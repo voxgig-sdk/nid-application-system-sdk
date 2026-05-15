@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "login": {
+      "LOGIN00": {
+        "captcha": "s46",
+        "expires_in": "s47",
+        "password": "s48",
+        "success": false,
+        "token": "s4a",
+        "user": {},
+        "username": "s4c"
+      },
+      "LOGIN01": {
+        "captcha": "s8c",
+        "expires_in": "s8d",
+        "password": "s8e",
+        "success": false,
+        "token": "s90",
+        "user": {},
+        "username": "s92"
+      },
+      "LOGIN02": {
+        "captcha": "sd2",
+        "expires_in": "sd3",
+        "password": "sd4",
+        "success": false,
+        "token": "sd6",
+        "user": {},
+        "username": "sd8"
+      }
+    }
+  },
+  "new": {
+    "login": {
+      "login_ref01": {
+        "captcha": "s118",
+        "expires_in": "s119",
+        "password": "s11a",
+        "success": false,
+        "token": "s11c",
+        "user": {},
+        "username": "s11e"
+      }
+    }
+  }
+}

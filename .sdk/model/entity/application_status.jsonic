@@ -1,0 +1,90 @@
+# Entity: application_status
+
+main: kit: entity: application_status: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "application_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "application_type"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "last_updated"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nid_number"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "remark"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "submission_date"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "application_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "application_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/application/status/{applicationId}"
+          parts: [
+            "application"
+            "status"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              applicationId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

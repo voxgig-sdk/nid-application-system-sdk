@@ -1,0 +1,8 @@
+# Flows
+
+@"BasicApplicationFlow.jsonic"
+@"BasicApplicationStatusFlow.jsonic"
+@"BasicLoginFlow.jsonic"
+@"BasicNidManagementFlow.jsonic"
+@"BasicRegistrationFlow.jsonic"
+@"BasicSuccessFlow.jsonic"

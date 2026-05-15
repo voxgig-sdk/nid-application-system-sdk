@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "application_status": {
+      "APPLICATION_STATUS00": {
+        "application_id": "APPLICATION01",
+        "application_type": "s47",
+        "last_updated": "s48",
+        "nid_number": "s49",
+        "remark": "s4a",
+        "status": "s4b",
+        "submission_date": "s4c"
+      },
+      "APPLICATION_STATUS01": {
+        "application_id": "APPLICATION01",
+        "application_type": "s8d",
+        "last_updated": "s8e",
+        "nid_number": "s8f",
+        "remark": "s90",
+        "status": "s91",
+        "submission_date": "s92"
+      },
+      "APPLICATION_STATUS02": {
+        "application_id": "APPLICATION01",
+        "application_type": "sd3",
+        "last_updated": "sd4",
+        "nid_number": "sd5",
+        "remark": "sd6",
+        "status": "sd7",
+        "submission_date": "sd8"
+      }
+    }
+  },
+  "new": {
+    "application_status": {
+      "application_status_ref01": {
+        "application_id": "APPLICATION01",
+        "application_type": "s119",
+        "last_updated": "s11a",
+        "nid_number": "s11b",
+        "remark": "s11c",
+        "status": "s11d",
+        "submission_date": "s11e"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# BasicSuccessFlow
+
+main: kit: flow: BasicSuccessFlow:
+{
+  entity: "success",
+  kind: "basic",
+  name: "BasicSuccessFlow",
+  step: [
+    {
+      input: {
+        ref: "success_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicSuccessFlow"
+}

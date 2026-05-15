@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "nid_management": {
+      "NID_MANAGEMENT00": {},
+      "NID_MANAGEMENT01": {},
+      "NID_MANAGEMENT02": {}
+    }
+  },
+  "new": {
+    "nid_management": {
+      "nid_management_ref01": {}
+    }
+  }
+}

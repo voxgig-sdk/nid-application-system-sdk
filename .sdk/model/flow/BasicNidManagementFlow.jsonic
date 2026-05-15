@@ -1,0 +1,28 @@
+# BasicNidManagementFlow
+
+main: kit: flow: BasicNidManagementFlow:
+{
+  entity: "nid_management",
+  kind: "basic",
+  name: "BasicNidManagementFlow",
+  step: [
+    {
+      input: {
+        ref: "nid_management_ref01",
+        srcdatavar: "nid_management_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-nid_management_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicNidManagementFlow"
+}

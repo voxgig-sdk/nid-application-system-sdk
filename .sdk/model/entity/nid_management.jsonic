@@ -1,0 +1,55 @@
+# Entity: nid_management
+
+main: kit: entity: nid_management: {
+
+  alias: field: {}
+
+  name: "nid_management"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "pdf"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "nid_number"
+                orig: "nid_number"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/nid/download"
+          parts: [
+            "nid"
+            "download"
+          ]
+          select: {
+            exist: [
+              "format"
+              "nid_number"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

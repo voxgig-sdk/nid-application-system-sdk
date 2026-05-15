@@ -1,0 +1,86 @@
+# Entity: application
+
+main: kit: entity: application: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "additional_info"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nid_number"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "police_report_number"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "reason"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "application"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/application/correction"
+          parts: [
+            "application"
+            "correction"
+          ]
+          select: {
+            "$action": "correction"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/application/duplicate"
+          parts: [
+            "application"
+            "duplicate"
+          ]
+          select: {
+            "$action": "duplicate"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/application/new-registration"
+          parts: [
+            "application"
+            "new-registration"
+          ]
+          select: {
+            "$action": "new_registration"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

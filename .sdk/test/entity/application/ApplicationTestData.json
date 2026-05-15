@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "application": {
+      "APPLICATION00": {
+        "additional_info": "s28",
+        "nid_number": "s29",
+        "police_report_number": "s2a",
+        "reason": "s2b"
+      },
+      "APPLICATION01": {
+        "additional_info": "s50",
+        "nid_number": "s51",
+        "police_report_number": "s52",
+        "reason": "s53"
+      },
+      "APPLICATION02": {
+        "additional_info": "s78",
+        "nid_number": "s79",
+        "police_report_number": "s7a",
+        "reason": "s7b"
+      }
+    }
+  },
+  "new": {
+    "application": {
+      "application_ref01": {
+        "additional_info": "sa0",
+        "nid_number": "sa1",
+        "police_report_number": "sa2",
+        "reason": "sa3"
+      }
+    }
+  }
+}

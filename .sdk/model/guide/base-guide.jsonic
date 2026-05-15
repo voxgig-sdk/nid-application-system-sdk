@@ -1,0 +1,63 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 10
+  metrics: count: method: 10
+
+  entity: application: {
+    path: "/application/correction": {
+      action: "correction": {}
+      op: create: method: *POST
+    }
+    path: "/application/duplicate": {
+      action: "duplicate": {}
+      op: create: method: *POST
+    }
+    path: "/application/new-registration": {
+      action: "new_registration": {}
+      op: create: method: *POST
+    }
+  }
+
+  entity: application_status: {
+    path: "/application/status/{applicationId}": {
+      rename: param: "applicationId": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: login: {
+    path: "/auth/login": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: nid_management: {
+    path: "/nid/download": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: registration: {
+    path: "/auth/register": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: success: {
+    path: "/auth/password-reset": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.success`")|top
+    }
+    path: "/verification/send-code": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.success`")|top
+    }
+    path: "/verification/verify-code": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.success`")|top
+    }
+  }
+
+}

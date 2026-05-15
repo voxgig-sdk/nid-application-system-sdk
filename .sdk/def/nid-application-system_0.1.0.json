@@ -1,0 +1,1030 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NID Application System",
+    "description": "The Bangladesh NID Application System API allows users to register for a national identity card, claim their accounts, and manage related services through a web-based platform. It provides functionalities for document uploads and information retrieval while ensuring user authentication and approval processes.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "info@nidw.gov.bd",
+      "url": "https://services.nidw.gov.bd/nid-pub/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://services.nidw.gov.bd/nid-pub",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "User login",
+        "description": "Authenticate users who have an existing online account to access NID services",
+        "operationId": "loginUser",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid captcha or missing fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Register new account",
+        "description": "Register a new account for users who already have a National Identity Card (NID)",
+        "operationId": "registerUser",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid registration data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Account already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/password-reset": {
+      "post": {
+        "summary": "Reset password",
+        "description": "Request password reset for users who have forgotten their password",
+        "operationId": "resetPassword",
+        "tags": [
+          "Authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordResetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset instructions sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/new-registration": {
+      "post": {
+        "summary": "Apply for new NID registration",
+        "description": "Submit an application for a new National Identity Card registration for users who do not have an existing NID",
+        "operationId": "applyNewRegistration",
+        "tags": [
+          "Application"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Application submitted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid application data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/correction": {
+      "post": {
+        "summary": "Apply for NID correction",
+        "description": "Submit an application to correct information on an existing National Identity Card",
+        "operationId": "applyCorrection",
+        "tags": [
+          "Application"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CorrectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Correction application submitted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid correction data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/duplicate": {
+      "post": {
+        "summary": "Apply for duplicate NID copy",
+        "description": "Request a duplicate copy of a lost or damaged National Identity Card",
+        "operationId": "applyDuplicate",
+        "tags": [
+          "Application"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Duplicate copy request submitted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nid/download": {
+      "get": {
+        "summary": "Download NID copy",
+        "description": "Download a digital copy of the National Identity Card for registered users who have been approved but have not received their physical card",
+        "operationId": "downloadNID",
+        "tags": [
+          "NID Management"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "nidNumber",
+            "in": "query",
+            "description": "National Identity Card number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Download format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pdf",
+                "png"
+              ],
+              "default": "pdf"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NID copy download successful",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "NID not found or not available for download",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/application/status/{applicationId}": {
+      "get": {
+        "summary": "Get application status",
+        "description": "Retrieve the status of a submitted NID application",
+        "operationId": "getApplicationStatus",
+        "tags": [
+          "Application"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "description": "Application ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application status retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationStatusResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Application not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verification/send-code": {
+      "post": {
+        "summary": "Send verification code",
+        "description": "Send verification code via email for account verification. For overseas Bangladeshis, verification codes are only sent via email.",
+        "operationId": "sendVerificationCode",
+        "tags": [
+          "Verification"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificationCodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification code sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verification/verify-code": {
+      "post": {
+        "summary": "Verify code",
+        "description": "Verify the code sent to email",
+        "operationId": "verifyCode",
+        "tags": [
+          "Verification"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyCodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Code verified successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or expired verification code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "required": [
+          "username",
+          "password",
+          "captcha"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "User's username or NID number"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "User's password"
+          },
+          "captcha": {
+            "type": "string",
+            "description": "Captcha code displayed in the image"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string",
+            "description": "Authentication token"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "expiresIn": {
+            "type": "integer",
+            "description": "Token expiration time in seconds"
+          }
+        }
+      },
+      "RegistrationRequest": {
+        "type": "object",
+        "required": [
+          "nidNumber",
+          "email",
+          "password",
+          "confirmPassword"
+        ],
+        "properties": {
+          "nidNumber": {
+            "type": "string",
+            "description": "National Identity Card number"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's email address"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Account password"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "format": "password",
+            "description": "Password confirmation"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone number"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of birth"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Newly created user ID"
+          }
+        }
+      },
+      "PasswordResetRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Registered email address"
+          },
+          "nidNumber": {
+            "type": "string",
+            "description": "National Identity Card number for verification"
+          }
+        }
+      },
+      "NewRegistrationRequest": {
+        "type": "object",
+        "required": [
+          "fullName",
+          "dateOfBirth",
+          "fatherName",
+          "motherName",
+          "address"
+        ],
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "Full name in Bengali"
+          },
+          "fullNameEnglish": {
+            "type": "string",
+            "description": "Full name in English"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of birth"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other"
+            ],
+            "description": "Gender"
+          },
+          "fatherName": {
+            "type": "string",
+            "description": "Father's name"
+          },
+          "motherName": {
+            "type": "string",
+            "description": "Mother's name"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "division": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "upazila": {
+                "type": "string"
+              },
+              "union": {
+                "type": "string"
+              },
+              "village": {
+                "type": "string"
+              }
+            }
+          },
+          "photograph": {
+            "type": "string",
+            "format": "binary",
+            "description": "Passport-sized photograph"
+          },
+          "signature": {
+            "type": "string",
+            "format": "binary",
+            "description": "Signature image"
+          },
+          "supportingDocuments": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "Supporting documents (birth certificate, etc.)"
+          },
+          "isOverseas": {
+            "type": "boolean",
+            "description": "Indicates if applicant is an overseas Bangladeshi"
+          }
+        }
+      },
+      "CorrectionRequest": {
+        "type": "object",
+        "required": [
+          "nidNumber",
+          "correctionType",
+          "correctedValue"
+        ],
+        "properties": {
+          "nidNumber": {
+            "type": "string",
+            "description": "National Identity Card number to be corrected"
+          },
+          "correctionType": {
+            "type": "string",
+            "enum": [
+              "name",
+              "dateOfBirth",
+              "address",
+              "fatherName",
+              "motherName",
+              "photograph",
+              "other"
+            ],
+            "description": "Type of correction needed"
+          },
+          "currentValue": {
+            "type": "string",
+            "description": "Current incorrect value"
+          },
+          "correctedValue": {
+            "type": "string",
+            "description": "Corrected value"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for correction"
+          },
+          "supportingDocuments": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "Supporting documents for correction"
+          }
+        }
+      },
+      "DuplicateRequest": {
+        "type": "object",
+        "required": [
+          "nidNumber",
+          "reason"
+        ],
+        "properties": {
+          "nidNumber": {
+            "type": "string",
+            "description": "National Identity Card number"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "lost",
+              "damaged",
+              "stolen"
+            ],
+            "description": "Reason for requesting duplicate"
+          },
+          "policeReportNumber": {
+            "type": "string",
+            "description": "Police report number (if lost or stolen)"
+          },
+          "additionalInfo": {
+            "type": "string",
+            "description": "Additional information"
+          }
+        }
+      },
+      "ApplicationResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "applicationId": {
+            "type": "string",
+            "description": "Unique application ID"
+          },
+          "submissionDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time of submission"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "submitted",
+              "under_review",
+              "approved",
+              "rejected"
+            ],
+            "description": "Current application status"
+          }
+        }
+      },
+      "ApplicationStatusResponse": {
+        "type": "object",
+        "properties": {
+          "applicationId": {
+            "type": "string"
+          },
+          "applicationType": {
+            "type": "string",
+            "enum": [
+              "new_registration",
+              "correction",
+              "duplicate"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "submitted",
+              "under_review",
+              "approved",
+              "rejected",
+              "pending_documents"
+            ]
+          },
+          "submissionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remarks": {
+            "type": "string",
+            "description": "Additional remarks or notes"
+          },
+          "nidNumber": {
+            "type": "string",
+            "description": "NID number (if approved)"
+          }
+        }
+      },
+      "VerificationCodeRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address to send verification code"
+          },
+          "isOverseas": {
+            "type": "boolean",
+            "description": "Indicates if user is an overseas Bangladeshi"
+          }
+        }
+      },
+      "VerifyCodeRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "code"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address"
+          },
+          "code": {
+            "type": "string",
+            "description": "Verification code received"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "nidNumber": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "accountStatus": {
+            "type": "string",
+            "enum": [
+              "active",
+              "pending",
+              "suspended"
+            ]
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "default": false
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "code": {
+            "type": "string",
+            "description": "Error code"
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional error details"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT authentication token obtained from login endpoint"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "User authentication and account management operations"
+    },
+    {
+      "name": "Application",
+      "description": "NID application submission and management"
+    },
+    {
+      "name": "NID Management",
+      "description": "Operations related to National Identity Card management"
+    },
+    {
+      "name": "Verification",
+      "description": "Email and code verification operations"
+    }
+  ]
+}

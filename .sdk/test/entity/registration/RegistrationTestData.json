@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "registration": {
+      "REGISTRATION00": {
+        "confirm_password": "s3c",
+        "date_of_birth": "s3d",
+        "email": "s3e",
+        "nid_number": "s3f",
+        "password": "s40",
+        "phone": "s41"
+      },
+      "REGISTRATION01": {
+        "confirm_password": "s78",
+        "date_of_birth": "s79",
+        "email": "s7a",
+        "nid_number": "s7b",
+        "password": "s7c",
+        "phone": "s7d"
+      },
+      "REGISTRATION02": {
+        "confirm_password": "sb4",
+        "date_of_birth": "sb5",
+        "email": "sb6",
+        "nid_number": "sb7",
+        "password": "sb8",
+        "phone": "sb9"
+      }
+    }
+  },
+  "new": {
+    "registration": {
+      "registration_ref01": {
+        "confirm_password": "sf0",
+        "date_of_birth": "sf1",
+        "email": "sf2",
+        "nid_number": "sf3",
+        "password": "sf4",
+        "phone": "sf5"
+      }
+    }
+  }
+}
