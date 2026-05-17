@@ -7,7 +7,8 @@
         "email": "s3e",
         "nid_number": "s3f",
         "password": "s40",
-        "phone": "s41"
+        "phone": "s41",
+        "id": "REGISTRATION00"
       },
       "REGISTRATION01": {
         "confirm_password": "s78",
@@ -15,7 +16,8 @@
         "email": "s7a",
         "nid_number": "s7b",
         "password": "s7c",
-        "phone": "s7d"
+        "phone": "s7d",
+        "id": "REGISTRATION01"
       },
       "REGISTRATION02": {
         "confirm_password": "sb4",
@@ -23,7 +25,8 @@
         "email": "sb6",
         "nid_number": "sb7",
         "password": "sb8",
-        "phone": "sb9"
+        "phone": "sb9",
+        "id": "REGISTRATION02"
       }
     }
   },

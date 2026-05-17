@@ -5,19 +5,22 @@
         "additional_info": "s28",
         "nid_number": "s29",
         "police_report_number": "s2a",
-        "reason": "s2b"
+        "reason": "s2b",
+        "id": "APPLICATION00"
       },
       "APPLICATION01": {
         "additional_info": "s50",
         "nid_number": "s51",
         "police_report_number": "s52",
-        "reason": "s53"
+        "reason": "s53",
+        "id": "APPLICATION01"
       },
       "APPLICATION02": {
         "additional_info": "s78",
         "nid_number": "s79",
         "police_report_number": "s7a",
-        "reason": "s7b"
+        "reason": "s7b",
+        "id": "APPLICATION02"
       }
     }
   },

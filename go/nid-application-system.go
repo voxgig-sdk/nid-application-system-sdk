@@ -1,10 +1,10 @@
 package voxgignidapplicationsystemsdk
 
 import (
-	"github.com/voxgig-sdk/nid-application-system-sdk/core"
-	"github.com/voxgig-sdk/nid-application-system-sdk/entity"
-	"github.com/voxgig-sdk/nid-application-system-sdk/feature"
-	_ "github.com/voxgig-sdk/nid-application-system-sdk/utility"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/core"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/entity"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/feature"
+	_ "github.com/voxgig-sdk/nid-application-system-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

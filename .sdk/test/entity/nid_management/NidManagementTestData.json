@@ -1,9 +1,15 @@
 {
   "existing": {
     "nid_management": {
-      "NID_MANAGEMENT00": {},
-      "NID_MANAGEMENT01": {},
-      "NID_MANAGEMENT02": {}
+      "NID_MANAGEMENT00": {
+        "id": "NID_MANAGEMENT00"
+      },
+      "NID_MANAGEMENT01": {
+        "id": "NID_MANAGEMENT01"
+      },
+      "NID_MANAGEMENT02": {
+        "id": "NID_MANAGEMENT02"
+      }
     }
   },
   "new": {

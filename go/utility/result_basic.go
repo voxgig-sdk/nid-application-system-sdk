@@ -3,7 +3,7 @@ package utility
 import (
 	"fmt"
 
-	"github.com/voxgig-sdk/nid-application-system-sdk/core"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/core"
 )
 
 func resultBasicUtil(ctx *core.Context) *core.Result {

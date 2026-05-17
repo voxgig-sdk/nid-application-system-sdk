@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/nid-application-system-sdk"
-	"github.com/voxgig-sdk/nid-application-system-sdk/core"
+	sdk "github.com/voxgig-sdk/nid-application-system-sdk/go"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/nid-application-system-sdk/go/utility/struct"
 )
 
 func TestNidManagementEntity(t *testing.T) {

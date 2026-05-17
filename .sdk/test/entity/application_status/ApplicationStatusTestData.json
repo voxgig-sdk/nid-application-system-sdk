@@ -8,7 +8,8 @@
         "nid_number": "s49",
         "remark": "s4a",
         "status": "s4b",
-        "submission_date": "s4c"
+        "submission_date": "s4c",
+        "id": "APPLICATION_STATUS00"
       },
       "APPLICATION_STATUS01": {
         "application_id": "APPLICATION01",
@@ -17,7 +18,8 @@
         "nid_number": "s8f",
         "remark": "s90",
         "status": "s91",
-        "submission_date": "s92"
+        "submission_date": "s92",
+        "id": "APPLICATION_STATUS01"
       },
       "APPLICATION_STATUS02": {
         "application_id": "APPLICATION01",
@@ -26,7 +28,8 @@
         "nid_number": "sd5",
         "remark": "sd6",
         "status": "sd7",
-        "submission_date": "sd8"
+        "submission_date": "sd8",
+        "id": "APPLICATION_STATUS02"
       }
     }
   },

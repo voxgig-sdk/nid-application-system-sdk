@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/nid-application-system-sdk"
-	"github.com/voxgig-sdk/nid-application-system-sdk/core"
+	sdk "github.com/voxgig-sdk/nid-application-system-sdk/go"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/core"
 )
 
 func TestApplicationStatusDirect(t *testing.T) {

@@ -8,7 +8,8 @@
         "success": false,
         "token": "s4a",
         "user": {},
-        "username": "s4c"
+        "username": "s4c",
+        "id": "LOGIN00"
       },
       "LOGIN01": {
         "captcha": "s8c",
@@ -17,7 +18,8 @@
         "success": false,
         "token": "s90",
         "user": {},
-        "username": "s92"
+        "username": "s92",
+        "id": "LOGIN01"
       },
       "LOGIN02": {
         "captcha": "sd2",
@@ -26,7 +28,8 @@
         "success": false,
         "token": "sd6",
         "user": {},
-        "username": "sd8"
+        "username": "sd8",
+        "id": "LOGIN02"
       }
     }
   },

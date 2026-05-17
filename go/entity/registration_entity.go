@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/nid-application-system-sdk/core"
+	"github.com/voxgig-sdk/nid-application-system-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/nid-application-system-sdk/go/utility/struct"
 )
 
 type RegistrationEntity struct {
