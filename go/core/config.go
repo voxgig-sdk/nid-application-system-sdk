@@ -14,9 +14,6 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "https://services.nidw.gov.bd/nid-pub",
-			"auth": map[string]any{
-				"prefix": "Bearer",
-			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},

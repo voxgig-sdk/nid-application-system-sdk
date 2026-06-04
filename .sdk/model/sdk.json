@@ -17,7 +17,20 @@
           }
         ],
         "title": "NID Application System",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Register, log in and manage Bangladesh National ID (NID) applications via the Election Commission's public portal",
+        "homepage": "https://services.nidw.gov.bd/nid-pub",
+        "docs_url": "https://services.nidw.gov.bd/nid-pub/",
+        "about_md": "The NID Application System is the public-facing service of the [Bangladesh Election Commission](https://services.nidw.gov.bd/nid-pub) for National Identity Card (NID) services. Citizens who already hold an NID can register an account to request corrections or duplicate copies, while those without an NID can apply for new registration. The portal also supports overseas Bangladeshis, who receive verification codes and notifications by email.\n\nWhat you get from the API:\n\n- Account registration and login flows for NID holders and new applicants\n- Submission of new NID applications and tracking of their status\n- NID management operations such as corrections and duplicate-copy requests\n- Success / confirmation responses for completed actions\n\nOperational notes: the service is provided directly by the Bangladesh Election Commission at `https://services.nidw.gov.bd/nid-pub`. Helpline 105 / +88 01708-5012261 and info@nidw.gov.bd are available Sunday-Thursday, 09:00-17:00 (Bangladesh time). No public licence, rate-limit or authentication scheme is documented; CORS is reported as disabled.",
+        "entity_desc": {
+          "application": "Operations for submitting and working with an NID application record.",
+          "application_status": "Lookup of the current state of a submitted NID application.",
+          "login": "Sign-in flow for citizens who already have an NID portal account.",
+          "nid_management": "Post-issuance NID actions such as corrections and duplicate-copy requests.",
+          "registration": "New-account and new-NID registration flow, including the overseas-applicant path that uses email verification codes.",
+          "success": "Confirmation / success responses returned after a completed action."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -25,7 +38,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "application": {

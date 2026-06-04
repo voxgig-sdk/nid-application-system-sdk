@@ -117,14 +117,12 @@ func application_statusDirectSetup(mockres any) *application_statusDirectSetupRe
 	env := envOverride(map[string]any{
 		"NIDAPPLICATIONSYSTEM_TEST_APPLICATION_STATUS_ENTID": map[string]any{},
 		"NIDAPPLICATIONSYSTEM_TEST_LIVE":    "FALSE",
-		"NIDAPPLICATIONSYSTEM_APIKEY":       "NONE",
 	})
 
 	live := env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["NIDAPPLICATIONSYSTEM_APIKEY"],
 		}
 		client := sdk.NewNidApplicationSystemSDK(mergedOpts)
 

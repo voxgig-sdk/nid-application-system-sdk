@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://services.nidw.gov.bd/nid-pub",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },

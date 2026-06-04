@@ -77,14 +77,12 @@ function application_status_direct_setup($mockres)
     $env = Runner::env_override([
         "NIDAPPLICATIONSYSTEM_TEST_APPLICATION_STATUS_ENTID" => [],
         "NIDAPPLICATIONSYSTEM_TEST_LIVE" => "FALSE",
-        "NIDAPPLICATIONSYSTEM_APIKEY" => "NONE",
     ]);
 
     $live = $env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["NIDAPPLICATIONSYSTEM_APIKEY"],
         ];
         $client = new NidApplicationSystemSDK($merged_opts);
         return [

@@ -99,14 +99,12 @@ func nid_managementDirectSetup(mockres any) *nid_managementDirectSetupResult {
 	env := envOverride(map[string]any{
 		"NIDAPPLICATIONSYSTEM_TEST_NID_MANAGEMENT_ENTID": map[string]any{},
 		"NIDAPPLICATIONSYSTEM_TEST_LIVE":    "FALSE",
-		"NIDAPPLICATIONSYSTEM_APIKEY":       "NONE",
 	})
 
 	live := env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["NIDAPPLICATIONSYSTEM_APIKEY"],
 		}
 		client := sdk.NewNidApplicationSystemSDK(mergedOpts)
 

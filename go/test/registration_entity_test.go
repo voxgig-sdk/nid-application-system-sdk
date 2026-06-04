@@ -110,7 +110,6 @@ func registrationBasicSetup(extra map[string]any) *entityTestSetup {
 		"NIDAPPLICATIONSYSTEM_TEST_REGISTRATION_ENTID": idmap,
 		"NIDAPPLICATIONSYSTEM_TEST_LIVE":      "FALSE",
 		"NIDAPPLICATIONSYSTEM_TEST_EXPLAIN":   "FALSE",
-		"NIDAPPLICATIONSYSTEM_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["NIDAPPLICATIONSYSTEM_TEST_REGISTRATION_ENTID"])
@@ -121,7 +120,6 @@ func registrationBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["NIDAPPLICATIONSYSTEM_APIKEY"],
 			},
 			extra,
 		})

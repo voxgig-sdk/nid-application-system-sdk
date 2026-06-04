@@ -85,7 +85,6 @@ function nid_management_basic_setup($extra)
         "NIDAPPLICATIONSYSTEM_TEST_NID_MANAGEMENT_ENTID" => $idmap,
         "NIDAPPLICATIONSYSTEM_TEST_LIVE" => "FALSE",
         "NIDAPPLICATIONSYSTEM_TEST_EXPLAIN" => "FALSE",
-        "NIDAPPLICATIONSYSTEM_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +96,6 @@ function nid_management_basic_setup($extra)
     if ($env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["NIDAPPLICATIONSYSTEM_APIKEY"],
             ],
             $extra ?? [],
         ]);

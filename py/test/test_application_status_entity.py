@@ -91,7 +91,6 @@ def _application_status_basic_setup(extra):
         "NIDAPPLICATIONSYSTEM_TEST_APPLICATION_STATUS_ENTID": idmap,
         "NIDAPPLICATIONSYSTEM_TEST_LIVE": "FALSE",
         "NIDAPPLICATIONSYSTEM_TEST_EXPLAIN": "FALSE",
-        "NIDAPPLICATIONSYSTEM_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +101,6 @@ def _application_status_basic_setup(extra):
     if env.get("NIDAPPLICATIONSYSTEM_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NIDAPPLICATIONSYSTEM_APIKEY"),
             },
             extra or {},
         ])

@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'NIDAPPLICATIONSYSTEM_TEST_NID_MANAGEMENT_ENTID': {},
     'NIDAPPLICATIONSYSTEM_TEST_LIVE': 'FALSE',
-    'NIDAPPLICATIONSYSTEM_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.NIDAPPLICATIONSYSTEM_TEST_LIVE
 
   if (live) {
     const client = new NidApplicationSystemSDK({
-      apikey: env.NIDAPPLICATIONSYSTEM_APIKEY,
     })
 
     let idmap: any = env['NIDAPPLICATIONSYSTEM_TEST_NID_MANAGEMENT_ENTID']
