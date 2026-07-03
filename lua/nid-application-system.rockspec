@@ -8,12 +8,14 @@ source = {
   dir = "nid-application-system-sdk/lua"
 }
 description = {
-  summary = "NidApplicationSystem SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the NID Application System public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/nid-application-system-sdk",
+  issues_url = "https://github.com/voxgig-sdk/nid-application-system-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "nid-application-system" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

@@ -1,8 +1,17 @@
 {
   "name": "voxgig-sdk/nid-application-system",
-  "description": "NidApplicationSystem SDK for PHP",
+  "description": "Unofficial generated PHP SDK for the NID Application System public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
+  "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "nid-application-system"],
+  "homepage": "https://github.com/voxgig-sdk/nid-application-system-sdk",
   "license": "MIT",
+  "authors": [
+    { "name": "Voxgig", "homepage": "https://voxgig.com" }
+  ],
+  "support": {
+    "issues": "https://github.com/voxgig-sdk/nid-application-system-sdk/issues",
+    "source": "https://github.com/voxgig-sdk/nid-application-system-sdk"
+  },
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.2"

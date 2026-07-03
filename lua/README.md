@@ -10,7 +10,7 @@ The Lua SDK for the NidApplicationSystem API — an entity-oriented client using
 
 ## Install
 ```bash
-luarocks install nid-application-system-sdk
+luarocks install voxgig-sdk-nid-application-system
 ```
 
 If the module is not yet published, add the source directory to

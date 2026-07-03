@@ -10,7 +10,7 @@ The PHP SDK for the NidApplicationSystem API — an entity-oriented client using
 
 ## Install
 ```bash
-composer require voxgig/nid-application-system-sdk
+composer require voxgig-sdk/nid-application-system
 ```
 
 

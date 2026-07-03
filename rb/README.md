@@ -10,13 +10,13 @@ The Ruby SDK for the NidApplicationSystem API — an entity-oriented client usin
 
 ## Install
 ```bash
-gem install nid-application-system-sdk
+gem install voxgig-sdk-nid-application-system
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "nid-application-system-sdk"
+gem "voxgig-sdk-nid-application-system"
 ```
 
 Then run:

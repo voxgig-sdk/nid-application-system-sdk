@@ -10,7 +10,7 @@ The Python SDK for the NidApplicationSystem API — an entity-oriented client fo
 
 ## Install
 ```bash
-pip install nid-application-system-sdk
+pip install voxgig-sdk-nid-application-system
 ```
 
 Or install from source:

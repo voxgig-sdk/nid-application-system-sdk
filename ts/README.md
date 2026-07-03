@@ -10,7 +10,7 @@ The TypeScript SDK for the NidApplicationSystem API — a type-safe, entity-orie
 
 ## Install
 ```bash
-npm install nid-application-system
+npm install @voxgig-sdk/nid-application-system
 ```
 ## Tutorial: your first API call
 
