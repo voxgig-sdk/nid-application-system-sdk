@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -123,10 +123,10 @@ local application = client:Application(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Application(nil):create({
+local result, err = client:Application():create({
   nid_number = --[[ `$STRING` ]],
   reason = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -184,7 +184,7 @@ local application_status = client:ApplicationStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ApplicationStatus(nil):load({ id = "application_status_id" }, nil)
+local result, err = client:ApplicationStatus():load({ id = "application_status_id" })
 ```
 
 ### Common Methods
@@ -242,11 +242,11 @@ local login = client:Login(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Login(nil):create({
+local result, err = client:Login():create({
   captcha = --[[ `$STRING` ]],
   password = --[[ `$STRING` ]],
   username = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -292,7 +292,7 @@ local nid_management = client:NidManagement(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:NidManagement(nil):load({ id = "nid_management_id" }, nil)
+local result, err = client:NidManagement():load({ id = "nid_management_id" })
 ```
 
 ### Common Methods
@@ -349,12 +349,12 @@ local registration = client:Registration(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Registration(nil):create({
+local result, err = client:Registration():create({
   confirm_password = --[[ `$STRING` ]],
   email = --[[ `$STRING` ]],
   nid_number = --[[ `$STRING` ]],
   password = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -411,10 +411,10 @@ local success = client:Success(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Success(nil):create({
+local result, err = client:Success():create({
   code = --[[ `$STRING` ]],
   email = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 ### Common Methods

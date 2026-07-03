@@ -86,6 +86,7 @@ function success_basic_setup(extra)
     ["NIDAPPLICATIONSYSTEM_TEST_SUCCESS_ENTID"] = idmap,
     ["NIDAPPLICATIONSYSTEM_TEST_LIVE"] = "FALSE",
     ["NIDAPPLICATIONSYSTEM_TEST_EXPLAIN"] = "FALSE",
+    ["NIDAPPLICATIONSYSTEM_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -97,6 +98,7 @@ function success_basic_setup(extra)
   if env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["NIDAPPLICATIONSYSTEM_APIKEY"],
       },
       extra or {},
     })

@@ -111,6 +111,7 @@ function basicSetup(extra?: any) {
     'NID_APPLICATION_SYSTEM_TEST_APPLICATION_STATUS_ENTID': idmap,
     'NID_APPLICATION_SYSTEM_TEST_LIVE': 'FALSE',
     'NID_APPLICATION_SYSTEM_TEST_EXPLAIN': 'FALSE',
+    'NID_APPLICATION_SYSTEM_APIKEY': 'NONE',
   })
 
   idmap = env['NID_APPLICATION_SYSTEM_TEST_APPLICATION_STATUS_ENTID']
@@ -120,6 +121,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new NidApplicationSystemSDK(merge([
       {
+        apikey: env.NID_APPLICATION_SYSTEM_APIKEY,
       },
       extra
     ]))

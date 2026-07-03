@@ -1,21 +1,8 @@
 # NidApplicationSystem SDK
 
-Register, log in and manage Bangladesh National ID (NID) applications via the Election Commission's public portal
+NID Application System client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About NID Application System
-
-The NID Application System is the public-facing service of the [Bangladesh Election Commission](https://services.nidw.gov.bd/nid-pub) for National Identity Card (NID) services. Citizens who already hold an NID can register an account to request corrections or duplicate copies, while those without an NID can apply for new registration. The portal also supports overseas Bangladeshis, who receive verification codes and notifications by email.
-
-What you get from the API:
-
-- Account registration and login flows for NID holders and new applicants
-- Submission of new NID applications and tracking of their status
-- NID management operations such as corrections and duplicate-copy requests
-- Success / confirmation responses for completed actions
-
-Operational notes: the service is provided directly by the Bangladesh Election Commission at `https://services.nidw.gov.bd/nid-pub`. Helpline 105 / +88 01708-5012261 and info@nidw.gov.bd are available Sunday-Thursday, 09:00-17:00 (Bangladesh time). No public licence, rate-limit or authentication scheme is documented; CORS is reported as disabled.
 
 ## Try it
 
@@ -49,27 +36,28 @@ gem install nid-application-system-sdk
 luarocks install nid-application-system-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { NidApplicationSystemSDK } from 'nid-application-system'
 
-const client = new NidApplicationSystemSDK({})
+const client = new NidApplicationSystemSDK({
+  apikey: process.env.NID-APPLICATION-SYSTEM_APIKEY,
+})
 
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,12 +87,12 @@ The API exposes 6 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Application** | Operations for submitting and working with an NID application record. | `/application/correction` |
-| **ApplicationStatus** | Lookup of the current state of a submitted NID application. | `/application/status/{applicationId}` |
-| **Login** | Sign-in flow for citizens who already have an NID portal account. | `/auth/login` |
-| **NidManagement** | Post-issuance NID actions such as corrections and duplicate-copy requests. | `/nid/download` |
-| **Registration** | New-account and new-NID registration flow, including the overseas-applicant path that uses email verification codes. | `/auth/register` |
-| **Success** | Confirmation / success responses returned after a completed action. | `/auth/password-reset` |
+| **Application** |  | `/application/correction` |
+| **ApplicationStatus** |  | `/application/status/{applicationId}` |
+| **Login** |  | `/auth/login` |
+| **NidManagement** |  | `/nid/download` |
+| **Registration** |  | `/auth/register` |
+| **Success** |  | `/auth/password-reset` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -114,9 +102,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from nidapplicationsystem_sdk import NidApplicationSystemSDK
 
-client = NidApplicationSystemSDK({})
+client = NidApplicationSystemSDK({
+    "apikey": os.environ.get("NID-APPLICATION-SYSTEM_APIKEY"),
+})
 
 ```
 
@@ -126,7 +117,9 @@ client = NidApplicationSystemSDK({})
 <?php
 require_once 'nidapplicationsystem_sdk.php';
 
-$client = new NidApplicationSystemSDK([]);
+$client = new NidApplicationSystemSDK([
+    "apikey" => getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+]);
 
 ```
 
@@ -135,7 +128,9 @@ $client = new NidApplicationSystemSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/nid-application-system-sdk/go"
 
-client := sdk.NewNidApplicationSystemSDK(map[string]any{})
+client := sdk.NewNidApplicationSystemSDK(map[string]any{
+    "apikey": os.Getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+})
 
 ```
 
@@ -144,7 +139,9 @@ client := sdk.NewNidApplicationSystemSDK(map[string]any{})
 ```ruby
 require_relative "NidApplicationSystem_sdk"
 
-client = NidApplicationSystemSDK.new({})
+client = NidApplicationSystemSDK.new({
+  "apikey" => ENV["NID-APPLICATION-SYSTEM_APIKEY"],
+})
 
 ```
 
@@ -153,7 +150,9 @@ client = NidApplicationSystemSDK.new({})
 ```lua
 local sdk = require("nid-application-system_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+})
 
 ```
 
@@ -173,25 +172,21 @@ const result = await client.Application().load({ id: 'test01' })
 ### Python
 
 ```python
-client = NidApplicationSystemSDK.test(None, None)
-result, err = client.Application(None).load(
-    {"id": "test01"}, None
-)
+client = NidApplicationSystemSDK.test()
+result, err = client.Application().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = NidApplicationSystemSDK::test(null, null);
-[$result, $err] = $client->Application(null)->load(
-    ["id" => "test01"], null
-);
+$client = NidApplicationSystemSDK::test();
+[$result, $err] = $client->Application()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Application(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -200,19 +195,15 @@ result, err := client.Application(nil).Load(
 ### Ruby
 
 ```ruby
-client = NidApplicationSystemSDK.test(nil, nil)
-result, err = client.Application(nil).load(
-  { "id" => "test01" }, nil
-)
+client = NidApplicationSystemSDK.test
+result, err = client.Application().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Application(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Application():load({ id = "test01" })
 ```
 
 ## How it works
@@ -316,11 +307,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the NID Application System
-
-- Upstream: [https://services.nidw.gov.bd/nid-pub](https://services.nidw.gov.bd/nid-pub)
-- API docs: [https://services.nidw.gov.bd/nid-pub/](https://services.nidw.gov.bd/nid-pub/)
 
 ---
 
