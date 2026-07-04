@@ -49,8 +49,7 @@ class TestApplicationStatusEntity:
         # LOAD
         application_status_ref01_ent = client.ApplicationStatus(None)
         application_status_ref01_match_dt0 = {}
-        application_status_ref01_data_dt0_loaded, err = application_status_ref01_ent.load(application_status_ref01_match_dt0, None)
-        assert err is None
+        application_status_ref01_data_dt0_loaded = application_status_ref01_ent.load(application_status_ref01_match_dt0, None)
         assert application_status_ref01_data_dt0_loaded is not None
 
 

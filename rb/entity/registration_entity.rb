@@ -45,6 +45,7 @@ class RegistrationEntity
     end
   end
 
+  # @return [Registration, Hash] the current Registration data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class RegistrationEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Registration fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -67,6 +69,11 @@ class RegistrationEntity
   
 
   
+  # Create a new Registration.
+  #
+  # @param reqdata [RegistrationCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Registration, Hash] the created Registration; raises NidApplicationSystemError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

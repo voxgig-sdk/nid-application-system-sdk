@@ -9,9 +9,10 @@ The PHP SDK for the NidApplicationSystem API — an entity-oriented client using
 
 
 ## Install
-```bash
-composer require voxgig-sdk/nid-application-system
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/nid-application-system-sdk/releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,7 +27,7 @@ loading a specific record.
 require_once 'nidapplicationsystem_sdk.php';
 
 $client = new NidApplicationSystemSDK([
-    "apikey" => getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+    "apikey" => getenv("NID_APPLICATION_SYSTEM_APIKEY"),
 ]);
 ```
 
@@ -34,7 +35,7 @@ $client = new NidApplicationSystemSDK([
 
 ```php
 // Create
-[$created, $_] = $client->Application()->create(["name" => "Example"]);
+$created = $client->application()->create(["name" => "Example"]);
 
 ```
 
@@ -46,28 +47,31 @@ $client = new NidApplicationSystemSDK([
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +85,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = NidApplicationSystemSDK::test();
 
-[$result, $err] = $client->NidApplicationSystem()->load(["id" => "test01"]);
+$result = $client->application()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -115,8 +119,8 @@ $client = new NidApplicationSystemSDK([
 Create a `.env.local` file at the project root:
 
 ```
-NID-APPLICATION-SYSTEM_TEST_LIVE=TRUE
-NID-APPLICATION-SYSTEM_APIKEY=<your-key>
+NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE
+NID_APPLICATION_SYSTEM_APIKEY=<your-key>
 ```
 
 Then run:
@@ -190,8 +194,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -295,7 +303,7 @@ API path: `/auth/password-reset`
 
 ### Application
 
-Create an instance: `const application = client.Application()`
+Create an instance: `const application = client.application`
 
 #### Operations
 
@@ -315,7 +323,7 @@ Create an instance: `const application = client.Application()`
 #### Example: Create
 
 ```ts
-const application = await client.Application().create({
+const application = await client.application.create({
   nid_number: /* `$STRING` */,
   reason: /* `$STRING` */,
 })
@@ -324,7 +332,7 @@ const application = await client.Application().create({
 
 ### ApplicationStatus
 
-Create an instance: `const application_status = client.ApplicationStatus()`
+Create an instance: `const application_status = client.application_status`
 
 #### Operations
 
@@ -347,13 +355,13 @@ Create an instance: `const application_status = client.ApplicationStatus()`
 #### Example: Load
 
 ```ts
-const application_status = await client.ApplicationStatus().load({ id: 'application_status_id' })
+const application_status = await client.application_status.load({ id: 'application_status_id' })
 ```
 
 
 ### Login
 
-Create an instance: `const login = client.Login()`
+Create an instance: `const login = client.login`
 
 #### Operations
 
@@ -376,7 +384,7 @@ Create an instance: `const login = client.Login()`
 #### Example: Create
 
 ```ts
-const login = await client.Login().create({
+const login = await client.login.create({
   captcha: /* `$STRING` */,
   password: /* `$STRING` */,
   username: /* `$STRING` */,
@@ -386,7 +394,7 @@ const login = await client.Login().create({
 
 ### NidManagement
 
-Create an instance: `const nid_management = client.NidManagement()`
+Create an instance: `const nid_management = client.nid_management`
 
 #### Operations
 
@@ -397,13 +405,13 @@ Create an instance: `const nid_management = client.NidManagement()`
 #### Example: Load
 
 ```ts
-const nid_management = await client.NidManagement().load({ id: 'nid_management_id' })
+const nid_management = await client.nid_management.load({ id: 'nid_management_id' })
 ```
 
 
 ### Registration
 
-Create an instance: `const registration = client.Registration()`
+Create an instance: `const registration = client.registration`
 
 #### Operations
 
@@ -425,7 +433,7 @@ Create an instance: `const registration = client.Registration()`
 #### Example: Create
 
 ```ts
-const registration = await client.Registration().create({
+const registration = await client.registration.create({
   confirm_password: /* `$STRING` */,
   email: /* `$STRING` */,
   nid_number: /* `$STRING` */,
@@ -436,7 +444,7 @@ const registration = await client.Registration().create({
 
 ### Success
 
-Create an instance: `const success = client.Success()`
+Create an instance: `const success = client.success`
 
 #### Operations
 
@@ -458,7 +466,7 @@ Create an instance: `const success = client.Success()`
 #### Example: Create
 
 ```ts
-const success = await client.Success().create({
+const success = await client.success.create({
   code: /* `$STRING` */,
   email: /* `$STRING` */,
 })
@@ -536,11 +544,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$application = $client->application();
+$application->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $application->dataGet() now returns the loaded application data
+// $application->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

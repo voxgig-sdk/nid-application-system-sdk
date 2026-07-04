@@ -42,8 +42,7 @@ class NidManagementEntityTest < Minitest::Test
     # LOAD
     nid_management_ref01_ent = client.NidManagement(nil)
     nid_management_ref01_match_dt0 = {}
-    nid_management_ref01_data_dt0_loaded, err = nid_management_ref01_ent.load(nid_management_ref01_match_dt0, nil)
-    assert_nil err
+    nid_management_ref01_data_dt0_loaded = nid_management_ref01_ent.load(nid_management_ref01_match_dt0, nil)
     assert !nid_management_ref01_data_dt0_loaded.nil?
 
   end

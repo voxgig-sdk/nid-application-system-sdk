@@ -44,9 +44,7 @@ class TestSuccessEntity:
         success_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.success"), "success_ref01"))
 
-        success_ref01_data_result, err = success_ref01_ent.create(success_ref01_data, None)
-        assert err is None
-        success_ref01_data = helpers.to_map(success_ref01_data_result)
+        success_ref01_data = helpers.to_map(success_ref01_ent.create(success_ref01_data, None))
         assert success_ref01_data is not None
 
 

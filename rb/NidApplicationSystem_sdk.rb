@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'NidApplicationSystem_types'
+
 
 class NidApplicationSystemSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class NidApplicationSystemSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class NidApplicationSystemSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue NidApplicationSystemError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = NidApplicationSystemHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class NidApplicationSystemSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,46 +198,88 @@ class NidApplicationSystemSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.application.list / client.application.load({ "id" => ... })
+  def application
+    require_relative 'entity/application_entity'
+    @application ||= ApplicationEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.application instead.
   def Application(data = nil)
     require_relative 'entity/application_entity'
     ApplicationEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.application_status.list / client.application_status.load({ "id" => ... })
+  def application_status
+    require_relative 'entity/application_status_entity'
+    @application_status ||= ApplicationStatusEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.application_status instead.
   def ApplicationStatus(data = nil)
     require_relative 'entity/application_status_entity'
     ApplicationStatusEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.login.list / client.login.load({ "id" => ... })
+  def login
+    require_relative 'entity/login_entity'
+    @login ||= LoginEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.login instead.
   def Login(data = nil)
     require_relative 'entity/login_entity'
     LoginEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.nid_management.list / client.nid_management.load({ "id" => ... })
+  def nid_management
+    require_relative 'entity/nid_management_entity'
+    @nid_management ||= NidManagementEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.nid_management instead.
   def NidManagement(data = nil)
     require_relative 'entity/nid_management_entity'
     NidManagementEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.registration.list / client.registration.load({ "id" => ... })
+  def registration
+    require_relative 'entity/registration_entity'
+    @registration ||= RegistrationEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.registration instead.
   def Registration(data = nil)
     require_relative 'entity/registration_entity'
     RegistrationEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.success.list / client.success.load({ "id" => ... })
+  def success
+    require_relative 'entity/success_entity'
+    @success ||= SuccessEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.success instead.
   def Success(data = nil)
     require_relative 'entity/success_entity'
     SuccessEntity.new(self, data)

@@ -10,22 +10,22 @@ This is an unofficial SDK for the NID Application System public API, generated b
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/nid-application-system` | `npm install @voxgig-sdk/nid-application-system` |
-| Python | `voxgig-sdk-nid-application-system` | `pip install voxgig-sdk-nid-application-system` |
-| PHP | `voxgig-sdk/nid-application-system` | `composer require voxgig-sdk/nid-application-system` |
-| Golang | `github.com/voxgig-sdk/nid-application-system-sdk/go` | `go get github.com/voxgig-sdk/nid-application-system-sdk/go` |
-| Ruby | `voxgig-sdk-nid-application-system` | `gem install voxgig-sdk-nid-application-system` |
-| Lua | `voxgig-sdk-nid-application-system` | `luarocks install voxgig-sdk-nid-application-system` |
+| TypeScript | `@voxgig-sdk/nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| Python | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| PHP | `voxgig-sdk/nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/nid-application-system-sdk/go` | `go get github.com/voxgig-sdk/nid-application-system-sdk/go@latest` |
+| Ruby | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| Lua | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
 
 ## Quickstart
 
 ### TypeScript
 
 ```ts
-import { NidApplicationSystemSDK } from 'nid-application-system'
+import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
 
 const client = new NidApplicationSystemSDK({
-  apikey: process.env.NID-APPLICATION-SYSTEM_APIKEY,
+  apikey: process.env.NID_APPLICATION_SYSTEM_APIKEY,
 })
 
 ```
@@ -68,12 +68,12 @@ The API exposes 6 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Application** |  | `/application/correction` |
-| **ApplicationStatus** |  | `/application/status/{applicationId}` |
-| **Login** |  | `/auth/login` |
-| **NidManagement** |  | `/nid/download` |
-| **Registration** |  | `/auth/register` |
-| **Success** |  | `/auth/password-reset` |
+| **Application** | The Application entity (create). | `/application/correction` |
+| **ApplicationStatus** | The ApplicationStatus entity (load). | `/application/status/{applicationId}` |
+| **Login** | The Login entity (create). | `/auth/login` |
+| **NidManagement** | The NidManagement entity (load). | `/nid/download` |
+| **Registration** | The Registration entity (create). | `/auth/register` |
+| **Success** | The Success entity (create). | `/auth/password-reset` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -87,7 +87,7 @@ import os
 from nidapplicationsystem_sdk import NidApplicationSystemSDK
 
 client = NidApplicationSystemSDK({
-    "apikey": os.environ.get("NID-APPLICATION-SYSTEM_APIKEY"),
+    "apikey": os.environ.get("NID_APPLICATION_SYSTEM_APIKEY"),
 })
 
 ```
@@ -99,7 +99,7 @@ client = NidApplicationSystemSDK({
 require_once 'nidapplicationsystem_sdk.php';
 
 $client = new NidApplicationSystemSDK([
-    "apikey" => getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+    "apikey" => getenv("NID_APPLICATION_SYSTEM_APIKEY"),
 ]);
 
 ```
@@ -110,7 +110,7 @@ $client = new NidApplicationSystemSDK([
 import sdk "github.com/voxgig-sdk/nid-application-system-sdk/go"
 
 client := sdk.NewNidApplicationSystemSDK(map[string]any{
-    "apikey": os.Getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+    "apikey": os.Getenv("NID_APPLICATION_SYSTEM_APIKEY"),
 })
 
 ```
@@ -121,7 +121,7 @@ client := sdk.NewNidApplicationSystemSDK(map[string]any{
 require_relative "NidApplicationSystem_sdk"
 
 client = NidApplicationSystemSDK.new({
-  "apikey" => ENV["NID-APPLICATION-SYSTEM_APIKEY"],
+  "apikey" => ENV["NID_APPLICATION_SYSTEM_APIKEY"],
 })
 
 ```
@@ -132,7 +132,7 @@ client = NidApplicationSystemSDK.new({
 local sdk = require("nid-application-system_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("NID-APPLICATION-SYSTEM_APIKEY"),
+  apikey = os.getenv("NID_APPLICATION_SYSTEM_APIKEY"),
 })
 
 ```
@@ -146,7 +146,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = NidApplicationSystemSDK.test()
-const result = await client.Application().load({ id: 'test01' })
+const result = await client.application.load({ id: 'test01' })
 // result.ok === true, result.data contains mock data
 ```
 
@@ -154,14 +154,14 @@ const result = await client.Application().load({ id: 'test01' })
 
 ```python
 client = NidApplicationSystemSDK.test()
-result, err = client.Application().load({"id": "test01"})
+result = client.application.load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
 $client = NidApplicationSystemSDK::test();
-[$result, $err] = $client->Application()->load(["id" => "test01"]);
+$result = $client->application()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -177,14 +177,14 @@ result, err := client.Application(nil).Load(
 
 ```ruby
 client = NidApplicationSystemSDK.test
-result, err = client.Application().load({ "id" => "test01" })
+result = client.application.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Application():load({ id = "test01" })
+local result, err = client:application():load({ id = "test01" })
 ```
 
 ## How it works
@@ -237,7 +237,7 @@ console.log(result.data)
 
 **Python:**
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
@@ -246,7 +246,7 @@ result, err = client.direct({
 
 **PHP:**
 ```php
-[$result, $err] = $client->direct([
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
@@ -264,7 +264,7 @@ result, err := client.Direct(map[string]any{
 
 **Ruby:**
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },

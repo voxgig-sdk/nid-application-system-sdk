@@ -144,16 +144,23 @@ class NidApplicationSystemSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class NidApplicationSystemSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,40 +212,106 @@ class NidApplicationSystemSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def application(self):
+        """Idiomatic facade: client.application.list() / client.application.load({"id": ...})."""
+        from entity.application_entity import ApplicationEntity
+        cached = getattr(self, "_application", None)
+        if cached is None:
+            cached = ApplicationEntity(self, None)
+            self._application = cached
+        return cached
 
     def Application(self, data=None):
+        # Deprecated: use client.application instead.
         from entity.application_entity import ApplicationEntity
         return ApplicationEntity(self, data)
 
 
+    @property
+    def application_status(self):
+        """Idiomatic facade: client.application_status.list() / client.application_status.load({"id": ...})."""
+        from entity.application_status_entity import ApplicationStatusEntity
+        cached = getattr(self, "_application_status", None)
+        if cached is None:
+            cached = ApplicationStatusEntity(self, None)
+            self._application_status = cached
+        return cached
+
     def ApplicationStatus(self, data=None):
+        # Deprecated: use client.application_status instead.
         from entity.application_status_entity import ApplicationStatusEntity
         return ApplicationStatusEntity(self, data)
 
 
+    @property
+    def login(self):
+        """Idiomatic facade: client.login.list() / client.login.load({"id": ...})."""
+        from entity.login_entity import LoginEntity
+        cached = getattr(self, "_login", None)
+        if cached is None:
+            cached = LoginEntity(self, None)
+            self._login = cached
+        return cached
+
     def Login(self, data=None):
+        # Deprecated: use client.login instead.
         from entity.login_entity import LoginEntity
         return LoginEntity(self, data)
 
 
+    @property
+    def nid_management(self):
+        """Idiomatic facade: client.nid_management.list() / client.nid_management.load({"id": ...})."""
+        from entity.nid_management_entity import NidManagementEntity
+        cached = getattr(self, "_nid_management", None)
+        if cached is None:
+            cached = NidManagementEntity(self, None)
+            self._nid_management = cached
+        return cached
+
     def NidManagement(self, data=None):
+        # Deprecated: use client.nid_management instead.
         from entity.nid_management_entity import NidManagementEntity
         return NidManagementEntity(self, data)
 
 
+    @property
+    def registration(self):
+        """Idiomatic facade: client.registration.list() / client.registration.load({"id": ...})."""
+        from entity.registration_entity import RegistrationEntity
+        cached = getattr(self, "_registration", None)
+        if cached is None:
+            cached = RegistrationEntity(self, None)
+            self._registration = cached
+        return cached
+
     def Registration(self, data=None):
+        # Deprecated: use client.registration instead.
         from entity.registration_entity import RegistrationEntity
         return RegistrationEntity(self, data)
 
 
+    @property
+    def success(self):
+        """Idiomatic facade: client.success.list() / client.success.load({"id": ...})."""
+        from entity.success_entity import SuccessEntity
+        cached = getattr(self, "_success", None)
+        if cached is None:
+            cached = SuccessEntity(self, None)
+            self._success = cached
+        return cached
+
     def Success(self, data=None):
+        # Deprecated: use client.success instead.
         from entity.success_entity import SuccessEntity
         return SuccessEntity(self, data)
 

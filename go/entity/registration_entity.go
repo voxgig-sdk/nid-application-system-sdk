@@ -85,6 +85,27 @@ func (e *RegistrationEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Registration; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *RegistrationEntity) DataTyped(data ...Registration) Registration {
+	if len(data) > 0 {
+		return typedFrom[Registration](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Registration](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Registration (all fields
+// optional at the wire level).
+func (e *RegistrationEntity) MatchTyped(match ...Registration) Registration {
+	if len(match) > 0 {
+		return typedFrom[Registration](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Registration](e.Match())
+}
+
 func (e *RegistrationEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
 	return core.UnsupportedOp("load", e.name)
 }
@@ -116,6 +137,17 @@ func (e *RegistrationEntity) Create(reqdata map[string]any, ctrl map[string]any)
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// RegistrationCreateData and returns an Registration. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *RegistrationEntity) CreateTyped(reqdata RegistrationCreateData, ctrl map[string]any) (Registration, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Registration{}, err
+	}
+	return typedFrom[Registration](res), nil
 }
 
 

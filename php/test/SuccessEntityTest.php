@@ -43,8 +43,7 @@ class SuccessEntityTest extends TestCase
         $success_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.success"), "success_ref01"));
 
-        [$success_ref01_data_result, $err] = $success_ref01_ent->create($success_ref01_data, null);
-        $this->assertNull($err);
+        $success_ref01_data_result = $success_ref01_ent->create($success_ref01_data, null);
         $success_ref01_data = Helpers::to_map($success_ref01_data_result);
         $this->assertNotNull($success_ref01_data);
 

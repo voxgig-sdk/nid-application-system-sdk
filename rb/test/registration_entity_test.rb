@@ -36,8 +36,7 @@ class RegistrationEntityTest < Minitest::Test
     registration_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.registration"), "registration_ref01"))
 
-    registration_ref01_data_result, err = registration_ref01_ent.create(registration_ref01_data, nil)
-    assert_nil err
+    registration_ref01_data_result = registration_ref01_ent.create(registration_ref01_data, nil)
     registration_ref01_data = Helpers.to_map(registration_ref01_data_result)
     assert !registration_ref01_data.nil?
 

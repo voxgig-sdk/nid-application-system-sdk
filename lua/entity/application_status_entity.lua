@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ApplicationStatusLoadMatch
+---@param ctrl? table
+---@return ApplicationStatus
+---@return string? err
 function ApplicationStatusEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -76,7 +76,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -90,11 +93,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -102,7 +106,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## ApplicationEntity
 
 ```php
-$application = $client->Application();
+$application = $client->application();
 ```
 
 ### Fields
@@ -116,12 +120,12 @@ $application = $client->Application();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Application()->create([
+$result = $client->application()->create([
   "nid_number" => /* `$STRING` */,
   "reason" => /* `$STRING` */,
 ]);
@@ -160,7 +164,7 @@ Return the entity name.
 ## ApplicationStatusEntity
 
 ```php
-$application_status = $client->ApplicationStatus();
+$application_status = $client->application_status();
 ```
 
 ### Fields
@@ -177,12 +181,12 @@ $application_status = $client->ApplicationStatus();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ApplicationStatus()->load(["id" => "application_status_id"]);
+$result = $client->application_status()->load(["id" => "application_status_id"]);
 ```
 
 ### Common Methods
@@ -218,7 +222,7 @@ Return the entity name.
 ## LoginEntity
 
 ```php
-$login = $client->Login();
+$login = $client->login();
 ```
 
 ### Fields
@@ -235,12 +239,12 @@ $login = $client->Login();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Login()->create([
+$result = $client->login()->create([
   "captcha" => /* `$STRING` */,
   "password" => /* `$STRING` */,
   "username" => /* `$STRING` */,
@@ -280,17 +284,17 @@ Return the entity name.
 ## NidManagementEntity
 
 ```php
-$nid_management = $client->NidManagement();
+$nid_management = $client->nid_management();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->NidManagement()->load(["id" => "nid_management_id"]);
+$result = $client->nid_management()->load(["id" => "nid_management_id"]);
 ```
 
 ### Common Methods
@@ -326,7 +330,7 @@ Return the entity name.
 ## RegistrationEntity
 
 ```php
-$registration = $client->Registration();
+$registration = $client->registration();
 ```
 
 ### Fields
@@ -342,12 +346,12 @@ $registration = $client->Registration();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Registration()->create([
+$result = $client->registration()->create([
   "confirm_password" => /* `$STRING` */,
   "email" => /* `$STRING` */,
   "nid_number" => /* `$STRING` */,
@@ -388,7 +392,7 @@ Return the entity name.
 ## SuccessEntity
 
 ```php
-$success = $client->Success();
+$success = $client->success();
 ```
 
 ### Fields
@@ -404,12 +408,12 @@ $success = $client->Success();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Success()->create([
+$result = $client->success()->create([
   "code" => /* `$STRING` */,
   "email" => /* `$STRING` */,
 ]);

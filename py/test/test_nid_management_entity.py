@@ -49,8 +49,7 @@ class TestNidManagementEntity:
         # LOAD
         nid_management_ref01_ent = client.NidManagement(None)
         nid_management_ref01_match_dt0 = {}
-        nid_management_ref01_data_dt0_loaded, err = nid_management_ref01_ent.load(nid_management_ref01_match_dt0, None)
-        assert err is None
+        nid_management_ref01_data_dt0_loaded = nid_management_ref01_ent.load(nid_management_ref01_match_dt0, None)
         assert nid_management_ref01_data_dt0_loaded is not None
 
 

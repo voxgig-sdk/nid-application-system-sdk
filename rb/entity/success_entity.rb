@@ -45,6 +45,7 @@ class SuccessEntity
     end
   end
 
+  # @return [Success, Hash] the current Success data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class SuccessEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Success fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -67,6 +69,11 @@ class SuccessEntity
   
 
   
+  # Create a new Success.
+  #
+  # @param reqdata [SuccessCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Success, Hash] the created Success; raises NidApplicationSystemError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

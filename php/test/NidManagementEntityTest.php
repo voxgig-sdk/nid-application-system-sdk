@@ -49,8 +49,7 @@ class NidManagementEntityTest extends TestCase
         // LOAD
         $nid_management_ref01_ent = $client->NidManagement(null);
         $nid_management_ref01_match_dt0 = [];
-        [$nid_management_ref01_data_dt0_loaded, $err] = $nid_management_ref01_ent->load($nid_management_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $nid_management_ref01_data_dt0_loaded = $nid_management_ref01_ent->load($nid_management_ref01_match_dt0, null);
         $this->assertNotNull($nid_management_ref01_data_dt0_loaded);
 
     }

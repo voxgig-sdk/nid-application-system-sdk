@@ -238,7 +238,8 @@ class Config {
                     "name": "id",
                     "orig": "application_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

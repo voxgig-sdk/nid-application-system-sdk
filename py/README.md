@@ -9,11 +9,9 @@ The Python SDK for the NidApplicationSystem API — an entity-oriented client fo
 
 
 ## Install
-```bash
-pip install voxgig-sdk-nid-application-system
-```
-
-Or install from source:
+This package is not yet published to PyPI. Install it from the GitHub
+release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)) or
+from a source checkout:
 
 ```bash
 pip install -e .
@@ -32,7 +30,7 @@ import os
 from nidapplicationsystem_sdk import NidApplicationSystemSDK
 
 client = NidApplicationSystemSDK({
-    "apikey": os.environ.get("NID-APPLICATION-SYSTEM_APIKEY"),
+    "apikey": os.environ.get("NID_APPLICATION_SYSTEM_APIKEY"),
 })
 ```
 
@@ -40,7 +38,7 @@ client = NidApplicationSystemSDK({
 
 ```python
 # Create
-created, _ = client.Application().create({"name": "Example"})
+created = client.application.create({"name": "Example"})
 
 ```
 
@@ -52,29 +50,28 @@ created, _ = client.Application().create({"name": "Example"})
 For endpoints not covered by entity methods:
 
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
+else:
+    print(result["err"])     # error value
 ```
 
 ### Prepare a request without sending it
 
 ```python
-fetchdef, err = client.prepare({
+# prepare() returns the fetch definition and raises on error.
+fetchdef = client.prepare({
     "path": "/api/resource/{id}",
     "method": "DELETE",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 print(fetchdef["url"])
 print(fetchdef["method"])
@@ -88,7 +85,7 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NidApplicationSystemSDK.test()
 
-result, err = client.NidApplicationSystem().load({"id": "test01"})
+result = client.application.load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -118,8 +115,8 @@ client = NidApplicationSystemSDK({
 Create a `.env.local` file at the project root:
 
 ```
-NID-APPLICATION-SYSTEM_TEST_LIVE=TRUE
-NID-APPLICATION-SYSTEM_APIKEY=<your-key>
+NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE
+NID_APPLICATION_SYSTEM_APIKEY=<your-key>
 ```
 
 Then run:
@@ -165,8 +162,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | --- | --- | --- |
 | `options_map` | `() -> dict` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> (dict, err)` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> (dict, err)` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Application` | `(data) -> ApplicationEntity` | Create a Application entity instance. |
 | `ApplicationStatus` | `(data) -> ApplicationStatusEntity` | Create a ApplicationStatus entity instance. |
 | `Login` | `(data) -> LoginEntity` | Create a Login entity instance. |
@@ -180,11 +177,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> (any, err)` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> (any, err)` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> (any, err)` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> (any, err)` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> (any, err)` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -194,8 +191,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`dict` with these keys:
+Entity operations return the bare result data (a `dict` for single-entity
+ops, a `list` for `list`) and raise on error. Wrap calls in
+`try`/`except` to handle failures.
+
+The `direct()` escape hatch never raises — it returns a result `dict`
+you branch on via `result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -299,7 +300,7 @@ API path: `/auth/password-reset`
 
 ### Application
 
-Create an instance: `const application = client.Application()`
+Create an instance: `const application = client.application`
 
 #### Operations
 
@@ -319,7 +320,7 @@ Create an instance: `const application = client.Application()`
 #### Example: Create
 
 ```ts
-const application = await client.Application().create({
+const application = await client.application.create({
   nid_number: /* `$STRING` */,
   reason: /* `$STRING` */,
 })
@@ -328,7 +329,7 @@ const application = await client.Application().create({
 
 ### ApplicationStatus
 
-Create an instance: `const application_status = client.ApplicationStatus()`
+Create an instance: `const application_status = client.application_status`
 
 #### Operations
 
@@ -351,13 +352,13 @@ Create an instance: `const application_status = client.ApplicationStatus()`
 #### Example: Load
 
 ```ts
-const application_status = await client.ApplicationStatus().load({ id: 'application_status_id' })
+const application_status = await client.application_status.load({ id: 'application_status_id' })
 ```
 
 
 ### Login
 
-Create an instance: `const login = client.Login()`
+Create an instance: `const login = client.login`
 
 #### Operations
 
@@ -380,7 +381,7 @@ Create an instance: `const login = client.Login()`
 #### Example: Create
 
 ```ts
-const login = await client.Login().create({
+const login = await client.login.create({
   captcha: /* `$STRING` */,
   password: /* `$STRING` */,
   username: /* `$STRING` */,
@@ -390,7 +391,7 @@ const login = await client.Login().create({
 
 ### NidManagement
 
-Create an instance: `const nid_management = client.NidManagement()`
+Create an instance: `const nid_management = client.nid_management`
 
 #### Operations
 
@@ -401,13 +402,13 @@ Create an instance: `const nid_management = client.NidManagement()`
 #### Example: Load
 
 ```ts
-const nid_management = await client.NidManagement().load({ id: 'nid_management_id' })
+const nid_management = await client.nid_management.load({ id: 'nid_management_id' })
 ```
 
 
 ### Registration
 
-Create an instance: `const registration = client.Registration()`
+Create an instance: `const registration = client.registration`
 
 #### Operations
 
@@ -429,7 +430,7 @@ Create an instance: `const registration = client.Registration()`
 #### Example: Create
 
 ```ts
-const registration = await client.Registration().create({
+const registration = await client.registration.create({
   confirm_password: /* `$STRING` */,
   email: /* `$STRING` */,
   nid_number: /* `$STRING` */,
@@ -440,7 +441,7 @@ const registration = await client.Registration().create({
 
 ### Success
 
-Create an instance: `const success = client.Success()`
+Create an instance: `const success = client.success`
 
 #### Operations
 
@@ -462,7 +463,7 @@ Create an instance: `const success = client.Success()`
 #### Example: Create
 
 ```ts
-const success = await client.Success().create({
+const success = await client.success.create({
   code: /* `$STRING` */,
   email: /* `$STRING` */,
 })
@@ -539,11 +540,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-moon = client.Moon()
-moon.load({"planet_id": "earth", "id": "luna"})
+application = client.application
+application.load({"id": "example_id"})
 
-# moon.data_get() now returns the loaded moon data
-# moon.match_get() returns the last match criteria
+# application.data_get() now returns the loaded application data
+# application.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

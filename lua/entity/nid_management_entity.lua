@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch NidManagementLoadMatch
+---@param ctrl? table
+---@return NidManagement
+---@return string? err
 function NidManagementEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

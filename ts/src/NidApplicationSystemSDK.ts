@@ -7,6 +7,8 @@ import { NidManagementEntity } from './entity/NidManagementEntity'
 import { RegistrationEntity } from './entity/RegistrationEntity'
 import { SuccessEntity } from './entity/SuccessEntity'
 
+export type * from './NidApplicationSystemTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -207,36 +209,84 @@ class NidApplicationSystemSDK {
 
 
 
+  _application?: ApplicationEntity
+
+  // Idiomatic facade: `client.application.list()` / `client.application.load({ id })`.
+  get application(): ApplicationEntity {
+    return (this._application ??= new ApplicationEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.application` instead. */
   Application(data?: any) {
     const self = this
     return new ApplicationEntity(self,data)
   }
 
 
+  _application_status?: ApplicationStatusEntity
+
+  // Idiomatic facade: `client.application_status.list()` / `client.application_status.load({ id })`.
+  get application_status(): ApplicationStatusEntity {
+    return (this._application_status ??= new ApplicationStatusEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.application_status` instead. */
   ApplicationStatus(data?: any) {
     const self = this
     return new ApplicationStatusEntity(self,data)
   }
 
 
+  _login?: LoginEntity
+
+  // Idiomatic facade: `client.login.list()` / `client.login.load({ id })`.
+  get login(): LoginEntity {
+    return (this._login ??= new LoginEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.login` instead. */
   Login(data?: any) {
     const self = this
     return new LoginEntity(self,data)
   }
 
 
+  _nid_management?: NidManagementEntity
+
+  // Idiomatic facade: `client.nid_management.list()` / `client.nid_management.load({ id })`.
+  get nid_management(): NidManagementEntity {
+    return (this._nid_management ??= new NidManagementEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.nid_management` instead. */
   NidManagement(data?: any) {
     const self = this
     return new NidManagementEntity(self,data)
   }
 
 
+  _registration?: RegistrationEntity
+
+  // Idiomatic facade: `client.registration.list()` / `client.registration.load({ id })`.
+  get registration(): RegistrationEntity {
+    return (this._registration ??= new RegistrationEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.registration` instead. */
   Registration(data?: any) {
     const self = this
     return new RegistrationEntity(self,data)
   }
 
 
+  _success?: SuccessEntity
+
+  // Idiomatic facade: `client.success.list()` / `client.success.load({ id })`.
+  get success(): SuccessEntity {
+    return (this._success ??= new SuccessEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.success` instead. */
   Success(data?: any) {
     const self = this
     return new SuccessEntity(self,data)

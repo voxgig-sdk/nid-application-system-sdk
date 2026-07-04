@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Registration,
+  RegistrationCreateData,
+} from '../NidApplicationSystemTypes'
 
 // TODO: needs Entity superclass
-class RegistrationEntity extends NidApplicationSystemEntityBase {
+class RegistrationEntity extends NidApplicationSystemEntityBase<Registration> {
 
   constructor(client: NidApplicationSystemSDK, entopts: any) {
     super(client, entopts)
@@ -34,7 +38,7 @@ class RegistrationEntity extends NidApplicationSystemEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: RegistrationCreateData, ctrl?: Control): Promise<Registration> {
 
     const utility = this._utility
     const {
@@ -133,7 +137,9 @@ class RegistrationEntity extends NidApplicationSystemEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Registration> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

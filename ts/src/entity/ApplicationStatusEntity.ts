@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ApplicationStatus,
+  ApplicationStatusLoadMatch,
+} from '../NidApplicationSystemTypes'
 
 // TODO: needs Entity superclass
-class ApplicationStatusEntity extends NidApplicationSystemEntityBase {
+class ApplicationStatusEntity extends NidApplicationSystemEntityBase<ApplicationStatus> {
 
   constructor(client: NidApplicationSystemSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ApplicationStatusEntity extends NidApplicationSystemEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ApplicationStatusLoadMatch, ctrl?: Control): Promise<ApplicationStatus> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ApplicationStatusEntity extends NidApplicationSystemEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<ApplicationStatus> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata SuccessCreateData
+---@param ctrl? table
+---@return Success
+---@return string? err
 function SuccessEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

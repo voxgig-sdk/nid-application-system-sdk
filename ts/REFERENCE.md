@@ -170,7 +170,7 @@ Alias for `NidApplicationSystemSDK.test()`.
 ## ApplicationEntity
 
 ```ts
-const application = client.Application()
+const application = client.application
 ```
 
 ### Fields
@@ -189,7 +189,7 @@ const application = client.Application()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Application().create({
+const result = await client.application.create({
   nid_number: /* `$STRING` */,
   reason: /* `$STRING` */,
 })
@@ -226,7 +226,7 @@ Return a copy of the entity options.
 ## ApplicationStatusEntity
 
 ```ts
-const application_status = client.ApplicationStatus()
+const application_status = client.application_status
 ```
 
 ### Fields
@@ -248,7 +248,7 @@ const application_status = client.ApplicationStatus()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ApplicationStatus().load({ id: 'application_status_id' })
+const result = await client.application_status.load({ id: 'application_status_id' })
 ```
 
 ### Common Methods
@@ -282,7 +282,7 @@ Return a copy of the entity options.
 ## LoginEntity
 
 ```ts
-const login = client.Login()
+const login = client.login
 ```
 
 ### Fields
@@ -304,7 +304,7 @@ const login = client.Login()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Login().create({
+const result = await client.login.create({
   captcha: /* `$STRING` */,
   password: /* `$STRING` */,
   username: /* `$STRING` */,
@@ -342,7 +342,7 @@ Return a copy of the entity options.
 ## NidManagementEntity
 
 ```ts
-const nid_management = client.NidManagement()
+const nid_management = client.nid_management
 ```
 
 ### Operations
@@ -352,7 +352,7 @@ const nid_management = client.NidManagement()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.NidManagement().load({ id: 'nid_management_id' })
+const result = await client.nid_management.load({ id: 'nid_management_id' })
 ```
 
 ### Common Methods
@@ -386,7 +386,7 @@ Return a copy of the entity options.
 ## RegistrationEntity
 
 ```ts
-const registration = client.Registration()
+const registration = client.registration
 ```
 
 ### Fields
@@ -407,7 +407,7 @@ const registration = client.Registration()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Registration().create({
+const result = await client.registration.create({
   confirm_password: /* `$STRING` */,
   email: /* `$STRING` */,
   nid_number: /* `$STRING` */,
@@ -446,7 +446,7 @@ Return a copy of the entity options.
 ## SuccessEntity
 
 ```ts
-const success = client.Success()
+const success = client.success
 ```
 
 ### Fields
@@ -467,7 +467,7 @@ const success = client.Success()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Success().create({
+const result = await client.success.create({
   code: /* `$STRING` */,
   email: /* `$STRING` */,
 })

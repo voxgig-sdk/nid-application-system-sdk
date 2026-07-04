@@ -103,7 +103,7 @@ class NidApplicationSystemSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class NidApplicationSystemSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class NidApplicationSystemSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,59 +216,125 @@ class NidApplicationSystemSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Application($data = null)
+    private $_application = null;
+
+    // Idiomatic facade: $client->application()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Application() (PHP method
+    // names are case-insensitive).
+    public function application($data = null)
     {
         require_once __DIR__ . '/entity/application_entity.php';
+        if ($data === null) {
+            if ($this->_application === null) {
+                $this->_application = new ApplicationEntity($this, null);
+            }
+            return $this->_application;
+        }
         return new ApplicationEntity($this, $data);
     }
 
 
-    public function ApplicationStatus($data = null)
+    private $_application_status = null;
+
+    // Idiomatic facade: $client->application_status()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ApplicationStatus() (PHP method
+    // names are case-insensitive).
+    public function application_status($data = null)
     {
         require_once __DIR__ . '/entity/application_status_entity.php';
+        if ($data === null) {
+            if ($this->_application_status === null) {
+                $this->_application_status = new ApplicationStatusEntity($this, null);
+            }
+            return $this->_application_status;
+        }
         return new ApplicationStatusEntity($this, $data);
     }
 
 
-    public function Login($data = null)
+    private $_login = null;
+
+    // Idiomatic facade: $client->login()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Login() (PHP method
+    // names are case-insensitive).
+    public function login($data = null)
     {
         require_once __DIR__ . '/entity/login_entity.php';
+        if ($data === null) {
+            if ($this->_login === null) {
+                $this->_login = new LoginEntity($this, null);
+            }
+            return $this->_login;
+        }
         return new LoginEntity($this, $data);
     }
 
 
-    public function NidManagement($data = null)
+    private $_nid_management = null;
+
+    // Idiomatic facade: $client->nid_management()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias NidManagement() (PHP method
+    // names are case-insensitive).
+    public function nid_management($data = null)
     {
         require_once __DIR__ . '/entity/nid_management_entity.php';
+        if ($data === null) {
+            if ($this->_nid_management === null) {
+                $this->_nid_management = new NidManagementEntity($this, null);
+            }
+            return $this->_nid_management;
+        }
         return new NidManagementEntity($this, $data);
     }
 
 
-    public function Registration($data = null)
+    private $_registration = null;
+
+    // Idiomatic facade: $client->registration()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Registration() (PHP method
+    // names are case-insensitive).
+    public function registration($data = null)
     {
         require_once __DIR__ . '/entity/registration_entity.php';
+        if ($data === null) {
+            if ($this->_registration === null) {
+                $this->_registration = new RegistrationEntity($this, null);
+            }
+            return $this->_registration;
+        }
         return new RegistrationEntity($this, $data);
     }
 
 
-    public function Success($data = null)
+    private $_success = null;
+
+    // Idiomatic facade: $client->success()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Success() (PHP method
+    // names are case-insensitive).
+    public function success($data = null)
     {
         require_once __DIR__ . '/entity/success_entity.php';
+        if ($data === null) {
+            if ($this->_success === null) {
+                $this->_success = new SuccessEntity($this, null);
+            }
+            return $this->_success;
+        }
         return new SuccessEntity($this, $data);
     }
 

@@ -9,9 +9,12 @@ The TypeScript SDK for the NidApplicationSystem API — a type-safe, entity-orie
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/nid-application-system
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/nid-application-system-sdk/releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,10 +23,10 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NidApplicationSystemSDK } from 'nid-application-system'
+import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
 
 const client = new NidApplicationSystemSDK({
-  apikey: process.env.NID-APPLICATION-SYSTEM_APIKEY,
+  apikey: process.env.NID_APPLICATION_SYSTEM_APIKEY,
 })
 ```
 
@@ -31,7 +34,7 @@ const client = new NidApplicationSystemSDK({
 
 ```ts
 // Create
-const created = await client.Application().create({
+const created = await client.application.create({
   name: 'Example',
 })
 
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NidApplicationSystemSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.application.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.application
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,8 +136,8 @@ const client = new NidApplicationSystemSDK({
 Create a `.env.local` file at the project root:
 
 ```
-NID-APPLICATION-SYSTEM_TEST_LIVE=TRUE
-NID-APPLICATION-SYSTEM_APIKEY=<your-key>
+NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE
+NID_APPLICATION_SYSTEM_APIKEY=<your-key>
 ```
 
 Then run:
@@ -345,7 +348,7 @@ API path: `/auth/password-reset`
 
 ### Application
 
-Create an instance: `const application = client.Application()`
+Create an instance: `const application = client.application`
 
 #### Operations
 
@@ -365,7 +368,7 @@ Create an instance: `const application = client.Application()`
 #### Example: Create
 
 ```ts
-const application = await client.Application().create({
+const application = await client.application.create({
   nid_number: /* `$STRING` */,
   reason: /* `$STRING` */,
 })
@@ -374,7 +377,7 @@ const application = await client.Application().create({
 
 ### ApplicationStatus
 
-Create an instance: `const application_status = client.ApplicationStatus()`
+Create an instance: `const application_status = client.application_status`
 
 #### Operations
 
@@ -397,13 +400,13 @@ Create an instance: `const application_status = client.ApplicationStatus()`
 #### Example: Load
 
 ```ts
-const application_status = await client.ApplicationStatus().load({ id: 'application_status_id' })
+const application_status = await client.application_status.load({ id: 'application_status_id' })
 ```
 
 
 ### Login
 
-Create an instance: `const login = client.Login()`
+Create an instance: `const login = client.login`
 
 #### Operations
 
@@ -426,7 +429,7 @@ Create an instance: `const login = client.Login()`
 #### Example: Create
 
 ```ts
-const login = await client.Login().create({
+const login = await client.login.create({
   captcha: /* `$STRING` */,
   password: /* `$STRING` */,
   username: /* `$STRING` */,
@@ -436,7 +439,7 @@ const login = await client.Login().create({
 
 ### NidManagement
 
-Create an instance: `const nid_management = client.NidManagement()`
+Create an instance: `const nid_management = client.nid_management`
 
 #### Operations
 
@@ -447,13 +450,13 @@ Create an instance: `const nid_management = client.NidManagement()`
 #### Example: Load
 
 ```ts
-const nid_management = await client.NidManagement().load({ id: 'nid_management_id' })
+const nid_management = await client.nid_management.load({ id: 'nid_management_id' })
 ```
 
 
 ### Registration
 
-Create an instance: `const registration = client.Registration()`
+Create an instance: `const registration = client.registration`
 
 #### Operations
 
@@ -475,7 +478,7 @@ Create an instance: `const registration = client.Registration()`
 #### Example: Create
 
 ```ts
-const registration = await client.Registration().create({
+const registration = await client.registration.create({
   confirm_password: /* `$STRING` */,
   email: /* `$STRING` */,
   nid_number: /* `$STRING` */,
@@ -486,7 +489,7 @@ const registration = await client.Registration().create({
 
 ### Success
 
-Create an instance: `const success = client.Success()`
+Create an instance: `const success = client.success`
 
 #### Operations
 
@@ -508,7 +511,7 @@ Create an instance: `const success = client.Success()`
 #### Example: Create
 
 ```ts
-const success = await client.Success().create({
+const success = await client.success.create({
   code: /* `$STRING` */,
   email: /* `$STRING` */,
 })
@@ -572,7 +575,7 @@ nid-application-system/
 Import the SDK from the package root:
 
 ```ts
-import { NidApplicationSystemSDK } from 'nid-application-system'
+import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
 ```
 
 ### Entity state
@@ -582,11 +585,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const application = client.application
+await application.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// application.data() now returns the loaded application data
+// application.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

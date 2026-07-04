@@ -244,36 +244,114 @@ end
 
 
 
+-- Idiomatic facade: client:application():list() / client:application():load({ id = ... })
+function NidApplicationSystemSDK:application(data)
+  local EntityMod = require("entity.application_entity")
+  if data == nil then
+    if self._application == nil then
+      self._application = EntityMod.new(self, nil)
+    end
+    return self._application
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:application() instead.
 function NidApplicationSystemSDK:Application(data)
   local EntityMod = require("entity.application_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:application_status():list() / client:application_status():load({ id = ... })
+function NidApplicationSystemSDK:application_status(data)
+  local EntityMod = require("entity.application_status_entity")
+  if data == nil then
+    if self._application_status == nil then
+      self._application_status = EntityMod.new(self, nil)
+    end
+    return self._application_status
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:application_status() instead.
 function NidApplicationSystemSDK:ApplicationStatus(data)
   local EntityMod = require("entity.application_status_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:login():list() / client:login():load({ id = ... })
+function NidApplicationSystemSDK:login(data)
+  local EntityMod = require("entity.login_entity")
+  if data == nil then
+    if self._login == nil then
+      self._login = EntityMod.new(self, nil)
+    end
+    return self._login
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:login() instead.
 function NidApplicationSystemSDK:Login(data)
   local EntityMod = require("entity.login_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:nid_management():list() / client:nid_management():load({ id = ... })
+function NidApplicationSystemSDK:nid_management(data)
+  local EntityMod = require("entity.nid_management_entity")
+  if data == nil then
+    if self._nid_management == nil then
+      self._nid_management = EntityMod.new(self, nil)
+    end
+    return self._nid_management
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:nid_management() instead.
 function NidApplicationSystemSDK:NidManagement(data)
   local EntityMod = require("entity.nid_management_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:registration():list() / client:registration():load({ id = ... })
+function NidApplicationSystemSDK:registration(data)
+  local EntityMod = require("entity.registration_entity")
+  if data == nil then
+    if self._registration == nil then
+      self._registration = EntityMod.new(self, nil)
+    end
+    return self._registration
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:registration() instead.
 function NidApplicationSystemSDK:Registration(data)
   local EntityMod = require("entity.registration_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:success():list() / client:success():load({ id = ... })
+function NidApplicationSystemSDK:success(data)
+  local EntityMod = require("entity.success_entity")
+  if data == nil then
+    if self._success == nil then
+      self._success = EntityMod.new(self, nil)
+    end
+    return self._success
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:success() instead.
 function NidApplicationSystemSDK:Success(data)
   local EntityMod = require("entity.success_entity")
   return EntityMod.new(self, data)

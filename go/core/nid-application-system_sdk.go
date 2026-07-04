@@ -245,31 +245,49 @@ func (sdk *NidApplicationSystemSDK) Direct(fetchargs map[string]any) (map[string
 }
 
 
+// Application returns a Application entity bound to this client.
+// Idiomatic usage: client.Application(nil).List(nil, nil) or
+// client.Application(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NidApplicationSystemSDK) Application(data map[string]any) NidApplicationSystemEntity {
 	return NewApplicationEntityFunc(sdk, data)
 }
 
 
+// ApplicationStatus returns a ApplicationStatus entity bound to this client.
+// Idiomatic usage: client.ApplicationStatus(nil).List(nil, nil) or
+// client.ApplicationStatus(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NidApplicationSystemSDK) ApplicationStatus(data map[string]any) NidApplicationSystemEntity {
 	return NewApplicationStatusEntityFunc(sdk, data)
 }
 
 
+// Login returns a Login entity bound to this client.
+// Idiomatic usage: client.Login(nil).List(nil, nil) or
+// client.Login(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NidApplicationSystemSDK) Login(data map[string]any) NidApplicationSystemEntity {
 	return NewLoginEntityFunc(sdk, data)
 }
 
 
+// NidManagement returns a NidManagement entity bound to this client.
+// Idiomatic usage: client.NidManagement(nil).List(nil, nil) or
+// client.NidManagement(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NidApplicationSystemSDK) NidManagement(data map[string]any) NidApplicationSystemEntity {
 	return NewNidManagementEntityFunc(sdk, data)
 }
 
 
+// Registration returns a Registration entity bound to this client.
+// Idiomatic usage: client.Registration(nil).List(nil, nil) or
+// client.Registration(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NidApplicationSystemSDK) Registration(data map[string]any) NidApplicationSystemEntity {
 	return NewRegistrationEntityFunc(sdk, data)
 }
 
 
+// Success returns a Success entity bound to this client.
+// Idiomatic usage: client.Success(nil).List(nil, nil) or
+// client.Success(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NidApplicationSystemSDK) Success(data map[string]any) NidApplicationSystemEntity {
 	return NewSuccessEntityFunc(sdk, data)
 }

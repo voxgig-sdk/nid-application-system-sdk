@@ -43,8 +43,7 @@ class RegistrationEntityTest extends TestCase
         $registration_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.registration"), "registration_ref01"));
 
-        [$registration_ref01_data_result, $err] = $registration_ref01_ent->create($registration_ref01_data, null);
-        $this->assertNull($err);
+        $registration_ref01_data_result = $registration_ref01_ent->create($registration_ref01_data, null);
         $registration_ref01_data = Helpers::to_map($registration_ref01_data_result);
         $this->assertNotNull($registration_ref01_data);
 

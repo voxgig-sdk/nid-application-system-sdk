@@ -74,9 +74,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -89,11 +89,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -101,7 +101,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## ApplicationEntity
 
 ```python
-application = client.Application()
+application = client.application
 ```
 
 ### Fields
@@ -115,12 +115,12 @@ application = client.Application()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Application().create({
+result = client.application.create({
     "nid_number": # `$STRING`,
     "reason": # `$STRING`,
 })
@@ -158,7 +158,7 @@ Return the entity name.
 ## ApplicationStatusEntity
 
 ```python
-application_status = client.ApplicationStatus()
+application_status = client.application_status
 ```
 
 ### Fields
@@ -175,12 +175,12 @@ application_status = client.ApplicationStatus()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.ApplicationStatus().load({"id": "application_status_id"})
+result = client.application_status.load({"id": "application_status_id"})
 ```
 
 ### Common Methods
@@ -215,7 +215,7 @@ Return the entity name.
 ## LoginEntity
 
 ```python
-login = client.Login()
+login = client.login
 ```
 
 ### Fields
@@ -232,12 +232,12 @@ login = client.Login()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Login().create({
+result = client.login.create({
     "captcha": # `$STRING`,
     "password": # `$STRING`,
     "username": # `$STRING`,
@@ -276,17 +276,17 @@ Return the entity name.
 ## NidManagementEntity
 
 ```python
-nid_management = client.NidManagement()
+nid_management = client.nid_management
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.NidManagement().load({"id": "nid_management_id"})
+result = client.nid_management.load({"id": "nid_management_id"})
 ```
 
 ### Common Methods
@@ -321,7 +321,7 @@ Return the entity name.
 ## RegistrationEntity
 
 ```python
-registration = client.Registration()
+registration = client.registration
 ```
 
 ### Fields
@@ -337,12 +337,12 @@ registration = client.Registration()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Registration().create({
+result = client.registration.create({
     "confirm_password": # `$STRING`,
     "email": # `$STRING`,
     "nid_number": # `$STRING`,
@@ -382,7 +382,7 @@ Return the entity name.
 ## SuccessEntity
 
 ```python
-success = client.Success()
+success = client.success
 ```
 
 ### Fields
@@ -398,12 +398,12 @@ success = client.Success()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Success().create({
+result = client.success.create({
     "code": # `$STRING`,
     "email": # `$STRING`,
 })

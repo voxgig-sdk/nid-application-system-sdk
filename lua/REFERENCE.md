@@ -104,7 +104,7 @@ same parameters as `direct()`.
 ## ApplicationEntity
 
 ```lua
-local application = client:Application(nil)
+local application = client:application(nil)
 ```
 
 ### Fields
@@ -123,7 +123,7 @@ local application = client:Application(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Application():create({
+local result, err = client:application():create({
   nid_number = --[[ `$STRING` ]],
   reason = --[[ `$STRING` ]],
 })
@@ -162,7 +162,7 @@ Return the entity name.
 ## ApplicationStatusEntity
 
 ```lua
-local application_status = client:ApplicationStatus(nil)
+local application_status = client:application_status(nil)
 ```
 
 ### Fields
@@ -184,7 +184,7 @@ local application_status = client:ApplicationStatus(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ApplicationStatus():load({ id = "application_status_id" })
+local result, err = client:application_status():load({ id = "application_status_id" })
 ```
 
 ### Common Methods
@@ -220,7 +220,7 @@ Return the entity name.
 ## LoginEntity
 
 ```lua
-local login = client:Login(nil)
+local login = client:login(nil)
 ```
 
 ### Fields
@@ -242,7 +242,7 @@ local login = client:Login(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Login():create({
+local result, err = client:login():create({
   captcha = --[[ `$STRING` ]],
   password = --[[ `$STRING` ]],
   username = --[[ `$STRING` ]],
@@ -282,7 +282,7 @@ Return the entity name.
 ## NidManagementEntity
 
 ```lua
-local nid_management = client:NidManagement(nil)
+local nid_management = client:nid_management(nil)
 ```
 
 ### Operations
@@ -292,7 +292,7 @@ local nid_management = client:NidManagement(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:NidManagement():load({ id = "nid_management_id" })
+local result, err = client:nid_management():load({ id = "nid_management_id" })
 ```
 
 ### Common Methods
@@ -328,7 +328,7 @@ Return the entity name.
 ## RegistrationEntity
 
 ```lua
-local registration = client:Registration(nil)
+local registration = client:registration(nil)
 ```
 
 ### Fields
@@ -349,7 +349,7 @@ local registration = client:Registration(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Registration():create({
+local result, err = client:registration():create({
   confirm_password = --[[ `$STRING` ]],
   email = --[[ `$STRING` ]],
   nid_number = --[[ `$STRING` ]],
@@ -390,7 +390,7 @@ Return the entity name.
 ## SuccessEntity
 
 ```lua
-local success = client:Success(nil)
+local success = client:success(nil)
 ```
 
 ### Fields
@@ -411,7 +411,7 @@ local success = client:Success(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Success():create({
+local result, err = client:success():create({
   code = --[[ `$STRING` ]],
   email = --[[ `$STRING` ]],
 })

@@ -199,6 +199,7 @@ def make_config():
                       "orig": "application_id",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

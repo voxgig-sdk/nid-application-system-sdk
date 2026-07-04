@@ -49,8 +49,7 @@ class ApplicationStatusEntityTest extends TestCase
         // LOAD
         $application_status_ref01_ent = $client->ApplicationStatus(null);
         $application_status_ref01_match_dt0 = [];
-        [$application_status_ref01_data_dt0_loaded, $err] = $application_status_ref01_ent->load($application_status_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $application_status_ref01_data_dt0_loaded = $application_status_ref01_ent->load($application_status_ref01_match_dt0, null);
         $this->assertNotNull($application_status_ref01_data_dt0_loaded);
 
     }

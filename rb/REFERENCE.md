@@ -74,9 +74,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -90,14 +92,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -105,7 +107,7 @@ same parameters as `direct()`.
 ## ApplicationEntity
 
 ```ruby
-application = client.Application
+application = client.application
 ```
 
 ### Fields
@@ -119,12 +121,12 @@ application = client.Application
 
 ### Operations
 
-#### `create(reqdata, ctrl = nil) -> result, err`
+#### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Raises on error.
 
 ```ruby
-result, err = client.Application.create({
+result = client.application.create({
   "nid_number" => # `$STRING`,
   "reason" => # `$STRING`,
 })
@@ -163,7 +165,7 @@ Return the entity name.
 ## ApplicationStatusEntity
 
 ```ruby
-application_status = client.ApplicationStatus
+application_status = client.application_status
 ```
 
 ### Fields
@@ -180,12 +182,12 @@ application_status = client.ApplicationStatus
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.ApplicationStatus.load({ "id" => "application_status_id" })
+result = client.application_status.load({ "id" => "application_status_id" })
 ```
 
 ### Common Methods
@@ -221,7 +223,7 @@ Return the entity name.
 ## LoginEntity
 
 ```ruby
-login = client.Login
+login = client.login
 ```
 
 ### Fields
@@ -238,12 +240,12 @@ login = client.Login
 
 ### Operations
 
-#### `create(reqdata, ctrl = nil) -> result, err`
+#### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Raises on error.
 
 ```ruby
-result, err = client.Login.create({
+result = client.login.create({
   "captcha" => # `$STRING`,
   "password" => # `$STRING`,
   "username" => # `$STRING`,
@@ -283,17 +285,17 @@ Return the entity name.
 ## NidManagementEntity
 
 ```ruby
-nid_management = client.NidManagement
+nid_management = client.nid_management
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.NidManagement.load({ "id" => "nid_management_id" })
+result = client.nid_management.load({ "id" => "nid_management_id" })
 ```
 
 ### Common Methods
@@ -329,7 +331,7 @@ Return the entity name.
 ## RegistrationEntity
 
 ```ruby
-registration = client.Registration
+registration = client.registration
 ```
 
 ### Fields
@@ -345,12 +347,12 @@ registration = client.Registration
 
 ### Operations
 
-#### `create(reqdata, ctrl = nil) -> result, err`
+#### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Raises on error.
 
 ```ruby
-result, err = client.Registration.create({
+result = client.registration.create({
   "confirm_password" => # `$STRING`,
   "email" => # `$STRING`,
   "nid_number" => # `$STRING`,
@@ -391,7 +393,7 @@ Return the entity name.
 ## SuccessEntity
 
 ```ruby
-success = client.Success
+success = client.success
 ```
 
 ### Fields
@@ -407,12 +409,12 @@ success = client.Success
 
 ### Operations
 
-#### `create(reqdata, ctrl = nil) -> result, err`
+#### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Raises on error.
 
 ```ruby
-result, err = client.Success.create({
+result = client.success.create({
   "code" => # `$STRING`,
   "email" => # `$STRING`,
 })
