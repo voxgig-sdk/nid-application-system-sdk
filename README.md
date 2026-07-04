@@ -146,22 +146,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = NidApplicationSystemSDK.test()
-const result = await client.application.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const application = await client.Application().load({ id: 'test01' })
+// application is a bare Application populated with mock data
+console.log(application)
 ```
 
 ### Python
 
 ```python
 client = NidApplicationSystemSDK.test()
-result = client.application.load({"id": "test01"})
+application = client.Application().load({"id": "test01"})
+print(application)
 ```
 
 ### PHP
 
 ```php
-$client = NidApplicationSystemSDK::test();
-$result = $client->application()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = NidApplicationSystemSDK::test([
+    "entity" => ["application" => ["test01" => ["id" => "test01"]]],
+]);
+$application = $client->Application()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -176,15 +181,18 @@ result, err := client.Application(nil).Load(
 ### Ruby
 
 ```ruby
-client = NidApplicationSystemSDK.test
-result = client.application.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = NidApplicationSystemSDK.test({
+  "entity" => { "application" => { "test01" => { "id" => "test01" } } },
+})
+application = client.Application.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:application():load({ id = "test01" })
+local result, err = client:Application():load({ id = "test01" })
 ```
 
 ## How it works
@@ -232,6 +240,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

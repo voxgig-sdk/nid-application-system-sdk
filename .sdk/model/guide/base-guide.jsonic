@@ -48,15 +48,12 @@ guide: {
   entity: success: {
     path: "/auth/password-reset": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.success`")|top
     }
     path: "/verification/send-code": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.success`")|top
     }
     path: "/verification/verify-code": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.success`")|top
     }
   }
 

@@ -37,8 +37,8 @@ client = NidApplicationSystemSDK({
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.application.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Application().create({"name": "Example"})
 
 ```
 
@@ -85,8 +85,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NidApplicationSystemSDK.test()
 
-result = client.application.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+application = client.Application().load({"id": "test01"})
+# application contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -164,8 +165,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Application` | `(data) -> ApplicationEntity` | Create a Application entity instance. |
-| `ApplicationStatus` | `(data) -> ApplicationStatusEntity` | Create a ApplicationStatus entity instance. |
+| `Application` | `(data) -> ApplicationEntity` | Create an Application entity instance. |
+| `ApplicationStatus` | `(data) -> ApplicationStatusEntity` | Create an ApplicationStatus entity instance. |
 | `Login` | `(data) -> LoginEntity` | Create a Login entity instance. |
 | `NidManagement` | `(data) -> NidManagementEntity` | Create a NidManagement entity instance. |
 | `Registration` | `(data) -> RegistrationEntity` | Create a Registration entity instance. |
@@ -300,7 +301,7 @@ API path: `/auth/password-reset`
 
 ### Application
 
-Create an instance: `const application = client.application`
+Create an instance: `application = client.Application()`
 
 #### Operations
 
@@ -319,17 +320,17 @@ Create an instance: `const application = client.application`
 
 #### Example: Create
 
-```ts
-const application = await client.application.create({
-  nid_number: /* `$STRING` */,
-  reason: /* `$STRING` */,
+```python
+application = client.Application().create({
+    "nid_number": ...,  # `$STRING`
+    "reason": ...,  # `$STRING`
 })
 ```
 
 
 ### ApplicationStatus
 
-Create an instance: `const application_status = client.application_status`
+Create an instance: `application_status = client.ApplicationStatus()`
 
 #### Operations
 
@@ -351,14 +352,14 @@ Create an instance: `const application_status = client.application_status`
 
 #### Example: Load
 
-```ts
-const application_status = await client.application_status.load({ id: 'application_status_id' })
+```python
+application_status = client.ApplicationStatus().load({"id": "application_status_id"})
 ```
 
 
 ### Login
 
-Create an instance: `const login = client.login`
+Create an instance: `login = client.Login()`
 
 #### Operations
 
@@ -380,18 +381,18 @@ Create an instance: `const login = client.login`
 
 #### Example: Create
 
-```ts
-const login = await client.login.create({
-  captcha: /* `$STRING` */,
-  password: /* `$STRING` */,
-  username: /* `$STRING` */,
+```python
+login = client.Login().create({
+    "captcha": ...,  # `$STRING`
+    "password": ...,  # `$STRING`
+    "username": ...,  # `$STRING`
 })
 ```
 
 
 ### NidManagement
 
-Create an instance: `const nid_management = client.nid_management`
+Create an instance: `nid_management = client.NidManagement()`
 
 #### Operations
 
@@ -401,14 +402,14 @@ Create an instance: `const nid_management = client.nid_management`
 
 #### Example: Load
 
-```ts
-const nid_management = await client.nid_management.load({ id: 'nid_management_id' })
+```python
+nid_management = client.NidManagement().load({"id": "nid_management_id"})
 ```
 
 
 ### Registration
 
-Create an instance: `const registration = client.registration`
+Create an instance: `registration = client.Registration()`
 
 #### Operations
 
@@ -429,19 +430,19 @@ Create an instance: `const registration = client.registration`
 
 #### Example: Create
 
-```ts
-const registration = await client.registration.create({
-  confirm_password: /* `$STRING` */,
-  email: /* `$STRING` */,
-  nid_number: /* `$STRING` */,
-  password: /* `$STRING` */,
+```python
+registration = client.Registration().create({
+    "confirm_password": ...,  # `$STRING`
+    "email": ...,  # `$STRING`
+    "nid_number": ...,  # `$STRING`
+    "password": ...,  # `$STRING`
 })
 ```
 
 
 ### Success
 
-Create an instance: `const success = client.success`
+Create an instance: `success = client.Success()`
 
 #### Operations
 
@@ -462,10 +463,10 @@ Create an instance: `const success = client.success`
 
 #### Example: Create
 
-```ts
-const success = await client.success.create({
-  code: /* `$STRING` */,
-  email: /* `$STRING` */,
+```python
+success = client.Success().create({
+    "code": ...,  # `$STRING`
+    "email": ...,  # `$STRING`
 })
 ```
 
@@ -540,7 +541,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-application = client.application
+application = client.Application()
 application.load({"id": "example_id"})
 
 # application.data_get() now returns the loaded application data

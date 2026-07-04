@@ -4,113 +4,117 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Application:
+class ApplicationRequired(TypedDict):
     nid_number: str
     reason: str
-    additional_info: Optional[str] = None
-    police_report_number: Optional[str] = None
 
 
-@dataclass
-class ApplicationCreateData:
-    additional_info: Optional[str] = None
-    nid_number: Optional[str] = None
-    police_report_number: Optional[str] = None
-    reason: Optional[str] = None
+class Application(ApplicationRequired, total=False):
+    additional_info: str
+    police_report_number: str
 
 
-@dataclass
-class ApplicationStatus:
-    application_id: Optional[str] = None
-    application_type: Optional[str] = None
-    last_updated: Optional[str] = None
-    nid_number: Optional[str] = None
-    remark: Optional[str] = None
-    status: Optional[str] = None
-    submission_date: Optional[str] = None
+class ApplicationCreateData(TypedDict, total=False):
+    additional_info: str
+    nid_number: str
+    police_report_number: str
+    reason: str
 
 
-@dataclass
-class ApplicationStatusLoadMatch:
+class ApplicationStatus(TypedDict, total=False):
+    application_id: str
+    application_type: str
+    last_updated: str
+    nid_number: str
+    remark: str
+    status: str
+    submission_date: str
+
+
+class ApplicationStatusLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Login:
+class LoginRequired(TypedDict):
     captcha: str
     password: str
     username: str
-    expires_in: Optional[int] = None
-    success: Optional[bool] = None
-    token: Optional[str] = None
-    user: Optional[dict] = None
 
 
-@dataclass
-class LoginCreateData:
-    captcha: Optional[str] = None
-    expires_in: Optional[int] = None
-    password: Optional[str] = None
-    success: Optional[bool] = None
-    token: Optional[str] = None
-    user: Optional[dict] = None
-    username: Optional[str] = None
+class Login(LoginRequired, total=False):
+    expires_in: int
+    success: bool
+    token: str
+    user: dict
 
 
-@dataclass
-class NidManagement:
+class LoginCreateData(TypedDict, total=False):
+    captcha: str
+    expires_in: int
+    password: str
+    success: bool
+    token: str
+    user: dict
+    username: str
+
+
+class NidManagement(TypedDict):
     pass
 
 
-@dataclass
-class NidManagementLoadMatch:
+class NidManagementLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class Registration:
+class RegistrationRequired(TypedDict):
     confirm_password: str
     email: str
     nid_number: str
     password: str
-    date_of_birth: Optional[str] = None
-    phone: Optional[str] = None
 
 
-@dataclass
-class RegistrationCreateData:
-    confirm_password: Optional[str] = None
-    date_of_birth: Optional[str] = None
-    email: Optional[str] = None
-    nid_number: Optional[str] = None
-    password: Optional[str] = None
-    phone: Optional[str] = None
+class Registration(RegistrationRequired, total=False):
+    date_of_birth: str
+    phone: str
 
 
-@dataclass
-class Success:
+class RegistrationCreateData(TypedDict, total=False):
+    confirm_password: str
+    date_of_birth: str
+    email: str
+    nid_number: str
+    password: str
+    phone: str
+
+
+class SuccessRequired(TypedDict):
     code: str
     email: str
-    is_oversea: Optional[bool] = None
-    message: Optional[str] = None
-    nid_number: Optional[str] = None
-    success: Optional[bool] = None
 
 
-@dataclass
-class SuccessCreateData:
-    code: Optional[str] = None
-    email: Optional[str] = None
-    is_oversea: Optional[bool] = None
-    message: Optional[str] = None
-    nid_number: Optional[str] = None
-    success: Optional[bool] = None
+class Success(SuccessRequired, total=False):
+    is_oversea: bool
+    message: str
+    nid_number: str
+    success: bool
 
+
+class SuccessCreateData(TypedDict, total=False):
+    code: str
+    email: str
+    is_oversea: bool
+    message: str
+    nid_number: str
+    success: bool

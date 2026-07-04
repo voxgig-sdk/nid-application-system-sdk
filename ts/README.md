@@ -33,8 +33,8 @@ const client = new NidApplicationSystemSDK({
 ### 4. Create, update, and remove
 
 ```ts
-// Create
-const created = await client.application.create({
+// Create — returns the created Application
+const created = await client.Application().create({
   name: 'Example',
 })
 
@@ -54,6 +54,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -82,9 +85,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NidApplicationSystemSDK.test()
 
-const result = await client.application.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const application = await client.Application().load({ id: 'test01' })
+// application is a bare entity populated with mock response data
+console.log(application)
 ```
 
 You can also use the instance method:
@@ -99,7 +102,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.application
+const entity = client.Application()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -181,8 +184,8 @@ new NidApplicationSystemSDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `Application(data?)` | `ApplicationEntity` | Create a Application entity instance. |
-| `ApplicationStatus(data?)` | `ApplicationStatusEntity` | Create a ApplicationStatus entity instance. |
+| `Application(data?)` | `ApplicationEntity` | Create an Application entity instance. |
+| `ApplicationStatus(data?)` | `ApplicationStatusEntity` | Create an ApplicationStatus entity instance. |
 | `Login(data?)` | `LoginEntity` | Create a Login entity instance. |
 | `NidManagement(data?)` | `NidManagementEntity` | Create a NidManagement entity instance. |
 | `Registration(data?)` | `RegistrationEntity` | Create a Registration entity instance. |
@@ -203,29 +206,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): NidApplicationSystemSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -348,7 +352,7 @@ API path: `/auth/password-reset`
 
 ### Application
 
-Create an instance: `const application = client.application`
+Create an instance: `const application = client.Application()`
 
 #### Operations
 
@@ -368,7 +372,7 @@ Create an instance: `const application = client.application`
 #### Example: Create
 
 ```ts
-const application = await client.application.create({
+const application = await client.Application().create({
   nid_number: /* `$STRING` */,
   reason: /* `$STRING` */,
 })
@@ -377,7 +381,7 @@ const application = await client.application.create({
 
 ### ApplicationStatus
 
-Create an instance: `const application_status = client.application_status`
+Create an instance: `const application_status = client.ApplicationStatus()`
 
 #### Operations
 
@@ -400,13 +404,13 @@ Create an instance: `const application_status = client.application_status`
 #### Example: Load
 
 ```ts
-const application_status = await client.application_status.load({ id: 'application_status_id' })
+const application_status = await client.ApplicationStatus().load({ id: 'application_status_id' })
 ```
 
 
 ### Login
 
-Create an instance: `const login = client.login`
+Create an instance: `const login = client.Login()`
 
 #### Operations
 
@@ -429,7 +433,7 @@ Create an instance: `const login = client.login`
 #### Example: Create
 
 ```ts
-const login = await client.login.create({
+const login = await client.Login().create({
   captcha: /* `$STRING` */,
   password: /* `$STRING` */,
   username: /* `$STRING` */,
@@ -439,7 +443,7 @@ const login = await client.login.create({
 
 ### NidManagement
 
-Create an instance: `const nid_management = client.nid_management`
+Create an instance: `const nid_management = client.NidManagement()`
 
 #### Operations
 
@@ -450,13 +454,13 @@ Create an instance: `const nid_management = client.nid_management`
 #### Example: Load
 
 ```ts
-const nid_management = await client.nid_management.load({ id: 'nid_management_id' })
+const nid_management = await client.NidManagement().load({ id: 'nid_management_id' })
 ```
 
 
 ### Registration
 
-Create an instance: `const registration = client.registration`
+Create an instance: `const registration = client.Registration()`
 
 #### Operations
 
@@ -478,7 +482,7 @@ Create an instance: `const registration = client.registration`
 #### Example: Create
 
 ```ts
-const registration = await client.registration.create({
+const registration = await client.Registration().create({
   confirm_password: /* `$STRING` */,
   email: /* `$STRING` */,
   nid_number: /* `$STRING` */,
@@ -489,7 +493,7 @@ const registration = await client.registration.create({
 
 ### Success
 
-Create an instance: `const success = client.success`
+Create an instance: `const success = client.Success()`
 
 #### Operations
 
@@ -511,7 +515,7 @@ Create an instance: `const success = client.success`
 #### Example: Create
 
 ```ts
-const success = await client.success.create({
+const success = await client.Success().create({
   code: /* `$STRING` */,
   email: /* `$STRING` */,
 })
@@ -585,7 +589,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const application = client.application
+const application = client.Application()
 await application.load({ id: "example_id" })
 
 // application.data() now returns the loaded application data

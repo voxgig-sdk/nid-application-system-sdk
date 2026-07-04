@@ -510,7 +510,7 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.success`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},
@@ -526,7 +526,7 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.success`",
+									"res": "`body`",
 								},
 								"index$": 1,
 							},
@@ -542,7 +542,7 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.success`",
+									"res": "`body`",
 								},
 								"index$": 2,
 							},

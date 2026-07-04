@@ -510,7 +510,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body.success`",
+                  ["res"] = "`body`",
                 },
                 ["index$"] = 0,
               },
@@ -526,7 +526,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body.success`",
+                  ["res"] = "`body`",
                 },
                 ["index$"] = 1,
               },
@@ -542,7 +542,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body.success`",
+                  ["res"] = "`body`",
                 },
                 ["index$"] = 2,
               },

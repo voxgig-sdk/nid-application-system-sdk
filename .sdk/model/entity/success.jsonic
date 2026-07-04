@@ -51,7 +51,7 @@ main: kit: entity: success: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body.success`"
+            res: "`body`"
           }
         }
         {
@@ -63,7 +63,7 @@ main: kit: entity: success: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body.success`"
+            res: "`body`"
           }
         }
         {
@@ -75,7 +75,7 @@ main: kit: entity: success: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body.success`"
+            res: "`body`"
           }
         }
       ]

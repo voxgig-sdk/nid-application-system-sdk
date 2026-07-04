@@ -516,7 +516,7 @@ class NidApplicationSystemConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.success`',
+                    'res' => '`body`',
                   ],
                   'index$' => 0,
                 ],
@@ -532,7 +532,7 @@ class NidApplicationSystemConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.success`',
+                    'res' => '`body`',
                   ],
                   'index$' => 1,
                 ],
@@ -548,7 +548,7 @@ class NidApplicationSystemConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.success`',
+                    'res' => '`body`',
                   ],
                   'index$' => 2,
                 ],

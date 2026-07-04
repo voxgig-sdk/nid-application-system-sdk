@@ -233,10 +233,10 @@ class NidApplicationSystemSDK
 
     private $_application = null;
 
-    // Idiomatic facade: $client->application()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Application() (PHP method
-    // names are case-insensitive).
-    public function application($data = null)
+    // Canonical facade: $client->Application()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->application()
+    // resolves here too.
+    public function Application($data = null)
     {
         require_once __DIR__ . '/entity/application_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class NidApplicationSystemSDK
 
     private $_application_status = null;
 
-    // Idiomatic facade: $client->application_status()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ApplicationStatus() (PHP method
-    // names are case-insensitive).
-    public function application_status($data = null)
+    // Canonical facade: $client->ApplicationStatus()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->application_status()
+    // resolves here too.
+    public function ApplicationStatus($data = null)
     {
         require_once __DIR__ . '/entity/application_status_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class NidApplicationSystemSDK
 
     private $_login = null;
 
-    // Idiomatic facade: $client->login()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Login() (PHP method
-    // names are case-insensitive).
-    public function login($data = null)
+    // Canonical facade: $client->Login()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->login()
+    // resolves here too.
+    public function Login($data = null)
     {
         require_once __DIR__ . '/entity/login_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class NidApplicationSystemSDK
 
     private $_nid_management = null;
 
-    // Idiomatic facade: $client->nid_management()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias NidManagement() (PHP method
-    // names are case-insensitive).
-    public function nid_management($data = null)
+    // Canonical facade: $client->NidManagement()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->nid_management()
+    // resolves here too.
+    public function NidManagement($data = null)
     {
         require_once __DIR__ . '/entity/nid_management_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class NidApplicationSystemSDK
 
     private $_registration = null;
 
-    // Idiomatic facade: $client->registration()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Registration() (PHP method
-    // names are case-insensitive).
-    public function registration($data = null)
+    // Canonical facade: $client->Registration()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->registration()
+    // resolves here too.
+    public function Registration($data = null)
     {
         require_once __DIR__ . '/entity/registration_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class NidApplicationSystemSDK
 
     private $_success = null;
 
-    // Idiomatic facade: $client->success()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Success() (PHP method
-    // names are case-insensitive).
-    public function success($data = null)
+    // Canonical facade: $client->Success()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->success()
+    // resolves here too.
+    public function Success($data = null)
     {
         require_once __DIR__ . '/entity/success_entity.php';
         if ($data === null) {

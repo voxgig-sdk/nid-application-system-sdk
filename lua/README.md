@@ -37,7 +37,8 @@ local client = sdk.new({
 
 ```lua
 -- Create
-local created, _ = client:application():create({ name = "Example" })
+local created, err = client:Application():create({ name = "Example" })
+if err then error(err) end
 
 ```
 
@@ -84,8 +85,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:application():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Application():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -165,8 +166,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Application` | `(data) -> ApplicationEntity` | Create a Application entity instance. |
-| `ApplicationStatus` | `(data) -> ApplicationStatusEntity` | Create a ApplicationStatus entity instance. |
+| `Application` | `(data) -> ApplicationEntity` | Create an Application entity instance. |
+| `ApplicationStatus` | `(data) -> ApplicationStatusEntity` | Create an ApplicationStatus entity instance. |
 | `Login` | `(data) -> LoginEntity` | Create a Login entity instance. |
 | `NidManagement` | `(data) -> NidManagementEntity` | Create a NidManagement entity instance. |
 | `Registration` | `(data) -> RegistrationEntity` | Create a Registration entity instance. |
@@ -192,17 +193,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local application, err = client:Application():load({ id = "example_id" })
+    if err then error(err) end
+    -- application is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -297,7 +303,7 @@ API path: `/auth/password-reset`
 
 ### Application
 
-Create an instance: `const application = client.application`
+Create an instance: `local application = client:Application(nil)`
 
 #### Operations
 
@@ -316,17 +322,17 @@ Create an instance: `const application = client.application`
 
 #### Example: Create
 
-```ts
-const application = await client.application.create({
-  nid_number: /* `$STRING` */,
-  reason: /* `$STRING` */,
+```lua
+local application, err = client:Application():create({
+  nid_number = nil, -- `$STRING`
+  reason = nil, -- `$STRING`
 })
 ```
 
 
 ### ApplicationStatus
 
-Create an instance: `const application_status = client.application_status`
+Create an instance: `local application_status = client:ApplicationStatus(nil)`
 
 #### Operations
 
@@ -348,14 +354,14 @@ Create an instance: `const application_status = client.application_status`
 
 #### Example: Load
 
-```ts
-const application_status = await client.application_status.load({ id: 'application_status_id' })
+```lua
+local application_status, err = client:ApplicationStatus():load({ id = "application_status_id" })
 ```
 
 
 ### Login
 
-Create an instance: `const login = client.login`
+Create an instance: `local login = client:Login(nil)`
 
 #### Operations
 
@@ -377,18 +383,18 @@ Create an instance: `const login = client.login`
 
 #### Example: Create
 
-```ts
-const login = await client.login.create({
-  captcha: /* `$STRING` */,
-  password: /* `$STRING` */,
-  username: /* `$STRING` */,
+```lua
+local login, err = client:Login():create({
+  captcha = nil, -- `$STRING`
+  password = nil, -- `$STRING`
+  username = nil, -- `$STRING`
 })
 ```
 
 
 ### NidManagement
 
-Create an instance: `const nid_management = client.nid_management`
+Create an instance: `local nid_management = client:NidManagement(nil)`
 
 #### Operations
 
@@ -398,14 +404,14 @@ Create an instance: `const nid_management = client.nid_management`
 
 #### Example: Load
 
-```ts
-const nid_management = await client.nid_management.load({ id: 'nid_management_id' })
+```lua
+local nid_management, err = client:NidManagement():load({ id = "nid_management_id" })
 ```
 
 
 ### Registration
 
-Create an instance: `const registration = client.registration`
+Create an instance: `local registration = client:Registration(nil)`
 
 #### Operations
 
@@ -426,19 +432,19 @@ Create an instance: `const registration = client.registration`
 
 #### Example: Create
 
-```ts
-const registration = await client.registration.create({
-  confirm_password: /* `$STRING` */,
-  email: /* `$STRING` */,
-  nid_number: /* `$STRING` */,
-  password: /* `$STRING` */,
+```lua
+local registration, err = client:Registration():create({
+  confirm_password = nil, -- `$STRING`
+  email = nil, -- `$STRING`
+  nid_number = nil, -- `$STRING`
+  password = nil, -- `$STRING`
 })
 ```
 
 
 ### Success
 
-Create an instance: `const success = client.success`
+Create an instance: `local success = client:Success(nil)`
 
 #### Operations
 
@@ -459,10 +465,10 @@ Create an instance: `const success = client.success`
 
 #### Example: Create
 
-```ts
-const success = await client.success.create({
-  code: /* `$STRING` */,
-  email: /* `$STRING` */,
+```lua
+local success, err = client:Success():create({
+  code = nil, -- `$STRING`
+  email = nil, -- `$STRING`
 })
 ```
 
@@ -538,7 +544,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local application = client:application()
+local application = client:Application()
 application:load({ id = "example_id" })
 
 -- application:data_get() now returns the loaded application data

@@ -101,7 +101,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## ApplicationEntity
 
 ```python
-application = client.application
+application = client.Application()
 ```
 
 ### Fields
@@ -120,9 +120,9 @@ application = client.application
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.application.create({
-    "nid_number": # `$STRING`,
-    "reason": # `$STRING`,
+result = client.Application().create({
+    "nid_number": ...,  # `$STRING`
+    "reason": ...,  # `$STRING`
 })
 ```
 
@@ -158,7 +158,7 @@ Return the entity name.
 ## ApplicationStatusEntity
 
 ```python
-application_status = client.application_status
+application_status = client.ApplicationStatus()
 ```
 
 ### Fields
@@ -180,7 +180,7 @@ application_status = client.application_status
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.application_status.load({"id": "application_status_id"})
+result = client.ApplicationStatus().load({"id": "application_status_id"})
 ```
 
 ### Common Methods
@@ -215,7 +215,7 @@ Return the entity name.
 ## LoginEntity
 
 ```python
-login = client.login
+login = client.Login()
 ```
 
 ### Fields
@@ -237,10 +237,10 @@ login = client.login
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.login.create({
-    "captcha": # `$STRING`,
-    "password": # `$STRING`,
-    "username": # `$STRING`,
+result = client.Login().create({
+    "captcha": ...,  # `$STRING`
+    "password": ...,  # `$STRING`
+    "username": ...,  # `$STRING`
 })
 ```
 
@@ -276,7 +276,7 @@ Return the entity name.
 ## NidManagementEntity
 
 ```python
-nid_management = client.nid_management
+nid_management = client.NidManagement()
 ```
 
 ### Operations
@@ -286,7 +286,7 @@ nid_management = client.nid_management
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.nid_management.load({"id": "nid_management_id"})
+result = client.NidManagement().load({"id": "nid_management_id"})
 ```
 
 ### Common Methods
@@ -321,7 +321,7 @@ Return the entity name.
 ## RegistrationEntity
 
 ```python
-registration = client.registration
+registration = client.Registration()
 ```
 
 ### Fields
@@ -342,11 +342,11 @@ registration = client.registration
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.registration.create({
-    "confirm_password": # `$STRING`,
-    "email": # `$STRING`,
-    "nid_number": # `$STRING`,
-    "password": # `$STRING`,
+result = client.Registration().create({
+    "confirm_password": ...,  # `$STRING`
+    "email": ...,  # `$STRING`
+    "nid_number": ...,  # `$STRING`
+    "password": ...,  # `$STRING`
 })
 ```
 
@@ -382,7 +382,7 @@ Return the entity name.
 ## SuccessEntity
 
 ```python
-success = client.success
+success = client.Success()
 ```
 
 ### Fields
@@ -403,9 +403,9 @@ success = client.success
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.success.create({
-    "code": # `$STRING`,
-    "email": # `$STRING`,
+result = client.Success().create({
+    "code": ...,  # `$STRING`
+    "email": ...,  # `$STRING`
 })
 ```
 

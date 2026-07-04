@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:application():list() / client:application():load({ id = ... })
-function NidApplicationSystemSDK:application(data)
+-- Idiomatic facade: client:Application():list() / client:Application():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NidApplicationSystemSDK:Application(data)
   local EntityMod = require("entity.application_entity")
   if data == nil then
     if self._application == nil then
@@ -256,15 +257,10 @@ function NidApplicationSystemSDK:application(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:application() instead.
-function NidApplicationSystemSDK:Application(data)
-  local EntityMod = require("entity.application_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:application_status():list() / client:application_status():load({ id = ... })
-function NidApplicationSystemSDK:application_status(data)
+-- Idiomatic facade: client:ApplicationStatus():list() / client:ApplicationStatus():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NidApplicationSystemSDK:ApplicationStatus(data)
   local EntityMod = require("entity.application_status_entity")
   if data == nil then
     if self._application_status == nil then
@@ -275,15 +271,10 @@ function NidApplicationSystemSDK:application_status(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:application_status() instead.
-function NidApplicationSystemSDK:ApplicationStatus(data)
-  local EntityMod = require("entity.application_status_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:login():list() / client:login():load({ id = ... })
-function NidApplicationSystemSDK:login(data)
+-- Idiomatic facade: client:Login():list() / client:Login():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NidApplicationSystemSDK:Login(data)
   local EntityMod = require("entity.login_entity")
   if data == nil then
     if self._login == nil then
@@ -294,15 +285,10 @@ function NidApplicationSystemSDK:login(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:login() instead.
-function NidApplicationSystemSDK:Login(data)
-  local EntityMod = require("entity.login_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:nid_management():list() / client:nid_management():load({ id = ... })
-function NidApplicationSystemSDK:nid_management(data)
+-- Idiomatic facade: client:NidManagement():list() / client:NidManagement():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NidApplicationSystemSDK:NidManagement(data)
   local EntityMod = require("entity.nid_management_entity")
   if data == nil then
     if self._nid_management == nil then
@@ -313,15 +299,10 @@ function NidApplicationSystemSDK:nid_management(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:nid_management() instead.
-function NidApplicationSystemSDK:NidManagement(data)
-  local EntityMod = require("entity.nid_management_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:registration():list() / client:registration():load({ id = ... })
-function NidApplicationSystemSDK:registration(data)
+-- Idiomatic facade: client:Registration():list() / client:Registration():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NidApplicationSystemSDK:Registration(data)
   local EntityMod = require("entity.registration_entity")
   if data == nil then
     if self._registration == nil then
@@ -332,15 +313,10 @@ function NidApplicationSystemSDK:registration(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:registration() instead.
-function NidApplicationSystemSDK:Registration(data)
-  local EntityMod = require("entity.registration_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:success():list() / client:success():load({ id = ... })
-function NidApplicationSystemSDK:success(data)
+-- Idiomatic facade: client:Success():list() / client:Success():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NidApplicationSystemSDK:Success(data)
   local EntityMod = require("entity.success_entity")
   if data == nil then
     if self._success == nil then
@@ -348,12 +324,6 @@ function NidApplicationSystemSDK:success(data)
     end
     return self._success
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:success() instead.
-function NidApplicationSystemSDK:Success(data)
-  local EntityMod = require("entity.success_entity")
   return EntityMod.new(self, data)
 end
 

@@ -220,105 +220,45 @@ class NidApplicationSystemSDK:
         }
 
 
-    @property
-    def application(self):
-        """Idiomatic facade: client.application.list() / client.application.load({"id": ...})."""
-        from entity.application_entity import ApplicationEntity
-        cached = getattr(self, "_application", None)
-        if cached is None:
-            cached = ApplicationEntity(self, None)
-            self._application = cached
-        return cached
-
-    def Application(self, data=None):
-        # Deprecated: use client.application instead.
+    def Application(self, data=None) -> "ApplicationEntity":
+        """Entity factory: client.Application().list({}) / client.Application().load({"id": ...})."""
         from entity.application_entity import ApplicationEntity
         return ApplicationEntity(self, data)
 
 
-    @property
-    def application_status(self):
-        """Idiomatic facade: client.application_status.list() / client.application_status.load({"id": ...})."""
-        from entity.application_status_entity import ApplicationStatusEntity
-        cached = getattr(self, "_application_status", None)
-        if cached is None:
-            cached = ApplicationStatusEntity(self, None)
-            self._application_status = cached
-        return cached
-
-    def ApplicationStatus(self, data=None):
-        # Deprecated: use client.application_status instead.
+    def ApplicationStatus(self, data=None) -> "ApplicationStatusEntity":
+        """Entity factory: client.ApplicationStatus().list({}) / client.ApplicationStatus().load({"id": ...})."""
         from entity.application_status_entity import ApplicationStatusEntity
         return ApplicationStatusEntity(self, data)
 
 
-    @property
-    def login(self):
-        """Idiomatic facade: client.login.list() / client.login.load({"id": ...})."""
-        from entity.login_entity import LoginEntity
-        cached = getattr(self, "_login", None)
-        if cached is None:
-            cached = LoginEntity(self, None)
-            self._login = cached
-        return cached
-
-    def Login(self, data=None):
-        # Deprecated: use client.login instead.
+    def Login(self, data=None) -> "LoginEntity":
+        """Entity factory: client.Login().list({}) / client.Login().load({"id": ...})."""
         from entity.login_entity import LoginEntity
         return LoginEntity(self, data)
 
 
-    @property
-    def nid_management(self):
-        """Idiomatic facade: client.nid_management.list() / client.nid_management.load({"id": ...})."""
-        from entity.nid_management_entity import NidManagementEntity
-        cached = getattr(self, "_nid_management", None)
-        if cached is None:
-            cached = NidManagementEntity(self, None)
-            self._nid_management = cached
-        return cached
-
-    def NidManagement(self, data=None):
-        # Deprecated: use client.nid_management instead.
+    def NidManagement(self, data=None) -> "NidManagementEntity":
+        """Entity factory: client.NidManagement().list({}) / client.NidManagement().load({"id": ...})."""
         from entity.nid_management_entity import NidManagementEntity
         return NidManagementEntity(self, data)
 
 
-    @property
-    def registration(self):
-        """Idiomatic facade: client.registration.list() / client.registration.load({"id": ...})."""
-        from entity.registration_entity import RegistrationEntity
-        cached = getattr(self, "_registration", None)
-        if cached is None:
-            cached = RegistrationEntity(self, None)
-            self._registration = cached
-        return cached
-
-    def Registration(self, data=None):
-        # Deprecated: use client.registration instead.
+    def Registration(self, data=None) -> "RegistrationEntity":
+        """Entity factory: client.Registration().list({}) / client.Registration().load({"id": ...})."""
         from entity.registration_entity import RegistrationEntity
         return RegistrationEntity(self, data)
 
 
-    @property
-    def success(self):
-        """Idiomatic facade: client.success.list() / client.success.load({"id": ...})."""
-        from entity.success_entity import SuccessEntity
-        cached = getattr(self, "_success", None)
-        if cached is None:
-            cached = SuccessEntity(self, None)
-            self._success = cached
-        return cached
-
-    def Success(self, data=None):
-        # Deprecated: use client.success instead.
+    def Success(self, data=None) -> "SuccessEntity":
+        """Entity factory: client.Success().list({}) / client.Success().load({"id": ...})."""
         from entity.success_entity import SuccessEntity
         return SuccessEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "NidApplicationSystemSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -338,3 +278,14 @@ class NidApplicationSystemSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.application_entity import ApplicationEntity
+    from entity.application_status_entity import ApplicationStatusEntity
+    from entity.login_entity import LoginEntity
+    from entity.nid_management_entity import NidManagementEntity
+    from entity.registration_entity import RegistrationEntity
+    from entity.success_entity import SuccessEntity

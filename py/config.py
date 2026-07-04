@@ -511,7 +511,7 @@ def make_config():
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.success`",
+                  "res": "`body`",
                 },
                 "index$": 0,
               },
@@ -527,7 +527,7 @@ def make_config():
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.success`",
+                  "res": "`body`",
                 },
                 "index$": 1,
               },
@@ -543,7 +543,7 @@ def make_config():
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.success`",
+                  "res": "`body`",
                 },
                 "index$": 2,
               },

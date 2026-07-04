@@ -208,78 +208,42 @@ class NidApplicationSystemSDK
   end
 
 
-  # Idiomatic facade: client.application.list / client.application.load({ "id" => ... })
-  def application
-    require_relative 'entity/application_entity'
-    @application ||= ApplicationEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.application instead.
+  # Canonical facade: client.Application.list / client.Application.load({ "id" => ... })
   def Application(data = nil)
     require_relative 'entity/application_entity'
     ApplicationEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.application_status.list / client.application_status.load({ "id" => ... })
-  def application_status
-    require_relative 'entity/application_status_entity'
-    @application_status ||= ApplicationStatusEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.application_status instead.
+  # Canonical facade: client.ApplicationStatus.list / client.ApplicationStatus.load({ "id" => ... })
   def ApplicationStatus(data = nil)
     require_relative 'entity/application_status_entity'
     ApplicationStatusEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.login.list / client.login.load({ "id" => ... })
-  def login
-    require_relative 'entity/login_entity'
-    @login ||= LoginEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.login instead.
+  # Canonical facade: client.Login.list / client.Login.load({ "id" => ... })
   def Login(data = nil)
     require_relative 'entity/login_entity'
     LoginEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.nid_management.list / client.nid_management.load({ "id" => ... })
-  def nid_management
-    require_relative 'entity/nid_management_entity'
-    @nid_management ||= NidManagementEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.nid_management instead.
+  # Canonical facade: client.NidManagement.list / client.NidManagement.load({ "id" => ... })
   def NidManagement(data = nil)
     require_relative 'entity/nid_management_entity'
     NidManagementEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.registration.list / client.registration.load({ "id" => ... })
-  def registration
-    require_relative 'entity/registration_entity'
-    @registration ||= RegistrationEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.registration instead.
+  # Canonical facade: client.Registration.list / client.Registration.load({ "id" => ... })
   def Registration(data = nil)
     require_relative 'entity/registration_entity'
     RegistrationEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.success.list / client.success.load({ "id" => ... })
-  def success
-    require_relative 'entity/success_entity'
-    @success ||= SuccessEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.success instead.
+  # Canonical facade: client.Success.list / client.Success.load({ "id" => ... })
   def Success(data = nil)
     require_relative 'entity/success_entity'
     SuccessEntity.new(self, data)
