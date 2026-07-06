@@ -29,19 +29,19 @@ Application = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Application#create (any subset of Application fields).
+# Request payload for Application#create.
 #
 # @!attribute [rw] additional_info
 #   @return [String, nil]
 #
 # @!attribute [rw] nid_number
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] police_report_number
 #   @return [String, nil]
 #
 # @!attribute [rw] reason
-#   @return [String, nil]
+#   @return [String]
 ApplicationCreateData = Struct.new(
   :additional_info,
   :nid_number,
@@ -125,16 +125,16 @@ Login = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Login#create (any subset of Login fields).
+# Request payload for Login#create.
 #
 # @!attribute [rw] captcha
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] expires_in
 #   @return [Integer, nil]
 #
 # @!attribute [rw] password
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] success
 #   @return [Boolean, nil]
@@ -146,7 +146,7 @@ Login = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] username
-#   @return [String, nil]
+#   @return [String]
 LoginCreateData = Struct.new(
   :captcha,
   :expires_in,
@@ -162,7 +162,7 @@ LoginCreateData = Struct.new(
 class NidManagement
 end
 
-# Match filter for NidManagement#load (any subset of NidManagement fields).
+# Request payload for NidManagement#load.
 class NidManagementLoadMatch
 end
 
@@ -195,22 +195,22 @@ Registration = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Registration#create (any subset of Registration fields).
+# Request payload for Registration#create.
 #
 # @!attribute [rw] confirm_password
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] date_of_birth
 #   @return [String, nil]
 #
 # @!attribute [rw] email
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] nid_number
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] password
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] phone
 #   @return [String, nil]
@@ -253,13 +253,13 @@ Success = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Success#create (any subset of Success fields).
+# Request payload for Success#create.
 #
 # @!attribute [rw] code
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] email
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] is_oversea
 #   @return [Boolean, nil]

@@ -8,7 +8,7 @@ Complete API reference for the NidApplicationSystem PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/nid-application-system_sdk.php';
+require_once __DIR__ . '/nidapplicationsystem_sdk.php';
 
 $client = new NidApplicationSystemSDK($options);
 ```
@@ -66,11 +66,11 @@ Create a new `RegistrationEntity` instance. Pass `null` for no initial data.
 
 Create a new `SuccessEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): NidApplicationSystemUtility`
 
 Return a copy of the SDK utility object.
 
@@ -113,10 +113,10 @@ $application = $client->Application();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `police_report_number` | ``$STRING`` | No |  |
-| `reason` | ``$STRING`` | Yes |  |
+| `additional_info` | `string` | No |  |
+| `nid_number` | `string` | Yes |  |
+| `police_report_number` | `string` | No |  |
+| `reason` | `string` | Yes |  |
 
 ### Operations
 
@@ -126,26 +126,26 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Application()->create([
-  "nid_number" => /* `$STRING` */,
-  "reason" => /* `$STRING` */,
+  "nid_number" => null, // string
+  "reason" => null, // string
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -154,7 +154,7 @@ Set the entity match criteria.
 Create a new `ApplicationEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -171,13 +171,13 @@ $application_status = $client->ApplicationStatus();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | ``$STRING`` | No |  |
-| `application_type` | ``$STRING`` | No |  |
-| `last_updated` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `remark` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `submission_date` | ``$STRING`` | No |  |
+| `application_id` | `string` | No |  |
+| `application_type` | `string` | No |  |
+| `last_updated` | `string` | No |  |
+| `nid_number` | `string` | No |  |
+| `remark` | `string` | No |  |
+| `status` | `string` | No |  |
+| `submission_date` | `string` | No |  |
 
 ### Operations
 
@@ -191,19 +191,19 @@ $result = $client->ApplicationStatus()->load(["id" => "application_status_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -212,7 +212,7 @@ Set the entity match criteria.
 Create a new `ApplicationStatusEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -229,13 +229,13 @@ $login = $client->Login();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `captcha` | ``$STRING`` | Yes |  |
-| `expires_in` | ``$INTEGER`` | No |  |
-| `password` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `user` | ``$OBJECT`` | No |  |
-| `username` | ``$STRING`` | Yes |  |
+| `captcha` | `string` | Yes |  |
+| `expires_in` | `int` | No |  |
+| `password` | `string` | Yes |  |
+| `success` | `bool` | No |  |
+| `token` | `string` | No |  |
+| `user` | `array` | No |  |
+| `username` | `string` | Yes |  |
 
 ### Operations
 
@@ -245,27 +245,27 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Login()->create([
-  "captcha" => /* `$STRING` */,
-  "password" => /* `$STRING` */,
-  "username" => /* `$STRING` */,
+  "captcha" => null, // string
+  "password" => null, // string
+  "username" => null, // string
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -274,7 +274,7 @@ Set the entity match criteria.
 Create a new `LoginEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -294,24 +294,24 @@ $nid_management = $client->NidManagement();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->NidManagement()->load(["id" => "nid_management_id"]);
+$result = $client->NidManagement()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -320,7 +320,7 @@ Set the entity match criteria.
 Create a new `NidManagementEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -337,12 +337,12 @@ $registration = $client->Registration();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | ``$STRING`` | Yes |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `email` | ``$STRING`` | Yes |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `password` | ``$STRING`` | Yes |  |
-| `phone` | ``$STRING`` | No |  |
+| `confirm_password` | `string` | Yes |  |
+| `date_of_birth` | `string` | No |  |
+| `email` | `string` | Yes |  |
+| `nid_number` | `string` | Yes |  |
+| `password` | `string` | Yes |  |
+| `phone` | `string` | No |  |
 
 ### Operations
 
@@ -352,28 +352,28 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Registration()->create([
-  "confirm_password" => /* `$STRING` */,
-  "email" => /* `$STRING` */,
-  "nid_number" => /* `$STRING` */,
-  "password" => /* `$STRING` */,
+  "confirm_password" => null, // string
+  "email" => null, // string
+  "nid_number" => null, // string
+  "password" => null, // string
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -382,7 +382,7 @@ Set the entity match criteria.
 Create a new `RegistrationEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -399,12 +399,12 @@ $success = $client->Success();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `email` | ``$STRING`` | Yes |  |
-| `is_oversea` | ``$BOOLEAN`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `code` | `string` | Yes |  |
+| `email` | `string` | Yes |  |
+| `is_oversea` | `bool` | No |  |
+| `message` | `string` | No |  |
+| `nid_number` | `string` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -414,26 +414,26 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Success()->create([
-  "code" => /* `$STRING` */,
-  "email" => /* `$STRING` */,
+  "code" => null, // string
+  "email" => null, // string
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -442,7 +442,7 @@ Set the entity match criteria.
 Create a new `SuccessEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

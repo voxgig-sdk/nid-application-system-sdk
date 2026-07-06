@@ -177,10 +177,10 @@ const application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `police_report_number` | ``$STRING`` | No |  |
-| `reason` | ``$STRING`` | Yes |  |
+| `additional_info` | `string` | No |  |
+| `nid_number` | `string` | Yes |  |
+| `police_report_number` | `string` | No |  |
+| `reason` | `string` | Yes |  |
 
 ### Operations
 
@@ -190,8 +190,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Application().create({
-  nid_number: /* `$STRING` */,
-  reason: /* `$STRING` */,
+  nid_number: /* string */,
+  reason: /* string */,
 })
 ```
 
@@ -233,13 +233,13 @@ const application_status = client.ApplicationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | ``$STRING`` | No |  |
-| `application_type` | ``$STRING`` | No |  |
-| `last_updated` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `remark` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `submission_date` | ``$STRING`` | No |  |
+| `application_id` | `string` | No |  |
+| `application_type` | `string` | No |  |
+| `last_updated` | `string` | No |  |
+| `nid_number` | `string` | No |  |
+| `remark` | `string` | No |  |
+| `status` | `string` | No |  |
+| `submission_date` | `string` | No |  |
 
 ### Operations
 
@@ -289,13 +289,13 @@ const login = client.Login()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `captcha` | ``$STRING`` | Yes |  |
-| `expires_in` | ``$INTEGER`` | No |  |
-| `password` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `user` | ``$OBJECT`` | No |  |
-| `username` | ``$STRING`` | Yes |  |
+| `captcha` | `string` | Yes |  |
+| `expires_in` | `number` | No |  |
+| `password` | `string` | Yes |  |
+| `success` | `boolean` | No |  |
+| `token` | `string` | No |  |
+| `user` | `Record<string, any>` | No |  |
+| `username` | `string` | Yes |  |
 
 ### Operations
 
@@ -305,9 +305,9 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Login().create({
-  captcha: /* `$STRING` */,
-  password: /* `$STRING` */,
-  username: /* `$STRING` */,
+  captcha: /* string */,
+  password: /* string */,
+  username: /* string */,
 })
 ```
 
@@ -352,7 +352,7 @@ const nid_management = client.NidManagement()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.NidManagement().load({ id: 'nid_management_id' })
+const result = await client.NidManagement().load()
 ```
 
 ### Common Methods
@@ -393,12 +393,12 @@ const registration = client.Registration()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | ``$STRING`` | Yes |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `email` | ``$STRING`` | Yes |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `password` | ``$STRING`` | Yes |  |
-| `phone` | ``$STRING`` | No |  |
+| `confirm_password` | `string` | Yes |  |
+| `date_of_birth` | `string` | No |  |
+| `email` | `string` | Yes |  |
+| `nid_number` | `string` | Yes |  |
+| `password` | `string` | Yes |  |
+| `phone` | `string` | No |  |
 
 ### Operations
 
@@ -408,10 +408,10 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Registration().create({
-  confirm_password: /* `$STRING` */,
-  email: /* `$STRING` */,
-  nid_number: /* `$STRING` */,
-  password: /* `$STRING` */,
+  confirm_password: /* string */,
+  email: /* string */,
+  nid_number: /* string */,
+  password: /* string */,
 })
 ```
 
@@ -453,12 +453,12 @@ const success = client.Success()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `email` | ``$STRING`` | Yes |  |
-| `is_oversea` | ``$BOOLEAN`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `code` | `string` | Yes |  |
+| `email` | `string` | Yes |  |
+| `is_oversea` | `boolean` | No |  |
+| `message` | `string` | No |  |
+| `nid_number` | `string` | No |  |
+| `success` | `boolean` | No |  |
 
 ### Operations
 
@@ -468,8 +468,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Success().create({
-  code: /* `$STRING` */,
-  email: /* `$STRING` */,
+  code: /* string */,
+  email: /* string */,
 })
 ```
 

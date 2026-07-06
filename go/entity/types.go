@@ -16,13 +16,12 @@ type Application struct {
 	Reason string `json:"reason"`
 }
 
-// ApplicationCreateData mirrors the application fields as an all-optional match
-// filter (Go analog of Partial<Application>).
+// ApplicationCreateData is the typed request payload for Application.CreateTyped.
 type ApplicationCreateData struct {
 	AdditionalInfo *string `json:"additional_info,omitempty"`
-	NidNumber *string `json:"nid_number,omitempty"`
+	NidNumber string `json:"nid_number"`
 	PoliceReportNumber *string `json:"police_report_number,omitempty"`
-	Reason *string `json:"reason,omitempty"`
+	Reason string `json:"reason"`
 }
 
 // ApplicationStatus is the typed data model for the application_status entity.
@@ -52,24 +51,22 @@ type Login struct {
 	Username string `json:"username"`
 }
 
-// LoginCreateData mirrors the login fields as an all-optional match
-// filter (Go analog of Partial<Login>).
+// LoginCreateData is the typed request payload for Login.CreateTyped.
 type LoginCreateData struct {
-	Captcha *string `json:"captcha,omitempty"`
+	Captcha string `json:"captcha"`
 	ExpiresIn *int `json:"expires_in,omitempty"`
-	Password *string `json:"password,omitempty"`
+	Password string `json:"password"`
 	Success *bool `json:"success,omitempty"`
 	Token *string `json:"token,omitempty"`
 	User *map[string]any `json:"user,omitempty"`
-	Username *string `json:"username,omitempty"`
+	Username string `json:"username"`
 }
 
 // NidManagement is the typed data model for the nid_management entity.
 type NidManagement struct {
 }
 
-// NidManagementLoadMatch mirrors the nid_management fields as an all-optional match
-// filter (Go analog of Partial<NidManagement>).
+// NidManagementLoadMatch is the typed request payload for NidManagement.LoadTyped.
 type NidManagementLoadMatch struct {
 }
 
@@ -83,14 +80,13 @@ type Registration struct {
 	Phone *string `json:"phone,omitempty"`
 }
 
-// RegistrationCreateData mirrors the registration fields as an all-optional match
-// filter (Go analog of Partial<Registration>).
+// RegistrationCreateData is the typed request payload for Registration.CreateTyped.
 type RegistrationCreateData struct {
-	ConfirmPassword *string `json:"confirm_password,omitempty"`
+	ConfirmPassword string `json:"confirm_password"`
 	DateOfBirth *string `json:"date_of_birth,omitempty"`
-	Email *string `json:"email,omitempty"`
-	NidNumber *string `json:"nid_number,omitempty"`
-	Password *string `json:"password,omitempty"`
+	Email string `json:"email"`
+	NidNumber string `json:"nid_number"`
+	Password string `json:"password"`
 	Phone *string `json:"phone,omitempty"`
 }
 
@@ -104,11 +100,10 @@ type Success struct {
 	Success *bool `json:"success,omitempty"`
 }
 
-// SuccessCreateData mirrors the success fields as an all-optional match
-// filter (Go analog of Partial<Success>).
+// SuccessCreateData is the typed request payload for Success.CreateTyped.
 type SuccessCreateData struct {
-	Code *string `json:"code,omitempty"`
-	Email *string `json:"email,omitempty"`
+	Code string `json:"code"`
+	Email string `json:"email"`
 	IsOversea *bool `json:"is_oversea,omitempty"`
 	Message *string `json:"message,omitempty"`
 	NidNumber *string `json:"nid_number,omitempty"`

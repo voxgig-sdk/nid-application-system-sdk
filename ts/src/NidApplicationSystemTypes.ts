@@ -12,7 +12,12 @@ export interface Application {
   reason: string
 }
 
-export type ApplicationCreateData = Partial<Application>
+export interface ApplicationCreateData {
+  additional_info?: string
+  nid_number: string
+  police_report_number?: string
+  reason: string
+}
 
 export interface ApplicationStatus {
   application_id?: string
@@ -38,12 +43,21 @@ export interface Login {
   username: string
 }
 
-export type LoginCreateData = Partial<Login>
+export interface LoginCreateData {
+  captcha: string
+  expires_in?: number
+  password: string
+  success?: boolean
+  token?: string
+  user?: Record<string, any>
+  username: string
+}
 
 export interface NidManagement {
 }
 
-export type NidManagementLoadMatch = Partial<NidManagement>
+export interface NidManagementLoadMatch {
+}
 
 export interface Registration {
   confirm_password: string
@@ -54,7 +68,14 @@ export interface Registration {
   phone?: string
 }
 
-export type RegistrationCreateData = Partial<Registration>
+export interface RegistrationCreateData {
+  confirm_password: string
+  date_of_birth?: string
+  email: string
+  nid_number: string
+  password: string
+  phone?: string
+}
 
 export interface Success {
   code: string
@@ -65,5 +86,12 @@ export interface Success {
   success?: boolean
 }
 
-export type SuccessCreateData = Partial<Success>
+export interface SuccessCreateData {
+  code: string
+  email: string
+  is_oversea?: boolean
+  message?: string
+  nid_number?: string
+  success?: boolean
+}
 

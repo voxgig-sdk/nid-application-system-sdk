@@ -8,7 +8,7 @@ Complete API reference for the NidApplicationSystem Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'nid-application-system_sdk'
+require_relative 'NidApplicationSystem_sdk'
 
 client = NidApplicationSystemSDK.new(options)
 ```
@@ -114,10 +114,10 @@ application = client.Application
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `police_report_number` | ``$STRING`` | No |  |
-| `reason` | ``$STRING`` | Yes |  |
+| `additional_info` | `String` | No |  |
+| `nid_number` | `String` | Yes |  |
+| `police_report_number` | `String` | No |  |
+| `reason` | `String` | Yes |  |
 
 ### Operations
 
@@ -127,8 +127,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Application.create({
-  "nid_number" => # `$STRING`,
-  "reason" => # `$STRING`,
+  "nid_number" => "example", # String
+  "reason" => "example", # String
 })
 ```
 
@@ -172,13 +172,13 @@ application_status = client.ApplicationStatus
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | ``$STRING`` | No |  |
-| `application_type` | ``$STRING`` | No |  |
-| `last_updated` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `remark` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `submission_date` | ``$STRING`` | No |  |
+| `application_id` | `String` | No |  |
+| `application_type` | `String` | No |  |
+| `last_updated` | `String` | No |  |
+| `nid_number` | `String` | No |  |
+| `remark` | `String` | No |  |
+| `status` | `String` | No |  |
+| `submission_date` | `String` | No |  |
 
 ### Operations
 
@@ -230,13 +230,13 @@ login = client.Login
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `captcha` | ``$STRING`` | Yes |  |
-| `expires_in` | ``$INTEGER`` | No |  |
-| `password` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `user` | ``$OBJECT`` | No |  |
-| `username` | ``$STRING`` | Yes |  |
+| `captcha` | `String` | Yes |  |
+| `expires_in` | `Integer` | No |  |
+| `password` | `String` | Yes |  |
+| `success` | `Boolean` | No |  |
+| `token` | `String` | No |  |
+| `user` | `Hash` | No |  |
+| `username` | `String` | Yes |  |
 
 ### Operations
 
@@ -246,9 +246,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Login.create({
-  "captcha" => # `$STRING`,
-  "password" => # `$STRING`,
-  "username" => # `$STRING`,
+  "captcha" => "example", # String
+  "password" => "example", # String
+  "username" => "example", # String
 })
 ```
 
@@ -295,7 +295,7 @@ nid_management = client.NidManagement
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.NidManagement.load({ "id" => "nid_management_id" })
+result = client.NidManagement.load()
 ```
 
 ### Common Methods
@@ -338,12 +338,12 @@ registration = client.Registration
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | ``$STRING`` | Yes |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `email` | ``$STRING`` | Yes |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `password` | ``$STRING`` | Yes |  |
-| `phone` | ``$STRING`` | No |  |
+| `confirm_password` | `String` | Yes |  |
+| `date_of_birth` | `String` | No |  |
+| `email` | `String` | Yes |  |
+| `nid_number` | `String` | Yes |  |
+| `password` | `String` | Yes |  |
+| `phone` | `String` | No |  |
 
 ### Operations
 
@@ -353,10 +353,10 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Registration.create({
-  "confirm_password" => # `$STRING`,
-  "email" => # `$STRING`,
-  "nid_number" => # `$STRING`,
-  "password" => # `$STRING`,
+  "confirm_password" => "example", # String
+  "email" => "example", # String
+  "nid_number" => "example", # String
+  "password" => "example", # String
 })
 ```
 
@@ -400,12 +400,12 @@ success = client.Success
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `email` | ``$STRING`` | Yes |  |
-| `is_oversea` | ``$BOOLEAN`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `code` | `String` | Yes |  |
+| `email` | `String` | Yes |  |
+| `is_oversea` | `Boolean` | No |  |
+| `message` | `String` | No |  |
+| `nid_number` | `String` | No |  |
+| `success` | `Boolean` | No |  |
 
 ### Operations
 
@@ -415,8 +415,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Success.create({
-  "code" => # `$STRING`,
-  "email" => # `$STRING`,
+  "code" => "example", # String
+  "email" => "example", # String
 })
 ```
 

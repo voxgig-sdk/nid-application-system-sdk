@@ -21,13 +21,13 @@ class Application
     public string $reason;
 }
 
-/** Match filter for Application#create (any subset of Application fields). */
+/** Request payload for Application#create. */
 class ApplicationCreateData
 {
     public ?string $additional_info = null;
-    public ?string $nid_number = null;
+    public string $nid_number;
     public ?string $police_report_number = null;
-    public ?string $reason = null;
+    public string $reason;
 }
 
 /** ApplicationStatus entity data model. */
@@ -60,16 +60,16 @@ class Login
     public string $username;
 }
 
-/** Match filter for Login#create (any subset of Login fields). */
+/** Request payload for Login#create. */
 class LoginCreateData
 {
-    public ?string $captcha = null;
+    public string $captcha;
     public ?int $expires_in = null;
-    public ?string $password = null;
+    public string $password;
     public ?bool $success = null;
     public ?string $token = null;
     public ?array $user = null;
-    public ?string $username = null;
+    public string $username;
 }
 
 /** NidManagement entity data model. */
@@ -77,7 +77,7 @@ class NidManagement
 {
 }
 
-/** Match filter for NidManagement#load (any subset of NidManagement fields). */
+/** Request payload for NidManagement#load. */
 class NidManagementLoadMatch
 {
 }
@@ -93,14 +93,14 @@ class Registration
     public ?string $phone = null;
 }
 
-/** Match filter for Registration#create (any subset of Registration fields). */
+/** Request payload for Registration#create. */
 class RegistrationCreateData
 {
-    public ?string $confirm_password = null;
+    public string $confirm_password;
     public ?string $date_of_birth = null;
-    public ?string $email = null;
-    public ?string $nid_number = null;
-    public ?string $password = null;
+    public string $email;
+    public string $nid_number;
+    public string $password;
     public ?string $phone = null;
 }
 
@@ -115,11 +115,11 @@ class Success
     public ?bool $success = null;
 }
 
-/** Match filter for Success#create (any subset of Success fields). */
+/** Request payload for Success#create. */
 class SuccessCreateData
 {
-    public ?string $code = null;
-    public ?string $email = null;
+    public string $code;
+    public string $email;
     public ?bool $is_oversea = null;
     public ?string $message = null;
     public ?string $nid_number = null;

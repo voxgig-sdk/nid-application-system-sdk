@@ -26,11 +26,14 @@ class Application(ApplicationRequired, total=False):
     police_report_number: str
 
 
-class ApplicationCreateData(TypedDict, total=False):
-    additional_info: str
+class ApplicationCreateDataRequired(TypedDict):
     nid_number: str
-    police_report_number: str
     reason: str
+
+
+class ApplicationCreateData(ApplicationCreateDataRequired, total=False):
+    additional_info: str
+    police_report_number: str
 
 
 class ApplicationStatus(TypedDict, total=False):
@@ -60,14 +63,17 @@ class Login(LoginRequired, total=False):
     user: dict
 
 
-class LoginCreateData(TypedDict, total=False):
+class LoginCreateDataRequired(TypedDict):
     captcha: str
-    expires_in: int
     password: str
+    username: str
+
+
+class LoginCreateData(LoginCreateDataRequired, total=False):
+    expires_in: int
     success: bool
     token: str
     user: dict
-    username: str
 
 
 class NidManagement(TypedDict):
@@ -90,12 +96,15 @@ class Registration(RegistrationRequired, total=False):
     phone: str
 
 
-class RegistrationCreateData(TypedDict, total=False):
+class RegistrationCreateDataRequired(TypedDict):
     confirm_password: str
-    date_of_birth: str
     email: str
     nid_number: str
     password: str
+
+
+class RegistrationCreateData(RegistrationCreateDataRequired, total=False):
+    date_of_birth: str
     phone: str
 
 
@@ -111,9 +120,12 @@ class Success(SuccessRequired, total=False):
     success: bool
 
 
-class SuccessCreateData(TypedDict, total=False):
+class SuccessCreateDataRequired(TypedDict):
     code: str
     email: str
+
+
+class SuccessCreateData(SuccessCreateDataRequired, total=False):
     is_oversea: bool
     message: str
     nid_number: str

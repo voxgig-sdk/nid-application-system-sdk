@@ -4,6 +4,8 @@
 
 The Golang SDK for the NidApplicationSystem API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Application(nil)` — each with the same small set of operations (`Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -52,12 +54,41 @@ func main() {
     })
 
     // Create a application.
-    created, err := client.Application(nil).Create(map[string]any{"name": "Example"}, nil)
+    created, err := client.Application(nil).Create(map[string]any{"nid_number": "example", "reason": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+application, err := client.Application(nil).Create(map[string]any{"nid_number": "example", "reason": "example"}, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = application
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -107,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-application, err := client.Application(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+application, err := client.Application(nil).Create(
+    map[string]any{"nid_number": "example", "reason": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(application) // the loaded mock data
+fmt.Println(application) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -206,10 +237,7 @@ All entities implement the `NidApplicationSystemEntity` interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
 | `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -222,16 +250,15 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` / `Create` | the entity record (`map[string]any`) |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    application, err := client.Application(nil).Load(map[string]any{"id": "example_id"}, nil)
+    application, err := client.Application(nil).Create(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // application is the loaded record
+    // application is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -341,17 +368,17 @@ Create an instance: `application := client.Application(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `police_report_number` | ``$STRING`` |  |
-| `reason` | ``$STRING`` |  |
+| `additional_info` | `string` |  |
+| `nid_number` | `string` |  |
+| `police_report_number` | `string` |  |
+| `reason` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Application(nil).Create(map[string]any{
-    "nid_number": /* `$STRING` */,
-    "reason": /* `$STRING` */,
+    "nid_number": /* string */,
+    "reason": /* string */,
 }, nil)
 ```
 
@@ -370,13 +397,13 @@ Create an instance: `application_status := client.ApplicationStatus(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | ``$STRING`` |  |
-| `application_type` | ``$STRING`` |  |
-| `last_updated` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `remark` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `submission_date` | ``$STRING`` |  |
+| `application_id` | `string` |  |
+| `application_type` | `string` |  |
+| `last_updated` | `string` |  |
+| `nid_number` | `string` |  |
+| `remark` | `string` |  |
+| `status` | `string` |  |
+| `submission_date` | `string` |  |
 
 #### Example: Load
 
@@ -403,21 +430,21 @@ Create an instance: `login := client.Login(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `captcha` | ``$STRING`` |  |
-| `expires_in` | ``$INTEGER`` |  |
-| `password` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `token` | ``$STRING`` |  |
-| `user` | ``$OBJECT`` |  |
-| `username` | ``$STRING`` |  |
+| `captcha` | `string` |  |
+| `expires_in` | `int` |  |
+| `password` | `string` |  |
+| `success` | `bool` |  |
+| `token` | `string` |  |
+| `user` | `map[string]any` |  |
+| `username` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Login(nil).Create(map[string]any{
-    "captcha": /* `$STRING` */,
-    "password": /* `$STRING` */,
-    "username": /* `$STRING` */,
+    "captcha": /* string */,
+    "password": /* string */,
+    "username": /* string */,
 }, nil)
 ```
 
@@ -435,7 +462,7 @@ Create an instance: `nid_management := client.NidManagement(nil)`
 #### Example: Load
 
 ```go
-nid_management, err := client.NidManagement(nil).Load(map[string]any{"id": "nid_management_id"}, nil)
+nid_management, err := client.NidManagement(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -457,21 +484,21 @@ Create an instance: `registration := client.Registration(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | ``$STRING`` |  |
-| `date_of_birth` | ``$STRING`` |  |
-| `email` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `password` | ``$STRING`` |  |
-| `phone` | ``$STRING`` |  |
+| `confirm_password` | `string` |  |
+| `date_of_birth` | `string` |  |
+| `email` | `string` |  |
+| `nid_number` | `string` |  |
+| `password` | `string` |  |
+| `phone` | `string` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Registration(nil).Create(map[string]any{
-    "confirm_password": /* `$STRING` */,
-    "email": /* `$STRING` */,
-    "nid_number": /* `$STRING` */,
-    "password": /* `$STRING` */,
+    "confirm_password": /* string */,
+    "email": /* string */,
+    "nid_number": /* string */,
+    "password": /* string */,
 }, nil)
 ```
 
@@ -490,29 +517,33 @@ Create an instance: `success := client.Success(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `email` | ``$STRING`` |  |
-| `is_oversea` | ``$BOOLEAN`` |  |
-| `message` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `code` | `string` |  |
+| `email` | `string` |  |
+| `is_oversea` | `bool` |  |
+| `message` | `string` |  |
+| `nid_number` | `string` |  |
+| `success` | `bool` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Success(nil).Create(map[string]any{
-    "code": /* `$STRING` */,
-    "email": /* `$STRING` */,
+    "code": /* string */,
+    "email": /* string */,
 }, nil)
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -529,9 +560,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -572,14 +603,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `Create`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 application := client.Application(nil)
-application.Load(map[string]any{"id": "example_id"}, nil)
+application.Create(map[string]any{"nid_number": "example", "reason": "example"}, nil)
 
-// application.Data() now returns the loaded application data
+// application.Data() now returns the application data from the last create
 // application.Match() returns the last match criteria
 ```
 

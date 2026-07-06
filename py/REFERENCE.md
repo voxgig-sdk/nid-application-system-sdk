@@ -8,7 +8,7 @@ Complete API reference for the NidApplicationSystem Python SDK.
 ### Constructor
 
 ```python
-from nid-application-system_sdk import NidApplicationSystemSDK
+from nidapplicationsystem_sdk import NidApplicationSystemSDK
 
 client = NidApplicationSystemSDK(options)
 ```
@@ -108,10 +108,10 @@ application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `police_report_number` | ``$STRING`` | No |  |
-| `reason` | ``$STRING`` | Yes |  |
+| `additional_info` | `str` | No |  |
+| `nid_number` | `str` | Yes |  |
+| `police_report_number` | `str` | No |  |
+| `reason` | `str` | Yes |  |
 
 ### Operations
 
@@ -121,8 +121,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Application().create({
-    "nid_number": ...,  # `$STRING`
-    "reason": ...,  # `$STRING`
+    "nid_number": "example",  # str
+    "reason": "example",  # str
 })
 ```
 
@@ -165,13 +165,13 @@ application_status = client.ApplicationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | ``$STRING`` | No |  |
-| `application_type` | ``$STRING`` | No |  |
-| `last_updated` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `remark` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `submission_date` | ``$STRING`` | No |  |
+| `application_id` | `str` | No |  |
+| `application_type` | `str` | No |  |
+| `last_updated` | `str` | No |  |
+| `nid_number` | `str` | No |  |
+| `remark` | `str` | No |  |
+| `status` | `str` | No |  |
+| `submission_date` | `str` | No |  |
 
 ### Operations
 
@@ -222,13 +222,13 @@ login = client.Login()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `captcha` | ``$STRING`` | Yes |  |
-| `expires_in` | ``$INTEGER`` | No |  |
-| `password` | ``$STRING`` | Yes |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `user` | ``$OBJECT`` | No |  |
-| `username` | ``$STRING`` | Yes |  |
+| `captcha` | `str` | Yes |  |
+| `expires_in` | `int` | No |  |
+| `password` | `str` | Yes |  |
+| `success` | `bool` | No |  |
+| `token` | `str` | No |  |
+| `user` | `dict` | No |  |
+| `username` | `str` | Yes |  |
 
 ### Operations
 
@@ -238,9 +238,9 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Login().create({
-    "captcha": ...,  # `$STRING`
-    "password": ...,  # `$STRING`
-    "username": ...,  # `$STRING`
+    "captcha": "example",  # str
+    "password": "example",  # str
+    "username": "example",  # str
 })
 ```
 
@@ -286,7 +286,7 @@ nid_management = client.NidManagement()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.NidManagement().load({"id": "nid_management_id"})
+result = client.NidManagement().load()
 ```
 
 ### Common Methods
@@ -328,12 +328,12 @@ registration = client.Registration()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | ``$STRING`` | Yes |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `email` | ``$STRING`` | Yes |  |
-| `nid_number` | ``$STRING`` | Yes |  |
-| `password` | ``$STRING`` | Yes |  |
-| `phone` | ``$STRING`` | No |  |
+| `confirm_password` | `str` | Yes |  |
+| `date_of_birth` | `str` | No |  |
+| `email` | `str` | Yes |  |
+| `nid_number` | `str` | Yes |  |
+| `password` | `str` | Yes |  |
+| `phone` | `str` | No |  |
 
 ### Operations
 
@@ -343,10 +343,10 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Registration().create({
-    "confirm_password": ...,  # `$STRING`
-    "email": ...,  # `$STRING`
-    "nid_number": ...,  # `$STRING`
-    "password": ...,  # `$STRING`
+    "confirm_password": "example",  # str
+    "email": "example",  # str
+    "nid_number": "example",  # str
+    "password": "example",  # str
 })
 ```
 
@@ -389,12 +389,12 @@ success = client.Success()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `email` | ``$STRING`` | Yes |  |
-| `is_oversea` | ``$BOOLEAN`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `nid_number` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
+| `code` | `str` | Yes |  |
+| `email` | `str` | Yes |  |
+| `is_oversea` | `bool` | No |  |
+| `message` | `str` | No |  |
+| `nid_number` | `str` | No |  |
+| `success` | `bool` | No |  |
 
 ### Operations
 
@@ -404,8 +404,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Success().create({
-    "code": ...,  # `$STRING`
-    "email": ...,  # `$STRING`
+    "code": "example",  # str
+    "email": "example",  # str
 })
 ```
 

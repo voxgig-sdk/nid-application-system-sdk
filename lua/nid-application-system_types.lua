@@ -13,6 +13,10 @@
 ---@field reason string
 
 ---@class ApplicationCreateData
+---@field additional_info? string
+---@field nid_number string
+---@field police_report_number? string
+---@field reason string
 
 ---@class ApplicationStatus
 ---@field application_id? string
@@ -36,6 +40,13 @@
 ---@field username string
 
 ---@class LoginCreateData
+---@field captcha string
+---@field expires_in? number
+---@field password string
+---@field success? boolean
+---@field token? string
+---@field user? table
+---@field username string
 
 ---@class NidManagement
 
@@ -50,6 +61,12 @@
 ---@field phone? string
 
 ---@class RegistrationCreateData
+---@field confirm_password string
+---@field date_of_birth? string
+---@field email string
+---@field nid_number string
+---@field password string
+---@field phone? string
 
 ---@class Success
 ---@field code string
@@ -60,6 +77,12 @@
 ---@field success? boolean
 
 ---@class SuccessCreateData
+---@field code string
+---@field email string
+---@field is_oversea? boolean
+---@field message? string
+---@field nid_number? string
+---@field success? boolean
 
 local M = {}
 

@@ -4,6 +4,8 @@
 
 The Lua SDK for the NidApplicationSystem API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Application()` — each with the same small set of operations (`load`, `create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,9 +39,31 @@ local client = sdk.new({
 
 ```lua
 -- Create
-local created, err = client:Application():create({ name = "Example" })
+local created, err = client:Application():create({ nid_number = "example", reason = "example" })
 if err then error(err) end
 
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local application, err = client:Application():create({ nid_number = "example", reason = "example" })
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -85,8 +109,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Application():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:Application():create({ nid_number = "example", reason = "example" })
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -180,10 +204,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
 | `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -198,12 +219,11 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
-| `list` | an array (`table`) of entity records |
+| `load` / `create` | the entity record (a `table`) |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local application, err = client:Application():load({ id = "example_id" })
+    local application, err = client:Application():load()
     if err then error(err) end
     -- application is the loaded record
 
@@ -315,17 +335,17 @@ Create an instance: `local application = client:Application(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `police_report_number` | ``$STRING`` |  |
-| `reason` | ``$STRING`` |  |
+| `additional_info` | `string` |  |
+| `nid_number` | `string` |  |
+| `police_report_number` | `string` |  |
+| `reason` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local application, err = client:Application():create({
-  nid_number = nil, -- `$STRING`
-  reason = nil, -- `$STRING`
+  nid_number = nil, -- string
+  reason = nil, -- string
 })
 ```
 
@@ -344,13 +364,13 @@ Create an instance: `local application_status = client:ApplicationStatus(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | ``$STRING`` |  |
-| `application_type` | ``$STRING`` |  |
-| `last_updated` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `remark` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `submission_date` | ``$STRING`` |  |
+| `application_id` | `string` |  |
+| `application_type` | `string` |  |
+| `last_updated` | `string` |  |
+| `nid_number` | `string` |  |
+| `remark` | `string` |  |
+| `status` | `string` |  |
+| `submission_date` | `string` |  |
 
 #### Example: Load
 
@@ -373,21 +393,21 @@ Create an instance: `local login = client:Login(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `captcha` | ``$STRING`` |  |
-| `expires_in` | ``$INTEGER`` |  |
-| `password` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `token` | ``$STRING`` |  |
-| `user` | ``$OBJECT`` |  |
-| `username` | ``$STRING`` |  |
+| `captcha` | `string` |  |
+| `expires_in` | `number` |  |
+| `password` | `string` |  |
+| `success` | `boolean` |  |
+| `token` | `string` |  |
+| `user` | `table` |  |
+| `username` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local login, err = client:Login():create({
-  captcha = nil, -- `$STRING`
-  password = nil, -- `$STRING`
-  username = nil, -- `$STRING`
+  captcha = nil, -- string
+  password = nil, -- string
+  username = nil, -- string
 })
 ```
 
@@ -405,7 +425,7 @@ Create an instance: `local nid_management = client:NidManagement(nil)`
 #### Example: Load
 
 ```lua
-local nid_management, err = client:NidManagement():load({ id = "nid_management_id" })
+local nid_management, err = client:NidManagement():load()
 ```
 
 
@@ -423,21 +443,21 @@ Create an instance: `local registration = client:Registration(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | ``$STRING`` |  |
-| `date_of_birth` | ``$STRING`` |  |
-| `email` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `password` | ``$STRING`` |  |
-| `phone` | ``$STRING`` |  |
+| `confirm_password` | `string` |  |
+| `date_of_birth` | `string` |  |
+| `email` | `string` |  |
+| `nid_number` | `string` |  |
+| `password` | `string` |  |
+| `phone` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local registration, err = client:Registration():create({
-  confirm_password = nil, -- `$STRING`
-  email = nil, -- `$STRING`
-  nid_number = nil, -- `$STRING`
-  password = nil, -- `$STRING`
+  confirm_password = nil, -- string
+  email = nil, -- string
+  nid_number = nil, -- string
+  password = nil, -- string
 })
 ```
 
@@ -456,29 +476,33 @@ Create an instance: `local success = client:Success(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `email` | ``$STRING`` |  |
-| `is_oversea` | ``$BOOLEAN`` |  |
-| `message` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `code` | `string` |  |
+| `email` | `string` |  |
+| `is_oversea` | `boolean` |  |
+| `message` | `string` |  |
+| `nid_number` | `string` |  |
+| `success` | `boolean` |  |
 
 #### Example: Create
 
 ```lua
 local success, err = client:Success():create({
-  code = nil, -- `$STRING`
-  email = nil, -- `$STRING`
+  code = nil, -- string
+  email = nil, -- string
 })
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -495,8 +519,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -540,14 +565,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `create`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
 local application = client:Application()
-application:load({ id = "example_id" })
+application:create({ nid_number = "example", reason = "example" })
 
--- application:data_get() now returns the loaded application data
+-- application:data_get() now returns the application data from the last create
 -- application:match_get() returns the last match criteria
 ```
 

@@ -221,37 +221,37 @@ class NidApplicationSystemSDK:
 
 
     def Application(self, data=None) -> "ApplicationEntity":
-        """Entity factory: client.Application().list({}) / client.Application().load({"id": ...})."""
+        """Entity factory: client.Application().list() / client.Application().load({"id": ...})."""
         from entity.application_entity import ApplicationEntity
         return ApplicationEntity(self, data)
 
 
     def ApplicationStatus(self, data=None) -> "ApplicationStatusEntity":
-        """Entity factory: client.ApplicationStatus().list({}) / client.ApplicationStatus().load({"id": ...})."""
+        """Entity factory: client.ApplicationStatus().list() / client.ApplicationStatus().load({"id": ...})."""
         from entity.application_status_entity import ApplicationStatusEntity
         return ApplicationStatusEntity(self, data)
 
 
     def Login(self, data=None) -> "LoginEntity":
-        """Entity factory: client.Login().list({}) / client.Login().load({"id": ...})."""
+        """Entity factory: client.Login().list() / client.Login().load({"id": ...})."""
         from entity.login_entity import LoginEntity
         return LoginEntity(self, data)
 
 
     def NidManagement(self, data=None) -> "NidManagementEntity":
-        """Entity factory: client.NidManagement().list({}) / client.NidManagement().load({"id": ...})."""
+        """Entity factory: client.NidManagement().list() / client.NidManagement().load({"id": ...})."""
         from entity.nid_management_entity import NidManagementEntity
         return NidManagementEntity(self, data)
 
 
     def Registration(self, data=None) -> "RegistrationEntity":
-        """Entity factory: client.Registration().list({}) / client.Registration().load({"id": ...})."""
+        """Entity factory: client.Registration().list() / client.Registration().load({"id": ...})."""
         from entity.registration_entity import RegistrationEntity
         return RegistrationEntity(self, data)
 
 
     def Success(self, data=None) -> "SuccessEntity":
-        """Entity factory: client.Success().list({}) / client.Success().load({"id": ...})."""
+        """Entity factory: client.Success().list() / client.Success().load({"id": ...})."""
         from entity.success_entity import SuccessEntity
         return SuccessEntity(self, data)
 

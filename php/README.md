@@ -4,6 +4,8 @@
 
 The PHP SDK for the NidApplicationSystem API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Application()` — with named operations (`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -35,8 +37,39 @@ $client = new NidApplicationSystemSDK([
 
 ```php
 // create() returns the bare created Application record.
-$created = $client->Application()->create(["name" => "Example"]);
+$created = $client->Application()->create(["nid_number" => "example", "reason" => "example"]);
 
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $application = $client->Application()->create(["nid_number" => "example", "reason" => "example"]);
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
+}
 ```
 
 
@@ -59,7 +92,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -80,16 +116,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = NidApplicationSystemSDK::test([
-    "entity" => ["application" => ["test01" => ["id" => "test01"]]],
-]);
+$client = NidApplicationSystemSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$application = $client->Application()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$application = $client->Application()->create(["nid_number" => "example", "reason" => "example"]);
 print_r($application);
 ```
 
@@ -185,10 +218,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -319,17 +349,17 @@ Create an instance: `$application = $client->Application();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `police_report_number` | ``$STRING`` |  |
-| `reason` | ``$STRING`` |  |
+| `additional_info` | `string` |  |
+| `nid_number` | `string` |  |
+| `police_report_number` | `string` |  |
+| `reason` | `string` |  |
 
 #### Example: Create
 
 ```php
 $application = $client->Application()->create([
-    "nid_number" => null, // `$STRING`
-    "reason" => null, // `$STRING`
+    "nid_number" => null, // string
+    "reason" => null, // string
 ]);
 ```
 
@@ -348,13 +378,13 @@ Create an instance: `$application_status = $client->ApplicationStatus();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | ``$STRING`` |  |
-| `application_type` | ``$STRING`` |  |
-| `last_updated` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `remark` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `submission_date` | ``$STRING`` |  |
+| `application_id` | `string` |  |
+| `application_type` | `string` |  |
+| `last_updated` | `string` |  |
+| `nid_number` | `string` |  |
+| `remark` | `string` |  |
+| `status` | `string` |  |
+| `submission_date` | `string` |  |
 
 #### Example: Load
 
@@ -378,21 +408,21 @@ Create an instance: `$login = $client->Login();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `captcha` | ``$STRING`` |  |
-| `expires_in` | ``$INTEGER`` |  |
-| `password` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `token` | ``$STRING`` |  |
-| `user` | ``$OBJECT`` |  |
-| `username` | ``$STRING`` |  |
+| `captcha` | `string` |  |
+| `expires_in` | `int` |  |
+| `password` | `string` |  |
+| `success` | `bool` |  |
+| `token` | `string` |  |
+| `user` | `array` |  |
+| `username` | `string` |  |
 
 #### Example: Create
 
 ```php
 $login = $client->Login()->create([
-    "captcha" => null, // `$STRING`
-    "password" => null, // `$STRING`
-    "username" => null, // `$STRING`
+    "captcha" => null, // string
+    "password" => null, // string
+    "username" => null, // string
 ]);
 ```
 
@@ -411,7 +441,7 @@ Create an instance: `$nid_management = $client->NidManagement();`
 
 ```php
 // load() returns the bare NidManagement record (throws on error).
-$nid_management = $client->NidManagement()->load(["id" => "nid_management_id"]);
+$nid_management = $client->NidManagement()->load();
 ```
 
 
@@ -429,21 +459,21 @@ Create an instance: `$registration = $client->Registration();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | ``$STRING`` |  |
-| `date_of_birth` | ``$STRING`` |  |
-| `email` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `password` | ``$STRING`` |  |
-| `phone` | ``$STRING`` |  |
+| `confirm_password` | `string` |  |
+| `date_of_birth` | `string` |  |
+| `email` | `string` |  |
+| `nid_number` | `string` |  |
+| `password` | `string` |  |
+| `phone` | `string` |  |
 
 #### Example: Create
 
 ```php
 $registration = $client->Registration()->create([
-    "confirm_password" => null, // `$STRING`
-    "email" => null, // `$STRING`
-    "nid_number" => null, // `$STRING`
-    "password" => null, // `$STRING`
+    "confirm_password" => null, // string
+    "email" => null, // string
+    "nid_number" => null, // string
+    "password" => null, // string
 ]);
 ```
 
@@ -462,29 +492,33 @@ Create an instance: `$success = $client->Success();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `email` | ``$STRING`` |  |
-| `is_oversea` | ``$BOOLEAN`` |  |
-| `message` | ``$STRING`` |  |
-| `nid_number` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
+| `code` | `string` |  |
+| `email` | `string` |  |
+| `is_oversea` | `bool` |  |
+| `message` | `string` |  |
+| `nid_number` | `string` |  |
+| `success` | `bool` |  |
 
 #### Example: Create
 
 ```php
 $success = $client->Success()->create([
-    "code" => null, // `$STRING`
-    "email" => null, // `$STRING`
+    "code" => null, // string
+    "email" => null, // string
 ]);
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -501,8 +535,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -546,15 +581,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `create`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $application = $client->Application();
-$application->load(["id" => "example_id"]);
+$application->create(["nid_number" => "example", "reason" => "example"]);
 
-// $application->dataGet() now returns the loaded application data
-// $application->matchGet() returns the last match criteria
+// $application->data_get() now returns the application data from the last create
+// $application->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
