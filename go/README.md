@@ -54,7 +54,7 @@ func main() {
     })
 
     // Create a application.
-    created, err := client.Application(nil).Create(map[string]any{"nid_number": "example", "reason": "example"}, nil)
+    created, err := client.Application(nil).Create(map[string]any{"nid_number": "example_nid_number", "reason": "example_reason"}, nil)
     if err != nil {
         panic(err)
     }
@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-application, err := client.Application(nil).Create(map[string]any{"nid_number": "example", "reason": "example"}, nil)
+applicationstatus, err := client.ApplicationStatus(nil).Load(map[string]any{"id": "example_id"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = application
+_ = applicationstatus
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-application, err := client.Application(nil).Create(
-    map[string]any{"nid_number": "example", "reason": "example"}, nil,
+applicationStatus, err := client.ApplicationStatus(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(application) // the returned mock data
+fmt.Println(applicationStatus) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -377,15 +377,19 @@ Create an instance: `application := client.Application(nil)`
 
 ```go
 result, err := client.Application(nil).Create(map[string]any{
-    "nid_number": /* string */,
-    "reason": /* string */,
+    "nid_number": "example_nid_number",
+    "reason": "example_reason",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### ApplicationStatus
 
-Create an instance: `application_status := client.ApplicationStatus(nil)`
+Create an instance: `applicationStatus := client.ApplicationStatus(nil)`
 
 #### Operations
 
@@ -408,11 +412,11 @@ Create an instance: `application_status := client.ApplicationStatus(nil)`
 #### Example: Load
 
 ```go
-application_status, err := client.ApplicationStatus(nil).Load(map[string]any{"id": "application_status_id"}, nil)
+applicationStatus, err := client.ApplicationStatus(nil).Load(map[string]any{"id": "application_status_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(application_status) // the loaded record
+fmt.Println(applicationStatus) // the loaded record
 ```
 
 
@@ -442,16 +446,20 @@ Create an instance: `login := client.Login(nil)`
 
 ```go
 result, err := client.Login(nil).Create(map[string]any{
-    "captcha": /* string */,
-    "password": /* string */,
-    "username": /* string */,
+    "captcha": "example_captcha",
+    "password": "example_password",
+    "username": "example_username",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### NidManagement
 
-Create an instance: `nid_management := client.NidManagement(nil)`
+Create an instance: `nidManagement := client.NidManagement(nil)`
 
 #### Operations
 
@@ -462,11 +470,11 @@ Create an instance: `nid_management := client.NidManagement(nil)`
 #### Example: Load
 
 ```go
-nid_management, err := client.NidManagement(nil).Load(nil, nil)
+nidManagement, err := client.NidManagement(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(nid_management) // the loaded record
+fmt.Println(nidManagement) // the loaded record
 ```
 
 
@@ -495,11 +503,15 @@ Create an instance: `registration := client.Registration(nil)`
 
 ```go
 result, err := client.Registration(nil).Create(map[string]any{
-    "confirm_password": /* string */,
-    "email": /* string */,
-    "nid_number": /* string */,
-    "password": /* string */,
+    "confirm_password": "example_confirm_password",
+    "email": "example_email",
+    "nid_number": "example_nid_number",
+    "password": "example_password",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -528,9 +540,13 @@ Create an instance: `success := client.Success(nil)`
 
 ```go
 result, err := client.Success(nil).Create(map[string]any{
-    "code": /* string */,
-    "email": /* string */,
+    "code": "example_code",
+    "email": "example_email",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -603,15 +619,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Create`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-application := client.Application(nil)
-application.Create(map[string]any{"nid_number": "example", "reason": "example"}, nil)
+applicationstatus := client.ApplicationStatus(nil)
+applicationstatus.Load(map[string]any{"id": "example_id"}, nil)
 
-// application.Data() now returns the application data from the last create
-// application.Match() returns the last match criteria
+// applicationstatus.Data() now returns the applicationstatus data from the last load
+// applicationstatus.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

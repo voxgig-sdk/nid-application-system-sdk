@@ -1,0 +1,8 @@
+# Flows
+
+@"BasicApplicationFlow.aontu"
+@"BasicApplicationStatusFlow.aontu"
+@"BasicLoginFlow.aontu"
+@"BasicNidManagementFlow.aontu"
+@"BasicRegistrationFlow.aontu"
+@"BasicSuccessFlow.aontu"

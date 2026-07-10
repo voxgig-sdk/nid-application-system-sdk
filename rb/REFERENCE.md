@@ -127,8 +127,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Application.create({
-  "nid_number" => "example", # String
-  "reason" => "example", # String
+  "nid_number" => "example_nid_number", # String
+  "reason" => "example_reason", # String
 })
 ```
 
@@ -246,9 +246,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Login.create({
-  "captcha" => "example", # String
-  "password" => "example", # String
-  "username" => "example", # String
+  "captcha" => "example_captcha", # String
+  "password" => "example_password", # String
+  "username" => "example_username", # String
 })
 ```
 
@@ -353,10 +353,10 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Registration.create({
-  "confirm_password" => "example", # String
-  "email" => "example", # String
-  "nid_number" => "example", # String
-  "password" => "example", # String
+  "confirm_password" => "example_confirm_password", # String
+  "email" => "example_email", # String
+  "nid_number" => "example_nid_number", # String
+  "password" => "example_password", # String
 })
 ```
 
@@ -415,8 +415,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Success.create({
-  "code" => "example", # String
-  "email" => "example", # String
+  "code" => "example_code", # String
+  "email" => "example_email", # String
 })
 ```
 

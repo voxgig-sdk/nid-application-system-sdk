@@ -190,8 +190,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Application().create({
-  nid_number: /* string */,
-  reason: /* string */,
+  nid_number: 'example_nid_number',
+  reason: 'example_reason',
 })
 ```
 
@@ -305,9 +305,9 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Login().create({
-  captcha: /* string */,
-  password: /* string */,
-  username: /* string */,
+  captcha: 'example_captcha',
+  password: 'example_password',
+  username: 'example_username',
 })
 ```
 
@@ -408,10 +408,10 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Registration().create({
-  confirm_password: /* string */,
-  email: /* string */,
-  nid_number: /* string */,
-  password: /* string */,
+  confirm_password: 'example_confirm_password',
+  email: 'example_email',
+  nid_number: 'example_nid_number',
+  password: 'example_password',
 })
 ```
 
@@ -468,8 +468,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Success().create({
-  code: /* string */,
-  email: /* string */,
+  code: 'example_code',
+  email: 'example_email',
 })
 ```
 

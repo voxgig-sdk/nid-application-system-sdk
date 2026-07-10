@@ -121,8 +121,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Application().create({
-    "nid_number": "example",  # str
-    "reason": "example",  # str
+    "nid_number": "example_nid_number",  # str
+    "reason": "example_reason",  # str
 })
 ```
 
@@ -238,9 +238,9 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Login().create({
-    "captcha": "example",  # str
-    "password": "example",  # str
-    "username": "example",  # str
+    "captcha": "example_captcha",  # str
+    "password": "example_password",  # str
+    "username": "example_username",  # str
 })
 ```
 
@@ -343,10 +343,10 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Registration().create({
-    "confirm_password": "example",  # str
-    "email": "example",  # str
-    "nid_number": "example",  # str
-    "password": "example",  # str
+    "confirm_password": "example_confirm_password",  # str
+    "email": "example_email",  # str
+    "nid_number": "example_nid_number",  # str
+    "password": "example_password",  # str
 })
 ```
 
@@ -404,8 +404,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Success().create({
-    "code": "example",  # str
-    "email": "example",  # str
+    "code": "example_code",  # str
+    "email": "example_email",  # str
 })
 ```
 

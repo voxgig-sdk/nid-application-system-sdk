@@ -36,7 +36,7 @@ client = NidApplicationSystemSDK.new({
 
 ```ruby
 # create returns the bare created Application record.
-created = client.Application.create({ "nid_number" => "example", "reason" => "example" })
+created = client.Application.create({ "nid_number" => "example_nid_number", "reason" => "example_reason" })
 
 ```
 
@@ -47,9 +47,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  application = client.Application.create({ "nid_number" => "example", "reason" => "example" })
+  applicationstatus = client.ApplicationStatus.load({ "id" => "example_id" })
 rescue => err
-  warn "create failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -110,14 +110,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = NidApplicationSystemSDK.test
+client = NidApplicationSystemSDK.test({
+  "entity" => { "applicationstatus" => { "test01" => { "id" => "test01" } } },
+})
 
 # Entity ops return the bare mock record (raises on error).
-application = client.Application.create({ "nid_number" => "example", "reason" => "example" })
-puts application
+applicationstatus = client.ApplicationStatus.load({ "id" => "test01" })
+puts applicationstatus
 ```
 
 ### Use a custom fetch function
@@ -348,8 +351,8 @@ Create an instance: `application = client.Application`
 
 ```ruby
 application = client.Application.create({
-  "nid_number" => "example", # String
-  "reason" => "example", # String
+  "nid_number" => "example_nid_number", # String
+  "reason" => "example_reason", # String
 })
 ```
 
@@ -410,9 +413,9 @@ Create an instance: `login = client.Login`
 
 ```ruby
 login = client.Login.create({
-  "captcha" => "example", # String
-  "password" => "example", # String
-  "username" => "example", # String
+  "captcha" => "example_captcha", # String
+  "password" => "example_password", # String
+  "username" => "example_username", # String
 })
 ```
 
@@ -460,10 +463,10 @@ Create an instance: `registration = client.Registration`
 
 ```ruby
 registration = client.Registration.create({
-  "confirm_password" => "example", # String
-  "email" => "example", # String
-  "nid_number" => "example", # String
-  "password" => "example", # String
+  "confirm_password" => "example_confirm_password", # String
+  "email" => "example_email", # String
+  "nid_number" => "example_nid_number", # String
+  "password" => "example_password", # String
 })
 ```
 
@@ -493,8 +496,8 @@ Create an instance: `success = client.Success`
 
 ```ruby
 success = client.Success.create({
-  "code" => "example", # String
-  "email" => "example", # String
+  "code" => "example_code", # String
+  "email" => "example_email", # String
 })
 ```
 
@@ -571,15 +574,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-application = client.Application
-application.create({ "nid_number" => "example", "reason" => "example" })
+applicationstatus = client.ApplicationStatus
+applicationstatus.load({ "id" => "example_id" })
 
-# application.data_get now returns the application data from the last create
-# application.match_get returns the last match criteria
+# applicationstatus.data_get now returns the applicationstatus data from the last load
+# applicationstatus.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -53,10 +53,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const application = await client.Application().create({ nid_number: "example", reason: "example" })
-  console.log(application)
+  const applicationstatus = await client.ApplicationStatus().load({ id: "example_id" })
+  console.log(applicationstatus)
 } catch (err) {
-  console.error('create failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -120,9 +120,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NidApplicationSystemSDK.test()
 
-const application = await client.Application().create({ nid_number: 'example_nid_number', reason: 'example_reason' })
-// application is a bare entity populated with mock response data
-console.log(application)
+const applicationstatus = await client.ApplicationStatus().load({ id: 'test01' })
+// applicationstatus is a bare entity populated with mock response data
+console.log(applicationstatus)
 ```
 
 You can also use the instance method:
@@ -137,10 +137,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Application()
+const entity = client.ApplicationStatus()
 
 // First call runs the operation and stores its result
-await entity.create({ nid_number: 'example_nid_number', reason: 'example_reason' })
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -402,8 +402,8 @@ Create an instance: `const application = client.Application()`
 
 ```ts
 const application = await client.Application().create({
-  nid_number: /* string */,
-  reason: /* string */,
+  nid_number: 'example_nid_number',
+  reason: 'example_reason',
 })
 ```
 
@@ -463,9 +463,9 @@ Create an instance: `const login = client.Login()`
 
 ```ts
 const login = await client.Login().create({
-  captcha: /* string */,
-  password: /* string */,
-  username: /* string */,
+  captcha: 'example_captcha',
+  password: 'example_password',
+  username: 'example_username',
 })
 ```
 
@@ -512,10 +512,10 @@ Create an instance: `const registration = client.Registration()`
 
 ```ts
 const registration = await client.Registration().create({
-  confirm_password: /* string */,
-  email: /* string */,
-  nid_number: /* string */,
-  password: /* string */,
+  confirm_password: 'example_confirm_password',
+  email: 'example_email',
+  nid_number: 'example_nid_number',
+  password: 'example_password',
 })
 ```
 
@@ -545,8 +545,8 @@ Create an instance: `const success = client.Success()`
 
 ```ts
 const success = await client.Success().create({
-  code: /* string */,
-  email: /* string */,
+  code: 'example_code',
+  email: 'example_email',
 })
 ```
 
@@ -615,16 +615,16 @@ import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const application = client.Application()
-await application.create({ nid_number: "example", reason: "example" })
+const applicationstatus = client.ApplicationStatus()
+await applicationstatus.load({ id: "example_id" })
 
-// application.data() now returns the application data from the last `create`
-// application.match() returns the last match criteria
+// applicationstatus.data() now returns the applicationstatus data from the last `load`
+// applicationstatus.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

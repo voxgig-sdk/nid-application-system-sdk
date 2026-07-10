@@ -39,7 +39,7 @@ local client = sdk.new({
 
 ```lua
 -- Create
-local created, err = client:Application():create({ nid_number = "example", reason = "example" })
+local created, err = client:Application():create({ nid_number = "example_nid_number", reason = "example_reason" })
 if err then error(err) end
 
 ```
@@ -51,7 +51,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local application, err = client:Application():create({ nid_number = "example", reason = "example" })
+local applicationstatus, err = client:ApplicationStatus():load({ id = "example_id" })
 if err then error(err) end
 ```
 
@@ -109,7 +109,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Application():create({ nid_number = "example", reason = "example" })
+local result, err = client:ApplicationStatus():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -344,8 +344,8 @@ Create an instance: `local application = client:Application(nil)`
 
 ```lua
 local application, err = client:Application():create({
-  nid_number = nil, -- string
-  reason = nil, -- string
+  nid_number = "example_nid_number", -- string
+  reason = "example_reason", -- string
 })
 ```
 
@@ -405,9 +405,9 @@ Create an instance: `local login = client:Login(nil)`
 
 ```lua
 local login, err = client:Login():create({
-  captcha = nil, -- string
-  password = nil, -- string
-  username = nil, -- string
+  captcha = "example_captcha", -- string
+  password = "example_password", -- string
+  username = "example_username", -- string
 })
 ```
 
@@ -454,10 +454,10 @@ Create an instance: `local registration = client:Registration(nil)`
 
 ```lua
 local registration, err = client:Registration():create({
-  confirm_password = nil, -- string
-  email = nil, -- string
-  nid_number = nil, -- string
-  password = nil, -- string
+  confirm_password = "example_confirm_password", -- string
+  email = "example_email", -- string
+  nid_number = "example_nid_number", -- string
+  password = "example_password", -- string
 })
 ```
 
@@ -487,8 +487,8 @@ Create an instance: `local success = client:Success(nil)`
 
 ```lua
 local success, err = client:Success():create({
-  code = nil, -- string
-  email = nil, -- string
+  code = "example_code", -- string
+  email = "example_email", -- string
 })
 ```
 
@@ -565,15 +565,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local application = client:Application()
-application:create({ nid_number = "example", reason = "example" })
+local applicationstatus = client:ApplicationStatus()
+applicationstatus:load({ id = "example_id" })
 
--- application:data_get() now returns the application data from the last create
--- application:match_get() returns the last match criteria
+-- applicationstatus:data_get() now returns the applicationstatus data from the last load
+-- applicationstatus:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

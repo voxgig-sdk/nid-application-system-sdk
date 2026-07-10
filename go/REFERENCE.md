@@ -112,6 +112,7 @@ same parameters as `Direct()`.
 
 ```go
 application := client.Application(nil)
+fmt.Println(application.GetName()) // "application"
 ```
 
 ### Fields
@@ -131,9 +132,13 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Application(nil).Create(map[string]any{
-    "nid_number": /* string */,
-    "reason": /* string */,
+    "nid_number": "example_nid_number",
+    "reason": "example_reason",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -163,7 +168,8 @@ Return the entity name.
 ## ApplicationStatusEntity
 
 ```go
-application_status := client.ApplicationStatus(nil)
+applicationStatus := client.ApplicationStatus(nil)
+fmt.Println(applicationStatus.GetName()) // "application_status"
 ```
 
 ### Fields
@@ -186,6 +192,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ApplicationStatus(nil).Load(map[string]any{"id": "application_status_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -216,6 +226,7 @@ Return the entity name.
 
 ```go
 login := client.Login(nil)
+fmt.Println(login.GetName()) // "login"
 ```
 
 ### Fields
@@ -238,10 +249,14 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Login(nil).Create(map[string]any{
-    "captcha": /* string */,
-    "password": /* string */,
-    "username": /* string */,
+    "captcha": "example_captcha",
+    "password": "example_password",
+    "username": "example_username",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -271,7 +286,8 @@ Return the entity name.
 ## NidManagementEntity
 
 ```go
-nid_management := client.NidManagement(nil)
+nidManagement := client.NidManagement(nil)
+fmt.Println(nidManagement.GetName()) // "nid_management"
 ```
 
 ### Operations
@@ -282,6 +298,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.NidManagement(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -312,6 +332,7 @@ Return the entity name.
 
 ```go
 registration := client.Registration(nil)
+fmt.Println(registration.GetName()) // "registration"
 ```
 
 ### Fields
@@ -333,11 +354,15 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Registration(nil).Create(map[string]any{
-    "confirm_password": /* string */,
-    "email": /* string */,
-    "nid_number": /* string */,
-    "password": /* string */,
+    "confirm_password": "example_confirm_password",
+    "email": "example_email",
+    "nid_number": "example_nid_number",
+    "password": "example_password",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -368,6 +393,7 @@ Return the entity name.
 
 ```go
 success := client.Success(nil)
+fmt.Println(success.GetName()) // "success"
 ```
 
 ### Fields
@@ -389,9 +415,13 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Success(nil).Create(map[string]any{
-    "code": /* string */,
-    "email": /* string */,
+    "code": "example_code",
+    "email": "example_email",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

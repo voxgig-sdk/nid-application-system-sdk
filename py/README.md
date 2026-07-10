@@ -43,7 +43,7 @@ client = NidApplicationSystemSDK({
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Application().create({"nid_number": "example", "reason": "example"})
+created = client.Application().create({"nid_number": "example_nid_number", "reason": "example_reason"})
 
 ```
 
@@ -54,10 +54,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    application = client.Application().create({ "nid_number": "example", "reason": "example" })
-    print(application)
+    applicationstatus = client.ApplicationStatus().load({"id": "example_id"})
+    print(applicationstatus)
 except Exception as err:
-    print(f"create failed: {err}")
+    print(f"load failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -122,8 +122,8 @@ Create a mock client for unit testing — no server required:
 client = NidApplicationSystemSDK.test()
 
 # Entity ops return the bare record and raise on error.
-application = client.Application().create({"nid_number": "example", "reason": "example"})
-# application contains the mock response record
+applicationstatus = client.ApplicationStatus().load({"id": "test01"})
+# applicationstatus contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -355,8 +355,8 @@ Create an instance: `application = client.Application()`
 
 ```python
 application = client.Application().create({
-    "nid_number": "example",  # str
-    "reason": "example",  # str
+    "nid_number": "example_nid_number",  # str
+    "reason": "example_reason",  # str
 })
 ```
 
@@ -416,9 +416,9 @@ Create an instance: `login = client.Login()`
 
 ```python
 login = client.Login().create({
-    "captcha": "example",  # str
-    "password": "example",  # str
-    "username": "example",  # str
+    "captcha": "example_captcha",  # str
+    "password": "example_password",  # str
+    "username": "example_username",  # str
 })
 ```
 
@@ -465,10 +465,10 @@ Create an instance: `registration = client.Registration()`
 
 ```python
 registration = client.Registration().create({
-    "confirm_password": "example",  # str
-    "email": "example",  # str
-    "nid_number": "example",  # str
-    "password": "example",  # str
+    "confirm_password": "example_confirm_password",  # str
+    "email": "example_email",  # str
+    "nid_number": "example_nid_number",  # str
+    "password": "example_password",  # str
 })
 ```
 
@@ -498,8 +498,8 @@ Create an instance: `success = client.Success()`
 
 ```python
 success = client.Success().create({
-    "code": "example",  # str
-    "email": "example",  # str
+    "code": "example_code",  # str
+    "email": "example_email",  # str
 })
 ```
 
@@ -575,15 +575,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-application = client.Application()
-application.create({ "nid_number": "example", "reason": "example" })
+applicationstatus = client.ApplicationStatus()
+applicationstatus.load({"id": "example_id"})
 
-# application.data_get() now returns the application data from the last create
-# application.match_get() returns the last match criteria
+# applicationstatus.data_get() now returns the applicationstatus data from the last load
+# applicationstatus.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
