@@ -27,7 +27,20 @@ func main() {
 }
 
 func run(args []string, in io.Reader, out, errOut io.Writer) int {
-	client := sdk.NewNidApplicationSystemSDK(nil)
+	// Configure from the environment: NID_APPLICATION_SYSTEM_APIKEY carries the API key and
+	// NID_APPLICATION_SYSTEM_BASE optionally overrides the API base URL (e.g. production).
+	// Both injectable by a secrets vault. Unset -> nil config defaults.
+	var opts map[string]any
+	if apikey := os.Getenv("NID_APPLICATION_SYSTEM_APIKEY"); apikey != "" {
+		opts = map[string]any{"apikey": apikey}
+	}
+	if base := os.Getenv("NID_APPLICATION_SYSTEM_BASE"); base != "" {
+		if opts == nil {
+			opts = map[string]any{}
+		}
+		opts["base"] = base
+	}
+	client := sdk.NewNidApplicationSystemSDK(opts)
 
 	r, err := eng.NewRegistry()
 	if err != nil {
