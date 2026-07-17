@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- NidApplicationSystem SDK exists test
 
 local sdk = require("nid-application-system_sdk")
 
