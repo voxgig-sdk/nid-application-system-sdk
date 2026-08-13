@@ -10,76 +10,76 @@
 
 # Application entity data model.
 #
-# @!attribute [rw] additional_info
+# @!attribute [rw] additionalInfo
 #   @return [String, nil]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String]
 #
-# @!attribute [rw] police_report_number
+# @!attribute [rw] policeReportNumber
 #   @return [String, nil]
 #
 # @!attribute [rw] reason
 #   @return [String]
 Application = Struct.new(
-  :additional_info,
-  :nid_number,
-  :police_report_number,
+  :additionalInfo,
+  :nidNumber,
+  :policeReportNumber,
   :reason,
   keyword_init: true
 )
 
 # Request payload for Application#create.
 #
-# @!attribute [rw] additional_info
+# @!attribute [rw] additionalInfo
 #   @return [String, nil]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String]
 #
-# @!attribute [rw] police_report_number
+# @!attribute [rw] policeReportNumber
 #   @return [String, nil]
 #
 # @!attribute [rw] reason
 #   @return [String]
 ApplicationCreateData = Struct.new(
-  :additional_info,
-  :nid_number,
-  :police_report_number,
+  :additionalInfo,
+  :nidNumber,
+  :policeReportNumber,
   :reason,
   keyword_init: true
 )
 
 # ApplicationStatus entity data model.
 #
-# @!attribute [rw] application_id
+# @!attribute [rw] applicationId
 #   @return [String, nil]
 #
-# @!attribute [rw] application_type
+# @!attribute [rw] applicationType
 #   @return [String, nil]
 #
-# @!attribute [rw] last_updated
+# @!attribute [rw] lastUpdated
 #   @return [String, nil]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String, nil]
 #
-# @!attribute [rw] remark
+# @!attribute [rw] remarks
 #   @return [String, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
 #
-# @!attribute [rw] submission_date
+# @!attribute [rw] submissionDate
 #   @return [String, nil]
 ApplicationStatus = Struct.new(
-  :application_id,
-  :application_type,
-  :last_updated,
-  :nid_number,
-  :remark,
+  :applicationId,
+  :applicationType,
+  :lastUpdated,
+  :nidNumber,
+  :remarks,
   :status,
-  :submission_date,
+  :submissionDate,
   keyword_init: true
 )
 
@@ -94,66 +94,82 @@ ApplicationStatusLoadMatch = Struct.new(
 
 # Login entity data model.
 #
+# @!attribute [rw] accountStatus
+#   @return [String, nil]
+#
 # @!attribute [rw] captcha
 #   @return [String]
 #
-# @!attribute [rw] expires_in
-#   @return [Integer, nil]
+# @!attribute [rw] email
+#   @return [String, nil]
+#
+# @!attribute [rw] fullName
+#   @return [String, nil]
+#
+# @!attribute [rw] nidNumber
+#   @return [String, nil]
 #
 # @!attribute [rw] password
 #   @return [String]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] token
+# @!attribute [rw] phone
 #   @return [String, nil]
 #
-# @!attribute [rw] user
-#   @return [Hash, nil]
+# @!attribute [rw] userId
+#   @return [String, nil]
 #
 # @!attribute [rw] username
 #   @return [String]
 Login = Struct.new(
+  :accountStatus,
   :captcha,
-  :expires_in,
+  :email,
+  :fullName,
+  :nidNumber,
   :password,
-  :success,
-  :token,
-  :user,
+  :phone,
+  :userId,
   :username,
   keyword_init: true
 )
 
 # Request payload for Login#create.
 #
+# @!attribute [rw] accountStatus
+#   @return [String, nil]
+#
 # @!attribute [rw] captcha
 #   @return [String]
 #
-# @!attribute [rw] expires_in
-#   @return [Integer, nil]
+# @!attribute [rw] email
+#   @return [String, nil]
+#
+# @!attribute [rw] fullName
+#   @return [String, nil]
+#
+# @!attribute [rw] nidNumber
+#   @return [String, nil]
 #
 # @!attribute [rw] password
 #   @return [String]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] token
+# @!attribute [rw] phone
 #   @return [String, nil]
 #
-# @!attribute [rw] user
-#   @return [Hash, nil]
+# @!attribute [rw] userId
+#   @return [String, nil]
 #
 # @!attribute [rw] username
 #   @return [String]
 LoginCreateData = Struct.new(
+  :accountStatus,
   :captcha,
-  :expires_in,
+  :email,
+  :fullName,
+  :nidNumber,
   :password,
-  :success,
-  :token,
-  :user,
+  :phone,
+  :userId,
   :username,
   keyword_init: true
 )
@@ -168,16 +184,16 @@ end
 
 # Registration entity data model.
 #
-# @!attribute [rw] confirm_password
+# @!attribute [rw] confirmPassword
 #   @return [String]
 #
-# @!attribute [rw] date_of_birth
+# @!attribute [rw] dateOfBirth
 #   @return [String, nil]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String]
 #
 # @!attribute [rw] password
@@ -186,10 +202,10 @@ end
 # @!attribute [rw] phone
 #   @return [String, nil]
 Registration = Struct.new(
-  :confirm_password,
-  :date_of_birth,
+  :confirmPassword,
+  :dateOfBirth,
   :email,
-  :nid_number,
+  :nidNumber,
   :password,
   :phone,
   keyword_init: true
@@ -197,16 +213,16 @@ Registration = Struct.new(
 
 # Request payload for Registration#create.
 #
-# @!attribute [rw] confirm_password
+# @!attribute [rw] confirmPassword
 #   @return [String]
 #
-# @!attribute [rw] date_of_birth
+# @!attribute [rw] dateOfBirth
 #   @return [String, nil]
 #
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String]
 #
 # @!attribute [rw] password
@@ -215,10 +231,10 @@ Registration = Struct.new(
 # @!attribute [rw] phone
 #   @return [String, nil]
 RegistrationCreateData = Struct.new(
-  :confirm_password,
-  :date_of_birth,
+  :confirmPassword,
+  :dateOfBirth,
   :email,
-  :nid_number,
+  :nidNumber,
   :password,
   :phone,
   keyword_init: true
@@ -232,13 +248,13 @@ RegistrationCreateData = Struct.new(
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] is_oversea
+# @!attribute [rw] isOverseas
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] message
 #   @return [String, nil]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String, nil]
 #
 # @!attribute [rw] success
@@ -246,9 +262,9 @@ RegistrationCreateData = Struct.new(
 Success = Struct.new(
   :code,
   :email,
-  :is_oversea,
+  :isOverseas,
   :message,
-  :nid_number,
+  :nidNumber,
   :success,
   keyword_init: true
 )
@@ -261,13 +277,13 @@ Success = Struct.new(
 # @!attribute [rw] email
 #   @return [String]
 #
-# @!attribute [rw] is_oversea
+# @!attribute [rw] isOverseas
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] message
 #   @return [String, nil]
 #
-# @!attribute [rw] nid_number
+# @!attribute [rw] nidNumber
 #   @return [String, nil]
 #
 # @!attribute [rw] success
@@ -275,9 +291,9 @@ Success = Struct.new(
 SuccessCreateData = Struct.new(
   :code,
   :email,
-  :is_oversea,
+  :isOverseas,
   :message,
-  :nid_number,
+  :nidNumber,
   :success,
   keyword_init: true
 )

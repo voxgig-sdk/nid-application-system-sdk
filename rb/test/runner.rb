@@ -23,8 +23,8 @@ module NidApplicationSystemTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("NIDAPPLICATIONSYSTEM_TEST_LIVE")
-    override = getenv("NIDAPPLICATIONSYSTEM_TEST_OVERRIDE")
+    live = getenv("NID_APPLICATION_SYSTEM_TEST_LIVE")
+    override = getenv("NID_APPLICATION_SYSTEM_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module NidApplicationSystemTestRunner
       end
     end
 
-    explain = getenv("NIDAPPLICATIONSYSTEM_TEST_EXPLAIN")
-    m["NIDAPPLICATIONSYSTEM_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("NID_APPLICATION_SYSTEM_TEST_EXPLAIN")
+    m["NID_APPLICATION_SYSTEM_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

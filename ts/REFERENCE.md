@@ -177,10 +177,32 @@ const application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | `string` | No |  |
-| `nid_number` | `string` | Yes |  |
-| `police_report_number` | `string` | No |  |
+| `additionalInfo` | `string` | No |  |
+| `nidNumber` | `string` | Yes |  |
+| `policeReportNumber` | `string` | No |  |
 | `reason` | `string` | Yes |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `correction` | `/application/correction` | `client.Application().create({ $action: 'correction', ... })` |
+| `duplicate` | `/application/duplicate` | `client.Application().create({ $action: 'duplicate', ... })` |
+| `new_registration` | `/application/new-registration` | `client.Application().create({ $action: 'new_registration', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Application record — check the API definition for its shape.
+
+```ts
+const result = await client.Application().create({
+  $action: 'correction',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -190,7 +212,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Application().create({
-  nid_number: 'example_nid_number',
+  nidNumber: 'example_nidNumber',
   reason: 'example_reason',
 })
 ```
@@ -233,13 +255,13 @@ const application_status = client.ApplicationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | `string` | No |  |
-| `application_type` | `string` | No |  |
-| `last_updated` | `string` | No |  |
-| `nid_number` | `string` | No |  |
-| `remark` | `string` | No |  |
+| `applicationId` | `string` | No |  |
+| `applicationType` | `string` | No |  |
+| `lastUpdated` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
+| `remarks` | `string` | No |  |
 | `status` | `string` | No |  |
-| `submission_date` | `string` | No |  |
+| `submissionDate` | `string` | No |  |
 
 ### Operations
 
@@ -289,12 +311,14 @@ const login = client.Login()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `accountStatus` | `string` | No |  |
 | `captcha` | `string` | Yes |  |
-| `expires_in` | `number` | No |  |
+| `email` | `string` | No |  |
+| `fullName` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
 | `password` | `string` | Yes |  |
-| `success` | `boolean` | No |  |
-| `token` | `string` | No |  |
-| `user` | `Record<string, any>` | No |  |
+| `phone` | `string` | No |  |
+| `userId` | `string` | No |  |
 | `username` | `string` | Yes |  |
 
 ### Operations
@@ -393,10 +417,10 @@ const registration = client.Registration()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | `string` | Yes |  |
-| `date_of_birth` | `string` | No |  |
+| `confirmPassword` | `string` | Yes |  |
+| `dateOfBirth` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `nid_number` | `string` | Yes |  |
+| `nidNumber` | `string` | Yes |  |
 | `password` | `string` | Yes |  |
 | `phone` | `string` | No |  |
 
@@ -408,9 +432,9 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Registration().create({
-  confirm_password: 'example_confirm_password',
+  confirmPassword: 'example_confirmPassword',
   email: 'example_email',
-  nid_number: 'example_nid_number',
+  nidNumber: 'example_nidNumber',
   password: 'example_password',
 })
 ```
@@ -455,9 +479,9 @@ const success = client.Success()
 | --- | --- | --- | --- |
 | `code` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `is_oversea` | `boolean` | No |  |
+| `isOverseas` | `boolean` | No |  |
 | `message` | `string` | No |  |
-| `nid_number` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations

@@ -24,7 +24,7 @@ support (`load`, `create`):
 ```ts
 const client = new NidApplicationSystemSDK()
 const application = await client.Application().create({
-  nid_number: 'example',
+  nidNumber: 'example',
   reason: 'example',
 })
 ```
@@ -41,9 +41,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = NidApplicationSystemSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = NidApplicationSystemSDK.test({
+  entity: {
+    application_status: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const applicationstatus = await client.ApplicationStatus().load({ id: 'test01' })
-// applicationstatus is a bare ApplicationStatus populated with mock data
+// applicationstatus is the ApplicationStatus entity, populated with mock data
+// — call applicationstatus.data() for the record itself
 console.log(applicationstatus)
 ```
 
@@ -340,6 +349,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://services.nidw.gov.bd/nid-pub/](https://services.nidw.gov.bd/nid-pub/)
 

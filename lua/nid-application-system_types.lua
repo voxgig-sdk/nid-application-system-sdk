@@ -7,45 +7,49 @@
 -- edit by hand.
 
 ---@class Application
----@field additional_info? string
----@field nid_number string
----@field police_report_number? string
+---@field additionalInfo? string
+---@field nidNumber string
+---@field policeReportNumber? string
 ---@field reason string
 
 ---@class ApplicationCreateData
----@field additional_info? string
----@field nid_number string
----@field police_report_number? string
+---@field additionalInfo? string
+---@field nidNumber string
+---@field policeReportNumber? string
 ---@field reason string
 
 ---@class ApplicationStatus
----@field application_id? string
----@field application_type? string
----@field last_updated? string
----@field nid_number? string
----@field remark? string
+---@field applicationId? string
+---@field applicationType? string
+---@field lastUpdated? string
+---@field nidNumber? string
+---@field remarks? string
 ---@field status? string
----@field submission_date? string
+---@field submissionDate? string
 
 ---@class ApplicationStatusLoadMatch
 ---@field id string
 
 ---@class Login
+---@field accountStatus? string
 ---@field captcha string
----@field expires_in? number
+---@field email? string
+---@field fullName? string
+---@field nidNumber? string
 ---@field password string
----@field success? boolean
----@field token? string
----@field user? table
+---@field phone? string
+---@field userId? string
 ---@field username string
 
 ---@class LoginCreateData
+---@field accountStatus? string
 ---@field captcha string
----@field expires_in? number
+---@field email? string
+---@field fullName? string
+---@field nidNumber? string
 ---@field password string
----@field success? boolean
----@field token? string
----@field user? table
+---@field phone? string
+---@field userId? string
 ---@field username string
 
 ---@class NidManagement
@@ -53,35 +57,35 @@
 ---@class NidManagementLoadMatch
 
 ---@class Registration
----@field confirm_password string
----@field date_of_birth? string
+---@field confirmPassword string
+---@field dateOfBirth? string
 ---@field email string
----@field nid_number string
+---@field nidNumber string
 ---@field password string
 ---@field phone? string
 
 ---@class RegistrationCreateData
----@field confirm_password string
----@field date_of_birth? string
+---@field confirmPassword string
+---@field dateOfBirth? string
 ---@field email string
----@field nid_number string
+---@field nidNumber string
 ---@field password string
 ---@field phone? string
 
 ---@class Success
 ---@field code string
 ---@field email string
----@field is_oversea? boolean
+---@field isOverseas? boolean
 ---@field message? string
----@field nid_number? string
+---@field nidNumber? string
 ---@field success? boolean
 
 ---@class SuccessCreateData
 ---@field code string
 ---@field email string
----@field is_oversea? boolean
+---@field isOverseas? boolean
 ---@field message? string
----@field nid_number? string
+---@field nidNumber? string
 ---@field success? boolean
 
 local M = {}

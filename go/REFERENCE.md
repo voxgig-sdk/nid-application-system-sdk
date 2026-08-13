@@ -119,9 +119,9 @@ fmt.Println(application.GetName()) // "application"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | `string` | No |  |
-| `nid_number` | `string` | Yes |  |
-| `police_report_number` | `string` | No |  |
+| `additionalInfo` | `string` | No |  |
+| `nidNumber` | `string` | Yes |  |
+| `policeReportNumber` | `string` | No |  |
 | `reason` | `string` | Yes |  |
 
 ### Operations
@@ -132,7 +132,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Application(nil).Create(map[string]any{
-    "nid_number": "example_nid_number",
+    "nidNumber": "example_nidNumber",
     "reason": "example_reason",
 }, nil)
 if err != nil {
@@ -176,13 +176,13 @@ fmt.Println(applicationStatus.GetName()) // "application_status"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | `string` | No |  |
-| `application_type` | `string` | No |  |
-| `last_updated` | `string` | No |  |
-| `nid_number` | `string` | No |  |
-| `remark` | `string` | No |  |
+| `applicationId` | `string` | No |  |
+| `applicationType` | `string` | No |  |
+| `lastUpdated` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
+| `remarks` | `string` | No |  |
 | `status` | `string` | No |  |
-| `submission_date` | `string` | No |  |
+| `submissionDate` | `string` | No |  |
 
 ### Operations
 
@@ -233,12 +233,14 @@ fmt.Println(login.GetName()) // "login"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `accountStatus` | `string` | No |  |
 | `captcha` | `string` | Yes |  |
-| `expires_in` | `int` | No |  |
+| `email` | `string` | No |  |
+| `fullName` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
 | `password` | `string` | Yes |  |
-| `success` | `bool` | No |  |
-| `token` | `string` | No |  |
-| `user` | `map[string]any` | No |  |
+| `phone` | `string` | No |  |
+| `userId` | `string` | No |  |
 | `username` | `string` | Yes |  |
 
 ### Operations
@@ -339,10 +341,10 @@ fmt.Println(registration.GetName()) // "registration"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | `string` | Yes |  |
-| `date_of_birth` | `string` | No |  |
+| `confirmPassword` | `string` | Yes |  |
+| `dateOfBirth` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `nid_number` | `string` | Yes |  |
+| `nidNumber` | `string` | Yes |  |
 | `password` | `string` | Yes |  |
 | `phone` | `string` | No |  |
 
@@ -354,9 +356,9 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Registration(nil).Create(map[string]any{
-    "confirm_password": "example_confirm_password",
+    "confirmPassword": "example_confirmPassword",
     "email": "example_email",
-    "nid_number": "example_nid_number",
+    "nidNumber": "example_nidNumber",
     "password": "example_password",
 }, nil)
 if err != nil {
@@ -402,9 +404,9 @@ fmt.Println(success.GetName()) // "success"
 | --- | --- | --- | --- |
 | `code` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `is_oversea` | `bool` | No |  |
+| `isOverseas` | `bool` | No |  |
 | `message` | `string` | No |  |
-| `nid_number` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations

@@ -6,27 +6,33 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Application {
-  additional_info?: string
-  nid_number: string
-  police_report_number?: string
+  additionalInfo?: string
+  nidNumber: string
+  policeReportNumber?: string
   reason: string
 }
 
 export interface ApplicationCreateData {
-  additional_info?: string
-  nid_number: string
-  police_report_number?: string
+  additionalInfo?: string
+  nidNumber: string
+  policeReportNumber?: string
   reason: string
+
+  // Selects a custom action instead of the plain create:
+  //   'correction' | 'duplicate' | 'new_registration'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface ApplicationStatus {
-  application_id?: string
-  application_type?: string
-  last_updated?: string
-  nid_number?: string
-  remark?: string
+  applicationId?: string
+  applicationType?: string
+  lastUpdated?: string
+  nidNumber?: string
+  remarks?: string
   status?: string
-  submission_date?: string
+  submissionDate?: string
 }
 
 export interface ApplicationStatusLoadMatch {
@@ -34,22 +40,26 @@ export interface ApplicationStatusLoadMatch {
 }
 
 export interface Login {
+  accountStatus?: string
   captcha: string
-  expires_in?: number
+  email?: string
+  fullName?: string
+  nidNumber?: string
   password: string
-  success?: boolean
-  token?: string
-  user?: Record<string, any>
+  phone?: string
+  userId?: string
   username: string
 }
 
 export interface LoginCreateData {
+  accountStatus?: string
   captcha: string
-  expires_in?: number
+  email?: string
+  fullName?: string
+  nidNumber?: string
   password: string
-  success?: boolean
-  token?: string
-  user?: Record<string, any>
+  phone?: string
+  userId?: string
   username: string
 }
 
@@ -60,19 +70,19 @@ export interface NidManagementLoadMatch {
 }
 
 export interface Registration {
-  confirm_password: string
-  date_of_birth?: string
+  confirmPassword: string
+  dateOfBirth?: string
   email: string
-  nid_number: string
+  nidNumber: string
   password: string
   phone?: string
 }
 
 export interface RegistrationCreateData {
-  confirm_password: string
-  date_of_birth?: string
+  confirmPassword: string
+  dateOfBirth?: string
   email: string
-  nid_number: string
+  nidNumber: string
   password: string
   phone?: string
 }
@@ -80,18 +90,18 @@ export interface RegistrationCreateData {
 export interface Success {
   code: string
   email: string
-  is_oversea?: boolean
+  isOverseas?: boolean
   message?: string
-  nid_number?: string
+  nidNumber?: string
   success?: boolean
 }
 
 export interface SuccessCreateData {
   code: string
   email: string
-  is_oversea?: boolean
+  isOverseas?: boolean
   message?: string
-  nid_number?: string
+  nidNumber?: string
   success?: boolean
 }
 

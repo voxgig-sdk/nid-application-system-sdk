@@ -6,14 +6,29 @@ main: kit: entity: login: {
 
   fields: [
     {
+      name: "accountStatus"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "captcha"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "expires_in"
+      name: "email"
       req: false
-      type: "`$INTEGER`"
+      type: "`$STRING`"
+    }
+    {
+      name: "fullName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nidNumber"
+      req: false
+      type: "`$STRING`"
     }
     {
       name: "password"
@@ -21,19 +36,14 @@ main: kit: entity: login: {
       type: "`$STRING`"
     }
     {
-      name: "success"
-      req: false
-      type: "`$BOOLEAN`"
-    }
-    {
-      name: "token"
+      name: "phone"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "user"
+      name: "userId"
       req: false
-      type: "`$OBJECT`"
+      type: "`$STRING`"
     }
     {
       name: "username"
@@ -56,7 +66,7 @@ main: kit: entity: login: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.user`"
           }
         }
       ]

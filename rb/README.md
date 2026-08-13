@@ -35,8 +35,8 @@ client = NidApplicationSystemSDK.new({
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Application record.
-created = client.Application.create({ "nid_number" => "example_nid_number", "reason" => "example_reason" })
+# create returns the ENTITY — call data_get for the created Application record.
+created = client.Application.create({ "nidNumber" => "example_nidNumber", "reason" => "example_reason" })
 
 ```
 
@@ -118,7 +118,8 @@ client = NidApplicationSystemSDK.test({
   "entity" => { "applicationstatus" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 applicationstatus = client.ApplicationStatus.load({ "id" => "test01" })
 puts applicationstatus
 ```
@@ -243,9 +244,9 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `additional_info` |  |
-| `nid_number` |  |
-| `police_report_number` |  |
+| `additionalInfo` |  |
+| `nidNumber` |  |
+| `policeReportNumber` |  |
 | `reason` |  |
 
 Operations: Create.
@@ -256,13 +257,13 @@ API path: `/application/correction`
 
 | Field | Description |
 | --- | --- |
-| `application_id` |  |
-| `application_type` |  |
-| `last_updated` |  |
-| `nid_number` |  |
-| `remark` |  |
+| `applicationId` |  |
+| `applicationType` |  |
+| `lastUpdated` |  |
+| `nidNumber` |  |
+| `remarks` |  |
 | `status` |  |
-| `submission_date` |  |
+| `submissionDate` |  |
 
 Operations: Load.
 
@@ -272,12 +273,14 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
+| `accountStatus` |  |
 | `captcha` |  |
-| `expires_in` |  |
+| `email` |  |
+| `fullName` |  |
+| `nidNumber` |  |
 | `password` |  |
-| `success` |  |
-| `token` |  |
-| `user` |  |
+| `phone` |  |
+| `userId` |  |
 | `username` |  |
 
 Operations: Create.
@@ -297,10 +300,10 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirm_password` |  |
-| `date_of_birth` |  |
+| `confirmPassword` |  |
+| `dateOfBirth` |  |
 | `email` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `password` |  |
 | `phone` |  |
 
@@ -314,9 +317,9 @@ API path: `/auth/register`
 | --- | --- |
 | `code` |  |
 | `email` |  |
-| `is_oversea` |  |
+| `isOverseas` |  |
 | `message` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `success` |  |
 
 Operations: Create.
@@ -342,16 +345,16 @@ Create an instance: `application = client.Application`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | `String` |  |
-| `nid_number` | `String` |  |
-| `police_report_number` | `String` |  |
+| `additionalInfo` | `String` |  |
+| `nidNumber` | `String` |  |
+| `policeReportNumber` | `String` |  |
 | `reason` | `String` |  |
 
 #### Example: Create
 
 ```ruby
 application = client.Application.create({
-  "nid_number" => "example_nid_number", # String
+  "nidNumber" => "example_nidNumber", # String
   "reason" => "example_reason", # String
 })
 ```
@@ -371,18 +374,18 @@ Create an instance: `application_status = client.ApplicationStatus`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | `String` |  |
-| `application_type` | `String` |  |
-| `last_updated` | `String` |  |
-| `nid_number` | `String` |  |
-| `remark` | `String` |  |
+| `applicationId` | `String` |  |
+| `applicationType` | `String` |  |
+| `lastUpdated` | `String` |  |
+| `nidNumber` | `String` |  |
+| `remarks` | `String` |  |
 | `status` | `String` |  |
-| `submission_date` | `String` |  |
+| `submissionDate` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare ApplicationStatus record (raises on error).
+# load returns the ENTITY — call data_get for the ApplicationStatus record (raises on error).
 application_status = client.ApplicationStatus.load({ "id" => "application_status_id" })
 ```
 
@@ -401,12 +404,14 @@ Create an instance: `login = client.Login`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `accountStatus` | `String` |  |
 | `captcha` | `String` |  |
-| `expires_in` | `Integer` |  |
+| `email` | `String` |  |
+| `fullName` | `String` |  |
+| `nidNumber` | `String` |  |
 | `password` | `String` |  |
-| `success` | `Boolean` |  |
-| `token` | `String` |  |
-| `user` | `Hash` |  |
+| `phone` | `String` |  |
+| `userId` | `String` |  |
 | `username` | `String` |  |
 
 #### Example: Create
@@ -433,7 +438,7 @@ Create an instance: `nid_management = client.NidManagement`
 #### Example: Load
 
 ```ruby
-# load returns the bare NidManagement record (raises on error).
+# load returns the ENTITY — call data_get for the NidManagement record (raises on error).
 nid_management = client.NidManagement.load()
 ```
 
@@ -452,10 +457,10 @@ Create an instance: `registration = client.Registration`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | `String` |  |
-| `date_of_birth` | `String` |  |
+| `confirmPassword` | `String` |  |
+| `dateOfBirth` | `String` |  |
 | `email` | `String` |  |
-| `nid_number` | `String` |  |
+| `nidNumber` | `String` |  |
 | `password` | `String` |  |
 | `phone` | `String` |  |
 
@@ -463,9 +468,9 @@ Create an instance: `registration = client.Registration`
 
 ```ruby
 registration = client.Registration.create({
-  "confirm_password" => "example_confirm_password", # String
+  "confirmPassword" => "example_confirmPassword", # String
   "email" => "example_email", # String
-  "nid_number" => "example_nid_number", # String
+  "nidNumber" => "example_nidNumber", # String
   "password" => "example_password", # String
 })
 ```
@@ -487,9 +492,9 @@ Create an instance: `success = client.Success`
 | --- | --- | --- |
 | `code` | `String` |  |
 | `email` | `String` |  |
-| `is_oversea` | `Boolean` |  |
+| `isOverseas` | `Boolean` |  |
 | `message` | `String` |  |
-| `nid_number` | `String` |  |
+| `nidNumber` | `String` |  |
 | `success` | `Boolean` |  |
 
 #### Example: Create

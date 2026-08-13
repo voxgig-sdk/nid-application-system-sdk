@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# NidApplicationSystem SDK exists test
 
 import pytest
 from nidapplicationsystem_sdk import NidApplicationSystemSDK

@@ -26,8 +26,8 @@ import {
 describe('ApplicationStatusEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NIDAPPLICATIONSYSTEM_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NIDAPPLICATIONSYSTEM_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NID_APPLICATION_SYSTEM_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NidApplicationSystemSDK.test()

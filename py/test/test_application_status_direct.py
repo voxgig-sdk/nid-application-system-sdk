@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from nidapplicationsystem_sdk.utility.voxgig_struct import voxgig_struct as vs
 from nidapplicationsystem_sdk import NidApplicationSystemSDK
-from core import helpers
+from nidapplicationsystem_sdk.core import helpers
 from test import runner
 
 
@@ -66,16 +66,16 @@ def _application_status_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "NIDAPPLICATIONSYSTEM_TEST_APPLICATION_STATUS_ENTID": {},
-        "NIDAPPLICATIONSYSTEM_TEST_LIVE": "FALSE",
-        "NIDAPPLICATIONSYSTEM_APIKEY": "NONE",
+        "NID_APPLICATION_SYSTEM_TEST_APPLICATION_STATUS_ENTID": {},
+        "NID_APPLICATION_SYSTEM_TEST_LIVE": "FALSE",
+        "NID_APPLICATION_SYSTEM_APIKEY": "NONE",
     })
 
-    live = env.get("NIDAPPLICATIONSYSTEM_TEST_LIVE") == "TRUE"
+    live = env.get("NID_APPLICATION_SYSTEM_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("NIDAPPLICATIONSYSTEM_APIKEY"),
+            "apikey": env.get("NID_APPLICATION_SYSTEM_APIKEY"),
         }
         client = NidApplicationSystemSDK(merged_opts)
         return {

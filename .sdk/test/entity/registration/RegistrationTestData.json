@@ -2,28 +2,28 @@
   "existing": {
     "registration": {
       "REGISTRATION00": {
-        "confirm_password": "s3c",
-        "date_of_birth": "s3d",
+        "confirmPassword": "s3c",
+        "dateOfBirth": "s3d",
         "email": "s3e",
-        "nid_number": "s3f",
+        "nidNumber": "s3f",
         "password": "s40",
         "phone": "s41",
         "id": "REGISTRATION00"
       },
       "REGISTRATION01": {
-        "confirm_password": "s78",
-        "date_of_birth": "s79",
+        "confirmPassword": "s78",
+        "dateOfBirth": "s79",
         "email": "s7a",
-        "nid_number": "s7b",
+        "nidNumber": "s7b",
         "password": "s7c",
         "phone": "s7d",
         "id": "REGISTRATION01"
       },
       "REGISTRATION02": {
-        "confirm_password": "sb4",
-        "date_of_birth": "sb5",
+        "confirmPassword": "sb4",
+        "dateOfBirth": "sb5",
         "email": "sb6",
-        "nid_number": "sb7",
+        "nidNumber": "sb7",
         "password": "sb8",
         "phone": "sb9",
         "id": "REGISTRATION02"
@@ -33,10 +33,10 @@
   "new": {
     "registration": {
       "registration_ref01": {
-        "confirm_password": "sf0",
-        "date_of_birth": "sf1",
+        "confirmPassword": "sf0",
+        "dateOfBirth": "sf1",
         "email": "sf2",
-        "nid_number": "sf3",
+        "nidNumber": "sf3",
         "password": "sf4",
         "phone": "sf5"
       }

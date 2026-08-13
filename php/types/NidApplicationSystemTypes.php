@@ -15,31 +15,31 @@ declare(strict_types=1);
 /** Application entity data model. */
 class Application
 {
-    public ?string $additional_info = null;
-    public string $nid_number;
-    public ?string $police_report_number = null;
+    public ?string $additionalInfo = null;
+    public string $nidNumber;
+    public ?string $policeReportNumber = null;
     public string $reason;
 }
 
 /** Request payload for Application#create. */
 class ApplicationCreateData
 {
-    public ?string $additional_info = null;
-    public string $nid_number;
-    public ?string $police_report_number = null;
+    public ?string $additionalInfo = null;
+    public string $nidNumber;
+    public ?string $policeReportNumber = null;
     public string $reason;
 }
 
 /** ApplicationStatus entity data model. */
 class ApplicationStatus
 {
-    public ?string $application_id = null;
-    public ?string $application_type = null;
-    public ?string $last_updated = null;
-    public ?string $nid_number = null;
-    public ?string $remark = null;
+    public ?string $applicationId = null;
+    public ?string $applicationType = null;
+    public ?string $lastUpdated = null;
+    public ?string $nidNumber = null;
+    public ?string $remarks = null;
     public ?string $status = null;
-    public ?string $submission_date = null;
+    public ?string $submissionDate = null;
 }
 
 /** Request payload for ApplicationStatus#load. */
@@ -51,24 +51,28 @@ class ApplicationStatusLoadMatch
 /** Login entity data model. */
 class Login
 {
+    public ?string $accountStatus = null;
     public string $captcha;
-    public ?int $expires_in = null;
+    public ?string $email = null;
+    public ?string $fullName = null;
+    public ?string $nidNumber = null;
     public string $password;
-    public ?bool $success = null;
-    public ?string $token = null;
-    public ?array $user = null;
+    public ?string $phone = null;
+    public ?string $userId = null;
     public string $username;
 }
 
 /** Request payload for Login#create. */
 class LoginCreateData
 {
+    public ?string $accountStatus = null;
     public string $captcha;
-    public ?int $expires_in = null;
+    public ?string $email = null;
+    public ?string $fullName = null;
+    public ?string $nidNumber = null;
     public string $password;
-    public ?bool $success = null;
-    public ?string $token = null;
-    public ?array $user = null;
+    public ?string $phone = null;
+    public ?string $userId = null;
     public string $username;
 }
 
@@ -85,10 +89,10 @@ class NidManagementLoadMatch
 /** Registration entity data model. */
 class Registration
 {
-    public string $confirm_password;
-    public ?string $date_of_birth = null;
+    public string $confirmPassword;
+    public ?string $dateOfBirth = null;
     public string $email;
-    public string $nid_number;
+    public string $nidNumber;
     public string $password;
     public ?string $phone = null;
 }
@@ -96,10 +100,10 @@ class Registration
 /** Request payload for Registration#create. */
 class RegistrationCreateData
 {
-    public string $confirm_password;
-    public ?string $date_of_birth = null;
+    public string $confirmPassword;
+    public ?string $dateOfBirth = null;
     public string $email;
-    public string $nid_number;
+    public string $nidNumber;
     public string $password;
     public ?string $phone = null;
 }
@@ -109,9 +113,9 @@ class Success
 {
     public string $code;
     public string $email;
-    public ?bool $is_oversea = null;
+    public ?bool $isOverseas = null;
     public ?string $message = null;
-    public ?string $nid_number = null;
+    public ?string $nidNumber = null;
     public ?bool $success = null;
 }
 
@@ -120,9 +124,9 @@ class SuccessCreateData
 {
     public string $code;
     public string $email;
-    public ?bool $is_oversea = null;
+    public ?bool $isOverseas = null;
     public ?string $message = null;
-    public ?string $nid_number = null;
+    public ?string $nidNumber = null;
     public ?bool $success = null;
 }
 

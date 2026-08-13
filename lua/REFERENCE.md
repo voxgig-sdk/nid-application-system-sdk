@@ -111,9 +111,9 @@ local application = client:Application(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | `string` | No |  |
-| `nid_number` | `string` | Yes |  |
-| `police_report_number` | `string` | No |  |
+| `additionalInfo` | `string` | No |  |
+| `nidNumber` | `string` | Yes |  |
+| `policeReportNumber` | `string` | No |  |
 | `reason` | `string` | Yes |  |
 
 ### Operations
@@ -124,7 +124,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Application():create({
-  nid_number = --[[ string ]],
+  nidNumber = --[[ string ]],
   reason = --[[ string ]],
 })
 ```
@@ -169,13 +169,13 @@ local application_status = client:ApplicationStatus(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | `string` | No |  |
-| `application_type` | `string` | No |  |
-| `last_updated` | `string` | No |  |
-| `nid_number` | `string` | No |  |
-| `remark` | `string` | No |  |
+| `applicationId` | `string` | No |  |
+| `applicationType` | `string` | No |  |
+| `lastUpdated` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
+| `remarks` | `string` | No |  |
 | `status` | `string` | No |  |
-| `submission_date` | `string` | No |  |
+| `submissionDate` | `string` | No |  |
 
 ### Operations
 
@@ -227,12 +227,14 @@ local login = client:Login(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `accountStatus` | `string` | No |  |
 | `captcha` | `string` | Yes |  |
-| `expires_in` | `number` | No |  |
+| `email` | `string` | No |  |
+| `fullName` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
 | `password` | `string` | Yes |  |
-| `success` | `boolean` | No |  |
-| `token` | `string` | No |  |
-| `user` | `table` | No |  |
+| `phone` | `string` | No |  |
+| `userId` | `string` | No |  |
 | `username` | `string` | Yes |  |
 
 ### Operations
@@ -335,10 +337,10 @@ local registration = client:Registration(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | `string` | Yes |  |
-| `date_of_birth` | `string` | No |  |
+| `confirmPassword` | `string` | Yes |  |
+| `dateOfBirth` | `string` | No |  |
 | `email` | `string` | Yes |  |
-| `nid_number` | `string` | Yes |  |
+| `nidNumber` | `string` | Yes |  |
 | `password` | `string` | Yes |  |
 | `phone` | `string` | No |  |
 
@@ -350,9 +352,9 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Registration():create({
-  confirm_password = --[[ string ]],
+  confirmPassword = --[[ string ]],
   email = --[[ string ]],
-  nid_number = --[[ string ]],
+  nidNumber = --[[ string ]],
   password = --[[ string ]],
 })
 ```
@@ -399,9 +401,9 @@ local success = client:Success(nil)
 | --- | --- | --- | --- |
 | `code` | `string` | Yes |  |
 | `email` | `string` | Yes |  |
-| `is_oversea` | `boolean` | No |  |
+| `isOverseas` | `boolean` | No |  |
 | `message` | `string` | No |  |
-| `nid_number` | `string` | No |  |
+| `nidNumber` | `string` | No |  |
 | `success` | `boolean` | No |  |
 
 ### Operations

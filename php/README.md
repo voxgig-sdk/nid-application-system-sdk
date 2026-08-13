@@ -36,8 +36,8 @@ $client = new NidApplicationSystemSDK([
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Application record.
-$created = $client->Application()->create(["nid_number" => "example_nid_number", "reason" => "example_reason"]);
+// create() returns the ENTITY — call data_get() for the created Application record.
+$created = $client->Application()->create(["nidNumber" => "example_nidNumber", "reason" => "example_reason"]);
 
 ```
 
@@ -124,7 +124,8 @@ $client = NidApplicationSystemSDK::test([
     "entity" => ["applicationstatus" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $applicationstatus = $client->ApplicationStatus()->load(["id" => "test01"]);
 print_r($applicationstatus);
 ```
@@ -231,7 +232,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -253,9 +254,9 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `additional_info` |  |
-| `nid_number` |  |
-| `police_report_number` |  |
+| `additionalInfo` |  |
+| `nidNumber` |  |
+| `policeReportNumber` |  |
 | `reason` |  |
 
 Operations: Create.
@@ -266,13 +267,13 @@ API path: `/application/correction`
 
 | Field | Description |
 | --- | --- |
-| `application_id` |  |
-| `application_type` |  |
-| `last_updated` |  |
-| `nid_number` |  |
-| `remark` |  |
+| `applicationId` |  |
+| `applicationType` |  |
+| `lastUpdated` |  |
+| `nidNumber` |  |
+| `remarks` |  |
 | `status` |  |
-| `submission_date` |  |
+| `submissionDate` |  |
 
 Operations: Load.
 
@@ -282,12 +283,14 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
+| `accountStatus` |  |
 | `captcha` |  |
-| `expires_in` |  |
+| `email` |  |
+| `fullName` |  |
+| `nidNumber` |  |
 | `password` |  |
-| `success` |  |
-| `token` |  |
-| `user` |  |
+| `phone` |  |
+| `userId` |  |
 | `username` |  |
 
 Operations: Create.
@@ -307,10 +310,10 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirm_password` |  |
-| `date_of_birth` |  |
+| `confirmPassword` |  |
+| `dateOfBirth` |  |
 | `email` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `password` |  |
 | `phone` |  |
 
@@ -324,9 +327,9 @@ API path: `/auth/register`
 | --- | --- |
 | `code` |  |
 | `email` |  |
-| `is_oversea` |  |
+| `isOverseas` |  |
 | `message` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `success` |  |
 
 Operations: Create.
@@ -352,16 +355,16 @@ Create an instance: `$application = $client->Application();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | `string` |  |
-| `nid_number` | `string` |  |
-| `police_report_number` | `string` |  |
+| `additionalInfo` | `string` |  |
+| `nidNumber` | `string` |  |
+| `policeReportNumber` | `string` |  |
 | `reason` | `string` |  |
 
 #### Example: Create
 
 ```php
 $application = $client->Application()->create([
-    "nid_number" => null, // string
+    "nidNumber" => null, // string
     "reason" => null, // string
 ]);
 ```
@@ -381,18 +384,18 @@ Create an instance: `$application_status = $client->ApplicationStatus();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | `string` |  |
-| `application_type` | `string` |  |
-| `last_updated` | `string` |  |
-| `nid_number` | `string` |  |
-| `remark` | `string` |  |
+| `applicationId` | `string` |  |
+| `applicationType` | `string` |  |
+| `lastUpdated` | `string` |  |
+| `nidNumber` | `string` |  |
+| `remarks` | `string` |  |
 | `status` | `string` |  |
-| `submission_date` | `string` |  |
+| `submissionDate` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare ApplicationStatus record (throws on error).
+// load() returns the ENTITY — call data_get() for the ApplicationStatus record (throws on error).
 $application_status = $client->ApplicationStatus()->load(["id" => "application_status_id"]);
 ```
 
@@ -411,12 +414,14 @@ Create an instance: `$login = $client->Login();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `accountStatus` | `string` |  |
 | `captcha` | `string` |  |
-| `expires_in` | `int` |  |
+| `email` | `string` |  |
+| `fullName` | `string` |  |
+| `nidNumber` | `string` |  |
 | `password` | `string` |  |
-| `success` | `bool` |  |
-| `token` | `string` |  |
-| `user` | `array` |  |
+| `phone` | `string` |  |
+| `userId` | `string` |  |
 | `username` | `string` |  |
 
 #### Example: Create
@@ -443,7 +448,7 @@ Create an instance: `$nid_management = $client->NidManagement();`
 #### Example: Load
 
 ```php
-// load() returns the bare NidManagement record (throws on error).
+// load() returns the ENTITY — call data_get() for the NidManagement record (throws on error).
 $nid_management = $client->NidManagement()->load();
 ```
 
@@ -462,10 +467,10 @@ Create an instance: `$registration = $client->Registration();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | `string` |  |
-| `date_of_birth` | `string` |  |
+| `confirmPassword` | `string` |  |
+| `dateOfBirth` | `string` |  |
 | `email` | `string` |  |
-| `nid_number` | `string` |  |
+| `nidNumber` | `string` |  |
 | `password` | `string` |  |
 | `phone` | `string` |  |
 
@@ -473,9 +478,9 @@ Create an instance: `$registration = $client->Registration();`
 
 ```php
 $registration = $client->Registration()->create([
-    "confirm_password" => null, // string
+    "confirmPassword" => null, // string
     "email" => null, // string
-    "nid_number" => null, // string
+    "nidNumber" => null, // string
     "password" => null, // string
 ]);
 ```
@@ -497,9 +502,9 @@ Create an instance: `$success = $client->Success();`
 | --- | --- | --- |
 | `code` | `string` |  |
 | `email` | `string` |  |
-| `is_oversea` | `bool` |  |
+| `isOverseas` | `bool` |  |
 | `message` | `string` |  |
-| `nid_number` | `string` |  |
+| `nidNumber` | `string` |  |
 | `success` | `bool` |  |
 
 #### Example: Create

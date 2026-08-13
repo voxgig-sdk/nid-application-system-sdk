@@ -6,12 +6,12 @@ main: kit: entity: registration: {
 
   fields: [
     {
-      name: "confirm_password"
+      name: "confirmPassword"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "date_of_birth"
+      name: "dateOfBirth"
       req: false
       type: "`$STRING`"
     }
@@ -21,7 +21,7 @@ main: kit: entity: registration: {
       type: "`$STRING`"
     }
     {
-      name: "nid_number"
+      name: "nidNumber"
       req: true
       type: "`$STRING`"
     }

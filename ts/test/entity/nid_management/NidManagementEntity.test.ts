@@ -26,8 +26,8 @@ import {
 describe('NidManagementEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NIDAPPLICATIONSYSTEM_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NIDAPPLICATIONSYSTEM_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NID_APPLICATION_SYSTEM_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NidApplicationSystemSDK.test()
@@ -62,7 +62,7 @@ describe('NidManagementEntity', async () => {
     // LOAD
     const nid_management_ref01_ent = client.NidManagement()
     const nid_management_ref01_match_dt0: any = {}
-    const nid_management_ref01_data_dt0 = await nid_management_ref01_ent.load(nid_management_ref01_match_dt0)
+    const nid_management_ref01_data_dt0 = (await nid_management_ref01_ent.load(nid_management_ref01_match_dt0)).data()
     assert(null != nid_management_ref01_data_dt0)
 
 

@@ -114,9 +114,9 @@ application = client.Application
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | `String` | No |  |
-| `nid_number` | `String` | Yes |  |
-| `police_report_number` | `String` | No |  |
+| `additionalInfo` | `String` | No |  |
+| `nidNumber` | `String` | Yes |  |
+| `policeReportNumber` | `String` | No |  |
 | `reason` | `String` | Yes |  |
 
 ### Operations
@@ -127,7 +127,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Application.create({
-  "nid_number" => "example_nid_number", # String
+  "nidNumber" => "example_nidNumber", # String
   "reason" => "example_reason", # String
 })
 ```
@@ -172,13 +172,13 @@ application_status = client.ApplicationStatus
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | `String` | No |  |
-| `application_type` | `String` | No |  |
-| `last_updated` | `String` | No |  |
-| `nid_number` | `String` | No |  |
-| `remark` | `String` | No |  |
+| `applicationId` | `String` | No |  |
+| `applicationType` | `String` | No |  |
+| `lastUpdated` | `String` | No |  |
+| `nidNumber` | `String` | No |  |
+| `remarks` | `String` | No |  |
 | `status` | `String` | No |  |
-| `submission_date` | `String` | No |  |
+| `submissionDate` | `String` | No |  |
 
 ### Operations
 
@@ -230,12 +230,14 @@ login = client.Login
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `accountStatus` | `String` | No |  |
 | `captcha` | `String` | Yes |  |
-| `expires_in` | `Integer` | No |  |
+| `email` | `String` | No |  |
+| `fullName` | `String` | No |  |
+| `nidNumber` | `String` | No |  |
 | `password` | `String` | Yes |  |
-| `success` | `Boolean` | No |  |
-| `token` | `String` | No |  |
-| `user` | `Hash` | No |  |
+| `phone` | `String` | No |  |
+| `userId` | `String` | No |  |
 | `username` | `String` | Yes |  |
 
 ### Operations
@@ -338,10 +340,10 @@ registration = client.Registration
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | `String` | Yes |  |
-| `date_of_birth` | `String` | No |  |
+| `confirmPassword` | `String` | Yes |  |
+| `dateOfBirth` | `String` | No |  |
 | `email` | `String` | Yes |  |
-| `nid_number` | `String` | Yes |  |
+| `nidNumber` | `String` | Yes |  |
 | `password` | `String` | Yes |  |
 | `phone` | `String` | No |  |
 
@@ -353,9 +355,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Registration.create({
-  "confirm_password" => "example_confirm_password", # String
+  "confirmPassword" => "example_confirmPassword", # String
   "email" => "example_email", # String
-  "nid_number" => "example_nid_number", # String
+  "nidNumber" => "example_nidNumber", # String
   "password" => "example_password", # String
 })
 ```
@@ -402,9 +404,9 @@ success = client.Success
 | --- | --- | --- | --- |
 | `code` | `String` | Yes |  |
 | `email` | `String` | Yes |  |
-| `is_oversea` | `Boolean` | No |  |
+| `isOverseas` | `Boolean` | No |  |
 | `message` | `String` | No |  |
-| `nid_number` | `String` | No |  |
+| `nidNumber` | `String` | No |  |
 | `success` | `Boolean` | No |  |
 
 ### Operations

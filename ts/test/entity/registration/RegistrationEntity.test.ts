@@ -26,8 +26,8 @@ import {
 describe('RegistrationEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NIDAPPLICATIONSYSTEM_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NIDAPPLICATIONSYSTEM_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NID_APPLICATION_SYSTEM_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NidApplicationSystemSDK.test()
@@ -62,7 +62,7 @@ describe('RegistrationEntity', async () => {
     const registration_ref01_ent = client.Registration()
     let registration_ref01_data = setup.data.new.registration['registration_ref01']
 
-    registration_ref01_data = await registration_ref01_ent.create(registration_ref01_data)
+    registration_ref01_data = (await registration_ref01_ent.create(registration_ref01_data)).data()
     assert(null != registration_ref01_data)
 
 

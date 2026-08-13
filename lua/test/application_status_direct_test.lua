@@ -70,16 +70,16 @@ function application_status_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["NIDAPPLICATIONSYSTEM_TEST_APPLICATION_STATUS_ENTID"] = {},
-    ["NIDAPPLICATIONSYSTEM_TEST_LIVE"] = "FALSE",
-    ["NIDAPPLICATIONSYSTEM_APIKEY"] = "NONE",
+    ["NID_APPLICATION_SYSTEM_TEST_APPLICATION_STATUS_ENTID"] = {},
+    ["NID_APPLICATION_SYSTEM_TEST_LIVE"] = "FALSE",
+    ["NID_APPLICATION_SYSTEM_APIKEY"] = "NONE",
   })
 
-  local live = env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] == "TRUE"
+  local live = env["NID_APPLICATION_SYSTEM_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["NIDAPPLICATIONSYSTEM_APIKEY"],
+      apikey = env["NID_APPLICATION_SYSTEM_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

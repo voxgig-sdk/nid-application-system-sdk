@@ -35,21 +35,21 @@ module NidApplicationSystemConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "additional_info",
+              "name" => "additionalInfo",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "nid_number",
+              "name" => "nidNumber",
               "req" => true,
               "type" => "`$STRING`",
               "index$" => 1,
             },
             {
               "active" => true,
-              "name" => "police_report_number",
+              "name" => "policeReportNumber",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 2,
@@ -71,6 +71,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/application/correction",
                   "parts" => [
@@ -89,6 +90,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/application/duplicate",
                   "parts" => [
@@ -107,6 +109,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/application/new-registration",
                   "parts" => [
@@ -134,35 +137,35 @@ module NidApplicationSystemConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "application_id",
+              "name" => "applicationId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "application_type",
+              "name" => "applicationType",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 1,
             },
             {
               "active" => true,
-              "name" => "last_updated",
+              "name" => "lastUpdated",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "nid_number",
+              "name" => "nidNumber",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "remark",
+              "name" => "remarks",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
@@ -176,7 +179,7 @@ module NidApplicationSystemConfig
             },
             {
               "active" => true,
-              "name" => "submission_date",
+              "name" => "submissionDate",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 6,
@@ -203,6 +206,7 @@ module NidApplicationSystemConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/application/status/{applicationId}",
                   "parts" => [
@@ -238,52 +242,66 @@ module NidApplicationSystemConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "captcha",
-              "req" => true,
+              "name" => "accountStatus",
+              "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "expires_in",
-              "req" => false,
-              "type" => "`$INTEGER`",
+              "name" => "captcha",
+              "req" => true,
+              "type" => "`$STRING`",
               "index$" => 1,
             },
             {
               "active" => true,
-              "name" => "password",
-              "req" => true,
+              "name" => "email",
+              "req" => false,
               "type" => "`$STRING`",
               "index$" => 2,
             },
             {
               "active" => true,
-              "name" => "success",
+              "name" => "fullName",
               "req" => false,
-              "type" => "`$BOOLEAN`",
+              "type" => "`$STRING`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "token",
+              "name" => "nidNumber",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
             },
             {
               "active" => true,
-              "name" => "user",
-              "req" => false,
-              "type" => "`$OBJECT`",
+              "name" => "password",
+              "req" => true,
+              "type" => "`$STRING`",
               "index$" => 5,
+            },
+            {
+              "active" => true,
+              "name" => "phone",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 6,
+            },
+            {
+              "active" => true,
+              "name" => "userId",
+              "req" => false,
+              "type" => "`$STRING`",
+              "index$" => 7,
             },
             {
               "active" => true,
               "name" => "username",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 6,
+              "index$" => 8,
             },
           ],
           "name" => "login",
@@ -295,6 +313,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/auth/login",
                   "parts" => [
@@ -304,7 +323,7 @@ module NidApplicationSystemConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.user`",
                   },
                   "index$" => 0,
                 },
@@ -347,6 +366,7 @@ module NidApplicationSystemConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/nid/download",
                   "parts" => [
@@ -377,14 +397,14 @@ module NidApplicationSystemConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "confirm_password",
+              "name" => "confirmPassword",
               "req" => true,
               "type" => "`$STRING`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "date_of_birth",
+              "name" => "dateOfBirth",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 1,
@@ -398,7 +418,7 @@ module NidApplicationSystemConfig
             },
             {
               "active" => true,
-              "name" => "nid_number",
+              "name" => "nidNumber",
               "req" => true,
               "type" => "`$STRING`",
               "index$" => 3,
@@ -427,6 +447,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/auth/register",
                   "parts" => [
@@ -466,7 +487,7 @@ module NidApplicationSystemConfig
             },
             {
               "active" => true,
-              "name" => "is_oversea",
+              "name" => "isOverseas",
               "req" => false,
               "type" => "`$BOOLEAN`",
               "index$" => 2,
@@ -480,7 +501,7 @@ module NidApplicationSystemConfig
             },
             {
               "active" => true,
-              "name" => "nid_number",
+              "name" => "nidNumber",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
@@ -502,6 +523,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/auth/password-reset",
                   "parts" => [
@@ -518,6 +540,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/verification/send-code",
                   "parts" => [
@@ -534,6 +557,7 @@ module NidApplicationSystemConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/verification/verify-code",
                   "parts" => [

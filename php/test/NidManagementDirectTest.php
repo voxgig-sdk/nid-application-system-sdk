@@ -65,16 +65,16 @@ function nid_management_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "NIDAPPLICATIONSYSTEM_TEST_NID_MANAGEMENT_ENTID" => [],
-        "NIDAPPLICATIONSYSTEM_TEST_LIVE" => "FALSE",
-        "NIDAPPLICATIONSYSTEM_APIKEY" => "NONE",
+        "NID_APPLICATION_SYSTEM_TEST_NID_MANAGEMENT_ENTID" => [],
+        "NID_APPLICATION_SYSTEM_TEST_LIVE" => "FALSE",
+        "NID_APPLICATION_SYSTEM_APIKEY" => "NONE",
     ]);
 
-    $live = $env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] === "TRUE";
+    $live = $env["NID_APPLICATION_SYSTEM_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["NIDAPPLICATIONSYSTEM_APIKEY"],
+            "apikey" => $env["NID_APPLICATION_SYSTEM_APIKEY"],
         ];
         $client = new NidApplicationSystemSDK($merged_opts);
         return [

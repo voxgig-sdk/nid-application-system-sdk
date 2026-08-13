@@ -43,8 +43,8 @@ class NidApplicationSystemTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('NIDAPPLICATIONSYSTEM_TEST_LIVE');
-        $override = self::getenv('NIDAPPLICATIONSYSTEM_TEST_OVERRIDE');
+        $live = self::getenv('NID_APPLICATION_SYSTEM_TEST_LIVE');
+        $override = self::getenv('NID_APPLICATION_SYSTEM_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class NidApplicationSystemTestRunner
             }
         }
 
-        $explain = self::getenv('NIDAPPLICATIONSYSTEM_TEST_EXPLAIN');
+        $explain = self::getenv('NID_APPLICATION_SYSTEM_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['NIDAPPLICATIONSYSTEM_TEST_EXPLAIN'] = $explain;
+            $m['NID_APPLICATION_SYSTEM_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -60,16 +60,16 @@ function nid_management_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["NIDAPPLICATIONSYSTEM_TEST_NID_MANAGEMENT_ENTID"] = {},
-    ["NIDAPPLICATIONSYSTEM_TEST_LIVE"] = "FALSE",
-    ["NIDAPPLICATIONSYSTEM_APIKEY"] = "NONE",
+    ["NID_APPLICATION_SYSTEM_TEST_NID_MANAGEMENT_ENTID"] = {},
+    ["NID_APPLICATION_SYSTEM_TEST_LIVE"] = "FALSE",
+    ["NID_APPLICATION_SYSTEM_APIKEY"] = "NONE",
   })
 
-  local live = env["NIDAPPLICATIONSYSTEM_TEST_LIVE"] == "TRUE"
+  local live = env["NID_APPLICATION_SYSTEM_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["NIDAPPLICATIONSYSTEM_APIKEY"],
+      apikey = env["NID_APPLICATION_SYSTEM_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

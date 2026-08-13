@@ -26,8 +26,8 @@ import {
 describe('SuccessEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NIDAPPLICATIONSYSTEM_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NIDAPPLICATIONSYSTEM_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NID_APPLICATION_SYSTEM_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NID_APPLICATION_SYSTEM_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NidApplicationSystemSDK.test()
@@ -62,7 +62,7 @@ describe('SuccessEntity', async () => {
     const success_ref01_ent = client.Success()
     let success_ref01_data = setup.data.new.success['success_ref01']
 
-    success_ref01_data = await success_ref01_ent.create(success_ref01_data)
+    success_ref01_data = (await success_ref01_ent.create(success_ref01_data)).data()
     assert(null != success_ref01_data)
 
 

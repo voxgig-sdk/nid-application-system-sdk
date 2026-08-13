@@ -38,9 +38,9 @@ const client = new NidApplicationSystemSDK({
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Application
+// Create — returns the created Application ENTITY (.data() for the record)
 const created = await client.Application().create({
-  nid_number: 'example_nid_number',
+  nidNumber: 'example_nidNumber',
   reason: 'example_reason',
 })
 
@@ -121,7 +121,8 @@ Create a mock client for unit testing — no server required:
 const client = NidApplicationSystemSDK.test()
 
 const applicationstatus = await client.ApplicationStatus().load({ id: 'test01' })
-// applicationstatus is a bare entity populated with mock response data
+// applicationstatus is the entity, populated with mock response data
+// — call applicationstatus.data() for the record itself
 console.log(applicationstatus)
 ```
 
@@ -294,9 +295,9 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `additional_info` |  |
-| `nid_number` |  |
-| `police_report_number` |  |
+| `additionalInfo` |  |
+| `nidNumber` |  |
+| `policeReportNumber` |  |
 | `reason` |  |
 
 Operations: create.
@@ -307,13 +308,13 @@ API path: `/application/correction`
 
 | Field | Description |
 | --- | --- |
-| `application_id` |  |
-| `application_type` |  |
-| `last_updated` |  |
-| `nid_number` |  |
-| `remark` |  |
+| `applicationId` |  |
+| `applicationType` |  |
+| `lastUpdated` |  |
+| `nidNumber` |  |
+| `remarks` |  |
 | `status` |  |
-| `submission_date` |  |
+| `submissionDate` |  |
 
 Operations: load.
 
@@ -323,12 +324,14 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
+| `accountStatus` |  |
 | `captcha` |  |
-| `expires_in` |  |
+| `email` |  |
+| `fullName` |  |
+| `nidNumber` |  |
 | `password` |  |
-| `success` |  |
-| `token` |  |
-| `user` |  |
+| `phone` |  |
+| `userId` |  |
 | `username` |  |
 
 Operations: create.
@@ -348,10 +351,10 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirm_password` |  |
-| `date_of_birth` |  |
+| `confirmPassword` |  |
+| `dateOfBirth` |  |
 | `email` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `password` |  |
 | `phone` |  |
 
@@ -365,9 +368,9 @@ API path: `/auth/register`
 | --- | --- |
 | `code` |  |
 | `email` |  |
-| `is_oversea` |  |
+| `isOverseas` |  |
 | `message` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `success` |  |
 
 Operations: create.
@@ -393,16 +396,16 @@ Create an instance: `const application = client.Application()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | `string` |  |
-| `nid_number` | `string` |  |
-| `police_report_number` | `string` |  |
+| `additionalInfo` | `string` |  |
+| `nidNumber` | `string` |  |
+| `policeReportNumber` | `string` |  |
 | `reason` | `string` |  |
 
 #### Example: Create
 
 ```ts
 const application = await client.Application().create({
-  nid_number: 'example_nid_number',
+  nidNumber: 'example_nidNumber',
   reason: 'example_reason',
 })
 ```
@@ -422,13 +425,13 @@ Create an instance: `const application_status = client.ApplicationStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | `string` |  |
-| `application_type` | `string` |  |
-| `last_updated` | `string` |  |
-| `nid_number` | `string` |  |
-| `remark` | `string` |  |
+| `applicationId` | `string` |  |
+| `applicationType` | `string` |  |
+| `lastUpdated` | `string` |  |
+| `nidNumber` | `string` |  |
+| `remarks` | `string` |  |
 | `status` | `string` |  |
-| `submission_date` | `string` |  |
+| `submissionDate` | `string` |  |
 
 #### Example: Load
 
@@ -451,12 +454,14 @@ Create an instance: `const login = client.Login()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `accountStatus` | `string` |  |
 | `captcha` | `string` |  |
-| `expires_in` | `number` |  |
+| `email` | `string` |  |
+| `fullName` | `string` |  |
+| `nidNumber` | `string` |  |
 | `password` | `string` |  |
-| `success` | `boolean` |  |
-| `token` | `string` |  |
-| `user` | `Record<string, any>` |  |
+| `phone` | `string` |  |
+| `userId` | `string` |  |
 | `username` | `string` |  |
 
 #### Example: Create
@@ -501,10 +506,10 @@ Create an instance: `const registration = client.Registration()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | `string` |  |
-| `date_of_birth` | `string` |  |
+| `confirmPassword` | `string` |  |
+| `dateOfBirth` | `string` |  |
 | `email` | `string` |  |
-| `nid_number` | `string` |  |
+| `nidNumber` | `string` |  |
 | `password` | `string` |  |
 | `phone` | `string` |  |
 
@@ -512,9 +517,9 @@ Create an instance: `const registration = client.Registration()`
 
 ```ts
 const registration = await client.Registration().create({
-  confirm_password: 'example_confirm_password',
+  confirmPassword: 'example_confirmPassword',
   email: 'example_email',
-  nid_number: 'example_nid_number',
+  nidNumber: 'example_nidNumber',
   password: 'example_password',
 })
 ```
@@ -536,9 +541,9 @@ Create an instance: `const success = client.Success()`
 | --- | --- | --- |
 | `code` | `string` |  |
 | `email` | `string` |  |
-| `is_oversea` | `boolean` |  |
+| `isOverseas` | `boolean` |  |
 | `message` | `string` |  |
-| `nid_number` | `string` |  |
+| `nidNumber` | `string` |  |
 | `success` | `boolean` |  |
 
 #### Example: Create

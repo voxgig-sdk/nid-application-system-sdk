@@ -4,27 +4,27 @@
       "SUCCESS00": {
         "code": "s3c",
         "email": "s3d",
-        "is_oversea": true,
+        "isOverseas": true,
         "message": "s3f",
-        "nid_number": "s40",
+        "nidNumber": "s40",
         "success": false,
         "id": "SUCCESS00"
       },
       "SUCCESS01": {
         "code": "s78",
         "email": "s79",
-        "is_oversea": true,
+        "isOverseas": true,
         "message": "s7b",
-        "nid_number": "s7c",
+        "nidNumber": "s7c",
         "success": false,
         "id": "SUCCESS01"
       },
       "SUCCESS02": {
         "code": "sb4",
         "email": "sb5",
-        "is_oversea": true,
+        "isOverseas": true,
         "message": "sb7",
-        "nid_number": "sb8",
+        "nidNumber": "sb8",
         "success": false,
         "id": "SUCCESS02"
       }
@@ -35,9 +35,9 @@
       "success_ref01": {
         "code": "sf0",
         "email": "sf1",
-        "is_oversea": true,
+        "isOverseas": true,
         "message": "sf3",
-        "nid_number": "sf4",
+        "nidNumber": "sf4",
         "success": false
       }
     }

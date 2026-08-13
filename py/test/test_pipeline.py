@@ -16,11 +16,11 @@
 import pytest
 
 from nidapplicationsystem_sdk import NidApplicationSystemSDK
-from core.error import NidApplicationSystemError
-from core.result import NidApplicationSystemResult
-from core.response import NidApplicationSystemResponse
-from core.spec import NidApplicationSystemSpec
-from feature.base_feature import NidApplicationSystemBaseFeature
+from nidapplicationsystem_sdk.core.error import NidApplicationSystemError
+from nidapplicationsystem_sdk.core.result import NidApplicationSystemResult
+from nidapplicationsystem_sdk.core.response import NidApplicationSystemResponse
+from nidapplicationsystem_sdk.core.spec import NidApplicationSystemSpec
+from nidapplicationsystem_sdk.feature.base_feature import NidApplicationSystemBaseFeature
 
 
 def _client():

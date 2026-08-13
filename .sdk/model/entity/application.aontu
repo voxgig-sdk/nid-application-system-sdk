@@ -6,17 +6,17 @@ main: kit: entity: application: {
 
   fields: [
     {
-      name: "additional_info"
+      name: "additionalInfo"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "nid_number"
+      name: "nidNumber"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "police_report_number"
+      name: "policeReportNumber"
       req: false
       type: "`$STRING`"
     }

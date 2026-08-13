@@ -2,33 +2,39 @@
   "existing": {
     "login": {
       "LOGIN00": {
-        "captcha": "s46",
-        "expires_in": "s47",
-        "password": "s48",
-        "success": false,
-        "token": "s4a",
-        "user": {},
-        "username": "s4c",
+        "accountStatus": "s5a",
+        "captcha": "s5b",
+        "email": "s5c",
+        "fullName": "s5d",
+        "nidNumber": "s5e",
+        "password": "s5f",
+        "phone": "s60",
+        "userId": "s61",
+        "username": "s62",
         "id": "LOGIN00"
       },
       "LOGIN01": {
-        "captcha": "s8c",
-        "expires_in": "s8d",
-        "password": "s8e",
-        "success": false,
-        "token": "s90",
-        "user": {},
-        "username": "s92",
+        "accountStatus": "sb4",
+        "captcha": "sb5",
+        "email": "sb6",
+        "fullName": "sb7",
+        "nidNumber": "sb8",
+        "password": "sb9",
+        "phone": "sba",
+        "userId": "sbb",
+        "username": "sbc",
         "id": "LOGIN01"
       },
       "LOGIN02": {
-        "captcha": "sd2",
-        "expires_in": "sd3",
-        "password": "sd4",
-        "success": false,
-        "token": "sd6",
-        "user": {},
-        "username": "sd8",
+        "accountStatus": "s10e",
+        "captcha": "s10f",
+        "email": "s110",
+        "fullName": "s111",
+        "nidNumber": "s112",
+        "password": "s113",
+        "phone": "s114",
+        "userId": "s115",
+        "username": "s116",
         "id": "LOGIN02"
       }
     }
@@ -36,13 +42,15 @@
   "new": {
     "login": {
       "login_ref01": {
-        "captcha": "s118",
-        "expires_in": "s119",
-        "password": "s11a",
-        "success": false,
-        "token": "s11c",
-        "user": {},
-        "username": "s11e"
+        "accountStatus": "s168",
+        "captcha": "s169",
+        "email": "s16a",
+        "fullName": "s16b",
+        "nidNumber": "s16c",
+        "password": "s16d",
+        "phone": "s16e",
+        "userId": "s16f",
+        "username": "s170"
       }
     }
   }

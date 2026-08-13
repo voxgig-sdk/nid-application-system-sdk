@@ -6,27 +6,27 @@ main: kit: entity: application_status: {
 
   fields: [
     {
-      name: "application_id"
+      name: "applicationId"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "application_type"
+      name: "applicationType"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "last_updated"
+      name: "lastUpdated"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "nid_number"
+      name: "nidNumber"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "remark"
+      name: "remarks"
       req: false
       type: "`$STRING`"
     }
@@ -36,7 +36,7 @@ main: kit: entity: application_status: {
       type: "`$STRING`"
     }
     {
-      name: "submission_date"
+      name: "submissionDate"
       req: false
       type: "`$STRING`"
     }

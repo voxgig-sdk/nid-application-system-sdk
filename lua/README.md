@@ -39,7 +39,7 @@ local client = sdk.new({
 
 ```lua
 -- Create
-local created, err = client:Application():create({ nid_number = "example_nid_number", reason = "example_reason" })
+local created, err = client:Application():create({ nidNumber = "example_nidNumber", reason = "example_reason" })
 if err then error(err) end
 
 ```
@@ -223,9 +223,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local application, err = client:Application():load()
+    local application_status, err = client:ApplicationStatus():load({ id = "example_id" })
     if err then error(err) end
-    -- application is the loaded record
+    -- application_status is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -236,9 +236,9 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `additional_info` |  |
-| `nid_number` |  |
-| `police_report_number` |  |
+| `additionalInfo` |  |
+| `nidNumber` |  |
+| `policeReportNumber` |  |
 | `reason` |  |
 
 Operations: Create.
@@ -249,13 +249,13 @@ API path: `/application/correction`
 
 | Field | Description |
 | --- | --- |
-| `application_id` |  |
-| `application_type` |  |
-| `last_updated` |  |
-| `nid_number` |  |
-| `remark` |  |
+| `applicationId` |  |
+| `applicationType` |  |
+| `lastUpdated` |  |
+| `nidNumber` |  |
+| `remarks` |  |
 | `status` |  |
-| `submission_date` |  |
+| `submissionDate` |  |
 
 Operations: Load.
 
@@ -265,12 +265,14 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
+| `accountStatus` |  |
 | `captcha` |  |
-| `expires_in` |  |
+| `email` |  |
+| `fullName` |  |
+| `nidNumber` |  |
 | `password` |  |
-| `success` |  |
-| `token` |  |
-| `user` |  |
+| `phone` |  |
+| `userId` |  |
 | `username` |  |
 
 Operations: Create.
@@ -290,10 +292,10 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirm_password` |  |
-| `date_of_birth` |  |
+| `confirmPassword` |  |
+| `dateOfBirth` |  |
 | `email` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `password` |  |
 | `phone` |  |
 
@@ -307,9 +309,9 @@ API path: `/auth/register`
 | --- | --- |
 | `code` |  |
 | `email` |  |
-| `is_oversea` |  |
+| `isOverseas` |  |
 | `message` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `success` |  |
 
 Operations: Create.
@@ -335,16 +337,16 @@ Create an instance: `local application = client:Application(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | `string` |  |
-| `nid_number` | `string` |  |
-| `police_report_number` | `string` |  |
+| `additionalInfo` | `string` |  |
+| `nidNumber` | `string` |  |
+| `policeReportNumber` | `string` |  |
 | `reason` | `string` |  |
 
 #### Example: Create
 
 ```lua
 local application, err = client:Application():create({
-  nid_number = "example_nid_number", -- string
+  nidNumber = "example_nidNumber", -- string
   reason = "example_reason", -- string
 })
 ```
@@ -364,13 +366,13 @@ Create an instance: `local application_status = client:ApplicationStatus(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | `string` |  |
-| `application_type` | `string` |  |
-| `last_updated` | `string` |  |
-| `nid_number` | `string` |  |
-| `remark` | `string` |  |
+| `applicationId` | `string` |  |
+| `applicationType` | `string` |  |
+| `lastUpdated` | `string` |  |
+| `nidNumber` | `string` |  |
+| `remarks` | `string` |  |
 | `status` | `string` |  |
-| `submission_date` | `string` |  |
+| `submissionDate` | `string` |  |
 
 #### Example: Load
 
@@ -393,12 +395,14 @@ Create an instance: `local login = client:Login(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `accountStatus` | `string` |  |
 | `captcha` | `string` |  |
-| `expires_in` | `number` |  |
+| `email` | `string` |  |
+| `fullName` | `string` |  |
+| `nidNumber` | `string` |  |
 | `password` | `string` |  |
-| `success` | `boolean` |  |
-| `token` | `string` |  |
-| `user` | `table` |  |
+| `phone` | `string` |  |
+| `userId` | `string` |  |
 | `username` | `string` |  |
 
 #### Example: Create
@@ -443,10 +447,10 @@ Create an instance: `local registration = client:Registration(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | `string` |  |
-| `date_of_birth` | `string` |  |
+| `confirmPassword` | `string` |  |
+| `dateOfBirth` | `string` |  |
 | `email` | `string` |  |
-| `nid_number` | `string` |  |
+| `nidNumber` | `string` |  |
 | `password` | `string` |  |
 | `phone` | `string` |  |
 
@@ -454,9 +458,9 @@ Create an instance: `local registration = client:Registration(nil)`
 
 ```lua
 local registration, err = client:Registration():create({
-  confirm_password = "example_confirm_password", -- string
+  confirmPassword = "example_confirmPassword", -- string
   email = "example_email", -- string
-  nid_number = "example_nid_number", -- string
+  nidNumber = "example_nidNumber", -- string
   password = "example_password", -- string
 })
 ```
@@ -478,9 +482,9 @@ Create an instance: `local success = client:Success(nil)`
 | --- | --- | --- |
 | `code` | `string` |  |
 | `email` | `string` |  |
-| `is_oversea` | `boolean` |  |
+| `isOverseas` | `boolean` |  |
 | `message` | `string` |  |
-| `nid_number` | `string` |  |
+| `nidNumber` | `string` |  |
 | `success` | `boolean` |  |
 
 #### Example: Create

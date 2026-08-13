@@ -42,8 +42,8 @@ client = NidApplicationSystemSDK({
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.Application().create({"nid_number": "example_nid_number", "reason": "example_reason"})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.Application().create({"nidNumber": "example_nidNumber", "reason": "example_reason"})
 
 ```
 
@@ -121,7 +121,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NidApplicationSystemSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 applicationstatus = client.ApplicationStatus().load({"id": "test01"})
 # applicationstatus contains the mock response record
 ```
@@ -225,7 +226,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -247,9 +248,9 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `additional_info` |  |
-| `nid_number` |  |
-| `police_report_number` |  |
+| `additionalInfo` |  |
+| `nidNumber` |  |
+| `policeReportNumber` |  |
 | `reason` |  |
 
 Operations: Create.
@@ -260,13 +261,13 @@ API path: `/application/correction`
 
 | Field | Description |
 | --- | --- |
-| `application_id` |  |
-| `application_type` |  |
-| `last_updated` |  |
-| `nid_number` |  |
-| `remark` |  |
+| `applicationId` |  |
+| `applicationType` |  |
+| `lastUpdated` |  |
+| `nidNumber` |  |
+| `remarks` |  |
 | `status` |  |
-| `submission_date` |  |
+| `submissionDate` |  |
 
 Operations: Load.
 
@@ -276,12 +277,14 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
+| `accountStatus` |  |
 | `captcha` |  |
-| `expires_in` |  |
+| `email` |  |
+| `fullName` |  |
+| `nidNumber` |  |
 | `password` |  |
-| `success` |  |
-| `token` |  |
-| `user` |  |
+| `phone` |  |
+| `userId` |  |
 | `username` |  |
 
 Operations: Create.
@@ -301,10 +304,10 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirm_password` |  |
-| `date_of_birth` |  |
+| `confirmPassword` |  |
+| `dateOfBirth` |  |
 | `email` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `password` |  |
 | `phone` |  |
 
@@ -318,9 +321,9 @@ API path: `/auth/register`
 | --- | --- |
 | `code` |  |
 | `email` |  |
-| `is_oversea` |  |
+| `isOverseas` |  |
 | `message` |  |
-| `nid_number` |  |
+| `nidNumber` |  |
 | `success` |  |
 
 Operations: Create.
@@ -346,16 +349,16 @@ Create an instance: `application = client.Application()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additional_info` | `str` |  |
-| `nid_number` | `str` |  |
-| `police_report_number` | `str` |  |
+| `additionalInfo` | `str` |  |
+| `nidNumber` | `str` |  |
+| `policeReportNumber` | `str` |  |
 | `reason` | `str` |  |
 
 #### Example: Create
 
 ```python
 application = client.Application().create({
-    "nid_number": "example_nid_number",  # str
+    "nidNumber": "example_nidNumber",  # str
     "reason": "example_reason",  # str
 })
 ```
@@ -375,13 +378,13 @@ Create an instance: `application_status = client.ApplicationStatus()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `application_id` | `str` |  |
-| `application_type` | `str` |  |
-| `last_updated` | `str` |  |
-| `nid_number` | `str` |  |
-| `remark` | `str` |  |
+| `applicationId` | `str` |  |
+| `applicationType` | `str` |  |
+| `lastUpdated` | `str` |  |
+| `nidNumber` | `str` |  |
+| `remarks` | `str` |  |
 | `status` | `str` |  |
-| `submission_date` | `str` |  |
+| `submissionDate` | `str` |  |
 
 #### Example: Load
 
@@ -404,12 +407,14 @@ Create an instance: `login = client.Login()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `accountStatus` | `str` |  |
 | `captcha` | `str` |  |
-| `expires_in` | `int` |  |
+| `email` | `str` |  |
+| `fullName` | `str` |  |
+| `nidNumber` | `str` |  |
 | `password` | `str` |  |
-| `success` | `bool` |  |
-| `token` | `str` |  |
-| `user` | `dict` |  |
+| `phone` | `str` |  |
+| `userId` | `str` |  |
 | `username` | `str` |  |
 
 #### Example: Create
@@ -454,10 +459,10 @@ Create an instance: `registration = client.Registration()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirm_password` | `str` |  |
-| `date_of_birth` | `str` |  |
+| `confirmPassword` | `str` |  |
+| `dateOfBirth` | `str` |  |
 | `email` | `str` |  |
-| `nid_number` | `str` |  |
+| `nidNumber` | `str` |  |
 | `password` | `str` |  |
 | `phone` | `str` |  |
 
@@ -465,9 +470,9 @@ Create an instance: `registration = client.Registration()`
 
 ```python
 registration = client.Registration().create({
-    "confirm_password": "example_confirm_password",  # str
+    "confirmPassword": "example_confirmPassword",  # str
     "email": "example_email",  # str
-    "nid_number": "example_nid_number",  # str
+    "nidNumber": "example_nidNumber",  # str
     "password": "example_password",  # str
 })
 ```
@@ -489,9 +494,9 @@ Create an instance: `success = client.Success()`
 | --- | --- | --- |
 | `code` | `str` |  |
 | `email` | `str` |  |
-| `is_oversea` | `bool` |  |
+| `isOverseas` | `bool` |  |
 | `message` | `str` |  |
-| `nid_number` | `str` |  |
+| `nidNumber` | `str` |  |
 | `success` | `bool` |  |
 
 #### Example: Create

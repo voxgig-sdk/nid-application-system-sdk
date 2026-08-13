@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.NIDAPPLICATIONSYSTEM_TEST_LIVE ||
-    'TRUE' === process.env.NIDAPPLICATIONSYSTEM_TEST_OVERRIDE
+    'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_LIVE ||
+    'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.NIDAPPLICATIONSYSTEM_TEST_EXPLAIN = process.env.NIDAPPLICATIONSYSTEM_TEST_EXPLAIN || m.NIDAPPLICATIONSYSTEM_TEST_EXPLAIN
+  m.NID_APPLICATION_SYSTEM_TEST_EXPLAIN = process.env.NID_APPLICATION_SYSTEM_TEST_EXPLAIN || m.NID_APPLICATION_SYSTEM_TEST_EXPLAIN
 
   return m
 }

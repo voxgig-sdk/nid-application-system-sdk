@@ -30,6 +30,7 @@ guide: {
   entity: login: {
     path: "/auth/login": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.user`")|top
     }
   }
 

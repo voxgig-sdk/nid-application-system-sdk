@@ -108,9 +108,9 @@ application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additional_info` | `str` | No |  |
-| `nid_number` | `str` | Yes |  |
-| `police_report_number` | `str` | No |  |
+| `additionalInfo` | `str` | No |  |
+| `nidNumber` | `str` | Yes |  |
+| `policeReportNumber` | `str` | No |  |
 | `reason` | `str` | Yes |  |
 
 ### Operations
@@ -121,7 +121,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Application().create({
-    "nid_number": "example_nid_number",  # str
+    "nidNumber": "example_nidNumber",  # str
     "reason": "example_reason",  # str
 })
 ```
@@ -165,13 +165,13 @@ application_status = client.ApplicationStatus()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `application_id` | `str` | No |  |
-| `application_type` | `str` | No |  |
-| `last_updated` | `str` | No |  |
-| `nid_number` | `str` | No |  |
-| `remark` | `str` | No |  |
+| `applicationId` | `str` | No |  |
+| `applicationType` | `str` | No |  |
+| `lastUpdated` | `str` | No |  |
+| `nidNumber` | `str` | No |  |
+| `remarks` | `str` | No |  |
 | `status` | `str` | No |  |
-| `submission_date` | `str` | No |  |
+| `submissionDate` | `str` | No |  |
 
 ### Operations
 
@@ -222,12 +222,14 @@ login = client.Login()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `accountStatus` | `str` | No |  |
 | `captcha` | `str` | Yes |  |
-| `expires_in` | `int` | No |  |
+| `email` | `str` | No |  |
+| `fullName` | `str` | No |  |
+| `nidNumber` | `str` | No |  |
 | `password` | `str` | Yes |  |
-| `success` | `bool` | No |  |
-| `token` | `str` | No |  |
-| `user` | `dict` | No |  |
+| `phone` | `str` | No |  |
+| `userId` | `str` | No |  |
 | `username` | `str` | Yes |  |
 
 ### Operations
@@ -328,10 +330,10 @@ registration = client.Registration()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirm_password` | `str` | Yes |  |
-| `date_of_birth` | `str` | No |  |
+| `confirmPassword` | `str` | Yes |  |
+| `dateOfBirth` | `str` | No |  |
 | `email` | `str` | Yes |  |
-| `nid_number` | `str` | Yes |  |
+| `nidNumber` | `str` | Yes |  |
 | `password` | `str` | Yes |  |
 | `phone` | `str` | No |  |
 
@@ -343,9 +345,9 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Registration().create({
-    "confirm_password": "example_confirm_password",  # str
+    "confirmPassword": "example_confirmPassword",  # str
     "email": "example_email",  # str
-    "nid_number": "example_nid_number",  # str
+    "nidNumber": "example_nidNumber",  # str
     "password": "example_password",  # str
 })
 ```
@@ -391,9 +393,9 @@ success = client.Success()
 | --- | --- | --- | --- |
 | `code` | `str` | Yes |  |
 | `email` | `str` | Yes |  |
-| `is_oversea` | `bool` | No |  |
+| `isOverseas` | `bool` | No |  |
 | `message` | `str` | No |  |
-| `nid_number` | `str` | No |  |
+| `nidNumber` | `str` | No |  |
 | `success` | `bool` | No |  |
 
 ### Operations
