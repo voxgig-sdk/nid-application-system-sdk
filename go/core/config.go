@@ -1,5 +1,12 @@
 package core
 
+import (
+	"sync"
+)
+
+// MakeConfig builds a fresh, fully materialised config map. Every call
+// rebuilds the whole structure, so prefer SharedConfig unless you need a
+// private copy you intend to mutate.
 func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
@@ -33,32 +40,22 @@ func MakeConfig() map[string]any {
 			"application": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "additionalInfo",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "nidNumber",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "policeReportNumber",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "reason",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 				},
 				"name": "application",
@@ -68,7 +65,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -84,10 +80,8 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -103,10 +97,8 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 1,
 							},
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -122,7 +114,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 2,
 							},
 						},
 					},
@@ -134,53 +125,32 @@ func MakeConfig() map[string]any {
 			"application_status": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "applicationId",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "applicationType",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "lastUpdated",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "nidNumber",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "remarks",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "status",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 5,
 					},
 					map[string]any{
-						"active": true,
 						"name": "submissionDate",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 6,
 					},
 				},
 				"name": "application_status",
@@ -190,17 +160,14 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "application_id",
 											"reqd": true,
 											"type": "`$STRING`",
-											"index$": 0,
 										},
 									},
 								},
@@ -226,7 +193,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -238,67 +204,43 @@ func MakeConfig() map[string]any {
 			"login": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "accountStatus",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "captcha",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "email",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "fullName",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "nidNumber",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "password",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 5,
 					},
 					map[string]any{
-						"active": true,
 						"name": "phone",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 6,
 					},
 					map[string]any{
-						"active": true,
 						"name": "userId",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 7,
 					},
 					map[string]any{
-						"active": true,
 						"name": "username",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 8,
 					},
 				},
 				"name": "login",
@@ -308,7 +250,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -322,7 +263,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.user`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -340,20 +280,16 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"example": "pdf",
 											"kind": "query",
 											"name": "format",
 											"orig": "format",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "nid_number",
 											"orig": "nid_number",
@@ -379,7 +315,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -391,46 +326,32 @@ func MakeConfig() map[string]any {
 			"registration": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "confirmPassword",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "dateOfBirth",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "email",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "nidNumber",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "password",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "phone",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 5,
 					},
 				},
 				"name": "registration",
@@ -440,7 +361,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -454,7 +374,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -466,46 +385,30 @@ func MakeConfig() map[string]any {
 			"success": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "code",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "email",
 						"req": true,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "isOverseas",
-						"req": false,
 						"type": "`$BOOLEAN`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "message",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "nidNumber",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "success",
-						"req": false,
 						"type": "`$BOOLEAN`",
-						"index$": 5,
 					},
 				},
 				"name": "success",
@@ -515,7 +418,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -529,10 +431,8 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -546,10 +446,8 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 1,
 							},
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
@@ -563,7 +461,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 2,
 							},
 						},
 					},
@@ -574,6 +471,24 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+var (
+	sharedConfigOnce sync.Once
+	sharedConfigVal  map[string]any
+)
+
+// SharedConfig returns the process-wide config, built once on first use.
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client.
+//
+// The returned map is shared: treat it as read-only. Callers that need to
+// mutate should use MakeConfig, which always returns a fresh copy.
+func SharedConfig() map[string]any {
+	sharedConfigOnce.Do(func() {
+		sharedConfigVal = MakeConfig()
+	})
+	return sharedConfigVal
 }
 
 func makeFeature(name string) Feature {

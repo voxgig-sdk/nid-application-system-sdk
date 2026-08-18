@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class NidApplicationSystemConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -39,32 +62,22 @@ class NidApplicationSystemConfig
         'application' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'additionalInfo',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'nidNumber',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'policeReportNumber',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'reason',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
           ],
           'name' => 'application',
@@ -74,7 +87,6 @@ class NidApplicationSystemConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -90,10 +102,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -109,10 +119,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 1,
                 ],
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -128,10 +136,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 2,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -141,53 +147,32 @@ class NidApplicationSystemConfig
         'application_status' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'applicationId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'applicationType',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'lastUpdated',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'nidNumber',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'remarks',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'status',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'submissionDate',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 6,
             ],
           ],
           'name' => 'application_status',
@@ -197,17 +182,14 @@ class NidApplicationSystemConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'params' => [
                       [
-                        'active' => true,
                         'kind' => 'param',
                         'name' => 'id',
                         'orig' => 'application_id',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -233,10 +215,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -246,67 +226,43 @@ class NidApplicationSystemConfig
         'login' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'accountStatus',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'captcha',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'email',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'fullName',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'nidNumber',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'password',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'phone',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'userId',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'username',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 8,
             ],
           ],
           'name' => 'login',
@@ -316,7 +272,6 @@ class NidApplicationSystemConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -330,10 +285,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body.user`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -349,20 +302,16 @@ class NidApplicationSystemConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 'pdf',
                         'kind' => 'query',
                         'name' => 'format',
                         'orig' => 'format',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'nid_number',
                         'orig' => 'nid_number',
@@ -388,10 +337,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -401,46 +348,32 @@ class NidApplicationSystemConfig
         'registration' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'confirmPassword',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'dateOfBirth',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'email',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'nidNumber',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'password',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'phone',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
           ],
           'name' => 'registration',
@@ -450,7 +383,6 @@ class NidApplicationSystemConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -464,10 +396,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [
@@ -477,46 +407,30 @@ class NidApplicationSystemConfig
         'success' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'code',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'email',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'isOverseas',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'message',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'nidNumber',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'success',
-              'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 5,
             ],
           ],
           'name' => 'success',
@@ -526,7 +440,6 @@ class NidApplicationSystemConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -540,10 +453,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -557,10 +468,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 1,
                 ],
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -574,10 +483,8 @@ class NidApplicationSystemConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 2,
                 ],
               ],
-              'key$' => 'create',
             ],
           ],
           'relations' => [

@@ -28,7 +28,7 @@ class NidApplicationSystemSDK
     utility = NidApplicationSystemUtility.new
     @_utility = utility
 
-    config = NidApplicationSystemConfig.make_config
+    config = NidApplicationSystemConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

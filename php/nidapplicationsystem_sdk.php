@@ -40,7 +40,7 @@ class NidApplicationSystemSDK
         $utility = new NidApplicationSystemUtility();
         $this->_utility = $utility;
 
-        $config = NidApplicationSystemConfig::make_config();
+        $config = NidApplicationSystemConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

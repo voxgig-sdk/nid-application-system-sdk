@@ -1,7 +1,30 @@
 # NidApplicationSystem SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "NidApplicationSystem",
@@ -34,32 +57,22 @@ def make_config():
       "application": {
         "fields": [
           {
-            "active": True,
             "name": "additionalInfo",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "nidNumber",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "policeReportNumber",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "reason",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
         ],
         "name": "application",
@@ -69,7 +82,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -85,10 +97,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -104,10 +114,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -123,10 +131,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 2,
               },
             ],
-            "key$": "create",
           },
         },
         "relations": {
@@ -136,53 +142,32 @@ def make_config():
       "application_status": {
         "fields": [
           {
-            "active": True,
             "name": "applicationId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "applicationType",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "lastUpdated",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "nidNumber",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "remarks",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "status",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "submissionDate",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 6,
           },
         ],
         "name": "application_status",
@@ -192,17 +177,14 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "application_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -228,10 +210,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -241,67 +221,43 @@ def make_config():
       "login": {
         "fields": [
           {
-            "active": True,
             "name": "accountStatus",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "captcha",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "email",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "fullName",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "nidNumber",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "password",
             "req": True,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "phone",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "userId",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "username",
             "req": True,
             "type": "`$STRING`",
-            "index$": 8,
           },
         ],
         "name": "login",
@@ -311,7 +267,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -325,10 +280,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.user`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
         },
         "relations": {
@@ -344,20 +297,16 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "pdf",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "nid_number",
                       "orig": "nid_number",
@@ -383,10 +332,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -396,46 +343,32 @@ def make_config():
       "registration": {
         "fields": [
           {
-            "active": True,
             "name": "confirmPassword",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "dateOfBirth",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "email",
             "req": True,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "nidNumber",
             "req": True,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "password",
             "req": True,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "phone",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
         ],
         "name": "registration",
@@ -445,7 +378,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -459,10 +391,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
         },
         "relations": {
@@ -472,46 +402,30 @@ def make_config():
       "success": {
         "fields": [
           {
-            "active": True,
             "name": "code",
             "req": True,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "email",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "isOverseas",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "message",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "nidNumber",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "success",
-            "req": False,
             "type": "`$BOOLEAN`",
-            "index$": 5,
           },
         ],
         "name": "success",
@@ -521,7 +435,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -535,10 +448,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -552,10 +463,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -569,10 +478,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 2,
               },
             ],
-            "key$": "create",
           },
         },
         "relations": {

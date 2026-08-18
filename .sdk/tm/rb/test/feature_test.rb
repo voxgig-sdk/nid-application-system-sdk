@@ -15,7 +15,7 @@ require_relative "../NidApplicationSystem_sdk"
 module NidApplicationSystemFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = NidApplicationSystemConfig.make_config["feature"]
+    f = NidApplicationSystemConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
