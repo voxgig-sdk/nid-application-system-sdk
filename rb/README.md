@@ -244,10 +244,10 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` |  |
-| `nidNumber` |  |
-| `policeReportNumber` |  |
-| `reason` |  |
+| `additionalInfo` | Additional information |
+| `nidNumber` | National Identity Card number |
+| `policeReportNumber` | Police report number (if lost or stolen) |
+| `reason` | Reason for requesting duplicate |
 
 Operations: Create.
 
@@ -260,8 +260,8 @@ API path: `/application/correction`
 | `applicationId` |  |
 | `applicationType` |  |
 | `lastUpdated` |  |
-| `nidNumber` |  |
-| `remarks` |  |
+| `nidNumber` | NID number (if approved) |
+| `remarks` | Additional remarks or notes |
 | `status` |  |
 | `submissionDate` |  |
 
@@ -274,14 +274,14 @@ API path: `/application/status/{applicationId}`
 | Field | Description |
 | --- | --- |
 | `accountStatus` |  |
-| `captcha` |  |
+| `captcha` | Captcha code displayed in the image |
 | `email` |  |
 | `fullName` |  |
 | `nidNumber` |  |
-| `password` |  |
+| `password` | User's password |
 | `phone` |  |
 | `userId` |  |
-| `username` |  |
+| `username` | User's username or NID number |
 
 Operations: Create.
 
@@ -300,12 +300,12 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirmPassword` |  |
-| `dateOfBirth` |  |
-| `email` |  |
-| `nidNumber` |  |
-| `password` |  |
-| `phone` |  |
+| `confirmPassword` | Password confirmation |
+| `dateOfBirth` | Date of birth |
+| `email` | User's email address |
+| `nidNumber` | National Identity Card number |
+| `password` | Account password |
+| `phone` | User's phone number |
 
 Operations: Create.
 
@@ -315,11 +315,11 @@ API path: `/auth/register`
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `email` |  |
-| `isOverseas` |  |
+| `code` | Verification code received |
+| `email` | Registered email address |
+| `isOverseas` | Indicates if user is an overseas Bangladeshi |
 | `message` |  |
-| `nidNumber` |  |
+| `nidNumber` | National Identity Card number for verification |
 | `success` |  |
 
 Operations: Create.
@@ -345,10 +345,10 @@ Create an instance: `application = client.Application`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additionalInfo` | `String` |  |
-| `nidNumber` | `String` |  |
-| `policeReportNumber` | `String` |  |
-| `reason` | `String` |  |
+| `additionalInfo` | `String` | Additional information |
+| `nidNumber` | `String` | National Identity Card number |
+| `policeReportNumber` | `String` | Police report number (if lost or stolen) |
+| `reason` | `String` | Reason for requesting duplicate |
 
 #### Example: Create
 
@@ -377,8 +377,8 @@ Create an instance: `application_status = client.ApplicationStatus`
 | `applicationId` | `String` |  |
 | `applicationType` | `String` |  |
 | `lastUpdated` | `String` |  |
-| `nidNumber` | `String` |  |
-| `remarks` | `String` |  |
+| `nidNumber` | `String` | NID number (if approved) |
+| `remarks` | `String` | Additional remarks or notes |
 | `status` | `String` |  |
 | `submissionDate` | `String` |  |
 
@@ -405,14 +405,14 @@ Create an instance: `login = client.Login`
 | Field | Type | Description |
 | --- | --- | --- |
 | `accountStatus` | `String` |  |
-| `captcha` | `String` |  |
+| `captcha` | `String` | Captcha code displayed in the image |
 | `email` | `String` |  |
 | `fullName` | `String` |  |
 | `nidNumber` | `String` |  |
-| `password` | `String` |  |
+| `password` | `String` | User's password |
 | `phone` | `String` |  |
 | `userId` | `String` |  |
-| `username` | `String` |  |
+| `username` | `String` | User's username or NID number |
 
 #### Example: Create
 
@@ -457,12 +457,12 @@ Create an instance: `registration = client.Registration`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirmPassword` | `String` |  |
-| `dateOfBirth` | `String` |  |
-| `email` | `String` |  |
-| `nidNumber` | `String` |  |
-| `password` | `String` |  |
-| `phone` | `String` |  |
+| `confirmPassword` | `String` | Password confirmation |
+| `dateOfBirth` | `String` | Date of birth |
+| `email` | `String` | User's email address |
+| `nidNumber` | `String` | National Identity Card number |
+| `password` | `String` | Account password |
+| `phone` | `String` | User's phone number |
 
 #### Example: Create
 
@@ -490,11 +490,11 @@ Create an instance: `success = client.Success`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `String` |  |
-| `email` | `String` |  |
-| `isOverseas` | `Boolean` |  |
+| `code` | `String` | Verification code received |
+| `email` | `String` | Registered email address |
+| `isOverseas` | `Boolean` | Indicates if user is an overseas Bangladeshi |
 | `message` | `String` |  |
-| `nidNumber` | `String` |  |
+| `nidNumber` | `String` | National Identity Card number for verification |
 | `success` | `Boolean` |  |
 
 #### Example: Create

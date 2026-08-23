@@ -1,0 +1,69 @@
+# Entity: registration
+
+main: kit: entity: registration: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "confirmPassword"
+      req: true
+      short: "Password confirmation"
+      type: "`$STRING`"
+    }
+    {
+      name: "dateOfBirth"
+      req: false
+      short: "Date of birth"
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      short: "User's email address"
+      type: "`$STRING`"
+    }
+    {
+      name: "nidNumber"
+      req: true
+      short: "National Identity Card number"
+      type: "`$STRING`"
+    }
+    {
+      name: "password"
+      req: true
+      short: "Account password"
+      type: "`$STRING`"
+    }
+    {
+      name: "phone"
+      req: false
+      short: "User's phone number"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "registration"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/auth/register"
+          parts: [
+            "auth"
+            "register"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

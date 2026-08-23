@@ -108,10 +108,10 @@ application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additionalInfo` | `str` | No |  |
-| `nidNumber` | `str` | Yes |  |
-| `policeReportNumber` | `str` | No |  |
-| `reason` | `str` | Yes |  |
+| `additionalInfo` | `str` | No | Additional information |
+| `nidNumber` | `str` | Yes | National Identity Card number |
+| `policeReportNumber` | `str` | No | Police report number (if lost or stolen) |
+| `reason` | `str` | Yes | Reason for requesting duplicate |
 
 ### Operations
 
@@ -168,8 +168,8 @@ application_status = client.ApplicationStatus()
 | `applicationId` | `str` | No |  |
 | `applicationType` | `str` | No |  |
 | `lastUpdated` | `str` | No |  |
-| `nidNumber` | `str` | No |  |
-| `remarks` | `str` | No |  |
+| `nidNumber` | `str` | No | NID number (if approved) |
+| `remarks` | `str` | No | Additional remarks or notes |
 | `status` | `str` | No |  |
 | `submissionDate` | `str` | No |  |
 
@@ -223,14 +223,14 @@ login = client.Login()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `accountStatus` | `str` | No |  |
-| `captcha` | `str` | Yes |  |
+| `captcha` | `str` | Yes | Captcha code displayed in the image |
 | `email` | `str` | No |  |
 | `fullName` | `str` | No |  |
 | `nidNumber` | `str` | No |  |
-| `password` | `str` | Yes |  |
+| `password` | `str` | Yes | User's password |
 | `phone` | `str` | No |  |
 | `userId` | `str` | No |  |
-| `username` | `str` | Yes |  |
+| `username` | `str` | Yes | User's username or NID number |
 
 ### Operations
 
@@ -330,12 +330,12 @@ registration = client.Registration()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirmPassword` | `str` | Yes |  |
-| `dateOfBirth` | `str` | No |  |
-| `email` | `str` | Yes |  |
-| `nidNumber` | `str` | Yes |  |
-| `password` | `str` | Yes |  |
-| `phone` | `str` | No |  |
+| `confirmPassword` | `str` | Yes | Password confirmation |
+| `dateOfBirth` | `str` | No | Date of birth |
+| `email` | `str` | Yes | User's email address |
+| `nidNumber` | `str` | Yes | National Identity Card number |
+| `password` | `str` | Yes | Account password |
+| `phone` | `str` | No | User's phone number |
 
 ### Operations
 
@@ -391,11 +391,11 @@ success = client.Success()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `str` | Yes |  |
-| `email` | `str` | Yes |  |
-| `isOverseas` | `bool` | No |  |
+| `code` | `str` | Yes | Verification code received |
+| `email` | `str` | Yes | Registered email address |
+| `isOverseas` | `bool` | No | Indicates if user is an overseas Bangladeshi |
 | `message` | `str` | No |  |
-| `nidNumber` | `str` | No |  |
+| `nidNumber` | `str` | No | National Identity Card number for verification |
 | `success` | `bool` | No |  |
 
 ### Operations

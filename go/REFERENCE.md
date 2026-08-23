@@ -119,10 +119,10 @@ fmt.Println(application.GetName()) // "application"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `additionalInfo` | `string` | No |  |
-| `nidNumber` | `string` | Yes |  |
-| `policeReportNumber` | `string` | No |  |
-| `reason` | `string` | Yes |  |
+| `additionalInfo` | `string` | No | Additional information |
+| `nidNumber` | `string` | Yes | National Identity Card number |
+| `policeReportNumber` | `string` | No | Police report number (if lost or stolen) |
+| `reason` | `string` | Yes | Reason for requesting duplicate |
 
 ### Operations
 
@@ -179,8 +179,8 @@ fmt.Println(applicationStatus.GetName()) // "application_status"
 | `applicationId` | `string` | No |  |
 | `applicationType` | `string` | No |  |
 | `lastUpdated` | `string` | No |  |
-| `nidNumber` | `string` | No |  |
-| `remarks` | `string` | No |  |
+| `nidNumber` | `string` | No | NID number (if approved) |
+| `remarks` | `string` | No | Additional remarks or notes |
 | `status` | `string` | No |  |
 | `submissionDate` | `string` | No |  |
 
@@ -234,14 +234,14 @@ fmt.Println(login.GetName()) // "login"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `accountStatus` | `string` | No |  |
-| `captcha` | `string` | Yes |  |
+| `captcha` | `string` | Yes | Captcha code displayed in the image |
 | `email` | `string` | No |  |
 | `fullName` | `string` | No |  |
 | `nidNumber` | `string` | No |  |
-| `password` | `string` | Yes |  |
+| `password` | `string` | Yes | User's password |
 | `phone` | `string` | No |  |
 | `userId` | `string` | No |  |
-| `username` | `string` | Yes |  |
+| `username` | `string` | Yes | User's username or NID number |
 
 ### Operations
 
@@ -341,12 +341,12 @@ fmt.Println(registration.GetName()) // "registration"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `confirmPassword` | `string` | Yes |  |
-| `dateOfBirth` | `string` | No |  |
-| `email` | `string` | Yes |  |
-| `nidNumber` | `string` | Yes |  |
-| `password` | `string` | Yes |  |
-| `phone` | `string` | No |  |
+| `confirmPassword` | `string` | Yes | Password confirmation |
+| `dateOfBirth` | `string` | No | Date of birth |
+| `email` | `string` | Yes | User's email address |
+| `nidNumber` | `string` | Yes | National Identity Card number |
+| `password` | `string` | Yes | Account password |
+| `phone` | `string` | No | User's phone number |
 
 ### Operations
 
@@ -402,11 +402,11 @@ fmt.Println(success.GetName()) // "success"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `string` | Yes |  |
-| `email` | `string` | Yes |  |
-| `isOverseas` | `bool` | No |  |
+| `code` | `string` | Yes | Verification code received |
+| `email` | `string` | Yes | Registered email address |
+| `isOverseas` | `bool` | No | Indicates if user is an overseas Bangladeshi |
 | `message` | `string` | No |  |
-| `nidNumber` | `string` | No |  |
+| `nidNumber` | `string` | No | National Identity Card number for verification |
 | `success` | `bool` | No |  |
 
 ### Operations

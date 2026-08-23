@@ -1,0 +1,81 @@
+# Entity: login
+
+main: kit: entity: login: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accountStatus"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "captcha"
+      req: true
+      short: "Captcha code displayed in the image"
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "fullName"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nidNumber"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "password"
+      req: true
+      short: "User's password"
+      type: "`$STRING`"
+    }
+    {
+      name: "phone"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "userId"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "username"
+      req: true
+      short: "User's username or NID number"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "login"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/auth/login"
+          parts: [
+            "auth"
+            "login"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.user`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

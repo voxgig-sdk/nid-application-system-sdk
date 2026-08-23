@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "NidApplicationSystem",
+			"slug": "nid-application-system",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -41,20 +44,24 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "additionalInfo",
+						"short": "Additional information",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "nidNumber",
 						"req": true,
+						"short": "National Identity Card number",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "policeReportNumber",
+						"short": "Police report number (if lost or stolen)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "reason",
 						"req": true,
+						"short": "Reason for requesting duplicate",
 						"type": "`$STRING`",
 					},
 				},
@@ -138,10 +145,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "nidNumber",
+						"short": "NID number (if approved)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "remarks",
+						"short": "Additional remarks or notes",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -210,6 +219,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "captcha",
 						"req": true,
+						"short": "Captcha code displayed in the image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -227,6 +237,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "password",
 						"req": true,
+						"short": "User's password",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -240,6 +251,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "username",
 						"req": true,
+						"short": "User's username or NID number",
 						"type": "`$STRING`",
 					},
 				},
@@ -328,29 +340,35 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "confirmPassword",
 						"req": true,
+						"short": "Password confirmation",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "dateOfBirth",
+						"short": "Date of birth",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "email",
 						"req": true,
+						"short": "User's email address",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "nidNumber",
 						"req": true,
+						"short": "National Identity Card number",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "password",
 						"req": true,
+						"short": "Account password",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "phone",
+						"short": "User's phone number",
 						"type": "`$STRING`",
 					},
 				},
@@ -387,15 +405,18 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "code",
 						"req": true,
+						"short": "Verification code received",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "email",
 						"req": true,
+						"short": "Registered email address",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "isOverseas",
+						"short": "Indicates if user is an overseas Bangladeshi",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
@@ -404,6 +425,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "nidNumber",
+						"short": "National Identity Card number for verification",
 						"type": "`$STRING`",
 					},
 					map[string]any{

@@ -1,0 +1,91 @@
+# Entity: success
+
+main: kit: entity: success: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "code"
+      req: true
+      short: "Verification code received"
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: true
+      short: "Registered email address"
+      type: "`$STRING`"
+    }
+    {
+      name: "isOverseas"
+      req: false
+      short: "Indicates if user is an overseas Bangladeshi"
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "message"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nidNumber"
+      req: false
+      short: "National Identity Card number for verification"
+      type: "`$STRING`"
+    }
+    {
+      name: "success"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+  ]
+
+  name: "success"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/auth/password-reset"
+          parts: [
+            "auth"
+            "password-reset"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/verification/send-code"
+          parts: [
+            "verification"
+            "send-code"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/verification/verify-code"
+          parts: [
+            "verification"
+            "verify-code"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

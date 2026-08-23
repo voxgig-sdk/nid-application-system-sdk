@@ -36,24 +36,28 @@
               "active": true,
               "name": "additionalInfo",
               "req": false,
+              "short": "Additional information",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "nidNumber",
               "req": true,
+              "short": "National Identity Card number",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "policeReportNumber",
               "req": false,
+              "short": "Police report number (if lost or stolen)",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "reason",
               "req": true,
+              "short": "Reason for requesting duplicate",
               "type": "`$STRING`"
             }
           ],
@@ -152,12 +156,14 @@
               "active": true,
               "name": "nidNumber",
               "req": false,
+              "short": "NID number (if approved)",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "remarks",
               "req": false,
+              "short": "Additional remarks or notes",
               "type": "`$STRING`"
             },
             {
@@ -239,6 +245,7 @@
               "active": true,
               "name": "captcha",
               "req": true,
+              "short": "Captcha code displayed in the image",
               "type": "`$STRING`"
             },
             {
@@ -263,6 +270,7 @@
               "active": true,
               "name": "password",
               "req": true,
+              "short": "User's password",
               "type": "`$STRING`"
             },
             {
@@ -281,6 +289,7 @@
               "active": true,
               "name": "username",
               "req": true,
+              "short": "User's username or NID number",
               "type": "`$STRING`"
             }
           ],
@@ -383,36 +392,42 @@
               "active": true,
               "name": "confirmPassword",
               "req": true,
+              "short": "Password confirmation",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "dateOfBirth",
               "req": false,
+              "short": "Date of birth",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "email",
               "req": true,
+              "short": "User's email address",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "nidNumber",
               "req": true,
+              "short": "National Identity Card number",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "password",
               "req": true,
+              "short": "Account password",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "phone",
               "req": false,
+              "short": "User's phone number",
               "type": "`$STRING`"
             }
           ],
@@ -455,18 +470,21 @@
               "active": true,
               "name": "code",
               "req": true,
+              "short": "Verification code received",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "email",
               "req": true,
+              "short": "Registered email address",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "isOverseas",
               "req": false,
+              "short": "Indicates if user is an overseas Bangladeshi",
               "type": "`$BOOLEAN`"
             },
             {
@@ -479,6 +497,7 @@
               "active": true,
               "name": "nidNumber",
               "req": false,
+              "short": "National Identity Card number for verification",
               "type": "`$STRING`"
             },
             {

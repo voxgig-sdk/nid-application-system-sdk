@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'NidApplicationSystem',
+        slug: "nid-application-system",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -75,20 +86,24 @@ class Config {
       "fields": [
         {
           "name": "additionalInfo",
+          "short": "Additional information",
           "type": "`$STRING`"
         },
         {
           "name": "nidNumber",
           "req": true,
+          "short": "National Identity Card number",
           "type": "`$STRING`"
         },
         {
           "name": "policeReportNumber",
+          "short": "Police report number (if lost or stolen)",
           "type": "`$STRING`"
         },
         {
           "name": "reason",
           "req": true,
+          "short": "Reason for requesting duplicate",
           "type": "`$STRING`"
         }
       ],
@@ -172,10 +187,12 @@ class Config {
         },
         {
           "name": "nidNumber",
+          "short": "NID number (if approved)",
           "type": "`$STRING`"
         },
         {
           "name": "remarks",
+          "short": "Additional remarks or notes",
           "type": "`$STRING`"
         },
         {
@@ -244,6 +261,7 @@ class Config {
         {
           "name": "captcha",
           "req": true,
+          "short": "Captcha code displayed in the image",
           "type": "`$STRING`"
         },
         {
@@ -261,6 +279,7 @@ class Config {
         {
           "name": "password",
           "req": true,
+          "short": "User's password",
           "type": "`$STRING`"
         },
         {
@@ -274,6 +293,7 @@ class Config {
         {
           "name": "username",
           "req": true,
+          "short": "User's username or NID number",
           "type": "`$STRING`"
         }
       ],
@@ -362,29 +382,35 @@ class Config {
         {
           "name": "confirmPassword",
           "req": true,
+          "short": "Password confirmation",
           "type": "`$STRING`"
         },
         {
           "name": "dateOfBirth",
+          "short": "Date of birth",
           "type": "`$STRING`"
         },
         {
           "name": "email",
           "req": true,
+          "short": "User's email address",
           "type": "`$STRING`"
         },
         {
           "name": "nidNumber",
           "req": true,
+          "short": "National Identity Card number",
           "type": "`$STRING`"
         },
         {
           "name": "password",
           "req": true,
+          "short": "Account password",
           "type": "`$STRING`"
         },
         {
           "name": "phone",
+          "short": "User's phone number",
           "type": "`$STRING`"
         }
       ],
@@ -421,15 +447,18 @@ class Config {
         {
           "name": "code",
           "req": true,
+          "short": "Verification code received",
           "type": "`$STRING`"
         },
         {
           "name": "email",
           "req": true,
+          "short": "Registered email address",
           "type": "`$STRING`"
         },
         {
           "name": "isOverseas",
+          "short": "Indicates if user is an overseas Bangladeshi",
           "type": "`$BOOLEAN`"
         },
         {
@@ -438,6 +467,7 @@ class Config {
         },
         {
           "name": "nidNumber",
+          "short": "National Identity Card number for verification",
           "type": "`$STRING`"
         },
         {

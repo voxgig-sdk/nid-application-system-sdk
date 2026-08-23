@@ -1,0 +1,90 @@
+# Entity: application
+
+main: kit: entity: application: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "additionalInfo"
+      req: false
+      short: "Additional information"
+      type: "`$STRING`"
+    }
+    {
+      name: "nidNumber"
+      req: true
+      short: "National Identity Card number"
+      type: "`$STRING`"
+    }
+    {
+      name: "policeReportNumber"
+      req: false
+      short: "Police report number (if lost or stolen)"
+      type: "`$STRING`"
+    }
+    {
+      name: "reason"
+      req: true
+      short: "Reason for requesting duplicate"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "application"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/application/correction"
+          parts: [
+            "application"
+            "correction"
+          ]
+          select: {
+            "$action": "correction"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/application/duplicate"
+          parts: [
+            "application"
+            "duplicate"
+          ]
+          select: {
+            "$action": "duplicate"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/application/new-registration"
+          parts: [
+            "application"
+            "new-registration"
+          ]
+          select: {
+            "$action": "new_registration"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

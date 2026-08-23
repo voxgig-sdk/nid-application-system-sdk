@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -295,10 +295,10 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` |  |
-| `nidNumber` |  |
-| `policeReportNumber` |  |
-| `reason` |  |
+| `additionalInfo` | Additional information |
+| `nidNumber` | National Identity Card number |
+| `policeReportNumber` | Police report number (if lost or stolen) |
+| `reason` | Reason for requesting duplicate |
 
 Operations: create.
 
@@ -311,8 +311,8 @@ API path: `/application/correction`
 | `applicationId` |  |
 | `applicationType` |  |
 | `lastUpdated` |  |
-| `nidNumber` |  |
-| `remarks` |  |
+| `nidNumber` | NID number (if approved) |
+| `remarks` | Additional remarks or notes |
 | `status` |  |
 | `submissionDate` |  |
 
@@ -325,14 +325,14 @@ API path: `/application/status/{applicationId}`
 | Field | Description |
 | --- | --- |
 | `accountStatus` |  |
-| `captcha` |  |
+| `captcha` | Captcha code displayed in the image |
 | `email` |  |
 | `fullName` |  |
 | `nidNumber` |  |
-| `password` |  |
+| `password` | User's password |
 | `phone` |  |
 | `userId` |  |
-| `username` |  |
+| `username` | User's username or NID number |
 
 Operations: create.
 
@@ -351,12 +351,12 @@ API path: `/nid/download`
 
 | Field | Description |
 | --- | --- |
-| `confirmPassword` |  |
-| `dateOfBirth` |  |
-| `email` |  |
-| `nidNumber` |  |
-| `password` |  |
-| `phone` |  |
+| `confirmPassword` | Password confirmation |
+| `dateOfBirth` | Date of birth |
+| `email` | User's email address |
+| `nidNumber` | National Identity Card number |
+| `password` | Account password |
+| `phone` | User's phone number |
 
 Operations: create.
 
@@ -366,11 +366,11 @@ API path: `/auth/register`
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
-| `email` |  |
-| `isOverseas` |  |
+| `code` | Verification code received |
+| `email` | Registered email address |
+| `isOverseas` | Indicates if user is an overseas Bangladeshi |
 | `message` |  |
-| `nidNumber` |  |
+| `nidNumber` | National Identity Card number for verification |
 | `success` |  |
 
 Operations: create.
@@ -396,10 +396,10 @@ Create an instance: `const application = client.Application()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `additionalInfo` | `string` |  |
-| `nidNumber` | `string` |  |
-| `policeReportNumber` | `string` |  |
-| `reason` | `string` |  |
+| `additionalInfo` | `string` | Additional information |
+| `nidNumber` | `string` | National Identity Card number |
+| `policeReportNumber` | `string` | Police report number (if lost or stolen) |
+| `reason` | `string` | Reason for requesting duplicate |
 
 #### Example: Create
 
@@ -428,8 +428,8 @@ Create an instance: `const application_status = client.ApplicationStatus()`
 | `applicationId` | `string` |  |
 | `applicationType` | `string` |  |
 | `lastUpdated` | `string` |  |
-| `nidNumber` | `string` |  |
-| `remarks` | `string` |  |
+| `nidNumber` | `string` | NID number (if approved) |
+| `remarks` | `string` | Additional remarks or notes |
 | `status` | `string` |  |
 | `submissionDate` | `string` |  |
 
@@ -455,14 +455,14 @@ Create an instance: `const login = client.Login()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `accountStatus` | `string` |  |
-| `captcha` | `string` |  |
+| `captcha` | `string` | Captcha code displayed in the image |
 | `email` | `string` |  |
 | `fullName` | `string` |  |
 | `nidNumber` | `string` |  |
-| `password` | `string` |  |
+| `password` | `string` | User's password |
 | `phone` | `string` |  |
 | `userId` | `string` |  |
-| `username` | `string` |  |
+| `username` | `string` | User's username or NID number |
 
 #### Example: Create
 
@@ -506,12 +506,12 @@ Create an instance: `const registration = client.Registration()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `confirmPassword` | `string` |  |
-| `dateOfBirth` | `string` |  |
-| `email` | `string` |  |
-| `nidNumber` | `string` |  |
-| `password` | `string` |  |
-| `phone` | `string` |  |
+| `confirmPassword` | `string` | Password confirmation |
+| `dateOfBirth` | `string` | Date of birth |
+| `email` | `string` | User's email address |
+| `nidNumber` | `string` | National Identity Card number |
+| `password` | `string` | Account password |
+| `phone` | `string` | User's phone number |
 
 #### Example: Create
 
@@ -539,11 +539,11 @@ Create an instance: `const success = client.Success()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
-| `email` | `string` |  |
-| `isOverseas` | `boolean` |  |
+| `code` | `string` | Verification code received |
+| `email` | `string` | Registered email address |
+| `isOverseas` | `boolean` | Indicates if user is an overseas Bangladeshi |
 | `message` | `string` |  |
-| `nidNumber` | `string` |  |
+| `nidNumber` | `string` | National Identity Card number for verification |
 | `success` | `boolean` |  |
 
 #### Example: Create
