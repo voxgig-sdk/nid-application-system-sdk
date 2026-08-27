@@ -48,9 +48,13 @@ class ApplicationStatusEntityTest extends TestCase
 
         // LOAD
         $application_status_ref01_ent = $client->ApplicationStatus(null);
-        $application_status_ref01_match_dt0 = [];
+        $application_status_ref01_match_dt0 = [
+            "id" => $application_status_ref01_data["id"],
+        ];
         $application_status_ref01_data_dt0_loaded = $application_status_ref01_ent->load($application_status_ref01_match_dt0, null);
-        $this->assertNotNull($application_status_ref01_data_dt0_loaded);
+        $application_status_ref01_data_dt0_load_result = Helpers::to_map(is_object($application_status_ref01_data_dt0_loaded) && method_exists($application_status_ref01_data_dt0_loaded, 'data_get') ? $application_status_ref01_data_dt0_loaded->data_get() : $application_status_ref01_data_dt0_loaded);
+        $this->assertNotNull($application_status_ref01_data_dt0_load_result);
+        $this->assertEquals($application_status_ref01_data_dt0_load_result["id"], $application_status_ref01_data["id"]);
 
     }
 }

@@ -35,6 +35,7 @@ class ApplicationStatus
 {
     public ?string $applicationId = null;
     public ?string $applicationType = null;
+    public ?string $id = null;
     public ?string $lastUpdated = null;
     public ?string $nidNumber = null;
     public ?string $remarks = null;

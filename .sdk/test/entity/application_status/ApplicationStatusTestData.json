@@ -2,47 +2,47 @@
   "existing": {
     "application_status": {
       "APPLICATION_STATUS00": {
-        "applicationId": "s46",
-        "applicationType": "s47",
-        "lastUpdated": "s48",
-        "nidNumber": "s49",
-        "remarks": "s4a",
-        "status": "s4b",
-        "submissionDate": "s4c",
-        "id": "APPLICATION_STATUS00"
+        "applicationId": "s50",
+        "applicationType": "s51",
+        "id": "APPLICATION_STATUS00",
+        "lastUpdated": "s53",
+        "nidNumber": "s54",
+        "remarks": "s55",
+        "status": "s56",
+        "submissionDate": "s57"
       },
       "APPLICATION_STATUS01": {
-        "applicationId": "s8c",
-        "applicationType": "s8d",
-        "lastUpdated": "s8e",
-        "nidNumber": "s8f",
-        "remarks": "s90",
-        "status": "s91",
-        "submissionDate": "s92",
-        "id": "APPLICATION_STATUS01"
+        "applicationId": "sa0",
+        "applicationType": "sa1",
+        "id": "APPLICATION_STATUS01",
+        "lastUpdated": "sa3",
+        "nidNumber": "sa4",
+        "remarks": "sa5",
+        "status": "sa6",
+        "submissionDate": "sa7"
       },
       "APPLICATION_STATUS02": {
-        "applicationId": "sd2",
-        "applicationType": "sd3",
-        "lastUpdated": "sd4",
-        "nidNumber": "sd5",
-        "remarks": "sd6",
-        "status": "sd7",
-        "submissionDate": "sd8",
-        "id": "APPLICATION_STATUS02"
+        "applicationId": "sf0",
+        "applicationType": "sf1",
+        "id": "APPLICATION_STATUS02",
+        "lastUpdated": "sf3",
+        "nidNumber": "sf4",
+        "remarks": "sf5",
+        "status": "sf6",
+        "submissionDate": "sf7"
       }
     }
   },
   "new": {
     "application_status": {
       "application_status_ref01": {
-        "applicationId": "s118",
-        "applicationType": "s119",
-        "lastUpdated": "s11a",
-        "nidNumber": "s11b",
-        "remarks": "s11c",
-        "status": "s11d",
-        "submissionDate": "s11e"
+        "applicationId": "s140",
+        "applicationType": "s141",
+        "lastUpdated": "s143",
+        "nidNumber": "s144",
+        "remarks": "s145",
+        "status": "s146",
+        "submissionDate": "s147"
       }
     }
   }

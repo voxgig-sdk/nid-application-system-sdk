@@ -251,6 +251,7 @@ API path: `/application/correction`
 | --- | --- |
 | `applicationId` |  |
 | `applicationType` |  |
+| `id` |  |
 | `lastUpdated` |  |
 | `nidNumber` | NID number (if approved) |
 | `remarks` | Additional remarks or notes |
@@ -368,6 +369,7 @@ Create an instance: `local application_status = client:ApplicationStatus(nil)`
 | --- | --- | --- |
 | `applicationId` | `string` |  |
 | `applicationType` | `string` |  |
+| `id` | `string` |  |
 | `lastUpdated` | `string` |  |
 | `nidNumber` | `string` | NID number (if approved) |
 | `remarks` | `string` | Additional remarks or notes |

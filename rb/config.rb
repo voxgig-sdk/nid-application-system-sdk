@@ -28,6 +28,7 @@ module NidApplicationSystemConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -145,6 +146,10 @@ module NidApplicationSystemConfig
             },
             {
               "name" => "applicationType",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {

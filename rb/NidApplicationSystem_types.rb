@@ -58,6 +58,9 @@ ApplicationCreateData = Struct.new(
 # @!attribute [rw] applicationType
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] lastUpdated
 #   @return [String, nil]
 #
@@ -75,6 +78,7 @@ ApplicationCreateData = Struct.new(
 ApplicationStatus = Struct.new(
   :applicationId,
   :applicationType,
+  :id,
   :lastUpdated,
   :nidNumber,
   :remarks,

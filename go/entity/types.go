@@ -32,6 +32,7 @@ type ApplicationCreateData struct {
 type ApplicationStatus struct {
 	ApplicationId *string `json:"applicationId,omitempty"`
 	ApplicationType *string `json:"applicationType,omitempty"`
+	Id *string `json:"id,omitempty"`
 	LastUpdated *string `json:"lastUpdated,omitempty"`
 	NidNumber *string `json:"nidNumber,omitempty"`
 	Remarks *string `json:"remarks,omitempty"`

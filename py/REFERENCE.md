@@ -167,6 +167,7 @@ application_status = client.ApplicationStatus()
 | --- | --- | --- | --- |
 | `applicationId` | `str` | No |  |
 | `applicationType` | `str` | No |  |
+| `id` | `str` | No |  |
 | `lastUpdated` | `str` | No |  |
 | `nidNumber` | `str` | No | NID number (if approved) |
 | `remarks` | `str` | No | Additional remarks or notes |

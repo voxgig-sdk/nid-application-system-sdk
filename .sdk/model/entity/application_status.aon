@@ -16,6 +16,11 @@ main: kit: entity: application_status: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "lastUpdated"
       req: false
       type: "`$STRING`"
@@ -43,6 +48,11 @@ main: kit: entity: application_status: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "application_status"
   op: {

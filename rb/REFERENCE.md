@@ -174,6 +174,7 @@ application_status = client.ApplicationStatus
 | --- | --- | --- | --- |
 | `applicationId` | `String` | No |  |
 | `applicationType` | `String` | No |  |
+| `id` | `String` | No |  |
 | `lastUpdated` | `String` | No |  |
 | `nidNumber` | `String` | No | NID number (if approved) |
 | `remarks` | `String` | No | Additional remarks or notes |

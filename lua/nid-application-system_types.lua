@@ -21,6 +21,7 @@
 ---@class ApplicationStatus
 ---@field applicationId? string
 ---@field applicationType? string
+---@field id? string
 ---@field lastUpdated? string
 ---@field nidNumber? string
 ---@field remarks? string

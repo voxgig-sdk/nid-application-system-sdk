@@ -145,7 +145,7 @@ await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -310,6 +310,7 @@ API path: `/application/correction`
 | --- | --- |
 | `applicationId` |  |
 | `applicationType` |  |
+| `id` |  |
 | `lastUpdated` |  |
 | `nidNumber` | NID number (if approved) |
 | `remarks` | Additional remarks or notes |
@@ -427,6 +428,7 @@ Create an instance: `const application_status = client.ApplicationStatus()`
 | --- | --- | --- |
 | `applicationId` | `string` |  |
 | `applicationType` | `string` |  |
+| `id` | `string` |  |
 | `lastUpdated` | `string` |  |
 | `nidNumber` | `string` | NID number (if approved) |
 | `remarks` | `string` | Additional remarks or notes |

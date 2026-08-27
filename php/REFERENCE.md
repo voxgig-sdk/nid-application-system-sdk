@@ -173,6 +173,7 @@ $application_status = $client->ApplicationStatus();
 | --- | --- | --- | --- |
 | `applicationId` | `string` | No |  |
 | `applicationType` | `string` | No |  |
+| `id` | `string` | No |  |
 | `lastUpdated` | `string` | No |  |
 | `nidNumber` | `string` | No | NID number (if approved) |
 | `remarks` | `string` | No | Additional remarks or notes |

@@ -39,6 +39,7 @@ class ApplicationCreateData(ApplicationCreateDataRequired, total=False):
 class ApplicationStatus(TypedDict, total=False):
     applicationId: str
     applicationType: str
+    id: str
     lastUpdated: str
     nidNumber: str
     remarks: str

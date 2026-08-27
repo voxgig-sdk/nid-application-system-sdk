@@ -259,6 +259,7 @@ API path: `/application/correction`
 | --- | --- |
 | `applicationId` |  |
 | `applicationType` |  |
+| `id` |  |
 | `lastUpdated` |  |
 | `nidNumber` | NID number (if approved) |
 | `remarks` | Additional remarks or notes |
@@ -376,6 +377,7 @@ Create an instance: `application_status = client.ApplicationStatus`
 | --- | --- | --- |
 | `applicationId` | `String` |  |
 | `applicationType` | `String` |  |
+| `id` | `String` |  |
 | `lastUpdated` | `String` |  |
 | `nidNumber` | `String` | NID number (if approved) |
 | `remarks` | `String` | Additional remarks or notes |

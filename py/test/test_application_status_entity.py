@@ -48,9 +48,13 @@ class TestApplicationStatusEntity:
 
         # LOAD
         application_status_ref01_ent = client.ApplicationStatus(None)
-        application_status_ref01_match_dt0 = {}
+        application_status_ref01_match_dt0 = {
+            "id": application_status_ref01_data["id"],
+        }
         application_status_ref01_data_dt0_loaded = application_status_ref01_ent.load(application_status_ref01_match_dt0, None)
-        assert application_status_ref01_data_dt0_loaded is not None
+        application_status_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(application_status_ref01_data_dt0_loaded))
+        assert application_status_ref01_data_dt0_load_result is not None
+        assert application_status_ref01_data_dt0_load_result["id"] == application_status_ref01_data["id"]
 
 
 

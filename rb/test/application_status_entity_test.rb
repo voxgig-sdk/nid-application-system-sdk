@@ -41,9 +41,13 @@ class ApplicationStatusEntityTest < Minitest::Test
 
     # LOAD
     application_status_ref01_ent = client.ApplicationStatus(nil)
-    application_status_ref01_match_dt0 = {}
+    application_status_ref01_match_dt0 = {
+      "id" => application_status_ref01_data["id"],
+    }
     application_status_ref01_data_dt0_loaded = application_status_ref01_ent.load(application_status_ref01_match_dt0, nil)
-    assert !application_status_ref01_data_dt0_loaded.nil?
+    application_status_ref01_data_dt0_load_result = Helpers.to_map(application_status_ref01_data_dt0_loaded.respond_to?(:data_get) ? application_status_ref01_data_dt0_loaded.data_get : application_status_ref01_data_dt0_loaded)
+    assert !application_status_ref01_data_dt0_load_result.nil?
+    assert_equal application_status_ref01_data_dt0_load_result["id"], application_status_ref01_data["id"]
 
   end
 end

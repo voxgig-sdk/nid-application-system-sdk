@@ -42,6 +42,7 @@ class NidApplicationSystemConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -159,6 +160,10 @@ class NidApplicationSystemConfig
             ],
             [
               'name' => 'applicationType',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [

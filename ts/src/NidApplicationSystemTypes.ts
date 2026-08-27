@@ -28,6 +28,7 @@ export interface ApplicationCreateData {
 export interface ApplicationStatus {
   applicationId?: string
   applicationType?: string
+  id?: string
   lastUpdated?: string
   nidNumber?: string
   remarks?: string
