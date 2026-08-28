@@ -68,6 +68,8 @@ export interface NidManagement {
 }
 
 export interface NidManagementLoadMatch {
+  format?: string
+  nid_number: string
 }
 
 export interface Registration {

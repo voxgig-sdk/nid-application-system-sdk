@@ -183,8 +183,17 @@ class NidManagement
 end
 
 # Request payload for NidManagement#load.
-class NidManagementLoadMatch
-end
+#
+# @!attribute [rw] format
+#   @return [String, nil]
+#
+# @!attribute [rw] nid_number
+#   @return [String]
+NidManagementLoadMatch = Struct.new(
+  :format,
+  :nid_number,
+  keyword_init: true
+)
 
 # Registration entity data model.
 #

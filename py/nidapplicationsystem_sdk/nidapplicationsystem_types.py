@@ -85,8 +85,12 @@ class NidManagement(TypedDict):
     pass
 
 
-class NidManagementLoadMatch(TypedDict):
-    pass
+class NidManagementLoadMatchRequired(TypedDict):
+    nid_number: str
+
+
+class NidManagementLoadMatch(NidManagementLoadMatchRequired, total=False):
+    format: str
 
 
 class RegistrationRequired(TypedDict):

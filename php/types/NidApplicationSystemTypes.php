@@ -85,6 +85,8 @@ class NidManagement
 /** Request payload for NidManagement#load. */
 class NidManagementLoadMatch
 {
+    public ?string $format = null;
+    public string $nid_number;
 }
 
 /** Registration entity data model. */

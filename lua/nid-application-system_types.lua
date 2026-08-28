@@ -56,6 +56,8 @@
 ---@class NidManagement
 
 ---@class NidManagementLoadMatch
+---@field format? string
+---@field nid_number string
 
 ---@class Registration
 ---@field confirmPassword string

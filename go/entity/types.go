@@ -77,6 +77,8 @@ type NidManagement struct {
 
 // NidManagementLoadMatch is the typed request payload for NidManagement.LoadTyped.
 type NidManagementLoadMatch struct {
+	Format *string `json:"format,omitempty"`
+	NidNumber string `json:"nid_number"`
 }
 
 // Registration is the typed data model for the registration entity.
