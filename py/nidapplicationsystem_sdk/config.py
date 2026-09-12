@@ -1,6 +1,14 @@
 # NidApplicationSystem SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -94,9 +102,13 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/application/correction",
-                "parts": [
-                  "application",
-                  "correction",
+                "segments": [
+                  {
+                    "lit": "application",
+                  },
+                  {
+                    "lit": "correction",
+                  },
                 ],
                 "select": {
                   "$action": "correction",
@@ -105,15 +117,23 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "application",
+                  "correction",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/application/duplicate",
-                "parts": [
-                  "application",
-                  "duplicate",
+                "segments": [
+                  {
+                    "lit": "application",
+                  },
+                  {
+                    "lit": "duplicate",
+                  },
                 ],
                 "select": {
                   "$action": "duplicate",
@@ -122,15 +142,23 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "application",
+                  "duplicate",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/application/new-registration",
-                "parts": [
-                  "application",
-                  "new-registration",
+                "segments": [
+                  {
+                    "lit": "application",
+                  },
+                  {
+                    "lit": "new-registration",
+                  },
                 ],
                 "select": {
                   "$action": "new_registration",
@@ -139,6 +167,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "application",
+                  "new-registration",
+                ],
               },
             ],
           },
@@ -162,6 +194,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "lastUpdated",
             "type": "`$STRING`",
           },
@@ -180,10 +213,15 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "submissionDate",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "application_status",
         "op": {
           "load": {
@@ -205,16 +243,22 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/application/status/{applicationId}",
-                "parts": [
-                  "application",
-                  "status",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "applicationId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "application",
+                  },
+                  {
+                    "lit": "status",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -224,6 +268,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "application",
+                  "status",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -245,6 +294,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "email",
             "name": "email",
             "type": "`$STRING`",
           },
@@ -257,6 +307,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "password",
             "name": "password",
             "req": True,
             "short": "User's password",
@@ -288,15 +339,23 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/auth/login",
-                "parts": [
-                  "auth",
-                  "login",
+                "segments": [
+                  {
+                    "lit": "auth",
+                  },
+                  {
+                    "lit": "login",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.user`",
                 },
+                "parts": [
+                  "auth",
+                  "login",
+                ],
               },
             ],
           },
@@ -335,9 +394,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/nid/download",
-                "parts": [
-                  "nid",
-                  "download",
+                "segments": [
+                  {
+                    "lit": "nid",
+                  },
+                  {
+                    "lit": "download",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -349,6 +412,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "nid",
+                  "download",
+                ],
               },
             ],
           },
@@ -360,17 +427,20 @@ def make_config():
       "registration": {
         "fields": [
           {
+            "format": "password",
             "name": "confirmPassword",
             "req": True,
             "short": "Password confirmation",
             "type": "`$STRING`",
           },
           {
+            "format": "date",
             "name": "dateOfBirth",
             "short": "Date of birth",
             "type": "`$STRING`",
           },
           {
+            "format": "email",
             "name": "email",
             "req": True,
             "short": "User's email address",
@@ -383,6 +453,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "password",
             "name": "password",
             "req": True,
             "short": "Account password",
@@ -405,15 +476,23 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/auth/register",
-                "parts": [
-                  "auth",
-                  "register",
+                "segments": [
+                  {
+                    "lit": "auth",
+                  },
+                  {
+                    "lit": "register",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "auth",
+                  "register",
+                ],
               },
             ],
           },
@@ -431,6 +510,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "email",
             "name": "email",
             "req": True,
             "short": "Registered email address",
@@ -466,45 +546,69 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/auth/password-reset",
-                "parts": [
-                  "auth",
-                  "password-reset",
+                "segments": [
+                  {
+                    "lit": "auth",
+                  },
+                  {
+                    "lit": "password-reset",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "auth",
+                  "password-reset",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/verification/send-code",
-                "parts": [
-                  "verification",
-                  "send-code",
+                "segments": [
+                  {
+                    "lit": "verification",
+                  },
+                  {
+                    "lit": "send-code",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "verification",
+                  "send-code",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/verification/verify-code",
-                "parts": [
-                  "verification",
-                  "verify-code",
+                "segments": [
+                  {
+                    "lit": "verification",
+                  },
+                  {
+                    "lit": "verify-code",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "verification",
+                  "verify-code",
+                ],
               },
             ],
           },

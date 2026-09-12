@@ -77,15 +77,17 @@ function application_status_direct_setup($mockres)
     $env = Runner::env_override([
         "NID_APPLICATION_SYSTEM_TEST_APPLICATION_STATUS_ENTID" => [],
         "NID_APPLICATION_SYSTEM_TEST_LIVE" => "FALSE",
-        "NID_APPLICATION_SYSTEM_APIKEY" => "NONE",
+        "NID_APPLICATION_SYSTEM_APIKEY" => "",
     ]);
 
     $live = $env["NID_APPLICATION_SYSTEM_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["NID_APPLICATION_SYSTEM_APIKEY"],
-        ];
+        ]);
         $client = new NidApplicationSystemSDK($merged_opts);
         return [
             "client" => $client,

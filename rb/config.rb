@@ -85,9 +85,13 @@ module NidApplicationSystemConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/application/correction",
-                  "parts" => [
-                    "application",
-                    "correction",
+                  "segments" => [
+                    {
+                      "lit" => "application",
+                    },
+                    {
+                      "lit" => "correction",
+                    },
                   ],
                   "select" => {
                     "$action" => "correction",
@@ -96,15 +100,23 @@ module NidApplicationSystemConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "application",
+                    "correction",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/application/duplicate",
-                  "parts" => [
-                    "application",
-                    "duplicate",
+                  "segments" => [
+                    {
+                      "lit" => "application",
+                    },
+                    {
+                      "lit" => "duplicate",
+                    },
                   ],
                   "select" => {
                     "$action" => "duplicate",
@@ -113,15 +125,23 @@ module NidApplicationSystemConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "application",
+                    "duplicate",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/application/new-registration",
-                  "parts" => [
-                    "application",
-                    "new-registration",
+                  "segments" => [
+                    {
+                      "lit" => "application",
+                    },
+                    {
+                      "lit" => "new-registration",
+                    },
                   ],
                   "select" => {
                     "$action" => "new_registration",
@@ -130,6 +150,10 @@ module NidApplicationSystemConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "application",
+                    "new-registration",
+                  ],
                 },
               ],
             },
@@ -153,6 +177,7 @@ module NidApplicationSystemConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "lastUpdated",
               "type" => "`$STRING`",
             },
@@ -171,10 +196,15 @@ module NidApplicationSystemConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "submissionDate",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "application_status",
           "op" => {
             "load" => {
@@ -196,16 +226,22 @@ module NidApplicationSystemConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/application/status/{applicationId}",
-                  "parts" => [
-                    "application",
-                    "status",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "applicationId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "application",
+                    },
+                    {
+                      "lit" => "status",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -215,6 +251,11 @@ module NidApplicationSystemConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "application",
+                    "status",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -236,6 +277,7 @@ module NidApplicationSystemConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "email",
               "name" => "email",
               "type" => "`$STRING`",
             },
@@ -248,6 +290,7 @@ module NidApplicationSystemConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "password",
               "name" => "password",
               "req" => true,
               "short" => "User's password",
@@ -279,15 +322,23 @@ module NidApplicationSystemConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/auth/login",
-                  "parts" => [
-                    "auth",
-                    "login",
+                  "segments" => [
+                    {
+                      "lit" => "auth",
+                    },
+                    {
+                      "lit" => "login",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.user`",
                   },
+                  "parts" => [
+                    "auth",
+                    "login",
+                  ],
                 },
               ],
             },
@@ -326,9 +377,13 @@ module NidApplicationSystemConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/nid/download",
-                  "parts" => [
-                    "nid",
-                    "download",
+                  "segments" => [
+                    {
+                      "lit" => "nid",
+                    },
+                    {
+                      "lit" => "download",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -340,6 +395,10 @@ module NidApplicationSystemConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "nid",
+                    "download",
+                  ],
                 },
               ],
             },
@@ -351,17 +410,20 @@ module NidApplicationSystemConfig
         "registration" => {
           "fields" => [
             {
+              "format" => "password",
               "name" => "confirmPassword",
               "req" => true,
               "short" => "Password confirmation",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date",
               "name" => "dateOfBirth",
               "short" => "Date of birth",
               "type" => "`$STRING`",
             },
             {
+              "format" => "email",
               "name" => "email",
               "req" => true,
               "short" => "User's email address",
@@ -374,6 +436,7 @@ module NidApplicationSystemConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "password",
               "name" => "password",
               "req" => true,
               "short" => "Account password",
@@ -396,15 +459,23 @@ module NidApplicationSystemConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/auth/register",
-                  "parts" => [
-                    "auth",
-                    "register",
+                  "segments" => [
+                    {
+                      "lit" => "auth",
+                    },
+                    {
+                      "lit" => "register",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "auth",
+                    "register",
+                  ],
                 },
               ],
             },
@@ -422,6 +493,7 @@ module NidApplicationSystemConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "email",
               "name" => "email",
               "req" => true,
               "short" => "Registered email address",
@@ -457,45 +529,69 @@ module NidApplicationSystemConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/auth/password-reset",
-                  "parts" => [
-                    "auth",
-                    "password-reset",
+                  "segments" => [
+                    {
+                      "lit" => "auth",
+                    },
+                    {
+                      "lit" => "password-reset",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "auth",
+                    "password-reset",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/verification/send-code",
-                  "parts" => [
-                    "verification",
-                    "send-code",
+                  "segments" => [
+                    {
+                      "lit" => "verification",
+                    },
+                    {
+                      "lit" => "send-code",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "verification",
+                    "send-code",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/verification/verify-code",
-                  "parts" => [
-                    "verification",
-                    "verify-code",
+                  "segments" => [
+                    {
+                      "lit" => "verification",
+                    },
+                    {
+                      "lit" => "verify-code",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "verification",
+                    "verify-code",
+                  ],
                 },
               ],
             },

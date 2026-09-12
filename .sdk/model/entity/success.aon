@@ -12,6 +12,7 @@ main: kit: entity: success: {
       type: "`$STRING`"
     }
     {
+      format: "email"
       name: "email"
       req: true
       short: "Registered email address"
@@ -49,9 +50,13 @@ main: kit: entity: success: {
         {
           method: "POST"
           orig: "/auth/password-reset"
-          parts: [
-            "auth"
-            "password-reset"
+          segments: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "password-reset"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -61,9 +66,13 @@ main: kit: entity: success: {
         {
           method: "POST"
           orig: "/verification/send-code"
-          parts: [
-            "verification"
-            "send-code"
+          segments: [
+            {
+              lit: "verification"
+            }
+            {
+              lit: "send-code"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -73,9 +82,13 @@ main: kit: entity: success: {
         {
           method: "POST"
           orig: "/verification/verify-code"
-          parts: [
-            "verification"
-            "verify-code"
+          segments: [
+            {
+              lit: "verification"
+            }
+            {
+              lit: "verify-code"
+            }
           ]
           transform: {
             req: "`reqdata`"

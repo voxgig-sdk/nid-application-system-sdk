@@ -52,7 +52,7 @@ func TestApplicationEntity(t *testing.T) {
 		// CREATE
 		applicationRef01Ent := client.Application(nil)
 		applicationRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "application"}, setup.data), "application_ref01"))
+			vs.GetPath(setup.data, []any{"new", "application"}), "application_ref01"))
 
 		applicationRef01DataResult, err := applicationRef01Ent.Create(applicationRef01Data, nil)
 		if err != nil {
@@ -90,7 +90,7 @@ func applicationBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"application01", "application02", "application03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -110,7 +110,7 @@ func applicationBasicSetup(extra map[string]any) *entityTestSetup {
 		"NID_APPLICATION_SYSTEM_TEST_APPLICATION_ENTID": idmap,
 		"NID_APPLICATION_SYSTEM_TEST_LIVE":      "FALSE",
 		"NID_APPLICATION_SYSTEM_TEST_EXPLAIN":   "FALSE",
-		"NID_APPLICATION_SYSTEM_APIKEY":         "NONE",
+		"NID_APPLICATION_SYSTEM_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["NID_APPLICATION_SYSTEM_TEST_APPLICATION_ENTID"])
@@ -119,11 +119,23 @@ func applicationBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["NID_APPLICATION_SYSTEM_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["NID_APPLICATION_SYSTEM_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewNidApplicationSystemSDK(core.ToMapAny(mergedOpts))
 	}

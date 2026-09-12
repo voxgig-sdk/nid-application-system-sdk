@@ -17,6 +17,7 @@ main: kit: entity: login: {
       type: "`$STRING`"
     }
     {
+      format: "email"
       name: "email"
       req: false
       type: "`$STRING`"
@@ -32,6 +33,7 @@ main: kit: entity: login: {
       type: "`$STRING`"
     }
     {
+      format: "password"
       name: "password"
       req: true
       short: "User's password"
@@ -63,9 +65,13 @@ main: kit: entity: login: {
         {
           method: "POST"
           orig: "/auth/login"
-          parts: [
-            "auth"
-            "login"
+          segments: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "login"
+            }
           ]
           transform: {
             req: "`reqdata`"

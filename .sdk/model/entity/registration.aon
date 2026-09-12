@@ -6,18 +6,21 @@ main: kit: entity: registration: {
 
   fields: [
     {
+      format: "password"
       name: "confirmPassword"
       req: true
       short: "Password confirmation"
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "dateOfBirth"
       req: false
       short: "Date of birth"
       type: "`$STRING`"
     }
     {
+      format: "email"
       name: "email"
       req: true
       short: "User's email address"
@@ -30,6 +33,7 @@ main: kit: entity: registration: {
       type: "`$STRING`"
     }
     {
+      format: "password"
       name: "password"
       req: true
       short: "Account password"
@@ -51,9 +55,13 @@ main: kit: entity: registration: {
         {
           method: "POST"
           orig: "/auth/register"
-          parts: [
-            "auth"
-            "register"
+          segments: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "register"
+            }
           ]
           transform: {
             req: "`reqdata`"

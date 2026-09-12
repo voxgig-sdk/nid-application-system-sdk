@@ -50,7 +50,7 @@ func TestNidManagementEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		nidManagementRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.nid_management", setup.data)))
+		nidManagementRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.nid_management")))
 		var nidManagementRef01Data map[string]any
 		if len(nidManagementRef01DataRaw) > 0 {
 			nidManagementRef01Data = core.ToMapAny(nidManagementRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func nid_managementBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"nid_management01", "nid_management02", "nid_management03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func nid_managementBasicSetup(extra map[string]any) *entityTestSetup {
 		"NID_APPLICATION_SYSTEM_TEST_NID_MANAGEMENT_ENTID": idmap,
 		"NID_APPLICATION_SYSTEM_TEST_LIVE":      "FALSE",
 		"NID_APPLICATION_SYSTEM_TEST_EXPLAIN":   "FALSE",
-		"NID_APPLICATION_SYSTEM_APIKEY":         "NONE",
+		"NID_APPLICATION_SYSTEM_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["NID_APPLICATION_SYSTEM_TEST_NID_MANAGEMENT_ENTID"])
@@ -126,11 +126,23 @@ func nid_managementBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["NID_APPLICATION_SYSTEM_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["NID_APPLICATION_SYSTEM_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewNidApplicationSystemSDK(core.ToMapAny(mergedOpts))
 	}

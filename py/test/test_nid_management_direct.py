@@ -58,15 +58,18 @@ def _nid_management_direct_setup(mockres):
     env = runner.env_override({
         "NID_APPLICATION_SYSTEM_TEST_NID_MANAGEMENT_ENTID": {},
         "NID_APPLICATION_SYSTEM_TEST_LIVE": "FALSE",
-        "NID_APPLICATION_SYSTEM_APIKEY": "NONE",
+        "NID_APPLICATION_SYSTEM_APIKEY": "",
     })
 
     live = env.get("NID_APPLICATION_SYSTEM_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("NID_APPLICATION_SYSTEM_APIKEY"),
-        }
+        })
         client = NidApplicationSystemSDK(merged_opts)
         return {
             "client": client,

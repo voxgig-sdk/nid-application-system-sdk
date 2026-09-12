@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -119,9 +130,13 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/application/correction",
-              "parts": [
-                "application",
-                "correction"
+              "segments": [
+                {
+                  "lit": "application"
+                },
+                {
+                  "lit": "correction"
+                }
               ],
               "select": {
                 "$action": "correction"
@@ -129,16 +144,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "application",
+                "correction"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/application/duplicate",
-              "parts": [
-                "application",
-                "duplicate"
+              "segments": [
+                {
+                  "lit": "application"
+                },
+                {
+                  "lit": "duplicate"
+                }
               ],
               "select": {
                 "$action": "duplicate"
@@ -146,16 +169,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "application",
+                "duplicate"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/application/new-registration",
-              "parts": [
-                "application",
-                "new-registration"
+              "segments": [
+                {
+                  "lit": "application"
+                },
+                {
+                  "lit": "new-registration"
+                }
               ],
               "select": {
                 "$action": "new_registration"
@@ -163,7 +194,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "application",
+                "new-registration"
+              ]
             }
           ]
         }
@@ -187,6 +222,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "lastUpdated",
           "type": "`$STRING`"
         },
@@ -205,10 +241,15 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "submissionDate",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "application_status",
       "op": {
         "load": {
@@ -230,16 +271,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/application/status/{applicationId}",
-              "parts": [
-                "application",
-                "status",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "applicationId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "application"
+                },
+                {
+                  "lit": "status"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -248,7 +295,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "application",
+                "status",
+                "{id}"
+              ]
             }
           ]
         }
@@ -270,6 +322,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "email",
           "name": "email",
           "type": "`$STRING`"
         },
@@ -282,6 +335,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "password",
           "name": "password",
           "req": true,
           "short": "User's password",
@@ -313,15 +367,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/auth/login",
-              "parts": [
-                "auth",
-                "login"
+              "segments": [
+                {
+                  "lit": "auth"
+                },
+                {
+                  "lit": "login"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.user`"
-              }
+              },
+              "parts": [
+                "auth",
+                "login"
+              ]
             }
           ]
         }
@@ -360,9 +422,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/nid/download",
-              "parts": [
-                "nid",
-                "download"
+              "segments": [
+                {
+                  "lit": "nid"
+                },
+                {
+                  "lit": "download"
+                }
               ],
               "select": {
                 "exist": [
@@ -373,7 +439,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "nid",
+                "download"
+              ]
             }
           ]
         }
@@ -385,17 +455,20 @@ class Config {
     "registration": {
       "fields": [
         {
+          "format": "password",
           "name": "confirmPassword",
           "req": true,
           "short": "Password confirmation",
           "type": "`$STRING`"
         },
         {
+          "format": "date",
           "name": "dateOfBirth",
           "short": "Date of birth",
           "type": "`$STRING`"
         },
         {
+          "format": "email",
           "name": "email",
           "req": true,
           "short": "User's email address",
@@ -408,6 +481,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "password",
           "name": "password",
           "req": true,
           "short": "Account password",
@@ -430,15 +504,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/auth/register",
-              "parts": [
-                "auth",
-                "register"
+              "segments": [
+                {
+                  "lit": "auth"
+                },
+                {
+                  "lit": "register"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "auth",
+                "register"
+              ]
             }
           ]
         }
@@ -456,6 +538,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "email",
           "name": "email",
           "req": true,
           "short": "Registered email address",
@@ -491,45 +574,69 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/auth/password-reset",
-              "parts": [
-                "auth",
-                "password-reset"
+              "segments": [
+                {
+                  "lit": "auth"
+                },
+                {
+                  "lit": "password-reset"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "auth",
+                "password-reset"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/verification/send-code",
-              "parts": [
-                "verification",
-                "send-code"
+              "segments": [
+                {
+                  "lit": "verification"
+                },
+                {
+                  "lit": "send-code"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "verification",
+                "send-code"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/verification/verify-code",
-              "parts": [
-                "verification",
-                "verify-code"
+              "segments": [
+                {
+                  "lit": "verification"
+                },
+                {
+                  "lit": "verify-code"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "verification",
+                "verify-code"
+              ]
             }
           ]
         }
@@ -545,6 +652,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 
