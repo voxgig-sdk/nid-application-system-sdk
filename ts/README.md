@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
+import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system-sdk'
 
 const client = new NidApplicationSystemSDK({
   apikey: process.env.NID_APPLICATION_SYSTEM_APIKEY,
@@ -640,7 +640,7 @@ nid-application-system/
 Import the SDK from the package root:
 
 ```ts
-import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
+import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system-sdk'
 ```
 
 ### Entity state

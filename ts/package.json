@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/nid-application-system",
+  "name": "@voxgig-sdk/nid-application-system-sdk",
   "version": "0.0.1",
   "description": "Unofficial generated TypeScript SDK for the NID Application System public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [

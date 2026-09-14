@@ -108,7 +108,7 @@ local result, err = client:ApplicationStatus():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| TypeScript | `@voxgig-sdk/nid-application-system-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
 | Python | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
 | PHP | `voxgig-sdk/nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/nid-application-system-sdk/go` | `go get github.com/voxgig-sdk/nid-application-system-sdk/go@latest` |
@@ -122,7 +122,7 @@ local result, err = client:ApplicationStatus():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system'
+import { NidApplicationSystemSDK } from '@voxgig-sdk/nid-application-system-sdk'
 
 const client = new NidApplicationSystemSDK({
   apikey: process.env.NID_APPLICATION_SYSTEM_APIKEY,
