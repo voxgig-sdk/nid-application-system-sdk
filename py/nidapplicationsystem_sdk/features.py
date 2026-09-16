@@ -1,12 +1,18 @@
 # NidApplicationSystem SDK feature factory
 
 from nidapplicationsystem_sdk.feature.base_feature import NidApplicationSystemBaseFeature
+from nidapplicationsystem_sdk.feature.ratelimit_feature import NidApplicationSystemRatelimitFeature
+from nidapplicationsystem_sdk.feature.retry_feature import NidApplicationSystemRetryFeature
 from nidapplicationsystem_sdk.feature.test_feature import NidApplicationSystemTestFeature
+from nidapplicationsystem_sdk.feature.timeout_feature import NidApplicationSystemTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: NidApplicationSystemBaseFeature(),
+    "ratelimit": lambda: NidApplicationSystemRatelimitFeature(),
+    "retry": lambda: NidApplicationSystemRetryFeature(),
     "test": lambda: NidApplicationSystemTestFeature(),
+    "timeout": lambda: NidApplicationSystemTimeoutFeature(),
 }
 
 

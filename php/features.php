@@ -4,7 +4,10 @@ declare(strict_types=1);
 // NidApplicationSystem SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class NidApplicationSystemFeatures
@@ -14,8 +17,14 @@ class NidApplicationSystemFeatures
         switch ($name) {
             case "base":
                 return new NidApplicationSystemBaseFeature();
+            case "ratelimit":
+                return new NidApplicationSystemRatelimitFeature();
+            case "retry":
+                return new NidApplicationSystemRetryFeature();
             case "test":
                 return new NidApplicationSystemTestFeature();
+            case "timeout":
+                return new NidApplicationSystemTimeoutFeature();
             default:
                 return new NidApplicationSystemBaseFeature();
         }
@@ -31,7 +40,10 @@ class NidApplicationSystemFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;
