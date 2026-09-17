@@ -16,24 +16,12 @@ from __future__ import annotations
 from typing import TypedDict, Any
 
 
-class ApplicationRequired(TypedDict):
-    nidNumber: str
-    reason: str
+class Application(TypedDict):
+    pass
 
 
-class Application(ApplicationRequired, total=False):
-    additionalInfo: str
-    policeReportNumber: str
-
-
-class ApplicationCreateDataRequired(TypedDict):
-    nidNumber: str
-    reason: str
-
-
-class ApplicationCreateData(ApplicationCreateDataRequired, total=False):
-    additionalInfo: str
-    policeReportNumber: str
+class ApplicationCreateData(TypedDict):
+    pass
 
 
 class ApplicationStatus(TypedDict, total=False):

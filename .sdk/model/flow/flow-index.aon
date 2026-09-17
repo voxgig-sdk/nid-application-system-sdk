@@ -1,8 +1,8 @@
 # Flows
 
-@"BasicApplicationFlow.aon"
-@"BasicApplicationStatusFlow.aon"
-@"BasicLoginFlow.aon"
-@"BasicNidManagementFlow.aon"
-@"BasicRegistrationFlow.aon"
-@"BasicSuccessFlow.aon"
+@"./BasicApplicationFlow.aon"
+@"./BasicApplicationStatusFlow.aon"
+@"./BasicLoginFlow.aon"
+@"./BasicNidManagementFlow.aon"
+@"./BasicRegistrationFlow.aon"
+@"./BasicSuccessFlow.aon"

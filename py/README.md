@@ -43,7 +43,7 @@ client = NidApplicationSystemSDK({
 
 ```python
 # Create — returns the ENTITY (call data_get() for the record)
-created = client.Application().create({"nidNumber": "example_nidNumber", "reason": "example_reason"})
+created = client.Application().create({})
 
 ```
 
@@ -248,10 +248,6 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` | Additional information |
-| `nidNumber` | National Identity Card number |
-| `policeReportNumber` | Police report number (if lost or stolen) |
-| `reason` | Reason for requesting duplicate |
 
 Operations: Create.
 
@@ -346,21 +342,10 @@ Create an instance: `application = client.Application()`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `additionalInfo` | `str` | Additional information |
-| `nidNumber` | `str` | National Identity Card number |
-| `policeReportNumber` | `str` | Police report number (if lost or stolen) |
-| `reason` | `str` | Reason for requesting duplicate |
-
 #### Example: Create
 
 ```python
 application = client.Application().create({
-    "nidNumber": "example_nidNumber",  # str
-    "reason": "example_reason",  # str
 })
 ```
 
@@ -653,6 +638,7 @@ Use `helpers.to_map()` to safely validate that a value is a dict.
 py/
 ├── nidapplicationsystem_sdk.py         -- Main SDK module
 ├── config.py                    -- Configuration
+├── schema.py                    -- Generated option + entity specs
 ├── features.py                  -- Feature factory
 ├── core/                        -- Core types and context
 ├── entity/                      -- Entity implementations

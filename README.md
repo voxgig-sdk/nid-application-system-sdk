@@ -27,10 +27,7 @@ support (`load`, `create`):
 
 ```ts
 const client = new NidApplicationSystemSDK()
-const application = await client.Application().create({
-  nidNumber: 'example',
-  reason: 'example',
-})
+const application = await client.Application().create({})
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -108,12 +105,12 @@ local result, err = client:ApplicationStatus():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/nid-application-system-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
-| Python | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
-| PHP | `voxgig-sdk/nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| TypeScript | `@voxgig-sdk/nid-application-system-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/tags) |
+| Python | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/tags) |
+| PHP | `voxgig-sdk/nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/nid-application-system-sdk/go` | `go get github.com/voxgig-sdk/nid-application-system-sdk/go@latest` |
-| Ruby | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
-| Lua | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/releases) |
+| Ruby | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/tags) |
+| Lua | `voxgig-sdk-nid-application-system` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nid-application-system-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/nid-application-system-sdk/go-cli` | `go install github.com/voxgig-sdk/nid-application-system-sdk/go-cli/cmd/nid-application-system@latest` |
 | Go MCP server | `github.com/voxgig-sdk/nid-application-system-sdk/go-mcp` | `go get github.com/voxgig-sdk/nid-application-system-sdk/go-mcp@latest` |
 

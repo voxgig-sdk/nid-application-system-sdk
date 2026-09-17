@@ -107,15 +107,6 @@ same parameters as `direct()`.
 local application = client:Application(nil)
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `additionalInfo` | `string` | No | Additional information |
-| `nidNumber` | `string` | Yes | National Identity Card number |
-| `policeReportNumber` | `string` | No | Police report number (if lost or stolen) |
-| `reason` | `string` | Yes | Reason for requesting duplicate |
-
 ### Operations
 
 #### `create(reqdata, ctrl) -> any, err`
@@ -124,8 +115,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Application():create({
-  nidNumber = --[[ string ]],
-  reason = --[[ string ]],
 })
 ```
 

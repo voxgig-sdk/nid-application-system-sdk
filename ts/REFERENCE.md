@@ -173,15 +173,6 @@ Alias for `NidApplicationSystemSDK.test()`.
 const application = client.Application()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `additionalInfo` | `string` | No | Additional information |
-| `nidNumber` | `string` | Yes | National Identity Card number |
-| `policeReportNumber` | `string` | No | Police report number (if lost or stolen) |
-| `reason` | `string` | Yes | Reason for requesting duplicate |
-
 ### Actions
 
 This entity exposes custom API actions in addition to the standard
@@ -212,8 +203,6 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Application().create({
-  nidNumber: 'example_nidNumber',
-  reason: 'example_reason',
 })
 ```
 

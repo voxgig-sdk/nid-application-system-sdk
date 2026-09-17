@@ -15,19 +15,11 @@ declare(strict_types=1);
 /** Application entity data model. */
 class Application
 {
-    public ?string $additionalInfo = null;
-    public string $nidNumber;
-    public ?string $policeReportNumber = null;
-    public string $reason;
 }
 
 /** Request payload for Application#create. */
 class ApplicationCreateData
 {
-    public ?string $additionalInfo = null;
-    public string $nidNumber;
-    public ?string $policeReportNumber = null;
-    public string $reason;
 }
 
 /** ApplicationStatus entity data model. */

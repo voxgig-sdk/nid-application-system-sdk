@@ -54,7 +54,7 @@ func main() {
     })
 
     // Create a application.
-    created, err := client.Application(nil).Create(map[string]any{"nidNumber": "example_nidNumber", "reason": "example_reason"}, nil)
+    created, err := client.Application(nil).Create(map[string]any{}, nil)
     if err != nil {
         panic(err)
     }
@@ -269,10 +269,6 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"additionalInfo"` | Additional information |
-| `"nidNumber"` | National Identity Card number |
-| `"policeReportNumber"` | Police report number (if lost or stolen) |
-| `"reason"` | Reason for requesting duplicate |
 
 Operations: Create.
 
@@ -367,21 +363,10 @@ Create an instance: `application := client.Application(nil)`
 | --- | --- |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `additionalInfo` | `string` | Additional information |
-| `nidNumber` | `string` | National Identity Card number |
-| `policeReportNumber` | `string` | Police report number (if lost or stolen) |
-| `reason` | `string` | Reason for requesting duplicate |
-
 #### Example: Create
 
 ```go
 result, err := client.Application(nil).Create(map[string]any{
-    "nidNumber": "example_nidNumber",
-    "reason": "example_reason",
 }, nil)
 if err != nil {
     panic(err)

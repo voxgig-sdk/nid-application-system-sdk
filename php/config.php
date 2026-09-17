@@ -118,30 +118,7 @@ class NidApplicationSystemConfig
             ],
             "entity" => [
         'application' => [
-          'fields' => [
-            [
-              'name' => 'additionalInfo',
-              'short' => 'Additional information',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'nidNumber',
-              'req' => true,
-              'short' => 'National Identity Card number',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'policeReportNumber',
-              'short' => 'Police report number (if lost or stolen)',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'reason',
-              'req' => true,
-              'short' => 'Reason for requesting duplicate',
-              'type' => '`$STRING`',
-            ],
-          ],
+          'fields' => [],
           'name' => 'application',
           'op' => [
             'create' => [

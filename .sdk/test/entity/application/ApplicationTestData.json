@@ -2,36 +2,19 @@
   "existing": {
     "application": {
       "APPLICATION00": {
-        "additionalInfo": "s28",
-        "nidNumber": "s29",
-        "policeReportNumber": "s2a",
-        "reason": "s2b",
         "id": "APPLICATION00"
       },
       "APPLICATION01": {
-        "additionalInfo": "s50",
-        "nidNumber": "s51",
-        "policeReportNumber": "s52",
-        "reason": "s53",
         "id": "APPLICATION01"
       },
       "APPLICATION02": {
-        "additionalInfo": "s78",
-        "nidNumber": "s79",
-        "policeReportNumber": "s7a",
-        "reason": "s7b",
         "id": "APPLICATION02"
       }
     }
   },
   "new": {
     "application": {
-      "application_ref01": {
-        "additionalInfo": "sa0",
-        "nidNumber": "sa1",
-        "policeReportNumber": "sa2",
-        "reason": "sa3"
-      }
+      "application_ref01": {}
     }
   },
   "requests": {

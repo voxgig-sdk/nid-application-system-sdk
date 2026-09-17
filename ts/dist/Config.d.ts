@@ -82,17 +82,7 @@ declare class Config {
     };
     entity: {
         application: {
-            fields: ({
-                name: string;
-                short: string;
-                type: string;
-                req?: undefined;
-            } | {
-                name: string;
-                req: boolean;
-                short: string;
-                type: string;
-            })[];
+            fields: never[];
             name: string;
             op: {
                 create: {

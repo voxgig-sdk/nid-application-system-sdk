@@ -7,16 +7,8 @@
 -- edit by hand.
 
 ---@class Application
----@field additionalInfo? string
----@field nidNumber string
----@field policeReportNumber? string
----@field reason string
 
 ---@class ApplicationCreateData
----@field additionalInfo? string
----@field nidNumber string
----@field policeReportNumber? string
----@field reason string
 
 ---@class ApplicationStatus
 ---@field applicationId? string

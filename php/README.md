@@ -37,7 +37,7 @@ $client = new NidApplicationSystemSDK([
 
 ```php
 // create() returns the ENTITY — call data_get() for the created Application record.
-$created = $client->Application()->create(["nidNumber" => "example_nidNumber", "reason" => "example_reason"]);
+$created = $client->Application()->create([]);
 
 ```
 
@@ -254,10 +254,6 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` | Additional information |
-| `nidNumber` | National Identity Card number |
-| `policeReportNumber` | Police report number (if lost or stolen) |
-| `reason` | Reason for requesting duplicate |
 
 Operations: Create.
 
@@ -352,21 +348,10 @@ Create an instance: `$application = $client->Application();`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `additionalInfo` | `string` | Additional information |
-| `nidNumber` | `string` | National Identity Card number |
-| `policeReportNumber` | `string` | Police report number (if lost or stolen) |
-| `reason` | `string` | Reason for requesting duplicate |
-
 #### Example: Create
 
 ```php
 $application = $client->Application()->create([
-    "nidNumber" => null, // string
-    "reason" => null, // string
 ]);
 ```
 
@@ -661,6 +646,7 @@ Use `Helpers::to_map()` to safely validate that a value is an array.
 php/
 ├── nidapplicationsystem_sdk.php          -- Main SDK class
 ├── config.php                     -- Configuration
+├── schema.php                     -- Generated option + entity specs
 ├── features.php                   -- Feature factory
 ├── core/                          -- Core types and context
 ├── entity/                        -- Entity implementations

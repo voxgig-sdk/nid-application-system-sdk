@@ -104,15 +104,6 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 application = client.Application()
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `additionalInfo` | `str` | No | Additional information |
-| `nidNumber` | `str` | Yes | National Identity Card number |
-| `policeReportNumber` | `str` | No | Police report number (if lost or stolen) |
-| `reason` | `str` | Yes | Reason for requesting duplicate |
-
 ### Operations
 
 #### `create(reqdata, ctrl=None) -> dict`
@@ -121,8 +112,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Application().create({
-    "nidNumber": "example_nidNumber",  # str
-    "reason": "example_reason",  # str
 })
 ```
 

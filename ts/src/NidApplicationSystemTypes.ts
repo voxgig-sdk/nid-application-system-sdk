@@ -6,17 +6,9 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Application {
-  additionalInfo?: string
-  nidNumber: string
-  policeReportNumber?: string
-  reason: string
 }
 
 export interface ApplicationCreateData {
-  additionalInfo?: string
-  nidNumber: string
-  policeReportNumber?: string
-  reason: string
 
   // Selects a custom action instead of the plain create:
   //   'correction' | 'duplicate' | 'new_registration'

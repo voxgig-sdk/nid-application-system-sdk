@@ -39,7 +39,7 @@ local client = sdk.new({
 
 ```lua
 -- Create
-local created, err = client:Application():create({ nidNumber = "example_nidNumber", reason = "example_reason" })
+local created, err = client:Application():create({  })
 if err then error(err) end
 
 ```
@@ -236,10 +236,6 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` | Additional information |
-| `nidNumber` | National Identity Card number |
-| `policeReportNumber` | Police report number (if lost or stolen) |
-| `reason` | Reason for requesting duplicate |
 
 Operations: Create.
 
@@ -334,21 +330,10 @@ Create an instance: `local application = client:Application(nil)`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `additionalInfo` | `string` | Additional information |
-| `nidNumber` | `string` | National Identity Card number |
-| `policeReportNumber` | `string` | Police report number (if lost or stolen) |
-| `reason` | `string` | Reason for requesting duplicate |
-
 #### Example: Create
 
 ```lua
 local application, err = client:Application():create({
-  nidNumber = "example_nidNumber", -- string
-  reason = "example_reason", -- string
 })
 ```
 
@@ -641,6 +626,7 @@ Use `helpers.to_map()` to safely validate that a value is a table.
 lua/
 ├── nid-application-system_sdk.lua    -- Main SDK module
 ├── config.lua               -- Configuration
+├── schema.lua               -- Generated option + entity specs
 ├── features.lua             -- Feature factory
 ├── core/                    -- Core types and context
 ├── entity/                  -- Entity implementations

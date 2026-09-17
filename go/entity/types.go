@@ -14,18 +14,10 @@ import (
 
 // Application is the typed data model for the application entity.
 type Application struct {
-	AdditionalInfo *string `json:"additionalInfo,omitempty"`
-	NidNumber string `json:"nidNumber"`
-	PoliceReportNumber *string `json:"policeReportNumber,omitempty"`
-	Reason string `json:"reason"`
 }
 
 // ApplicationCreateData is the typed request payload for Application.CreateTyped.
 type ApplicationCreateData struct {
-	AdditionalInfo *string `json:"additionalInfo,omitempty"`
-	NidNumber string `json:"nidNumber"`
-	PoliceReportNumber *string `json:"policeReportNumber,omitempty"`
-	Reason string `json:"reason"`
 }
 
 // ApplicationStatus is the typed data model for the application_status entity.

@@ -121,30 +121,7 @@ def make_config():
         },
         "entity": {
       "application": {
-        "fields": [
-          {
-            "name": "additionalInfo",
-            "short": "Additional information",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "nidNumber",
-            "req": True,
-            "short": "National Identity Card number",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "policeReportNumber",
-            "short": "Police report number (if lost or stolen)",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "reason",
-            "req": True,
-            "short": "Reason for requesting duplicate",
-            "type": "`$STRING`",
-          },
-        ],
+        "fields": [],
         "name": "application",
         "op": {
           "create": {

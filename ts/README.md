@@ -39,10 +39,7 @@ const client = new NidApplicationSystemSDK({
 
 ```ts
 // Create — returns the created Application ENTITY (.data() for the record)
-const created = await client.Application().create({
-  nidNumber: 'example_nidNumber',
-  reason: 'example_reason',
-})
+const created = await client.Application().create({})
 
 ```
 
@@ -300,10 +297,6 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` | Additional information |
-| `nidNumber` | National Identity Card number |
-| `policeReportNumber` | Police report number (if lost or stolen) |
-| `reason` | Reason for requesting duplicate |
 
 Operations: create.
 
@@ -398,21 +391,10 @@ Create an instance: `const application = client.Application()`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `additionalInfo` | `string` | Additional information |
-| `nidNumber` | `string` | National Identity Card number |
-| `policeReportNumber` | `string` | Police report number (if lost or stolen) |
-| `reason` | `string` | Reason for requesting duplicate |
-
 #### Example: Create
 
 ```ts
 const application = await client.Application().create({
-  nidNumber: 'example_nidNumber',
-  reason: 'example_reason',
 })
 ```
 

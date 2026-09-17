@@ -1,14 +1,6 @@
 export interface Application {
-    additionalInfo?: string;
-    nidNumber: string;
-    policeReportNumber?: string;
-    reason: string;
 }
 export interface ApplicationCreateData {
-    additionalInfo?: string;
-    nidNumber: string;
-    policeReportNumber?: string;
-    reason: string;
     $action?: string;
     [action: string]: any;
 }

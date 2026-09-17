@@ -110,15 +110,6 @@ same parameters as `direct()`. Raises on error.
 application = client.Application
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `additionalInfo` | `String` | No | Additional information |
-| `nidNumber` | `String` | Yes | National Identity Card number |
-| `policeReportNumber` | `String` | No | Police report number (if lost or stolen) |
-| `reason` | `String` | Yes | Reason for requesting duplicate |
-
 ### Operations
 
 #### `create(reqdata, ctrl = nil) -> result`
@@ -127,8 +118,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Application.create({
-  "nidNumber" => "example_nidNumber", # String
-  "reason" => "example_reason", # String
 })
 ```
 

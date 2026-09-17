@@ -109,15 +109,6 @@ Prepare a fetch definition without sending the request. Returns the
 $application = $client->Application();
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `additionalInfo` | `string` | No | Additional information |
-| `nidNumber` | `string` | Yes | National Identity Card number |
-| `policeReportNumber` | `string` | No | Police report number (if lost or stolen) |
-| `reason` | `string` | Yes | Reason for requesting duplicate |
-
 ### Operations
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
@@ -126,8 +117,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Application()->create([
-  "nidNumber" => null, // string
-  "reason" => null, // string
 ]);
 ```
 

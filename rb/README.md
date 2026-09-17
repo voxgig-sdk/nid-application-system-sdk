@@ -36,7 +36,7 @@ client = NidApplicationSystemSDK.new({
 
 ```ruby
 # create returns the ENTITY — call data_get for the created Application record.
-created = client.Application.create({ "nidNumber" => "example_nidNumber", "reason" => "example_reason" })
+created = client.Application.create({  })
 
 ```
 
@@ -244,10 +244,6 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `additionalInfo` | Additional information |
-| `nidNumber` | National Identity Card number |
-| `policeReportNumber` | Police report number (if lost or stolen) |
-| `reason` | Reason for requesting duplicate |
 
 Operations: Create.
 
@@ -342,21 +338,10 @@ Create an instance: `application = client.Application`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `additionalInfo` | `String` | Additional information |
-| `nidNumber` | `String` | National Identity Card number |
-| `policeReportNumber` | `String` | Police report number (if lost or stolen) |
-| `reason` | `String` | Reason for requesting duplicate |
-
 #### Example: Create
 
 ```ruby
 application = client.Application.create({
-  "nidNumber" => "example_nidNumber", # String
-  "reason" => "example_reason", # String
 })
 ```
 
@@ -651,6 +636,7 @@ Use `Helpers.to_map()` to safely validate that a value is a hash.
 rb/
 ├── NidApplicationSystem_sdk.rb       -- Main SDK module
 ├── config.rb                  -- Configuration
+├── schema.rb                  -- Generated option + entity specs
 ├── features.rb                -- Feature factory
 ├── core/                      -- Core types and context
 ├── entity/                    -- Entity implementations

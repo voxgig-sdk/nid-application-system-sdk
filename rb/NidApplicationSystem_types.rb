@@ -9,46 +9,12 @@
 # annotations document the shapes. Do not edit by hand.
 
 # Application entity data model.
-#
-# @!attribute [rw] additionalInfo
-#   @return [String, nil]
-#
-# @!attribute [rw] nidNumber
-#   @return [String]
-#
-# @!attribute [rw] policeReportNumber
-#   @return [String, nil]
-#
-# @!attribute [rw] reason
-#   @return [String]
-Application = Struct.new(
-  :additionalInfo,
-  :nidNumber,
-  :policeReportNumber,
-  :reason,
-  keyword_init: true
-)
+class Application
+end
 
 # Request payload for Application#create.
-#
-# @!attribute [rw] additionalInfo
-#   @return [String, nil]
-#
-# @!attribute [rw] nidNumber
-#   @return [String]
-#
-# @!attribute [rw] policeReportNumber
-#   @return [String, nil]
-#
-# @!attribute [rw] reason
-#   @return [String]
-ApplicationCreateData = Struct.new(
-  :additionalInfo,
-  :nidNumber,
-  :policeReportNumber,
-  :reason,
-  keyword_init: true
-)
+class ApplicationCreateData
+end
 
 # ApplicationStatus entity data model.
 #

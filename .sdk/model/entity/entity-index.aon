@@ -1,8 +1,8 @@
 # Entity Models
 
-@"application.aon"
-@"application_status.aon"
-@"login.aon"
-@"nid_management.aon"
-@"registration.aon"
-@"success.aon"
+@"./application.aon"
+@"./application_status.aon"
+@"./login.aon"
+@"./nid_management.aon"
+@"./registration.aon"
+@"./success.aon"

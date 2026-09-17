@@ -115,15 +115,6 @@ application := client.Application(nil)
 fmt.Println(application.GetName()) // "application"
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `additionalInfo` | `string` | No | Additional information |
-| `nidNumber` | `string` | Yes | National Identity Card number |
-| `policeReportNumber` | `string` | No | Police report number (if lost or stolen) |
-| `reason` | `string` | Yes | Reason for requesting duplicate |
-
 ### Operations
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
@@ -132,8 +123,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Application(nil).Create(map[string]any{
-    "nidNumber": "example_nidNumber",
-    "reason": "example_reason",
 }, nil)
 if err != nil {
     panic(err)

@@ -96,30 +96,7 @@ func MakeConfig() map[string]any {
 		},
 		"entity": map[string]any{
 			"application": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "additionalInfo",
-						"short": "Additional information",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "nidNumber",
-						"req": true,
-						"short": "National Identity Card number",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "policeReportNumber",
-						"short": "Police report number (if lost or stolen)",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "reason",
-						"req": true,
-						"short": "Reason for requesting duplicate",
-						"type": "`$STRING`",
-					},
-				},
+				"fields": []any{},
 				"name": "application",
 				"op": map[string]any{
 					"create": map[string]any{
