@@ -1,0 +1,123 @@
+# Entity: application_status
+
+main: kit: entity: application_status: {
+
+  alias: field: {}
+
+  fields: {
+    applicationId: {
+      h: "Application Id"
+      n: "applicationId"
+      r: false
+      t: "`$STRING`"
+    }
+    applicationType: {
+      h: "Application Type"
+      n: "applicationType"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    lastUpdated: {
+      fo: "date-time"
+      h: "Last Updated"
+      n: "lastUpdated"
+      r: false
+      t: "`$STRING`"
+    }
+    nidNumber: {
+      h: "Nid Number"
+      n: "nidNumber"
+      r: false
+      sh: "NID number (if approved)"
+      t: "`$STRING`"
+    }
+    remarks: {
+      h: "Remarks"
+      n: "remarks"
+      r: false
+      sh: "Additional remarks or notes"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    submissionDate: {
+      fo: "date-time"
+      h: "Submission Date"
+      n: "submissionDate"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "application_status"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /application/status/{applicationId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "application_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/application/status/{applicationId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              applicationId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "application"
+            }
+            {
+              lit: "status"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

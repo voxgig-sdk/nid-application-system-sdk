@@ -1,0 +1,88 @@
+# Entity: registration
+
+main: kit: entity: registration: {
+
+  alias: field: {}
+
+  fields: {
+    confirmPassword: {
+      fo: "password"
+      h: "Confirm Password"
+      n: "confirmPassword"
+      r: true
+      sh: "Password confirmation"
+      t: "`$STRING`"
+    }
+    dateOfBirth: {
+      fo: "date"
+      h: "Date Of Birth"
+      n: "dateOfBirth"
+      r: false
+      sh: "Date of birth"
+      t: "`$STRING`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      sh: "User's email address"
+      t: "`$STRING`"
+    }
+    nidNumber: {
+      h: "Nid Number"
+      n: "nidNumber"
+      r: true
+      sh: "National Identity Card number"
+      t: "`$STRING`"
+    }
+    password: {
+      fo: "password"
+      h: "Password"
+      n: "password"
+      r: true
+      sh: "Account password"
+      t: "`$STRING`"
+    }
+    phone: {
+      h: "Phone"
+      n: "phone"
+      r: false
+      sh: "User's phone number"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "registration"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /auth/register"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/register"
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "register"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

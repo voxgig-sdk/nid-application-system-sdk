@@ -1,0 +1,125 @@
+# Entity: success
+
+main: kit: entity: success: {
+
+  alias: field: {}
+
+  fields: {
+    code: {
+      h: "Code"
+      n: "code"
+      r: true
+      sh: "Verification code received"
+      t: "`$STRING`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: true
+      sh: "Registered email address"
+      t: "`$STRING`"
+    }
+    isOverseas: {
+      h: "Is Overseas"
+      n: "isOverseas"
+      r: false
+      sh: "Indicates if user is an overseas Bangladeshi"
+      t: "`$BOOLEAN`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      r: false
+      t: "`$STRING`"
+    }
+    nidNumber: {
+      h: "Nid Number"
+      n: "nidNumber"
+      r: false
+      sh: "National Identity Card number for verification"
+      t: "`$STRING`"
+    }
+    success: {
+      h: "Success"
+      n: "success"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "success"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /auth/password-reset"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/password-reset"
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "password-reset"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /verification/send-code"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/verification/send-code"
+          s: [
+            {
+              lit: "verification"
+            }
+            {
+              lit: "send-code"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /verification/verify-code"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/verification/verify-code"
+          s: [
+            {
+              lit: "verification"
+            }
+            {
+              lit: "verify-code"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

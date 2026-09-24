@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -127,7 +120,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/application/correction",
@@ -139,20 +131,21 @@ class Config {
                                     "lit": "correction"
                                 }
                             ],
-                            "select": {
-                                "$action": "correction"
-                            },
+                            "parts": [
+                                "application",
+                                "correction"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "application",
-                                "correction"
-                            ]
+                            "args": {},
+                            "select": {
+                                "$action": "correction"
+                            }
                         },
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/application/duplicate",
@@ -164,20 +157,21 @@ class Config {
                                     "lit": "duplicate"
                                 }
                             ],
-                            "select": {
-                                "$action": "duplicate"
-                            },
+                            "parts": [
+                                "application",
+                                "duplicate"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "application",
-                                "duplicate"
-                            ]
+                            "args": {},
+                            "select": {
+                                "$action": "duplicate"
+                            }
                         },
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/application/new-registration",
@@ -189,17 +183,19 @@ class Config {
                                     "lit": "new-registration"
                                 }
                             ],
-                            "select": {
-                                "$action": "new_registration"
-                            },
+                            "parts": [
+                                "application",
+                                "new-registration"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "application",
-                                "new-registration"
-                            ]
+                            "args": {},
+                            "select": {
+                                "$action": "new_registration"
+                            }
                         }
                     ]
                 }
@@ -212,39 +208,47 @@ class Config {
             "fields": [
                 {
                     "name": "applicationId",
+                    "title": "Application Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "applicationType",
+                    "title": "Application Type",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "date-time",
                     "name": "lastUpdated",
-                    "type": "`$STRING`"
+                    "title": "Last Updated",
+                    "type": "`$STRING`",
+                    "format": "date-time"
                 },
                 {
                     "name": "nidNumber",
-                    "short": "NID number (if approved)",
-                    "type": "`$STRING`"
+                    "title": "Nid Number",
+                    "type": "`$STRING`",
+                    "short": "NID number (if approved)"
                 },
                 {
                     "name": "remarks",
-                    "short": "Additional remarks or notes",
-                    "type": "`$STRING`"
+                    "title": "Remarks",
+                    "type": "`$STRING`",
+                    "short": "Additional remarks or notes"
                 },
                 {
                     "name": "status",
+                    "title": "Status",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "date-time",
                     "name": "submissionDate",
-                    "type": "`$STRING`"
+                    "title": "Submission Date",
+                    "type": "`$STRING`",
+                    "format": "date-time"
                 }
             ],
             "id": {
@@ -258,25 +262,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "application_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/application/status/{applicationId}",
-                            "rename": {
-                                "param": {
-                                    "applicationId": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "application"
@@ -288,20 +276,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "application",
+                                "status",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "applicationId": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "application",
-                                "status",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "application_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -314,47 +318,56 @@ class Config {
             "fields": [
                 {
                     "name": "accountStatus",
+                    "title": "Account Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "captcha",
+                    "title": "Captcha",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Captcha code displayed in the image",
-                    "type": "`$STRING`"
+                    "short": "Captcha code displayed in the image"
                 },
                 {
-                    "format": "email",
                     "name": "email",
-                    "type": "`$STRING`"
+                    "title": "Email",
+                    "type": "`$STRING`",
+                    "format": "email"
                 },
                 {
                     "name": "fullName",
+                    "title": "Full Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "nidNumber",
+                    "title": "Nid Number",
                     "type": "`$STRING`"
                 },
                 {
-                    "format": "password",
                     "name": "password",
+                    "title": "Password",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "User's password",
-                    "type": "`$STRING`"
+                    "format": "password"
                 },
                 {
                     "name": "phone",
+                    "title": "Phone",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "userId",
+                    "title": "User Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "username",
+                    "title": "Username",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "User's username or NID number",
-                    "type": "`$STRING`"
+                    "short": "User's username or NID number"
                 }
             ],
             "name": "login",
@@ -364,7 +377,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/auth/login",
@@ -376,15 +388,17 @@ class Config {
                                     "lit": "login"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "auth",
+                                "login"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.user`"
                             },
-                            "parts": [
-                                "auth",
-                                "login"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -402,24 +416,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "pdf",
-                                        "kind": "query",
-                                        "name": "format",
-                                        "orig": "format",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "nid_number",
-                                        "orig": "nid_number",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/nid/download",
@@ -431,20 +427,39 @@ class Config {
                                     "lit": "download"
                                 }
                             ],
+                            "parts": [
+                                "nid",
+                                "download"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "format",
+                                        "orig": "format",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "pdf"
+                                    },
+                                    {
+                                        "name": "nid_number",
+                                        "orig": "nid_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "format",
                                     "nid_number"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "nid",
-                                "download"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -456,42 +471,48 @@ class Config {
         "registration": {
             "fields": [
                 {
-                    "format": "password",
                     "name": "confirmPassword",
+                    "title": "Confirm Password",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Password confirmation",
-                    "type": "`$STRING`"
+                    "format": "password"
                 },
                 {
-                    "format": "date",
                     "name": "dateOfBirth",
+                    "title": "Date Of Birth",
+                    "type": "`$STRING`",
                     "short": "Date of birth",
-                    "type": "`$STRING`"
+                    "format": "date"
                 },
                 {
-                    "format": "email",
                     "name": "email",
+                    "title": "Email",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "User's email address",
-                    "type": "`$STRING`"
+                    "format": "email"
                 },
                 {
                     "name": "nidNumber",
+                    "title": "Nid Number",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "National Identity Card number",
-                    "type": "`$STRING`"
+                    "short": "National Identity Card number"
                 },
                 {
-                    "format": "password",
                     "name": "password",
+                    "title": "Password",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Account password",
-                    "type": "`$STRING`"
+                    "format": "password"
                 },
                 {
                     "name": "phone",
-                    "short": "User's phone number",
-                    "type": "`$STRING`"
+                    "title": "Phone",
+                    "type": "`$STRING`",
+                    "short": "User's phone number"
                 }
             ],
             "name": "registration",
@@ -501,7 +522,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/auth/register",
@@ -513,15 +533,17 @@ class Config {
                                     "lit": "register"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "auth",
+                                "register"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "auth",
-                                "register"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -534,33 +556,39 @@ class Config {
             "fields": [
                 {
                     "name": "code",
+                    "title": "Code",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Verification code received",
-                    "type": "`$STRING`"
+                    "short": "Verification code received"
                 },
                 {
-                    "format": "email",
                     "name": "email",
+                    "title": "Email",
+                    "type": "`$STRING`",
                     "req": true,
                     "short": "Registered email address",
-                    "type": "`$STRING`"
+                    "format": "email"
                 },
                 {
                     "name": "isOverseas",
-                    "short": "Indicates if user is an overseas Bangladeshi",
-                    "type": "`$BOOLEAN`"
+                    "title": "Is Overseas",
+                    "type": "`$BOOLEAN`",
+                    "short": "Indicates if user is an overseas Bangladeshi"
                 },
                 {
                     "name": "message",
+                    "title": "Message",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "nidNumber",
-                    "short": "National Identity Card number for verification",
-                    "type": "`$STRING`"
+                    "title": "Nid Number",
+                    "type": "`$STRING`",
+                    "short": "National Identity Card number for verification"
                 },
                 {
                     "name": "success",
+                    "title": "Success",
                     "type": "`$BOOLEAN`"
                 }
             ],
@@ -571,7 +599,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/auth/password-reset",
@@ -583,18 +610,19 @@ class Config {
                                     "lit": "password-reset"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "auth",
+                                "password-reset"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "auth",
-                                "password-reset"
-                            ]
+                            "args": {},
+                            "select": {}
                         },
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/verification/send-code",
@@ -606,18 +634,19 @@ class Config {
                                     "lit": "send-code"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "verification",
+                                "send-code"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "verification",
-                                "send-code"
-                            ]
+                            "args": {},
+                            "select": {}
                         },
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/verification/verify-code",
@@ -629,15 +658,17 @@ class Config {
                                     "lit": "verify-code"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "verification",
+                                "verify-code"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "verification",
-                                "verify-code"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }

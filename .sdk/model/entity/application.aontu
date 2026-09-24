@@ -1,0 +1,93 @@
+# Entity: application
+
+main: kit: entity: application: {
+
+  alias: field: {}
+
+  name: "application"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /application/correction"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/application/correction"
+          q: {
+            "$action": "correction"
+          }
+          s: [
+            {
+              lit: "application"
+            }
+            {
+              lit: "correction"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /application/duplicate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/application/duplicate"
+          q: {
+            "$action": "duplicate"
+          }
+          s: [
+            {
+              lit: "application"
+            }
+            {
+              lit: "duplicate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /application/new-registration"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/application/new-registration"
+          q: {
+            "$action": "new_registration"
+          }
+          s: [
+            {
+              lit: "application"
+            }
+            {
+              lit: "new-registration"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

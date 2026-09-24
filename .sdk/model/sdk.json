@@ -24,13 +24,79 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "application": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "application",
           "op": {
             "create": {
@@ -38,18 +104,21 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /application/correction",
-                    "json": "{\"operationId\":\"applyCorrection\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"multipart/form-data\":{\"schema\":{\"properties\":{\"correctedValue\":{\"description\":\"Corrected value\",\"type\":\"string\"},\"correctionType\":{\"description\":\"Type of correction needed\",\"enum\":[\"name\",\"dateOfBirth\",\"address\",\"fatherName\",\"motherName\",\"photograph\",\"other\"],\"type\":\"string\"},\"currentValue\":{\"description\":\"Current incorrect value\",\"type\":\"string\"},\"nidNumber\":{\"description\":\"National Identity Card number to be corrected\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason for correction\",\"type\":\"string\"},\"supportingDocuments\":{\"description\":\"Supporting documents for correction\",\"items\":{\"format\":\"binary\",\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"nidNumber\",\"correctionType\",\"correctedValue\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"applicationId\":{\"description\":\"Unique application ID\",\"type\":\"string\"},\"message\":{\"type\":\"string\"},\"status\":{\"description\":\"Current application status\",\"enum\":[\"submitted\",\"under_review\",\"approved\",\"rejected\"],\"type\":\"string\"},\"submissionDate\":{\"description\":\"Date and time of submission\",\"format\":\"date-time\",\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Correction application submitted successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid correction data\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - authentication required\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/application/correction",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/application/correction",
+                  "q": {
+                    "$action": "correction"
+                  },
+                  "r": {},
+                  "s": [
                     {
                       "lit": "application"
                     },
@@ -57,27 +126,27 @@
                       "lit": "correction"
                     }
                   ],
-                  "select": {
-                    "$action": "correction"
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /application/duplicate",
-                    "json": "{\"operationId\":\"applyDuplicate\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"additionalInfo\":{\"description\":\"Additional information\",\"type\":\"string\"},\"nidNumber\":{\"description\":\"National Identity Card number\",\"type\":\"string\"},\"policeReportNumber\":{\"description\":\"Police report number (if lost or stolen)\",\"type\":\"string\"},\"reason\":{\"description\":\"Reason for requesting duplicate\",\"enum\":[\"lost\",\"damaged\",\"stolen\"],\"type\":\"string\"}},\"required\":[\"nidNumber\",\"reason\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"applicationId\":{\"description\":\"Unique application ID\",\"type\":\"string\"},\"message\":{\"type\":\"string\"},\"status\":{\"description\":\"Current application status\",\"enum\":[\"submitted\",\"under_review\",\"approved\",\"rejected\"],\"type\":\"string\"},\"submissionDate\":{\"description\":\"Date and time of submission\",\"format\":\"date-time\",\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Duplicate copy request submitted successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid request data\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - authentication required\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/application/duplicate",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/application/duplicate",
+                  "q": {
+                    "$action": "duplicate"
+                  },
+                  "r": {},
+                  "s": [
                     {
                       "lit": "application"
                     },
@@ -85,27 +154,27 @@
                       "lit": "duplicate"
                     }
                   ],
-                  "select": {
-                    "$action": "duplicate"
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /application/new-registration",
-                    "json": "{\"operationId\":\"applyNewRegistration\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"multipart/form-data\":{\"schema\":{\"properties\":{\"address\":{\"properties\":{\"district\":{\"type\":\"string\"},\"division\":{\"type\":\"string\"},\"union\":{\"type\":\"string\"},\"upazila\":{\"type\":\"string\"},\"village\":{\"type\":\"string\"}},\"type\":\"object\"},\"dateOfBirth\":{\"description\":\"Date of birth\",\"format\":\"date\",\"type\":\"string\"},\"fatherName\":{\"description\":\"Father's name\",\"type\":\"string\"},\"fullName\":{\"description\":\"Full name in Bengali\",\"type\":\"string\"},\"fullNameEnglish\":{\"description\":\"Full name in English\",\"type\":\"string\"},\"gender\":{\"description\":\"Gender\",\"enum\":[\"male\",\"female\",\"other\"],\"type\":\"string\"},\"isOverseas\":{\"description\":\"Indicates if applicant is an overseas Bangladeshi\",\"type\":\"boolean\"},\"motherName\":{\"description\":\"Mother's name\",\"type\":\"string\"},\"photograph\":{\"description\":\"Passport-sized photograph\",\"format\":\"binary\",\"type\":\"string\"},\"signature\":{\"description\":\"Signature image\",\"format\":\"binary\",\"type\":\"string\"},\"supportingDocuments\":{\"description\":\"Supporting documents (birth certificate, etc.)\",\"items\":{\"format\":\"binary\",\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"fullName\",\"dateOfBirth\",\"fatherName\",\"motherName\",\"address\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"applicationId\":{\"description\":\"Unique application ID\",\"type\":\"string\"},\"message\":{\"type\":\"string\"},\"status\":{\"description\":\"Current application status\",\"enum\":[\"submitted\",\"under_review\",\"approved\",\"rejected\"],\"type\":\"string\"},\"submissionDate\":{\"description\":\"Date and time of submission\",\"format\":\"date-time\",\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Application submitted successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid application data\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - authentication required\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/application/new-registration",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/application/new-registration",
+                  "q": {
+                    "$action": "new_registration"
+                  },
+                  "r": {},
+                  "s": [
                     {
                       "lit": "application"
                     },
@@ -113,10 +182,7 @@
                       "lit": "new-registration"
                     }
                   ],
-                  "select": {
-                    "$action": "new_registration"
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -133,60 +199,68 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "applicationId",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "applicationId": {
+              "a": true,
+              "h": "Application Id",
+              "n": "applicationId",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "applicationType",
-              "req": false,
-              "type": "`$STRING`"
+            "applicationType": {
+              "a": true,
+              "h": "Application Type",
+              "n": "applicationType",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "lastUpdated",
-              "req": false,
-              "type": "`$STRING`"
+            "lastUpdated": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Last Updated",
+              "n": "lastUpdated",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "nidNumber",
-              "req": false,
-              "short": "NID number (if approved)",
-              "type": "`$STRING`"
+            "nidNumber": {
+              "a": true,
+              "h": "Nid Number",
+              "n": "nidNumber",
+              "r": false,
+              "sh": "NID number (if approved)",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "remarks",
-              "req": false,
-              "short": "Additional remarks or notes",
-              "type": "`$STRING`"
+            "remarks": {
+              "a": true,
+              "h": "Remarks",
+              "n": "remarks",
+              "r": false,
+              "sh": "Additional remarks or notes",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "status",
-              "req": false,
-              "type": "`$STRING`"
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "submissionDate",
-              "req": false,
-              "type": "`$STRING`"
+            "submissionDate": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Submission Date",
+              "n": "submissionDate",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -198,34 +272,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /application/status/{applicationId}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "application_id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "application_id",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /application/status/{applicationId}",
-                    "json": "{\"operationId\":\"getApplicationStatus\",\"parameters\":[{\"description\":\"Application ID\",\"in\":\"path\",\"name\":\"applicationId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"applicationId\":{\"type\":\"string\"},\"applicationType\":{\"enum\":[\"new_registration\",\"correction\",\"duplicate\"],\"type\":\"string\"},\"lastUpdated\":{\"format\":\"date-time\",\"type\":\"string\"},\"nidNumber\":{\"description\":\"NID number (if approved)\",\"type\":\"string\"},\"remarks\":{\"description\":\"Additional remarks or notes\",\"type\":\"string\"},\"status\":{\"enum\":[\"submitted\",\"under_review\",\"approved\",\"rejected\",\"pending_documents\"],\"type\":\"string\"},\"submissionDate\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Application status retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - authentication required\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Application not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/application/status/{applicationId}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/application/status/{applicationId}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "applicationId": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "application"
                     },
@@ -236,12 +314,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -258,67 +331,76 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "accountStatus",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "accountStatus": {
+              "a": true,
+              "h": "Account Status",
+              "n": "accountStatus",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "captcha",
-              "req": true,
-              "short": "Captcha code displayed in the image",
-              "type": "`$STRING`"
+            "captcha": {
+              "a": true,
+              "h": "Captcha",
+              "n": "captcha",
+              "r": true,
+              "sh": "Captcha code displayed in the image",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "email",
-              "name": "email",
-              "req": false,
-              "type": "`$STRING`"
+            "email": {
+              "a": true,
+              "fo": "email",
+              "h": "Email",
+              "n": "email",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "fullName",
-              "req": false,
-              "type": "`$STRING`"
+            "fullName": {
+              "a": true,
+              "h": "Full Name",
+              "n": "fullName",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "nidNumber",
-              "req": false,
-              "type": "`$STRING`"
+            "nidNumber": {
+              "a": true,
+              "h": "Nid Number",
+              "n": "nidNumber",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "password",
-              "name": "password",
-              "req": true,
-              "short": "User's password",
-              "type": "`$STRING`"
+            "password": {
+              "a": true,
+              "fo": "password",
+              "h": "Password",
+              "n": "password",
+              "r": true,
+              "sh": "User's password",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "phone",
-              "req": false,
-              "type": "`$STRING`"
+            "phone": {
+              "a": true,
+              "h": "Phone",
+              "n": "phone",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "userId",
-              "req": false,
-              "type": "`$STRING`"
+            "userId": {
+              "a": true,
+              "h": "User Id",
+              "n": "userId",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "username",
-              "req": true,
-              "short": "User's username or NID number",
-              "type": "`$STRING`"
+            "username": {
+              "a": true,
+              "h": "Username",
+              "n": "username",
+              "r": true,
+              "sh": "User's username or NID number",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "login",
           "op": {
             "create": {
@@ -326,18 +408,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /auth/login",
-                    "json": "{\"operationId\":\"loginUser\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"captcha\":{\"description\":\"Captcha code displayed in the image\",\"type\":\"string\"},\"password\":{\"description\":\"User's password\",\"format\":\"password\",\"type\":\"string\"},\"username\":{\"description\":\"User's username or NID number\",\"type\":\"string\"}},\"required\":[\"username\",\"password\",\"captcha\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"expiresIn\":{\"description\":\"Token expiration time in seconds\",\"type\":\"integer\"},\"success\":{\"type\":\"boolean\"},\"token\":{\"description\":\"Authentication token\",\"type\":\"string\"},\"user\":{\"properties\":{\"accountStatus\":{\"enum\":[\"active\",\"pending\",\"suspended\"],\"type\":\"string\"},\"email\":{\"format\":\"email\",\"type\":\"string\"},\"fullName\":{\"type\":\"string\"},\"nidNumber\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"},\"userId\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful login\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Bad request - invalid captcha or missing fields\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid credentials\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/auth/login",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/auth/login",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "auth"
                     },
@@ -345,8 +428,7 @@
                       "lit": "login"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.user`"
                   }
@@ -363,7 +445,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "nid_management",
           "op": {
             "load": {
@@ -371,38 +453,44 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /nid/download",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "pdf",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "pdf",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "nid_number",
-                        "orig": "nid_number",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "nid_number",
+                        "or": "nid_number",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /nid/download",
-                    "json": "{\"operationId\":\"downloadNID\",\"parameters\":[{\"description\":\"National Identity Card number\",\"in\":\"query\",\"name\":\"nidNumber\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Download format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"pdf\",\"enum\":[\"pdf\",\"png\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/pdf\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}},\"image/png\":{\"schema\":{\"format\":\"binary\",\"type\":\"string\"}}},\"description\":\"NID copy download successful\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - authentication required\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"NID not found or not available for download\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/nid/download",
+                  "q": {
+                    "exist": [
+                      "format",
+                      "nid_number"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/nid/download",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "nid"
                     },
@@ -410,13 +498,7 @@
                       "lit": "download"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "format",
-                      "nid_number"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -433,54 +515,60 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "password",
-              "name": "confirmPassword",
-              "req": true,
-              "short": "Password confirmation",
-              "type": "`$STRING`"
+          "fields": {
+            "confirmPassword": {
+              "a": true,
+              "fo": "password",
+              "h": "Confirm Password",
+              "n": "confirmPassword",
+              "r": true,
+              "sh": "Password confirmation",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date",
-              "name": "dateOfBirth",
-              "req": false,
-              "short": "Date of birth",
-              "type": "`$STRING`"
+            "dateOfBirth": {
+              "a": true,
+              "fo": "date",
+              "h": "Date Of Birth",
+              "n": "dateOfBirth",
+              "r": false,
+              "sh": "Date of birth",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "email",
-              "name": "email",
-              "req": true,
-              "short": "User's email address",
-              "type": "`$STRING`"
+            "email": {
+              "a": true,
+              "fo": "email",
+              "h": "Email",
+              "n": "email",
+              "r": true,
+              "sh": "User's email address",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "nidNumber",
-              "req": true,
-              "short": "National Identity Card number",
-              "type": "`$STRING`"
+            "nidNumber": {
+              "a": true,
+              "h": "Nid Number",
+              "n": "nidNumber",
+              "r": true,
+              "sh": "National Identity Card number",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "password",
-              "name": "password",
-              "req": true,
-              "short": "Account password",
-              "type": "`$STRING`"
+            "password": {
+              "a": true,
+              "fo": "password",
+              "h": "Password",
+              "n": "password",
+              "r": true,
+              "sh": "Account password",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "phone",
-              "req": false,
-              "short": "User's phone number",
-              "type": "`$STRING`"
+            "phone": {
+              "a": true,
+              "h": "Phone",
+              "n": "phone",
+              "r": false,
+              "sh": "User's phone number",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "registration",
           "op": {
             "create": {
@@ -488,18 +576,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /auth/register",
-                    "json": "{\"operationId\":\"registerUser\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"confirmPassword\":{\"description\":\"Password confirmation\",\"format\":\"password\",\"type\":\"string\"},\"dateOfBirth\":{\"description\":\"Date of birth\",\"format\":\"date\",\"type\":\"string\"},\"email\":{\"description\":\"User's email address\",\"format\":\"email\",\"type\":\"string\"},\"nidNumber\":{\"description\":\"National Identity Card number\",\"type\":\"string\"},\"password\":{\"description\":\"Account password\",\"format\":\"password\",\"type\":\"string\"},\"phone\":{\"description\":\"User's phone number\",\"type\":\"string\"}},\"required\":[\"nidNumber\",\"email\",\"password\",\"confirmPassword\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"type\":\"boolean\"},\"userId\":{\"description\":\"Newly created user ID\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Account successfully created\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid registration data\"},\"409\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Account already exists\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/auth/register",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/auth/register",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "auth"
                     },
@@ -507,8 +596,7 @@
                       "lit": "register"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -525,49 +613,55 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "code",
-              "req": true,
-              "short": "Verification code received",
-              "type": "`$STRING`"
+          "fields": {
+            "code": {
+              "a": true,
+              "h": "Code",
+              "n": "code",
+              "r": true,
+              "sh": "Verification code received",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "email",
-              "name": "email",
-              "req": true,
-              "short": "Registered email address",
-              "type": "`$STRING`"
+            "email": {
+              "a": true,
+              "fo": "email",
+              "h": "Email",
+              "n": "email",
+              "r": true,
+              "sh": "Registered email address",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "isOverseas",
-              "req": false,
-              "short": "Indicates if user is an overseas Bangladeshi",
-              "type": "`$BOOLEAN`"
+            "isOverseas": {
+              "a": true,
+              "h": "Is Overseas",
+              "n": "isOverseas",
+              "r": false,
+              "sh": "Indicates if user is an overseas Bangladeshi",
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "message",
-              "req": false,
-              "type": "`$STRING`"
+            "message": {
+              "a": true,
+              "h": "Message",
+              "n": "message",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "nidNumber",
-              "req": false,
-              "short": "National Identity Card number for verification",
-              "type": "`$STRING`"
+            "nidNumber": {
+              "a": true,
+              "h": "Nid Number",
+              "n": "nidNumber",
+              "r": false,
+              "sh": "National Identity Card number for verification",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "success",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "success": {
+              "a": true,
+              "h": "Success",
+              "n": "success",
+              "r": false,
+              "t": "`$BOOLEAN`"
             }
-          ],
+          },
           "name": "success",
           "op": {
             "create": {
@@ -575,18 +669,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /auth/password-reset",
-                    "json": "{\"operationId\":\"resetPassword\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"email\":{\"description\":\"Registered email address\",\"format\":\"email\",\"type\":\"string\"},\"nidNumber\":{\"description\":\"National Identity Card number for verification\",\"type\":\"string\"}},\"required\":[\"email\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Password reset instructions sent\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"User not found\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/auth/password-reset",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/auth/password-reset",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "auth"
                     },
@@ -594,25 +689,25 @@
                       "lit": "password-reset"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /verification/send-code",
-                    "json": "{\"operationId\":\"sendVerificationCode\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"email\":{\"description\":\"Email address to send verification code\",\"format\":\"email\",\"type\":\"string\"},\"isOverseas\":{\"description\":\"Indicates if user is an overseas Bangladeshi\",\"type\":\"boolean\"}},\"required\":[\"email\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Verification code sent successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid request data\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/verification/send-code",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/verification/send-code",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "verification"
                     },
@@ -620,25 +715,25 @@
                       "lit": "send-code"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /verification/verify-code",
-                    "json": "{\"operationId\":\"verifyCode\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Verification code received\",\"type\":\"string\"},\"email\":{\"description\":\"Email address\",\"format\":\"email\",\"type\":\"string\"}},\"required\":[\"email\",\"code\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"type\":\"string\"},\"success\":{\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Code verified successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"type\":\"string\"},\"details\":{\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"type\":\"string\"},\"success\":{\"default\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Invalid or expired verification code\"}},\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT authentication token obtained from login endpoint\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/verification/verify-code",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/verification/verify-code",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "verification"
                     },
@@ -646,8 +741,7 @@
                       "lit": "verify-code"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -1076,15 +1170,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "application_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         },
@@ -1097,19 +1191,19 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "application_status_ref01",
                 "srcdatavar": "application_status_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "application_status01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1129,15 +1223,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "login_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         },
@@ -1150,17 +1244,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "nid_management_ref01",
                 "srcdatavar": "nid_management_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1180,15 +1274,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "registration_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         },
@@ -1201,15 +1295,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "success_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         }

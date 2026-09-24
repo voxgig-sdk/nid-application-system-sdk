@@ -1,7 +1,7 @@
 // Typed models for the NidApplicationSystem SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -22,14 +22,6 @@ type ApplicationCreateData struct {
 
 // ApplicationStatus is the typed data model for the application_status entity.
 type ApplicationStatus struct {
-	ApplicationId *string `json:"applicationId,omitempty"`
-	ApplicationType *string `json:"applicationType,omitempty"`
-	Id *string `json:"id,omitempty"`
-	LastUpdated *string `json:"lastUpdated,omitempty"`
-	NidNumber *string `json:"nidNumber,omitempty"`
-	Remarks *string `json:"remarks,omitempty"`
-	Status *string `json:"status,omitempty"`
-	SubmissionDate *string `json:"submissionDate,omitempty"`
 }
 
 // ApplicationStatusLoadMatch is the typed request payload for ApplicationStatus.LoadTyped.
@@ -39,15 +31,6 @@ type ApplicationStatusLoadMatch struct {
 
 // Login is the typed data model for the login entity.
 type Login struct {
-	AccountStatus *string `json:"accountStatus,omitempty"`
-	Captcha string `json:"captcha"`
-	Email *string `json:"email,omitempty"`
-	FullName *string `json:"fullName,omitempty"`
-	NidNumber *string `json:"nidNumber,omitempty"`
-	Password string `json:"password"`
-	Phone *string `json:"phone,omitempty"`
-	UserId *string `json:"userId,omitempty"`
-	Username string `json:"username"`
 }
 
 // LoginCreateData is the typed request payload for Login.CreateTyped.
@@ -75,12 +58,6 @@ type NidManagementLoadMatch struct {
 
 // Registration is the typed data model for the registration entity.
 type Registration struct {
-	ConfirmPassword string `json:"confirmPassword"`
-	DateOfBirth *string `json:"dateOfBirth,omitempty"`
-	Email string `json:"email"`
-	NidNumber string `json:"nidNumber"`
-	Password string `json:"password"`
-	Phone *string `json:"phone,omitempty"`
 }
 
 // RegistrationCreateData is the typed request payload for Registration.CreateTyped.
@@ -95,12 +72,6 @@ type RegistrationCreateData struct {
 
 // Success is the typed data model for the success entity.
 type Success struct {
-	Code string `json:"code"`
-	Email string `json:"email"`
-	IsOverseas *bool `json:"isOverseas,omitempty"`
-	Message *string `json:"message,omitempty"`
-	NidNumber *string `json:"nidNumber,omitempty"`
-	Success *bool `json:"success,omitempty"`
 }
 
 // SuccessCreateData is the typed request payload for Success.CreateTyped.

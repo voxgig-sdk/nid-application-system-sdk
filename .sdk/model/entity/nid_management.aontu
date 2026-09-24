@@ -1,0 +1,67 @@
+# Entity: nid_management
+
+main: kit: entity: nid_management: {
+
+  alias: field: {}
+
+  name: "nid_management"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /nid/download"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "pdf"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "nid_number"
+                or: "nid_number"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/nid/download"
+          q: {
+            exist: [
+              "format"
+              "nid_number"
+            ]
+          }
+          s: [
+            {
+              lit: "nid"
+            }
+            {
+              lit: "download"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

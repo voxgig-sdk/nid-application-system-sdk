@@ -129,7 +129,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/application/correction",
@@ -141,20 +140,21 @@ def make_config():
                     "lit": "correction",
                   },
                 ],
-                "select": {
-                  "$action": "correction",
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "application",
                   "correction",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {
+                  "$action": "correction",
+                },
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/application/duplicate",
@@ -166,20 +166,21 @@ def make_config():
                     "lit": "duplicate",
                   },
                 ],
-                "select": {
-                  "$action": "duplicate",
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "application",
                   "duplicate",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {
+                  "$action": "duplicate",
+                },
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/application/new-registration",
@@ -191,17 +192,19 @@ def make_config():
                     "lit": "new-registration",
                   },
                 ],
-                "select": {
-                  "$action": "new_registration",
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "application",
                   "new-registration",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {
+                  "$action": "new_registration",
+                },
               },
             ],
           },
@@ -214,39 +217,47 @@ def make_config():
         "fields": [
           {
             "name": "applicationId",
+            "title": "Application Id",
             "type": "`$STRING`",
           },
           {
             "name": "applicationType",
+            "title": "Application Type",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
-            "format": "date-time",
             "name": "lastUpdated",
+            "title": "Last Updated",
             "type": "`$STRING`",
+            "format": "date-time",
           },
           {
             "name": "nidNumber",
-            "short": "NID number (if approved)",
+            "title": "Nid Number",
             "type": "`$STRING`",
+            "short": "NID number (if approved)",
           },
           {
             "name": "remarks",
-            "short": "Additional remarks or notes",
+            "title": "Remarks",
             "type": "`$STRING`",
+            "short": "Additional remarks or notes",
           },
           {
             "name": "status",
+            "title": "Status",
             "type": "`$STRING`",
           },
           {
-            "format": "date-time",
             "name": "submissionDate",
+            "title": "Submission Date",
             "type": "`$STRING`",
+            "format": "date-time",
           },
         ],
         "id": {
@@ -260,25 +271,9 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "application_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/application/status/{applicationId}",
-                "rename": {
-                  "param": {
-                    "applicationId": "id",
-                  },
-                },
                 "segments": [
                   {
                     "lit": "application",
@@ -290,20 +285,36 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "application",
                   "status",
                   "{id}",
                 ],
+                "rename": {
+                  "param": {
+                    "applicationId": "id",
+                  },
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "application_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },
@@ -316,47 +327,56 @@ def make_config():
         "fields": [
           {
             "name": "accountStatus",
+            "title": "Account Status",
             "type": "`$STRING`",
           },
           {
             "name": "captcha",
+            "title": "Captcha",
+            "type": "`$STRING`",
             "req": True,
             "short": "Captcha code displayed in the image",
-            "type": "`$STRING`",
           },
           {
-            "format": "email",
             "name": "email",
+            "title": "Email",
             "type": "`$STRING`",
+            "format": "email",
           },
           {
             "name": "fullName",
+            "title": "Full Name",
             "type": "`$STRING`",
           },
           {
             "name": "nidNumber",
+            "title": "Nid Number",
             "type": "`$STRING`",
           },
           {
-            "format": "password",
             "name": "password",
+            "title": "Password",
+            "type": "`$STRING`",
             "req": True,
             "short": "User's password",
-            "type": "`$STRING`",
+            "format": "password",
           },
           {
             "name": "phone",
+            "title": "Phone",
             "type": "`$STRING`",
           },
           {
             "name": "userId",
+            "title": "User Id",
             "type": "`$STRING`",
           },
           {
             "name": "username",
+            "title": "Username",
+            "type": "`$STRING`",
             "req": True,
             "short": "User's username or NID number",
-            "type": "`$STRING`",
           },
         ],
         "name": "login",
@@ -366,7 +386,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/auth/login",
@@ -378,15 +397,17 @@ def make_config():
                     "lit": "login",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.user`",
-                },
                 "parts": [
                   "auth",
                   "login",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.user`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -404,24 +425,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "pdf",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "nid_number",
-                      "orig": "nid_number",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/nid/download",
@@ -433,20 +436,39 @@ def make_config():
                     "lit": "download",
                   },
                 ],
+                "parts": [
+                  "nid",
+                  "download",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "pdf",
+                    },
+                    {
+                      "name": "nid_number",
+                      "orig": "nid_number",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "format",
                     "nid_number",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "nid",
-                  "download",
-                ],
               },
             ],
           },
@@ -458,42 +480,48 @@ def make_config():
       "registration": {
         "fields": [
           {
-            "format": "password",
             "name": "confirmPassword",
+            "title": "Confirm Password",
+            "type": "`$STRING`",
             "req": True,
             "short": "Password confirmation",
-            "type": "`$STRING`",
+            "format": "password",
           },
           {
-            "format": "date",
             "name": "dateOfBirth",
-            "short": "Date of birth",
+            "title": "Date Of Birth",
             "type": "`$STRING`",
+            "short": "Date of birth",
+            "format": "date",
           },
           {
-            "format": "email",
             "name": "email",
+            "title": "Email",
+            "type": "`$STRING`",
             "req": True,
             "short": "User's email address",
-            "type": "`$STRING`",
+            "format": "email",
           },
           {
             "name": "nidNumber",
+            "title": "Nid Number",
+            "type": "`$STRING`",
             "req": True,
             "short": "National Identity Card number",
-            "type": "`$STRING`",
           },
           {
-            "format": "password",
             "name": "password",
+            "title": "Password",
+            "type": "`$STRING`",
             "req": True,
             "short": "Account password",
-            "type": "`$STRING`",
+            "format": "password",
           },
           {
             "name": "phone",
-            "short": "User's phone number",
+            "title": "Phone",
             "type": "`$STRING`",
+            "short": "User's phone number",
           },
         ],
         "name": "registration",
@@ -503,7 +531,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/auth/register",
@@ -515,15 +542,17 @@ def make_config():
                     "lit": "register",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "auth",
                   "register",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -536,33 +565,39 @@ def make_config():
         "fields": [
           {
             "name": "code",
+            "title": "Code",
+            "type": "`$STRING`",
             "req": True,
             "short": "Verification code received",
-            "type": "`$STRING`",
           },
           {
-            "format": "email",
             "name": "email",
+            "title": "Email",
+            "type": "`$STRING`",
             "req": True,
             "short": "Registered email address",
-            "type": "`$STRING`",
+            "format": "email",
           },
           {
             "name": "isOverseas",
-            "short": "Indicates if user is an overseas Bangladeshi",
+            "title": "Is Overseas",
             "type": "`$BOOLEAN`",
+            "short": "Indicates if user is an overseas Bangladeshi",
           },
           {
             "name": "message",
+            "title": "Message",
             "type": "`$STRING`",
           },
           {
             "name": "nidNumber",
-            "short": "National Identity Card number for verification",
+            "title": "Nid Number",
             "type": "`$STRING`",
+            "short": "National Identity Card number for verification",
           },
           {
             "name": "success",
+            "title": "Success",
             "type": "`$BOOLEAN`",
           },
         ],
@@ -573,7 +608,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/auth/password-reset",
@@ -585,18 +619,19 @@ def make_config():
                     "lit": "password-reset",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "auth",
                   "password-reset",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/verification/send-code",
@@ -608,18 +643,19 @@ def make_config():
                     "lit": "send-code",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "verification",
                   "send-code",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/verification/verify-code",
@@ -631,15 +667,17 @@ def make_config():
                     "lit": "verify-code",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "verification",
                   "verify-code",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },

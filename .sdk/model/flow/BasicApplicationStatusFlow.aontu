@@ -1,0 +1,32 @@
+# BasicApplicationStatusFlow
+
+main: kit: flow: BasicApplicationStatusFlow:
+{
+  entity: "application_status",
+  kind: "basic",
+  name: "BasicApplicationStatusFlow",
+  step: [
+    {
+      i: {
+        ref: "application_status_ref01",
+        srcdatavar: "application_status_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "application_status01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-application_status_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicApplicationStatusFlow"
+}

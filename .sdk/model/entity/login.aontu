@@ -1,0 +1,101 @@
+# Entity: login
+
+main: kit: entity: login: {
+
+  alias: field: {}
+
+  fields: {
+    accountStatus: {
+      h: "Account Status"
+      n: "accountStatus"
+      r: false
+      t: "`$STRING`"
+    }
+    captcha: {
+      h: "Captcha"
+      n: "captcha"
+      r: true
+      sh: "Captcha code displayed in the image"
+      t: "`$STRING`"
+    }
+    email: {
+      fo: "email"
+      h: "Email"
+      n: "email"
+      r: false
+      t: "`$STRING`"
+    }
+    fullName: {
+      h: "Full Name"
+      n: "fullName"
+      r: false
+      t: "`$STRING`"
+    }
+    nidNumber: {
+      h: "Nid Number"
+      n: "nidNumber"
+      r: false
+      t: "`$STRING`"
+    }
+    password: {
+      fo: "password"
+      h: "Password"
+      n: "password"
+      r: true
+      sh: "User's password"
+      t: "`$STRING`"
+    }
+    phone: {
+      h: "Phone"
+      n: "phone"
+      r: false
+      t: "`$STRING`"
+    }
+    userId: {
+      h: "User Id"
+      n: "userId"
+      r: false
+      t: "`$STRING`"
+    }
+    username: {
+      h: "Username"
+      n: "username"
+      r: true
+      sh: "User's username or NID number"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "login"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /auth/login"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/auth/login"
+          s: [
+            {
+              lit: "auth"
+            }
+            {
+              lit: "login"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.user`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
