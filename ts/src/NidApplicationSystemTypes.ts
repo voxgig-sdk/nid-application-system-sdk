@@ -33,26 +33,22 @@ export interface ApplicationStatusLoadMatch {
 }
 
 export interface Login {
-  accountStatus?: string
   captcha: string
-  email?: string
-  fullName?: string
-  nidNumber?: string
+  expiresIn?: number
   password: string
-  phone?: string
-  userId?: string
+  success?: boolean
+  token?: string
+  user?: Record<string, any>
   username: string
 }
 
 export interface LoginCreateData {
-  accountStatus?: string
   captcha: string
-  email?: string
-  fullName?: string
-  nidNumber?: string
+  expiresIn?: number
   password: string
-  phone?: string
-  userId?: string
+  success?: boolean
+  token?: string
+  user?: Record<string, any>
   username: string
 }
 

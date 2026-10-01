@@ -35,14 +35,12 @@ type Login struct {
 
 // LoginCreateData is the typed request payload for Login.CreateTyped.
 type LoginCreateData struct {
-	AccountStatus *string `json:"accountStatus,omitempty"`
 	Captcha string `json:"captcha"`
-	Email *string `json:"email,omitempty"`
-	FullName *string `json:"fullName,omitempty"`
-	NidNumber *string `json:"nidNumber,omitempty"`
+	ExpiresIn *int `json:"expiresIn,omitempty"`
 	Password string `json:"password"`
-	Phone *string `json:"phone,omitempty"`
-	UserId *string `json:"userId,omitempty"`
+	Success *bool `json:"success,omitempty"`
+	Token *string `json:"token,omitempty"`
+	User *map[string]any `json:"user,omitempty"`
 	Username string `json:"username"`
 }
 

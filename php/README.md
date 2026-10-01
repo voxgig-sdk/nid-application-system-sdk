@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/nid-application-system-sdk/releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/nid-application-system-sdk
+composer config repositories.nid-application-system-sdk path ./nid-application-system-sdk/php
+composer require voxgig-sdk/nid-application-system-sdk:@dev
+```
 
 
 ## Tutorial: your first API call
@@ -280,14 +285,12 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
-| `accountStatus` |  |
 | `captcha` | Captcha code displayed in the image |
-| `email` |  |
-| `fullName` |  |
-| `nidNumber` |  |
+| `expiresIn` | Token expiration time in seconds |
 | `password` | User's password |
-| `phone` |  |
-| `userId` |  |
+| `success` |  |
+| `token` | Authentication token |
+| `user` |  |
 | `username` | User's username or NID number |
 
 Operations: Create.
@@ -401,14 +404,12 @@ Create an instance: `$login = $client->Login();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountStatus` | `string` |  |
 | `captcha` | `string` | Captcha code displayed in the image |
-| `email` | `string` |  |
-| `fullName` | `string` |  |
-| `nidNumber` | `string` |  |
+| `expiresIn` | `int` | Token expiration time in seconds |
 | `password` | `string` | User's password |
-| `phone` | `string` |  |
-| `userId` | `string` |  |
+| `success` | `bool` |  |
+| `token` | `string` | Authentication token |
+| `user` | `array` |  |
 | `username` | `string` | User's username or NID number |
 
 #### Example: Create

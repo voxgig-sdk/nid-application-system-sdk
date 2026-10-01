@@ -220,14 +220,12 @@ login = client.Login
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `accountStatus` | `String` | No |  |
 | `captcha` | `String` | Yes | Captcha code displayed in the image |
-| `email` | `String` | No |  |
-| `fullName` | `String` | No |  |
-| `nidNumber` | `String` | No |  |
+| `expiresIn` | `Integer` | No | Token expiration time in seconds |
 | `password` | `String` | Yes | User's password |
-| `phone` | `String` | No |  |
-| `userId` | `String` | No |  |
+| `success` | `Boolean` | No |  |
+| `token` | `String` | No | Authentication token |
+| `user` | `Hash` | No |  |
 | `username` | `String` | Yes | User's username or NID number |
 
 ### Operations

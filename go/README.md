@@ -295,14 +295,12 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
-| `"accountStatus"` |  |
 | `"captcha"` | Captcha code displayed in the image |
-| `"email"` |  |
-| `"fullName"` |  |
-| `"nidNumber"` |  |
+| `"expiresIn"` | Token expiration time in seconds |
 | `"password"` | User's password |
-| `"phone"` |  |
-| `"userId"` |  |
+| `"success"` |  |
+| `"token"` | Authentication token |
+| `"user"` |  |
 | `"username"` | User's username or NID number |
 
 Operations: Create.
@@ -423,14 +421,12 @@ Create an instance: `login := client.Login(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountStatus` | `string` |  |
 | `captcha` | `string` | Captcha code displayed in the image |
-| `email` | `string` |  |
-| `fullName` | `string` |  |
-| `nidNumber` | `string` |  |
+| `expiresIn` | `int` | Token expiration time in seconds |
 | `password` | `string` | User's password |
-| `phone` | `string` |  |
-| `userId` | `string` |  |
+| `success` | `bool` |  |
+| `token` | `string` | Authentication token |
+| `user` | `map[string]any` |  |
 | `username` | `string` | User's username or NID number |
 
 #### Example: Create

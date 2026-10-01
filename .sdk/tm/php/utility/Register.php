@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 NidApplicationSystemUtility::setRegistrar(function (NidApplicationSystemUtility $u): void {
     $u->clean = [NidApplicationSystemClean::class, 'call'];
+    $u->clean_add = [NidApplicationSystemClean::class, 'add'];
+    $u->clean_explain = [NidApplicationSystemDone::class, 'clean_explain'];
     $u->done = [NidApplicationSystemDone::class, 'call'];
     $u->make_error = [NidApplicationSystemMakeError::class, 'call'];
     $u->feature_add = [NidApplicationSystemFeatureAdd::class, 'call'];

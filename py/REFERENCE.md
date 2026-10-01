@@ -212,14 +212,12 @@ login = client.Login()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `accountStatus` | `str` | No |  |
 | `captcha` | `str` | Yes | Captcha code displayed in the image |
-| `email` | `str` | No |  |
-| `fullName` | `str` | No |  |
-| `nidNumber` | `str` | No |  |
+| `expiresIn` | `int` | No | Token expiration time in seconds |
 | `password` | `str` | Yes | User's password |
-| `phone` | `str` | No |  |
-| `userId` | `str` | No |  |
+| `success` | `bool` | No |  |
+| `token` | `str` | No | Authentication token |
+| `user` | `dict` | No |  |
 | `username` | `str` | Yes | User's username or NID number |
 
 ### Operations

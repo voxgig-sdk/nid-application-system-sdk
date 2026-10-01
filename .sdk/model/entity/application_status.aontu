@@ -80,7 +80,7 @@ main: kit: entity: application_status: {
               {
                 k: "param"
                 n: "id"
-                or: "application_id"
+                or: "applicationId"
                 r: true
                 t: "`$STRING`"
               }

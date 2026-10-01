@@ -262,14 +262,12 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
-| `accountStatus` |  |
 | `captcha` | Captcha code displayed in the image |
-| `email` |  |
-| `fullName` |  |
-| `nidNumber` |  |
+| `expiresIn` | Token expiration time in seconds |
 | `password` | User's password |
-| `phone` |  |
-| `userId` |  |
+| `success` |  |
+| `token` | Authentication token |
+| `user` |  |
 | `username` | User's username or NID number |
 
 Operations: Create.
@@ -382,14 +380,12 @@ Create an instance: `local login = client:Login(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountStatus` | `string` |  |
 | `captcha` | `string` | Captcha code displayed in the image |
-| `email` | `string` |  |
-| `fullName` | `string` |  |
-| `nidNumber` | `string` |  |
+| `expiresIn` | `number` | Token expiration time in seconds |
 | `password` | `string` | User's password |
-| `phone` | `string` |  |
-| `userId` | `string` |  |
+| `success` | `boolean` |  |
+| `token` | `string` | Authentication token |
+| `user` | `table` |  |
 | `username` | `string` | User's username or NID number |
 
 #### Example: Create

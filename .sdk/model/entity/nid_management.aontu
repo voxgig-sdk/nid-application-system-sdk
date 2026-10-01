@@ -28,7 +28,7 @@ main: kit: entity: nid_management: {
               {
                 k: "query"
                 n: "nid_number"
-                or: "nid_number"
+                or: "nidNumber"
                 r: true
                 t: "`$STRING`"
               }

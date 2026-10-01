@@ -44,28 +44,24 @@ class ApplicationStatusLoadMatch
 /** Login entity data model. */
 class Login
 {
-    public ?string $accountStatus = null;
     public string $captcha;
-    public ?string $email = null;
-    public ?string $fullName = null;
-    public ?string $nidNumber = null;
+    public ?int $expiresIn = null;
     public string $password;
-    public ?string $phone = null;
-    public ?string $userId = null;
+    public ?bool $success = null;
+    public ?string $token = null;
+    public ?array $user = null;
     public string $username;
 }
 
 /** Request payload for Login#create. */
 class LoginCreateData
 {
-    public ?string $accountStatus = null;
     public string $captcha;
-    public ?string $email = null;
-    public ?string $fullName = null;
-    public ?string $nidNumber = null;
+    public ?int $expiresIn = null;
     public string $password;
-    public ?string $phone = null;
-    public ?string $userId = null;
+    public ?bool $success = null;
+    public ?string $token = null;
+    public ?array $user = null;
     public string $username;
 }
 

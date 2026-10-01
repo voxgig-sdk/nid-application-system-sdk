@@ -38,7 +38,9 @@ SDK operations: `create`.
 Key fields to recognise:
 
 - `captcha`: Captcha code displayed in the image
+- `expiresIn`: Token expiration time in seconds
 - `password`: User&#39;s password
+- `token`: Authentication token
 - `username`: User&#39;s username or NID number
 
 ### NidManagement

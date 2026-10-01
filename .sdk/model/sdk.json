@@ -284,7 +284,7 @@
                         "a": true,
                         "k": "param",
                         "n": "id",
-                        "or": "application_id",
+                        "or": "applicationId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -332,13 +332,6 @@
             "field": {}
           },
           "fields": {
-            "accountStatus": {
-              "a": true,
-              "h": "Account Status",
-              "n": "accountStatus",
-              "r": false,
-              "t": "`$STRING`"
-            },
             "captcha": {
               "a": true,
               "h": "Captcha",
@@ -347,27 +340,13 @@
               "sh": "Captcha code displayed in the image",
               "t": "`$STRING`"
             },
-            "email": {
+            "expiresIn": {
               "a": true,
-              "fo": "email",
-              "h": "Email",
-              "n": "email",
+              "h": "Expires In",
+              "n": "expiresIn",
               "r": false,
-              "t": "`$STRING`"
-            },
-            "fullName": {
-              "a": true,
-              "h": "Full Name",
-              "n": "fullName",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "nidNumber": {
-              "a": true,
-              "h": "Nid Number",
-              "n": "nidNumber",
-              "r": false,
-              "t": "`$STRING`"
+              "sh": "Token expiration time in seconds",
+              "t": "`$INTEGER`"
             },
             "password": {
               "a": true,
@@ -378,19 +357,27 @@
               "sh": "User's password",
               "t": "`$STRING`"
             },
-            "phone": {
+            "success": {
               "a": true,
-              "h": "Phone",
-              "n": "phone",
+              "h": "Success",
+              "n": "success",
               "r": false,
+              "t": "`$BOOLEAN`"
+            },
+            "token": {
+              "a": true,
+              "h": "Token",
+              "n": "token",
+              "r": false,
+              "sh": "Authentication token",
               "t": "`$STRING`"
             },
-            "userId": {
+            "user": {
               "a": true,
-              "h": "User Id",
-              "n": "userId",
+              "h": "User",
+              "n": "user",
               "r": false,
-              "t": "`$STRING`"
+              "t": "`$OBJECT`"
             },
             "username": {
               "a": true,
@@ -430,7 +417,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.user`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -474,7 +461,7 @@
                         "a": true,
                         "k": "query",
                         "n": "nid_number",
-                        "or": "nid_number",
+                        "or": "nidNumber",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -1352,7 +1339,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

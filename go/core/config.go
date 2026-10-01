@@ -278,7 +278,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "id",
-											"orig": "application_id",
+											"orig": "applicationId",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -301,11 +301,6 @@ func MakeConfig() map[string]any {
 			"login": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "accountStatus",
-						"title": "Account Status",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "captcha",
 						"title": "Captcha",
 						"type": "`$STRING`",
@@ -313,20 +308,10 @@ func MakeConfig() map[string]any {
 						"short": "Captcha code displayed in the image",
 					},
 					map[string]any{
-						"name": "email",
-						"title": "Email",
-						"type": "`$STRING`",
-						"format": "email",
-					},
-					map[string]any{
-						"name": "fullName",
-						"title": "Full Name",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "nidNumber",
-						"title": "Nid Number",
-						"type": "`$STRING`",
+						"name": "expiresIn",
+						"title": "Expires In",
+						"type": "`$INTEGER`",
+						"short": "Token expiration time in seconds",
 					},
 					map[string]any{
 						"name": "password",
@@ -337,14 +322,20 @@ func MakeConfig() map[string]any {
 						"format": "password",
 					},
 					map[string]any{
-						"name": "phone",
-						"title": "Phone",
-						"type": "`$STRING`",
+						"name": "success",
+						"title": "Success",
+						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
-						"name": "userId",
-						"title": "User Id",
+						"name": "token",
+						"title": "Token",
 						"type": "`$STRING`",
+						"short": "Authentication token",
+					},
+					map[string]any{
+						"name": "user",
+						"title": "User",
+						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "username",
@@ -379,7 +370,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.user`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
@@ -431,7 +422,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "nid_number",
-											"orig": "nid_number",
+											"orig": "nidNumber",
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,

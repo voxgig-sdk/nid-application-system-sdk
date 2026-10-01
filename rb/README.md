@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/nid-application-system-sdk/releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/nid-application-system-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-nid-application-system-sdk", path: "./nid-application-system-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -270,14 +279,12 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
-| `accountStatus` |  |
 | `captcha` | Captcha code displayed in the image |
-| `email` |  |
-| `fullName` |  |
-| `nidNumber` |  |
+| `expiresIn` | Token expiration time in seconds |
 | `password` | User's password |
-| `phone` |  |
-| `userId` |  |
+| `success` |  |
+| `token` | Authentication token |
+| `user` |  |
 | `username` | User's username or NID number |
 
 Operations: Create.
@@ -391,14 +398,12 @@ Create an instance: `login = client.Login`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountStatus` | `String` |  |
 | `captcha` | `String` | Captcha code displayed in the image |
-| `email` | `String` |  |
-| `fullName` | `String` |  |
-| `nidNumber` | `String` |  |
+| `expiresIn` | `Integer` | Token expiration time in seconds |
 | `password` | `String` | User's password |
-| `phone` | `String` |  |
-| `userId` | `String` |  |
+| `success` | `Boolean` |  |
+| `token` | `String` | Authentication token |
+| `user` | `Hash` |  |
 | `username` | `String` | User's username or NID number |
 
 #### Example: Create

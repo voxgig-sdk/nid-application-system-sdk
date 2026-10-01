@@ -219,14 +219,12 @@ $login = $client->Login();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `accountStatus` | `string` | No |  |
 | `captcha` | `string` | Yes | Captcha code displayed in the image |
-| `email` | `string` | No |  |
-| `fullName` | `string` | No |  |
-| `nidNumber` | `string` | No |  |
+| `expiresIn` | `int` | No | Token expiration time in seconds |
 | `password` | `string` | Yes | User's password |
-| `phone` | `string` | No |  |
-| `userId` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `token` | `string` | No | Authentication token |
+| `user` | `array` | No |  |
 | `username` | `string` | Yes | User's username or NID number |
 
 ### Operations

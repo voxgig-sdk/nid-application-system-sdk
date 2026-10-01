@@ -64,82 +64,66 @@ ApplicationStatusLoadMatch = Struct.new(
 
 # Login entity data model.
 #
-# @!attribute [rw] accountStatus
-#   @return [String, nil]
-#
 # @!attribute [rw] captcha
 #   @return [String]
 #
-# @!attribute [rw] email
-#   @return [String, nil]
-#
-# @!attribute [rw] fullName
-#   @return [String, nil]
-#
-# @!attribute [rw] nidNumber
-#   @return [String, nil]
+# @!attribute [rw] expiresIn
+#   @return [Integer, nil]
 #
 # @!attribute [rw] password
 #   @return [String]
 #
-# @!attribute [rw] phone
+# @!attribute [rw] success
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] token
 #   @return [String, nil]
 #
-# @!attribute [rw] userId
-#   @return [String, nil]
+# @!attribute [rw] user
+#   @return [Hash, nil]
 #
 # @!attribute [rw] username
 #   @return [String]
 Login = Struct.new(
-  :accountStatus,
   :captcha,
-  :email,
-  :fullName,
-  :nidNumber,
+  :expiresIn,
   :password,
-  :phone,
-  :userId,
+  :success,
+  :token,
+  :user,
   :username,
   keyword_init: true
 )
 
 # Request payload for Login#create.
 #
-# @!attribute [rw] accountStatus
-#   @return [String, nil]
-#
 # @!attribute [rw] captcha
 #   @return [String]
 #
-# @!attribute [rw] email
-#   @return [String, nil]
-#
-# @!attribute [rw] fullName
-#   @return [String, nil]
-#
-# @!attribute [rw] nidNumber
-#   @return [String, nil]
+# @!attribute [rw] expiresIn
+#   @return [Integer, nil]
 #
 # @!attribute [rw] password
 #   @return [String]
 #
-# @!attribute [rw] phone
+# @!attribute [rw] success
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] token
 #   @return [String, nil]
 #
-# @!attribute [rw] userId
-#   @return [String, nil]
+# @!attribute [rw] user
+#   @return [Hash, nil]
 #
 # @!attribute [rw] username
 #   @return [String]
 LoginCreateData = Struct.new(
-  :accountStatus,
   :captcha,
-  :email,
-  :fullName,
-  :nidNumber,
+  :expiresIn,
   :password,
-  :phone,
-  :userId,
+  :success,
+  :token,
+  :user,
   :username,
   keyword_init: true
 )

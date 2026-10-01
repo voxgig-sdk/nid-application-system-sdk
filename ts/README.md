@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/nid-application-system-sdk/releases](https://github.com/voxgig-sdk/nid-application-system-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/nid-application-system-sdk
+npm install ./nid-application-system-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -323,14 +327,12 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
-| `accountStatus` |  |
 | `captcha` | Captcha code displayed in the image |
-| `email` |  |
-| `fullName` |  |
-| `nidNumber` |  |
+| `expiresIn` | Token expiration time in seconds |
 | `password` | User's password |
-| `phone` |  |
-| `userId` |  |
+| `success` |  |
+| `token` | Authentication token |
+| `user` |  |
 | `username` | User's username or NID number |
 
 Operations: create.
@@ -443,14 +445,12 @@ Create an instance: `const login = client.Login()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountStatus` | `string` |  |
 | `captcha` | `string` | Captcha code displayed in the image |
-| `email` | `string` |  |
-| `fullName` | `string` |  |
-| `nidNumber` | `string` |  |
+| `expiresIn` | `number` | Token expiration time in seconds |
 | `password` | `string` | User's password |
-| `phone` | `string` |  |
-| `userId` | `string` |  |
+| `success` | `boolean` |  |
+| `token` | `string` | Authentication token |
+| `user` | `Record<string, any>` |  |
 | `username` | `string` | User's username or NID number |
 
 #### Example: Create

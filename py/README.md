@@ -274,14 +274,12 @@ API path: `/application/status/{applicationId}`
 
 | Field | Description |
 | --- | --- |
-| `accountStatus` |  |
 | `captcha` | Captcha code displayed in the image |
-| `email` |  |
-| `fullName` |  |
-| `nidNumber` |  |
+| `expiresIn` | Token expiration time in seconds |
 | `password` | User's password |
-| `phone` |  |
-| `userId` |  |
+| `success` |  |
+| `token` | Authentication token |
+| `user` |  |
 | `username` | User's username or NID number |
 
 Operations: Create.
@@ -394,14 +392,12 @@ Create an instance: `login = client.Login()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accountStatus` | `str` |  |
 | `captcha` | `str` | Captcha code displayed in the image |
-| `email` | `str` |  |
-| `fullName` | `str` |  |
-| `nidNumber` | `str` |  |
+| `expiresIn` | `int` | Token expiration time in seconds |
 | `password` | `str` | User's password |
-| `phone` | `str` |  |
-| `userId` | `str` |  |
+| `success` | `bool` |  |
+| `token` | `str` | Authentication token |
+| `user` | `dict` |  |
 | `username` | `str` | User's username or NID number |
 
 #### Example: Create

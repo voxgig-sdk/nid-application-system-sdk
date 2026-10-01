@@ -5,12 +5,6 @@ main: kit: entity: login: {
   alias: field: {}
 
   fields: {
-    accountStatus: {
-      h: "Account Status"
-      n: "accountStatus"
-      r: false
-      t: "`$STRING`"
-    }
     captcha: {
       h: "Captcha"
       n: "captcha"
@@ -18,24 +12,12 @@ main: kit: entity: login: {
       sh: "Captcha code displayed in the image"
       t: "`$STRING`"
     }
-    email: {
-      fo: "email"
-      h: "Email"
-      n: "email"
+    expiresIn: {
+      h: "Expires In"
+      n: "expiresIn"
       r: false
-      t: "`$STRING`"
-    }
-    fullName: {
-      h: "Full Name"
-      n: "fullName"
-      r: false
-      t: "`$STRING`"
-    }
-    nidNumber: {
-      h: "Nid Number"
-      n: "nidNumber"
-      r: false
-      t: "`$STRING`"
+      sh: "Token expiration time in seconds"
+      t: "`$INTEGER`"
     }
     password: {
       fo: "password"
@@ -45,17 +27,24 @@ main: kit: entity: login: {
       sh: "User's password"
       t: "`$STRING`"
     }
-    phone: {
-      h: "Phone"
-      n: "phone"
+    success: {
+      h: "Success"
+      n: "success"
       r: false
+      t: "`$BOOLEAN`"
+    }
+    token: {
+      h: "Token"
+      n: "token"
+      r: false
+      sh: "Authentication token"
       t: "`$STRING`"
     }
-    userId: {
-      h: "User Id"
-      n: "userId"
+    user: {
+      h: "User"
+      n: "user"
       r: false
-      t: "`$STRING`"
+      t: "`$OBJECT`"
     }
     username: {
       h: "Username"
@@ -89,7 +78,7 @@ main: kit: entity: login: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.user`"
+            res: "`body`"
           }
         }
       ]

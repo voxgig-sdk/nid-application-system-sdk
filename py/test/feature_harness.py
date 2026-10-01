@@ -20,6 +20,7 @@ from nidapplicationsystem_sdk.core.control import NidApplicationSystemControl
 from nidapplicationsystem_sdk.core.error import NidApplicationSystemError
 from nidapplicationsystem_sdk.core.result import NidApplicationSystemResult
 from nidapplicationsystem_sdk.core.spec import NidApplicationSystemSpec
+from nidapplicationsystem_sdk.utility.clean import clean_util, clean_add_util
 
 
 # True when this SDK was generated with the named feature.
@@ -115,6 +116,9 @@ def build_url(spec):
 class _Utility:
     def __init__(self, fetcher):
         self.fetcher = fetcher
+        # The real ones: every feature record leaves through clean.
+        self.clean = clean_util
+        self.clean_add = clean_add_util
 
         def param(ctx, name):
             params = ctx.spec.params if ctx.spec is not None else {}

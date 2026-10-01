@@ -24,25 +24,21 @@
 ---@field id string
 
 ---@class Login
----@field accountStatus? string
 ---@field captcha string
----@field email? string
----@field fullName? string
----@field nidNumber? string
+---@field expiresIn? number
 ---@field password string
----@field phone? string
----@field userId? string
+---@field success? boolean
+---@field token? string
+---@field user? table
 ---@field username string
 
 ---@class LoginCreateData
----@field accountStatus? string
 ---@field captcha string
----@field email? string
----@field fullName? string
----@field nidNumber? string
+---@field expiresIn? number
 ---@field password string
----@field phone? string
----@field userId? string
+---@field success? boolean
+---@field token? string
+---@field user? table
 ---@field username string
 
 ---@class NidManagement

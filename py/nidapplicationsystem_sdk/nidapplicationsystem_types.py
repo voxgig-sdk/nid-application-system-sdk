@@ -46,12 +46,10 @@ class LoginRequired(TypedDict):
 
 
 class Login(LoginRequired, total=False):
-    accountStatus: str
-    email: str
-    fullName: str
-    nidNumber: str
-    phone: str
-    userId: str
+    expiresIn: int
+    success: bool
+    token: str
+    user: dict
 
 
 class LoginCreateDataRequired(TypedDict):
@@ -61,12 +59,10 @@ class LoginCreateDataRequired(TypedDict):
 
 
 class LoginCreateData(LoginCreateDataRequired, total=False):
-    accountStatus: str
-    email: str
-    fullName: str
-    nidNumber: str
-    phone: str
-    userId: str
+    expiresIn: int
+    success: bool
+    token: str
+    user: dict
 
 
 class NidManagement(TypedDict):

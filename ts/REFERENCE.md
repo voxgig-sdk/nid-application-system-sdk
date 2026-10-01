@@ -301,14 +301,12 @@ const login = client.Login()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `accountStatus` | `string` | No |  |
 | `captcha` | `string` | Yes | Captcha code displayed in the image |
-| `email` | `string` | No |  |
-| `fullName` | `string` | No |  |
-| `nidNumber` | `string` | No |  |
+| `expiresIn` | `number` | No | Token expiration time in seconds |
 | `password` | `string` | Yes | User's password |
-| `phone` | `string` | No |  |
-| `userId` | `string` | No |  |
+| `success` | `boolean` | No |  |
+| `token` | `string` | No | Authentication token |
+| `user` | `Record<string, any>` | No |  |
 | `username` | `string` | Yes | User's username or NID number |
 
 ### Operations

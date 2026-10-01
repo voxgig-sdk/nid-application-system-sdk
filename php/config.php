@@ -300,7 +300,7 @@ class NidApplicationSystemConfig
                     'params' => [
                       [
                         'name' => 'id',
-                        'orig' => 'application_id',
+                        'orig' => 'applicationId',
                         'type' => '`$STRING`',
                         'kind' => 'param',
                         'reqd' => true,
@@ -323,11 +323,6 @@ class NidApplicationSystemConfig
         'login' => [
           'fields' => [
             [
-              'name' => 'accountStatus',
-              'title' => 'Account Status',
-              'type' => '`$STRING`',
-            ],
-            [
               'name' => 'captcha',
               'title' => 'Captcha',
               'type' => '`$STRING`',
@@ -335,20 +330,10 @@ class NidApplicationSystemConfig
               'short' => 'Captcha code displayed in the image',
             ],
             [
-              'name' => 'email',
-              'title' => 'Email',
-              'type' => '`$STRING`',
-              'format' => 'email',
-            ],
-            [
-              'name' => 'fullName',
-              'title' => 'Full Name',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'nidNumber',
-              'title' => 'Nid Number',
-              'type' => '`$STRING`',
+              'name' => 'expiresIn',
+              'title' => 'Expires In',
+              'type' => '`$INTEGER`',
+              'short' => 'Token expiration time in seconds',
             ],
             [
               'name' => 'password',
@@ -359,14 +344,20 @@ class NidApplicationSystemConfig
               'format' => 'password',
             ],
             [
-              'name' => 'phone',
-              'title' => 'Phone',
-              'type' => '`$STRING`',
+              'name' => 'success',
+              'title' => 'Success',
+              'type' => '`$BOOLEAN`',
             ],
             [
-              'name' => 'userId',
-              'title' => 'User Id',
+              'name' => 'token',
+              'title' => 'Token',
               'type' => '`$STRING`',
+              'short' => 'Authentication token',
+            ],
+            [
+              'name' => 'user',
+              'title' => 'User',
+              'type' => '`$OBJECT`',
             ],
             [
               'name' => 'username',
@@ -401,7 +392,7 @@ class NidApplicationSystemConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.user`',
+                    'res' => '`body`',
                   ],
                   'args' => [],
                   'select' => [],
@@ -453,7 +444,7 @@ class NidApplicationSystemConfig
                       ],
                       [
                         'name' => 'nid_number',
-                        'orig' => 'nid_number',
+                        'orig' => 'nidNumber',
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
