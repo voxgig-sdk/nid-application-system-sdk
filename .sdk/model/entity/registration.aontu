@@ -59,6 +59,14 @@ main: kit: entity: registration: {
       name: "create"
       points: [
         {
+          bf: [
+            "confirmPassword"
+            "dateOfBirth"
+            "email"
+            "nidNumber"
+            "password"
+            "phone"
+          ]
           co: {
             id: "POST /auth/register"
             source: "openapi3"
@@ -66,6 +74,10 @@ main: kit: entity: registration: {
           }
           m: "POST"
           o: "/auth/register"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "auth"

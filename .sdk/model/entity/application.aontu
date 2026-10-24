@@ -20,6 +20,36 @@ main: kit: entity: application: {
           q: {
             "$action": "correction"
           }
+          rb: {
+            fields: [
+              {
+                name: "correctedValue"
+              }
+              {
+                name: "correctionType"
+              }
+              {
+                name: "currentValue"
+              }
+              {
+                name: "nidNumber"
+              }
+              {
+                name: "reason"
+              }
+              {
+                binary: true
+                list: true
+                name: "supportingDocuments"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "application"
@@ -34,6 +64,12 @@ main: kit: entity: application: {
           }
         }
         {
+          bf: [
+            "additionalInfo"
+            "nidNumber"
+            "policeReportNumber"
+            "reason"
+          ]
           co: {
             id: "POST /application/duplicate"
             source: "openapi3"
@@ -43,6 +79,10 @@ main: kit: entity: application: {
           o: "/application/duplicate"
           q: {
             "$action": "duplicate"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -67,6 +107,53 @@ main: kit: entity: application: {
           o: "/application/new-registration"
           q: {
             "$action": "new_registration"
+          }
+          rb: {
+            fields: [
+              {
+                name: "address"
+              }
+              {
+                name: "dateOfBirth"
+              }
+              {
+                name: "fatherName"
+              }
+              {
+                name: "fullName"
+              }
+              {
+                name: "fullNameEnglish"
+              }
+              {
+                name: "gender"
+              }
+              {
+                name: "isOverseas"
+              }
+              {
+                name: "motherName"
+              }
+              {
+                binary: true
+                name: "photograph"
+              }
+              {
+                binary: true
+                name: "signature"
+              }
+              {
+                binary: true
+                list: true
+                name: "supportingDocuments"
+              }
+            ]
+            kind: "multipart"
+            media: "multipart/form-data"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

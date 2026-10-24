@@ -102,6 +102,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -179,6 +180,36 @@ class Config {
               "args": {},
               "select": {
                 "$action": "correction"
+              },
+              "body": {
+                "fields": [
+                  {
+                    "name": "correctedValue"
+                  },
+                  {
+                    "name": "correctionType"
+                  },
+                  {
+                    "name": "currentValue"
+                  },
+                  {
+                    "name": "nidNumber"
+                  },
+                  {
+                    "name": "reason"
+                  },
+                  {
+                    "binary": true,
+                    "list": true,
+                    "name": "supportingDocuments"
+                  }
+                ],
+                "kind": "multipart",
+                "media": "multipart/form-data"
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -205,6 +236,10 @@ class Config {
               "args": {},
               "select": {
                 "$action": "duplicate"
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             },
             {
@@ -231,6 +266,53 @@ class Config {
               "args": {},
               "select": {
                 "$action": "new_registration"
+              },
+              "body": {
+                "fields": [
+                  {
+                    "name": "address"
+                  },
+                  {
+                    "name": "dateOfBirth"
+                  },
+                  {
+                    "name": "fatherName"
+                  },
+                  {
+                    "name": "fullName"
+                  },
+                  {
+                    "name": "fullNameEnglish"
+                  },
+                  {
+                    "name": "gender"
+                  },
+                  {
+                    "name": "isOverseas"
+                  },
+                  {
+                    "name": "motherName"
+                  },
+                  {
+                    "binary": true,
+                    "name": "photograph"
+                  },
+                  {
+                    "binary": true,
+                    "name": "signature"
+                  },
+                  {
+                    "binary": true,
+                    "list": true,
+                    "name": "supportingDocuments"
+                  }
+                ],
+                "kind": "multipart",
+                "media": "multipart/form-data"
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -341,6 +423,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -425,7 +511,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         }
@@ -483,9 +573,20 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "format",
                   "nid_number"
                 ]
+              },
+              "response": {
+                "alternatives": [
+                  {
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "image/png"
+                  }
+                ],
+                "binary": true,
+                "kind": "raw",
+                "media": "application/pdf"
               }
             }
           ]
@@ -570,7 +671,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         }
@@ -647,7 +752,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             },
             {
               "kind": "http",
@@ -671,7 +780,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             },
             {
               "kind": "http",
@@ -695,7 +808,11 @@ class Config {
                 "res": "`body`"
               },
               "args": {},
-              "select": {}
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
+              }
             }
           ]
         }

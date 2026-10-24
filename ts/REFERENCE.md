@@ -148,8 +148,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -163,6 +165,15 @@ same parameters as `direct()`.
 Alias for `NidApplicationSystemSDK.test()`.
 
 **Returns:** `NidApplicationSystemSDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -199,12 +210,7 @@ const result = await client.Application().create({
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
-
-```ts
-const result = await client.Application().create({
-})
-```
+Create a new entity with the given data. Resolves to the created entity.
 
 ### Common Methods
 
@@ -257,7 +263,7 @@ const application_status = client.ApplicationStatus()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ApplicationStatus().load({ id: 'application_status_id' })
@@ -313,7 +319,7 @@ const login = client.Login()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Login().create({
@@ -361,7 +367,7 @@ const nid_management = client.NidManagement()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.NidManagement().load({ nid_number: 'nid_number' })
@@ -416,7 +422,7 @@ const registration = client.Registration()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Registration().create({
@@ -476,7 +482,7 @@ const success = client.Success()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Success().create({
@@ -670,6 +676,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

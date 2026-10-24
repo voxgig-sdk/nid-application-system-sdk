@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -124,6 +125,36 @@ local function make_config()
                 ["select"] = {
                   ["$action"] = "correction",
                 },
+                ["body"] = {
+                  ["fields"] = {
+                    {
+                      ["name"] = "correctedValue",
+                    },
+                    {
+                      ["name"] = "correctionType",
+                    },
+                    {
+                      ["name"] = "currentValue",
+                    },
+                    {
+                      ["name"] = "nidNumber",
+                    },
+                    {
+                      ["name"] = "reason",
+                    },
+                    {
+                      ["binary"] = true,
+                      ["list"] = true,
+                      ["name"] = "supportingDocuments",
+                    },
+                  },
+                  ["kind"] = "multipart",
+                  ["media"] = "multipart/form-data",
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
               {
                 ["kind"] = "http",
@@ -150,6 +181,10 @@ local function make_config()
                 ["select"] = {
                   ["$action"] = "duplicate",
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
               {
                 ["kind"] = "http",
@@ -175,6 +210,53 @@ local function make_config()
                 ["args"] = {},
                 ["select"] = {
                   ["$action"] = "new_registration",
+                },
+                ["body"] = {
+                  ["fields"] = {
+                    {
+                      ["name"] = "address",
+                    },
+                    {
+                      ["name"] = "dateOfBirth",
+                    },
+                    {
+                      ["name"] = "fatherName",
+                    },
+                    {
+                      ["name"] = "fullName",
+                    },
+                    {
+                      ["name"] = "fullNameEnglish",
+                    },
+                    {
+                      ["name"] = "gender",
+                    },
+                    {
+                      ["name"] = "isOverseas",
+                    },
+                    {
+                      ["name"] = "motherName",
+                    },
+                    {
+                      ["binary"] = true,
+                      ["name"] = "photograph",
+                    },
+                    {
+                      ["binary"] = true,
+                      ["name"] = "signature",
+                    },
+                    {
+                      ["binary"] = true,
+                      ["list"] = true,
+                      ["name"] = "supportingDocuments",
+                    },
+                  },
+                  ["kind"] = "multipart",
+                  ["media"] = "multipart/form-data",
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -286,6 +368,10 @@ local function make_config()
                     "id",
                   },
                 },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -370,6 +456,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -427,9 +517,20 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "format",
                     "nid_number",
                   },
+                },
+                ["response"] = {
+                  ["alternatives"] = {
+                    {
+                      ["binary"] = true,
+                      ["kind"] = "raw",
+                      ["media"] = "image/png",
+                    },
+                  },
+                  ["binary"] = true,
+                  ["kind"] = "raw",
+                  ["media"] = "application/pdf",
                 },
               },
             },
@@ -515,6 +616,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },
@@ -592,6 +697,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
               {
                 ["kind"] = "http",
@@ -616,6 +725,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
               {
                 ["kind"] = "http",
@@ -640,6 +753,10 @@ local function make_config()
                 },
                 ["args"] = {},
                 ["select"] = {},
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
+                },
               },
             },
           },

@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { NidApplicationSystemSDK, BaseFeature, stdutil } from '../../..'
+import { NidApplicationSystemSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('SuccessEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = NidApplicationSystemSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Success().create({"code":1,"email":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_LIVE
@@ -51,7 +63,7 @@ describe('SuccessEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"code":{"a":true,"h":"Code","n":"code","r":true,"sh":"Verification code received","t":"`$STRING`","key$":"code","index$":0},"email":{"a":true,"fo":"email","h":"Email","n":"email","r":true,"sh":"Registered email address","t":"`$STRING`","key$":"email","index$":1},"isOverseas":{"a":true,"h":"Is Overseas","n":"isOverseas","r":false,"sh":"Indicates if user is an overseas Bangladeshi","t":"`$BOOLEAN`","key$":"isOverseas","index$":2},"message":{"a":true,"h":"Message","n":"message","r":false,"t":"`$STRING`","key$":"message","index$":3},"nidNumber":{"a":true,"h":"Nid Number","n":"nidNumber","r":false,"sh":"National Identity Card number for verification","t":"`$STRING`","key$":"nidNumber","index$":4},"success":{"a":true,"h":"Success","n":"success","r":false,"t":"`$BOOLEAN`","key$":"success","index$":5}},"name":"success","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /auth/password-reset","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/auth/password-reset","q":{},"r":{},"s":[{"lit":"auth"},{"lit":"password-reset"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"POST /verification/send-code","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/verification/send-code","q":{},"r":{},"s":[{"lit":"verification"},{"lit":"send-code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"POST /verification/verify-code","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/verification/verify-code","q":{},"r":{},"s":[{"lit":"verification"},{"lit":"verify-code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"success","name__orig":"success","Name":"Success","name_":"success","name-":"success","NAME":"SUCCESS","index$":5}, {"active":true,"entity":"success","key$":"BasicSuccessFlow","kind":"basic","name":"BasicSuccessFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"success_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Success', {"POST /auth/password-reset":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email"],"properties":{"email":{"type":"string","format":"email","description":"Registered email address","key$":"email"},"nidNumber":{"type":"string","description":"National Identity Card number for verification","key$":"nidNumber"}},"x-ref":"#/components/schemas/PasswordResetRequest","index$":1}}}},"parameters":[]},"POST /verification/send-code":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email"],"properties":{"email":{"type":"string","format":"email","description":"Email address to send verification code","key$":"email"},"isOverseas":{"type":"boolean","description":"Indicates if user is an overseas Bangladeshi","key$":"isOverseas"}},"x-ref":"#/components/schemas/VerificationCodeRequest","index$":1}}}},"parameters":[]},"POST /verification/verify-code":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email","code"],"properties":{"email":{"type":"string","format":"email","description":"Email address","key$":"email"},"code":{"type":"string","description":"Verification code received","key$":"code"}},"x-ref":"#/components/schemas/VerifyCodeRequest","index$":1}}}},"parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"code":{"a":true,"h":"Code","n":"code","r":true,"sh":"Verification code received","t":"`$STRING`","key$":"code","index$":0},"email":{"a":true,"fo":"email","h":"Email","n":"email","r":true,"sh":"Registered email address","t":"`$STRING`","key$":"email","index$":1},"isOverseas":{"a":true,"h":"Is Overseas","n":"isOverseas","r":false,"sh":"Indicates if user is an overseas Bangladeshi","t":"`$BOOLEAN`","key$":"isOverseas","index$":2},"message":{"a":true,"h":"Message","n":"message","r":false,"t":"`$STRING`","key$":"message","index$":3},"nidNumber":{"a":true,"h":"Nid Number","n":"nidNumber","r":false,"sh":"National Identity Card number for verification","t":"`$STRING`","key$":"nidNumber","index$":4},"success":{"a":true,"h":"Success","n":"success","r":false,"t":"`$BOOLEAN`","key$":"success","index$":5}},"name":"success","op":{"create":{"input":"data","name":"create","points":[{"a":true,"bf":["email","nidNumber"],"co":{"id":"POST /auth/password-reset","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/auth/password-reset","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"auth"},{"lit":"password-reset"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"bf":["email","isOverseas"],"co":{"id":"POST /verification/send-code","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/verification/send-code","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"verification"},{"lit":"send-code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"bf":["code","email"],"co":{"id":"POST /verification/verify-code","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/verification/verify-code","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"verification"},{"lit":"verify-code"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"success","name__orig":"success","Name":"Success","name_":"success","name-":"success","NAME":"SUCCESS","index$":5}, {"active":true,"entity":"success","key$":"BasicSuccessFlow","kind":"basic","name":"BasicSuccessFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"success_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Success', {"POST /auth/password-reset":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email"],"properties":{"email":{"type":"string","format":"email","description":"Registered email address","key$":"email"},"nidNumber":{"type":"string","description":"National Identity Card number for verification","key$":"nidNumber"}},"x-ref":"#/components/schemas/PasswordResetRequest","index$":1}}}},"parameters":[]},"POST /verification/send-code":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email"],"properties":{"email":{"type":"string","format":"email","description":"Email address to send verification code","key$":"email"},"isOverseas":{"type":"boolean","description":"Indicates if user is an overseas Bangladeshi","key$":"isOverseas"}},"x-ref":"#/components/schemas/VerificationCodeRequest","index$":1}}}},"parameters":[]},"POST /verification/verify-code":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email","code"],"properties":{"email":{"type":"string","format":"email","description":"Email address","key$":"email"},"code":{"type":"string","description":"Verification code received","key$":"code"}},"x-ref":"#/components/schemas/VerifyCodeRequest","index$":1}}}},"parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('SuccessEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

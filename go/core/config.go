@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -128,6 +129,36 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"$action": "correction",
 								},
+								"body": map[string]any{
+									"fields": []any{
+										map[string]any{
+											"name": "correctedValue",
+										},
+										map[string]any{
+											"name": "correctionType",
+										},
+										map[string]any{
+											"name": "currentValue",
+										},
+										map[string]any{
+											"name": "nidNumber",
+										},
+										map[string]any{
+											"name": "reason",
+										},
+										map[string]any{
+											"binary": true,
+											"list": true,
+											"name": "supportingDocuments",
+										},
+									},
+									"kind": "multipart",
+									"media": "multipart/form-data",
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -154,6 +185,10 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"$action": "duplicate",
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -179,6 +214,53 @@ func MakeConfig() map[string]any {
 								"args": map[string]any{},
 								"select": map[string]any{
 									"$action": "new_registration",
+								},
+								"body": map[string]any{
+									"fields": []any{
+										map[string]any{
+											"name": "address",
+										},
+										map[string]any{
+											"name": "dateOfBirth",
+										},
+										map[string]any{
+											"name": "fatherName",
+										},
+										map[string]any{
+											"name": "fullName",
+										},
+										map[string]any{
+											"name": "fullNameEnglish",
+										},
+										map[string]any{
+											"name": "gender",
+										},
+										map[string]any{
+											"name": "isOverseas",
+										},
+										map[string]any{
+											"name": "motherName",
+										},
+										map[string]any{
+											"binary": true,
+											"name": "photograph",
+										},
+										map[string]any{
+											"binary": true,
+											"name": "signature",
+										},
+										map[string]any{
+											"binary": true,
+											"list": true,
+											"name": "supportingDocuments",
+										},
+									},
+									"kind": "multipart",
+									"media": "multipart/form-data",
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -290,6 +372,10 @@ func MakeConfig() map[string]any {
 										"id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -374,6 +460,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -431,9 +521,20 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"format",
 										"nid_number",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "image/png",
+										},
+									},
+									"binary": true,
+									"kind": "raw",
+									"media": "application/pdf",
 								},
 							},
 						},
@@ -519,6 +620,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -596,6 +701,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -620,6 +729,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -644,6 +757,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},

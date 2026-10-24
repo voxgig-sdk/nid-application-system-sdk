@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { NidApplicationSystemSDK, BaseFeature, stdutil } from '../../..'
+import { NidApplicationSystemSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('ApplicationStatusEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = NidApplicationSystemSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.ApplicationStatus().load({"id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_LIVE
@@ -51,7 +63,7 @@ describe('ApplicationStatusEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"applicationId":{"a":true,"h":"Application Id","n":"applicationId","r":false,"t":"`$STRING`","key$":"applicationId","index$":0},"applicationType":{"a":true,"h":"Application Type","n":"applicationType","r":false,"t":"`$STRING`","key$":"applicationType","index$":1},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":2},"lastUpdated":{"a":true,"fo":"date-time","h":"Last Updated","n":"lastUpdated","r":false,"t":"`$STRING`","key$":"lastUpdated","index$":3},"nidNumber":{"a":true,"h":"Nid Number","n":"nidNumber","r":false,"sh":"NID number (if approved)","t":"`$STRING`","key$":"nidNumber","index$":4},"remarks":{"a":true,"h":"Remarks","n":"remarks","r":false,"sh":"Additional remarks or notes","t":"`$STRING`","key$":"remarks","index$":5},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":6},"submissionDate":{"a":true,"fo":"date-time","h":"Submission Date","n":"submissionDate","r":false,"t":"`$STRING`","key$":"submissionDate","index$":7}},"id":{"field":"id","name":"id"},"name":"application_status","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /application/status/{applicationId}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"applicationId","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/application/status/{applicationId}","q":{"exist":["id"]},"r":{"param":{"applicationId":"id"}},"s":[{"lit":"application"},{"lit":"status"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"application_status","name__orig":"application_status","Name":"ApplicationStatus","name_":"application_status","name-":"application-status","NAME":"APPLICATION_STATUS","index$":1}, {"active":true,"entity":"application_status","key$":"BasicApplicationStatusFlow","kind":"basic","name":"BasicApplicationStatusFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"application_status_ref01","srcdatavar":"application_status_ref01_data","suffix":"_dt0"},"m":{"id":"application_status01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-application_status_ref01"}}],"index$":0}]}, 'ApplicationStatus', {"GET /application/status/{applicationId}":{"protocol":"http","parameters":[{"name":"applicationId","in":"path","description":"Application ID","required":true,"schema":{"type":"string"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"applicationId":{"a":true,"h":"Application Id","n":"applicationId","r":false,"t":"`$STRING`","key$":"applicationId","index$":0},"applicationType":{"a":true,"h":"Application Type","n":"applicationType","r":false,"t":"`$STRING`","key$":"applicationType","index$":1},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":2},"lastUpdated":{"a":true,"fo":"date-time","h":"Last Updated","n":"lastUpdated","r":false,"t":"`$STRING`","key$":"lastUpdated","index$":3},"nidNumber":{"a":true,"h":"Nid Number","n":"nidNumber","r":false,"sh":"NID number (if approved)","t":"`$STRING`","key$":"nidNumber","index$":4},"remarks":{"a":true,"h":"Remarks","n":"remarks","r":false,"sh":"Additional remarks or notes","t":"`$STRING`","key$":"remarks","index$":5},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":6},"submissionDate":{"a":true,"fo":"date-time","h":"Submission Date","n":"submissionDate","r":false,"t":"`$STRING`","key$":"submissionDate","index$":7}},"id":{"field":"id","name":"id"},"name":"application_status","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /application/status/{applicationId}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"applicationId","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/application/status/{applicationId}","q":{"exist":["id"]},"r":{"param":{"applicationId":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"application"},{"lit":"status"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"application_status","name__orig":"application_status","Name":"ApplicationStatus","name_":"application_status","name-":"application-status","NAME":"APPLICATION_STATUS","index$":1}, {"active":true,"entity":"application_status","key$":"BasicApplicationStatusFlow","kind":"basic","name":"BasicApplicationStatusFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"application_status_ref01","srcdatavar":"application_status_ref01_data","suffix":"_dt0"},"m":{"id":"application_status01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-application_status_ref01"}}],"index$":0}]}, 'ApplicationStatus', {"GET /application/status/{applicationId}":{"protocol":"http","parameters":[{"name":"applicationId","in":"path","description":"Application ID","required":true,"schema":{"type":"string"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -73,6 +85,12 @@ describe('ApplicationStatusEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

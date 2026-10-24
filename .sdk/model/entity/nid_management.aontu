@@ -38,9 +38,20 @@ main: kit: entity: nid_management: {
           o: "/nid/download"
           q: {
             exist: [
-              "format"
               "nid_number"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "image/png"
+              }
+            ]
+            binary: true
+            kind: "raw"
+            media: "application/pdf"
           }
           s: [
             {

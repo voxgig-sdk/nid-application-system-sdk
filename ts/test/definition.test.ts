@@ -18,7 +18,12 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": [
       [
         {
@@ -48,7 +53,12 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": [
       [
         {
@@ -78,7 +88,12 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": [
       [
         {
@@ -113,7 +128,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": [
       [
         {
@@ -144,7 +164,12 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": [],
     "status": 200,
     "sample": {
@@ -170,13 +195,28 @@ const PLAN: any[] = [
     "path": "/nid/download",
     "args": [],
     "select": {
-      "format": "v1",
-      "nid_number": "v1"
+      "nid_number": "v1",
+      "format": "pdf"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/pdf",
+      "image/png"
+    ],
     "query": [
       "nidNumber",
       "format"
+    ],
+    "queryArgs": [
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "nid_number",
+        "wire": "nidNumber"
+      }
     ],
     "auth": [
       [
@@ -200,7 +240,12 @@ const PLAN: any[] = [
     "args": [],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": [],
     "status": 201,
     "sample": {

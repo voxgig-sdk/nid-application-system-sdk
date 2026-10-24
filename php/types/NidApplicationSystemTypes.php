@@ -20,6 +20,10 @@ class Application
 /** Request payload for Application#create. */
 class ApplicationCreateData
 {
+    public mixed $additionalInfo = null;
+    public mixed $nidNumber = null;
+    public mixed $policeReportNumber = null;
+    public mixed $reason = null;
 }
 
 /** ApplicationStatus entity data model. */
@@ -57,11 +61,7 @@ class Login
 class LoginCreateData
 {
     public string $captcha;
-    public ?int $expiresIn = null;
     public string $password;
-    public ?bool $success = null;
-    public ?string $token = null;
-    public ?array $user = null;
     public string $username;
 }
 
@@ -116,8 +116,6 @@ class SuccessCreateData
     public string $code;
     public string $email;
     public ?bool $isOverseas = null;
-    public ?string $message = null;
     public ?string $nidNumber = null;
-    public ?bool $success = null;
 }
 

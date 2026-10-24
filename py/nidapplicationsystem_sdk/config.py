@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -153,6 +154,36 @@ def make_config():
                 "select": {
                   "$action": "correction",
                 },
+                "body": {
+                  "fields": [
+                    {
+                      "name": "correctedValue",
+                    },
+                    {
+                      "name": "correctionType",
+                    },
+                    {
+                      "name": "currentValue",
+                    },
+                    {
+                      "name": "nidNumber",
+                    },
+                    {
+                      "name": "reason",
+                    },
+                    {
+                      "binary": True,
+                      "list": True,
+                      "name": "supportingDocuments",
+                    },
+                  ],
+                  "kind": "multipart",
+                  "media": "multipart/form-data",
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
               {
                 "kind": "http",
@@ -179,6 +210,10 @@ def make_config():
                 "select": {
                   "$action": "duplicate",
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
               {
                 "kind": "http",
@@ -204,6 +239,53 @@ def make_config():
                 "args": {},
                 "select": {
                   "$action": "new_registration",
+                },
+                "body": {
+                  "fields": [
+                    {
+                      "name": "address",
+                    },
+                    {
+                      "name": "dateOfBirth",
+                    },
+                    {
+                      "name": "fatherName",
+                    },
+                    {
+                      "name": "fullName",
+                    },
+                    {
+                      "name": "fullNameEnglish",
+                    },
+                    {
+                      "name": "gender",
+                    },
+                    {
+                      "name": "isOverseas",
+                    },
+                    {
+                      "name": "motherName",
+                    },
+                    {
+                      "binary": True,
+                      "name": "photograph",
+                    },
+                    {
+                      "binary": True,
+                      "name": "signature",
+                    },
+                    {
+                      "binary": True,
+                      "list": True,
+                      "name": "supportingDocuments",
+                    },
+                  ],
+                  "kind": "multipart",
+                  "media": "multipart/form-data",
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -315,6 +397,10 @@ def make_config():
                     "id",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -399,6 +485,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -456,9 +546,20 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "format",
                     "nid_number",
                   ],
+                },
+                "response": {
+                  "alternatives": [
+                    {
+                      "binary": True,
+                      "kind": "raw",
+                      "media": "image/png",
+                    },
+                  ],
+                  "binary": True,
+                  "kind": "raw",
+                  "media": "application/pdf",
                 },
               },
             ],
@@ -544,6 +645,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -621,6 +726,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
               {
                 "kind": "http",
@@ -645,6 +754,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
               {
                 "kind": "http",
@@ -669,6 +782,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },

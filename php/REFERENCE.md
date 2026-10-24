@@ -113,12 +113,7 @@ $application = $client->Application();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
-
-```php
-$result = $client->Application()->create([
-]);
-```
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ### Common Methods
 
@@ -173,7 +168,7 @@ $application_status = $client->ApplicationStatus();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ApplicationStatus()->load(["id" => "application_status_id"]);
@@ -231,7 +226,7 @@ $login = $client->Login();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Login()->create([
@@ -281,7 +276,7 @@ $nid_management = $client->NidManagement();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->NidManagement()->load(["nid_number" => "nid_number"]);
@@ -338,7 +333,7 @@ $registration = $client->Registration();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Registration()->create([
@@ -400,7 +395,7 @@ $success = $client->Success();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Success()->create([
@@ -596,6 +591,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

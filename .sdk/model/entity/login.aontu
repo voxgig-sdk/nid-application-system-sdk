@@ -61,6 +61,11 @@ main: kit: entity: login: {
       name: "create"
       points: [
         {
+          bf: [
+            "captcha"
+            "password"
+            "username"
+          ]
           co: {
             id: "POST /auth/login"
             source: "openapi3"
@@ -68,6 +73,10 @@ main: kit: entity: login: {
           }
           m: "POST"
           o: "/auth/login"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "auth"

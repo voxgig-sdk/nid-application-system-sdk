@@ -118,6 +118,36 @@
                     "$action": "correction"
                   },
                   "r": {},
+                  "rb": {
+                    "fields": [
+                      {
+                        "name": "correctedValue"
+                      },
+                      {
+                        "name": "correctionType"
+                      },
+                      {
+                        "name": "currentValue"
+                      },
+                      {
+                        "name": "nidNumber"
+                      },
+                      {
+                        "name": "reason"
+                      },
+                      {
+                        "binary": true,
+                        "list": true,
+                        "name": "supportingDocuments"
+                      }
+                    ],
+                    "kind": "multipart",
+                    "media": "multipart/form-data"
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "application"
@@ -133,6 +163,12 @@
                 },
                 {
                   "a": true,
+                  "bf": [
+                    "additionalInfo",
+                    "nidNumber",
+                    "policeReportNumber",
+                    "reason"
+                  ],
                   "co": {
                     "id": "POST /application/duplicate",
                     "source": "openapi3",
@@ -146,6 +182,10 @@
                     "$action": "duplicate"
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "application"
@@ -174,6 +214,53 @@
                     "$action": "new_registration"
                   },
                   "r": {},
+                  "rb": {
+                    "fields": [
+                      {
+                        "name": "address"
+                      },
+                      {
+                        "name": "dateOfBirth"
+                      },
+                      {
+                        "name": "fatherName"
+                      },
+                      {
+                        "name": "fullName"
+                      },
+                      {
+                        "name": "fullNameEnglish"
+                      },
+                      {
+                        "name": "gender"
+                      },
+                      {
+                        "name": "isOverseas"
+                      },
+                      {
+                        "name": "motherName"
+                      },
+                      {
+                        "binary": true,
+                        "name": "photograph"
+                      },
+                      {
+                        "binary": true,
+                        "name": "signature"
+                      },
+                      {
+                        "binary": true,
+                        "list": true,
+                        "name": "supportingDocuments"
+                      }
+                    ],
+                    "kind": "multipart",
+                    "media": "multipart/form-data"
+                  },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "application"
@@ -303,6 +390,10 @@
                       "applicationId": "id"
                     }
                   },
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "application"
@@ -396,6 +487,11 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "captcha",
+                    "password",
+                    "username"
+                  ],
                   "co": {
                     "id": "POST /auth/login",
                     "source": "openapi3",
@@ -407,6 +503,10 @@
                   "o": "/auth/login",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "auth"
@@ -472,11 +572,22 @@
                   "o": "/nid/download",
                   "q": {
                     "exist": [
-                      "format",
                       "nid_number"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "image/png"
+                      }
+                    ],
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/pdf"
+                  },
                   "s": [
                     {
                       "lit": "nid"
@@ -564,6 +675,14 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "confirmPassword",
+                    "dateOfBirth",
+                    "email",
+                    "nidNumber",
+                    "password",
+                    "phone"
+                  ],
                   "co": {
                     "id": "POST /auth/register",
                     "source": "openapi3",
@@ -575,6 +694,10 @@
                   "o": "/auth/register",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "auth"
@@ -657,6 +780,10 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "email",
+                    "nidNumber"
+                  ],
                   "co": {
                     "id": "POST /auth/password-reset",
                     "source": "openapi3",
@@ -668,6 +795,10 @@
                   "o": "/auth/password-reset",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "auth"
@@ -683,6 +814,10 @@
                 },
                 {
                   "a": true,
+                  "bf": [
+                    "email",
+                    "isOverseas"
+                  ],
                   "co": {
                     "id": "POST /verification/send-code",
                     "source": "openapi3",
@@ -694,6 +829,10 @@
                   "o": "/verification/send-code",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "verification"
@@ -709,6 +848,10 @@
                 },
                 {
                   "a": true,
+                  "bf": [
+                    "code",
+                    "email"
+                  ],
                   "co": {
                     "id": "POST /verification/verify-code",
                     "source": "openapi3",
@@ -720,6 +863,10 @@
                   "o": "/verification/verify-code",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "verification"
@@ -1063,6 +1210,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -1328,7 +1476,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -1381,6 +1529,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -1611,7 +1764,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -1988,6 +2144,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

@@ -1,0 +1,12 @@
+{
+  point: "warning"
+  note: "Points POST /auth/password-reset, POST /verification/send-code and POST /verification/verify-code on entity=success op=create have the same selector (exist: none), so only POST /auth/password-reset is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "success"
+  op: "create"
+  points: [
+    "POST /auth/password-reset"
+    "POST /verification/send-code"
+    "POST /verification/verify-code"
+  ]
+
+}

@@ -79,6 +79,7 @@ module NidApplicationSystemConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -136,6 +137,36 @@ module NidApplicationSystemConfig
                   "select" => {
                     "$action" => "correction",
                   },
+                  "body" => {
+                    "fields" => [
+                      {
+                        "name" => "correctedValue",
+                      },
+                      {
+                        "name" => "correctionType",
+                      },
+                      {
+                        "name" => "currentValue",
+                      },
+                      {
+                        "name" => "nidNumber",
+                      },
+                      {
+                        "name" => "reason",
+                      },
+                      {
+                        "binary" => true,
+                        "list" => true,
+                        "name" => "supportingDocuments",
+                      },
+                    ],
+                    "kind" => "multipart",
+                    "media" => "multipart/form-data",
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -162,6 +193,10 @@ module NidApplicationSystemConfig
                   "select" => {
                     "$action" => "duplicate",
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -187,6 +222,53 @@ module NidApplicationSystemConfig
                   "args" => {},
                   "select" => {
                     "$action" => "new_registration",
+                  },
+                  "body" => {
+                    "fields" => [
+                      {
+                        "name" => "address",
+                      },
+                      {
+                        "name" => "dateOfBirth",
+                      },
+                      {
+                        "name" => "fatherName",
+                      },
+                      {
+                        "name" => "fullName",
+                      },
+                      {
+                        "name" => "fullNameEnglish",
+                      },
+                      {
+                        "name" => "gender",
+                      },
+                      {
+                        "name" => "isOverseas",
+                      },
+                      {
+                        "name" => "motherName",
+                      },
+                      {
+                        "binary" => true,
+                        "name" => "photograph",
+                      },
+                      {
+                        "binary" => true,
+                        "name" => "signature",
+                      },
+                      {
+                        "binary" => true,
+                        "list" => true,
+                        "name" => "supportingDocuments",
+                      },
+                    ],
+                    "kind" => "multipart",
+                    "media" => "multipart/form-data",
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -298,6 +380,10 @@ module NidApplicationSystemConfig
                       "id",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -382,6 +468,10 @@ module NidApplicationSystemConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -439,9 +529,20 @@ module NidApplicationSystemConfig
                   },
                   "select" => {
                     "exist" => [
-                      "format",
                       "nid_number",
                     ],
+                  },
+                  "response" => {
+                    "alternatives" => [
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "image/png",
+                      },
+                    ],
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/pdf",
                   },
                 },
               ],
@@ -527,6 +628,10 @@ module NidApplicationSystemConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -604,6 +709,10 @@ module NidApplicationSystemConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -628,6 +737,10 @@ module NidApplicationSystemConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
                 {
                   "kind" => "http",
@@ -652,6 +765,10 @@ module NidApplicationSystemConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },

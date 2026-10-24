@@ -8,6 +8,13 @@ local runner = require("test.runner")
 
 local _test_dir = debug.getinfo(1, "S").source:match("^@(.+/)")  or "./"
 
+-- main.kit.test.live.strict is true (the default is true): a live
+-- request that fails, or a live test missing an input it needs,
+-- fails the test.
+-- An account with no record for a test to read skips it either way.
+local LIVE_STRICT = true
+
+
 describe("ApplicationEntity", function()
   it("should create instance", function()
     local testsdk = sdk.test(nil, nil)
@@ -19,30 +26,22 @@ describe("ApplicationEntity", function()
     local setup = application_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"create"}) do
+    for _, _op in ipairs({}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "application." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
         return
       end
     end
-    -- The basic flow consumes synthetic IDs from the fixture. In live mode
-    -- without an *_ENTID env override, those IDs hit the live API and 4xx.
-    if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set NID_APPLICATION_SYSTEM_TEST_APPLICATION_ENTID JSON to run live")
-      return
-    end
     local client = setup.client
 
-    -- CREATE
-    local application_ref01_ent = client:Application(nil)
-    local application_ref01_data = helpers.to_map(vs.getprop(
-      vs.getpath(setup.data, "new.application"), "application_ref01"))
-
-    local application_ref01_data_result, err = application_ref01_ent:create(application_ref01_data, nil)
-    assert.is_nil(err)
-    application_ref01_data = helpers.to_map(type(application_ref01_data_result) == 'table' and application_ref01_data_result.data_get and application_ref01_data_result:data_get() or application_ref01_data_result)
-    assert.is_not_nil(application_ref01_data)
+    -- Bootstrap entity data from existing test data.
+    local application_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.application")))
+    local application_ref01_data = nil
+    if #application_ref01_data_raw > 0 then
+      application_ref01_data = helpers.to_map(application_ref01_data_raw[1][2])
+    end
 
   end)
 end)
@@ -76,9 +75,8 @@ function application_basic_setup(extra)
     }
   )
 
-  -- Detect ENTID env override before envOverride consumes it. When live
-  -- mode is on without a real override, the basic test runs against synthetic
-  -- IDs from the fixture and 4xx's. Surface this so the test can skip.
+  -- Whether *_ENTID supplied the idmap, read before env_override consumes
+  -- it: without it, the ids a live flow binds are the fixture's synthetic ones.
   local entid_env_raw = os.getenv("NID_APPLICATION_SYSTEM_TEST_APPLICATION_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 

@@ -84,9 +84,12 @@ class NidManagementEntity extends NidApplicationSystemEntityBase_1.NidApplicatio
         catch (err) {
             // What a hook throws here must not escape the cleaning below.
             try {
-                fres = featureHook(ctx, 'PreUnexpected');
-                if (fres instanceof Promise) {
-                    await fres;
+                // Once per operation: makeError fires it for its own error.
+                if (!ctx.unexpectedFired) {
+                    fres = featureHook(ctx, 'PreUnexpected');
+                    if (fres instanceof Promise) {
+                        await fres;
+                    }
                 }
             }
             catch (hookerr) {
@@ -98,7 +101,7 @@ class NidManagementEntity extends NidApplicationSystemEntityBase_1.NidApplicatio
             }
             else {
                 // Off-happy-path (throw disabled): typed as any so the method's
-                // Promise<NidManagement> return stays clean under strict null checks.
+                // Promise<NidManagementEntity> return stays clean under strict null checks.
                 return undefined;
             }
         }

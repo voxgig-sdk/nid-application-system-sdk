@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { NidApplicationSystemSDK, BaseFeature, stdutil } from '../../..'
+import { NidApplicationSystemSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,17 +41,19 @@ describe('ApplicationEntity', async () => {
   })
 
 
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_LIVE
-    for (const op of ['create']) {
+    for (const op of []) {
       if (!live && maybeSkipControl(t, 'entityOp', 'application.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"application","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /application/correction","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/application/correction","q":{"$action":"correction"},"r":{},"s":[{"lit":"application"},{"lit":"correction"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"POST /application/duplicate","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/application/duplicate","q":{"$action":"duplicate"},"r":{},"s":[{"lit":"application"},{"lit":"duplicate"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"POST /application/new-registration","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/application/new-registration","q":{"$action":"new_registration"},"r":{},"s":[{"lit":"application"},{"lit":"new-registration"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"application","name__orig":"application","Name":"Application","name_":"application","name-":"application","NAME":"APPLICATION","index$":0}, {"active":true,"entity":"application","key$":"BasicApplicationFlow","kind":"basic","name":"BasicApplicationFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"application_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Application', {"POST /application/correction":{"protocol":"http","requestBody":{"required":true,"content":{"multipart/form-data":{"schema":{"type":"object","required":["nidNumber","correctionType","correctedValue"],"properties":{"nidNumber":{"type":"string","description":"National Identity Card number to be corrected"},"correctionType":{"type":"string","enum":["name","dateOfBirth","address","fatherName","motherName","photograph","other"],"description":"Type of correction needed"},"currentValue":{"type":"string","description":"Current incorrect value"},"correctedValue":{"type":"string","description":"Corrected value"},"reason":{"type":"string","description":"Reason for correction"},"supportingDocuments":{"type":"array","items":{"type":"string","format":"binary"},"description":"Supporting documents for correction"}},"x-ref":"#/components/schemas/CorrectionRequest"}}}},"parameters":[]},"POST /application/duplicate":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["nidNumber","reason"],"properties":{"nidNumber":{"type":"string","description":"National Identity Card number"},"reason":{"type":"string","enum":["lost","damaged","stolen"],"description":"Reason for requesting duplicate"},"policeReportNumber":{"type":"string","description":"Police report number (if lost or stolen)"},"additionalInfo":{"type":"string","description":"Additional information"}},"x-ref":"#/components/schemas/DuplicateRequest"}}}},"parameters":[]},"POST /application/new-registration":{"protocol":"http","requestBody":{"required":true,"content":{"multipart/form-data":{"schema":{"type":"object","required":["fullName","dateOfBirth","fatherName","motherName","address"],"properties":{"fullName":{"type":"string","description":"Full name in Bengali"},"fullNameEnglish":{"type":"string","description":"Full name in English"},"dateOfBirth":{"type":"string","format":"date","description":"Date of birth"},"gender":{"type":"string","enum":["male","female","other"],"description":"Gender"},"fatherName":{"type":"string","description":"Father's name"},"motherName":{"type":"string","description":"Mother's name"},"address":{"type":"object","properties":{"division":{"type":"string"},"district":{"type":"string"},"upazila":{"type":"string"},"union":{"type":"string"},"village":{"type":"string"}}},"photograph":{"type":"string","format":"binary","description":"Passport-sized photograph"},"signature":{"type":"string","format":"binary","description":"Signature image"},"supportingDocuments":{"type":"array","items":{"type":"string","format":"binary"},"description":"Supporting documents (birth certificate, etc.)"},"isOverseas":{"type":"boolean","description":"Indicates if applicant is an overseas Bangladeshi"}},"x-ref":"#/components/schemas/NewRegistrationRequest"}}}},"parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"application","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /application/correction","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/application/correction","q":{"$action":"correction"},"r":{},"rb":{"fields":[{"name":"correctedValue"},{"name":"correctionType"},{"name":"currentValue"},{"name":"nidNumber"},{"name":"reason"},{"binary":true,"list":true,"name":"supportingDocuments"}],"kind":"multipart","media":"multipart/form-data"},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"application"},{"lit":"correction"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"bf":["additionalInfo","nidNumber","policeReportNumber","reason"],"co":{"id":"POST /application/duplicate","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/application/duplicate","q":{"$action":"duplicate"},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"application"},{"lit":"duplicate"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"POST /application/new-registration","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/application/new-registration","q":{"$action":"new_registration"},"r":{},"rb":{"fields":[{"name":"address"},{"name":"dateOfBirth"},{"name":"fatherName"},{"name":"fullName"},{"name":"fullNameEnglish"},{"name":"gender"},{"name":"isOverseas"},{"name":"motherName"},{"binary":true,"name":"photograph"},{"binary":true,"name":"signature"},{"binary":true,"list":true,"name":"supportingDocuments"}],"kind":"multipart","media":"multipart/form-data"},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"application"},{"lit":"new-registration"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"application","name__orig":"application","Name":"Application","name_":"application","name-":"application","NAME":"APPLICATION","index$":0}, {"active":true,"entity":"application","key$":"BasicApplicationFlow","kind":"basic","name":"BasicApplicationFlow","param":{},"step":[{"a":false,"d":{},"i":{"ref":"application_ref01"},"m":{},"o":"create","s":[],"v":[],"unreachable":true}]}, 'Application', {"POST /application/correction":{"protocol":"http","requestBody":{"required":true,"content":{"multipart/form-data":{"schema":{"type":"object","required":["nidNumber","correctionType","correctedValue"],"properties":{"nidNumber":{"type":"string","description":"National Identity Card number to be corrected"},"correctionType":{"type":"string","enum":["name","dateOfBirth","address","fatherName","motherName","photograph","other"],"description":"Type of correction needed"},"currentValue":{"type":"string","description":"Current incorrect value"},"correctedValue":{"type":"string","description":"Corrected value"},"reason":{"type":"string","description":"Reason for correction"},"supportingDocuments":{"type":"array","items":{"type":"string","format":"binary"},"description":"Supporting documents for correction"}},"x-ref":"#/components/schemas/CorrectionRequest"}}}},"parameters":[]},"POST /application/duplicate":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["nidNumber","reason"],"properties":{"nidNumber":{"type":"string","description":"National Identity Card number"},"reason":{"type":"string","enum":["lost","damaged","stolen"],"description":"Reason for requesting duplicate"},"policeReportNumber":{"type":"string","description":"Police report number (if lost or stolen)"},"additionalInfo":{"type":"string","description":"Additional information"}},"x-ref":"#/components/schemas/DuplicateRequest"}}}},"parameters":[]},"POST /application/new-registration":{"protocol":"http","requestBody":{"required":true,"content":{"multipart/form-data":{"schema":{"type":"object","required":["fullName","dateOfBirth","fatherName","motherName","address"],"properties":{"fullName":{"type":"string","description":"Full name in Bengali"},"fullNameEnglish":{"type":"string","description":"Full name in English"},"dateOfBirth":{"type":"string","format":"date","description":"Date of birth"},"gender":{"type":"string","enum":["male","female","other"],"description":"Gender"},"fatherName":{"type":"string","description":"Father's name"},"motherName":{"type":"string","description":"Mother's name"},"address":{"type":"object","properties":{"division":{"type":"string"},"district":{"type":"string"},"upazila":{"type":"string"},"union":{"type":"string"},"village":{"type":"string"}}},"photograph":{"type":"string","format":"binary","description":"Passport-sized photograph"},"signature":{"type":"string","format":"binary","description":"Signature image"},"supportingDocuments":{"type":"array","items":{"type":"string","format":"binary"},"description":"Supporting documents (birth certificate, etc.)"},"isOverseas":{"type":"boolean","description":"Indicates if applicant is an overseas Bangladeshi"}},"x-ref":"#/components/schemas/NewRegistrationRequest"}}}},"parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -59,19 +61,18 @@ describe('ApplicationEntity', async () => {
     const isempty = struct.isempty
     const select = struct.select
 
-
-    // CREATE
-    const application_ref01_ent = client.Application()
-    let application_ref01_data = setup.data.new.application['application_ref01']
-
-    application_ref01_data = (await application_ref01_ent.create(application_ref01_data)).data()
-    assert(null != application_ref01_data)
-
+    let application_ref01_data = Object.values(setup.data.existing.application)[0] as any
 
   })
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

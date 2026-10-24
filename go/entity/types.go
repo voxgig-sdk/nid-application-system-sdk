@@ -18,6 +18,10 @@ type Application struct {
 
 // ApplicationCreateData is the typed request payload for Application.CreateTyped.
 type ApplicationCreateData struct {
+	AdditionalInfo *any `json:"additionalInfo,omitempty"`
+	NidNumber *any `json:"nidNumber,omitempty"`
+	PoliceReportNumber *any `json:"policeReportNumber,omitempty"`
+	Reason *any `json:"reason,omitempty"`
 }
 
 // ApplicationStatus is the typed data model for the application_status entity.
@@ -36,11 +40,7 @@ type Login struct {
 // LoginCreateData is the typed request payload for Login.CreateTyped.
 type LoginCreateData struct {
 	Captcha string `json:"captcha"`
-	ExpiresIn *int `json:"expiresIn,omitempty"`
 	Password string `json:"password"`
-	Success *bool `json:"success,omitempty"`
-	Token *string `json:"token,omitempty"`
-	User *map[string]any `json:"user,omitempty"`
 	Username string `json:"username"`
 }
 
@@ -77,9 +77,7 @@ type SuccessCreateData struct {
 	Code string `json:"code"`
 	Email string `json:"email"`
 	IsOverseas *bool `json:"isOverseas,omitempty"`
-	Message *string `json:"message,omitempty"`
 	NidNumber *string `json:"nidNumber,omitempty"`
-	Success *bool `json:"success,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

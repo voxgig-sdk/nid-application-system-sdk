@@ -9,6 +9,10 @@
 ---@class Application
 
 ---@class ApplicationCreateData
+---@field additionalInfo? any
+---@field nidNumber? any
+---@field policeReportNumber? any
+---@field reason? any
 
 ---@class ApplicationStatus
 ---@field applicationId? string
@@ -34,11 +38,7 @@
 
 ---@class LoginCreateData
 ---@field captcha string
----@field expiresIn? number
 ---@field password string
----@field success? boolean
----@field token? string
----@field user? table
 ---@field username string
 
 ---@class NidManagement
@@ -75,9 +75,7 @@
 ---@field code string
 ---@field email string
 ---@field isOverseas? boolean
----@field message? string
 ---@field nidNumber? string
----@field success? boolean
 
 local M = {}
 

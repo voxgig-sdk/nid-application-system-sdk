@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { NidApplicationSystemSDK, BaseFeature, stdutil } from '../../..'
+import { NidApplicationSystemSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('RegistrationEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = NidApplicationSystemSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Registration().create({"confirmPassword":1,"email":"x","nidNumber":"x","password":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_LIVE
@@ -51,7 +63,7 @@ describe('RegistrationEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"confirmPassword":{"a":true,"fo":"password","h":"Confirm Password","n":"confirmPassword","r":true,"sh":"Password confirmation","t":"`$STRING`","key$":"confirmPassword","index$":0},"dateOfBirth":{"a":true,"fo":"date","h":"Date Of Birth","n":"dateOfBirth","r":false,"sh":"Date of birth","t":"`$STRING`","key$":"dateOfBirth","index$":1},"email":{"a":true,"fo":"email","h":"Email","n":"email","r":true,"sh":"User's email address","t":"`$STRING`","key$":"email","index$":2},"nidNumber":{"a":true,"h":"Nid Number","n":"nidNumber","r":true,"sh":"National Identity Card number","t":"`$STRING`","key$":"nidNumber","index$":3},"password":{"a":true,"fo":"password","h":"Password","n":"password","r":true,"sh":"Account password","t":"`$STRING`","key$":"password","index$":4},"phone":{"a":true,"h":"Phone","n":"phone","r":false,"sh":"User's phone number","t":"`$STRING`","key$":"phone","index$":5}},"name":"registration","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /auth/register","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/auth/register","q":{},"r":{},"s":[{"lit":"auth"},{"lit":"register"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"registration","name__orig":"registration","Name":"Registration","name_":"registration","name-":"registration","NAME":"REGISTRATION","index$":4}, {"active":true,"entity":"registration","key$":"BasicRegistrationFlow","kind":"basic","name":"BasicRegistrationFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"registration_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Registration', {"POST /auth/register":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["nidNumber","email","password","confirmPassword"],"properties":{"nidNumber":{"type":"string","description":"National Identity Card number","key$":"nidNumber"},"email":{"type":"string","format":"email","description":"User's email address","key$":"email"},"password":{"type":"string","format":"password","description":"Account password","key$":"password"},"confirmPassword":{"type":"string","format":"password","description":"Password confirmation","key$":"confirmPassword"},"phone":{"type":"string","description":"User's phone number","key$":"phone"},"dateOfBirth":{"type":"string","format":"date","description":"Date of birth","key$":"dateOfBirth"}},"x-ref":"#/components/schemas/RegistrationRequest","index$":1}}}},"parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"confirmPassword":{"a":true,"fo":"password","h":"Confirm Password","n":"confirmPassword","r":true,"sh":"Password confirmation","t":"`$STRING`","key$":"confirmPassword","index$":0},"dateOfBirth":{"a":true,"fo":"date","h":"Date Of Birth","n":"dateOfBirth","r":false,"sh":"Date of birth","t":"`$STRING`","key$":"dateOfBirth","index$":1},"email":{"a":true,"fo":"email","h":"Email","n":"email","r":true,"sh":"User's email address","t":"`$STRING`","key$":"email","index$":2},"nidNumber":{"a":true,"h":"Nid Number","n":"nidNumber","r":true,"sh":"National Identity Card number","t":"`$STRING`","key$":"nidNumber","index$":3},"password":{"a":true,"fo":"password","h":"Password","n":"password","r":true,"sh":"Account password","t":"`$STRING`","key$":"password","index$":4},"phone":{"a":true,"h":"Phone","n":"phone","r":false,"sh":"User's phone number","t":"`$STRING`","key$":"phone","index$":5}},"name":"registration","op":{"create":{"input":"data","name":"create","points":[{"a":true,"bf":["confirmPassword","dateOfBirth","email","nidNumber","password","phone"],"co":{"id":"POST /auth/register","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/auth/register","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"auth"},{"lit":"register"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"registration","name__orig":"registration","Name":"Registration","name_":"registration","name-":"registration","NAME":"REGISTRATION","index$":4}, {"active":true,"entity":"registration","key$":"BasicRegistrationFlow","kind":"basic","name":"BasicRegistrationFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"registration_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Registration', {"POST /auth/register":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["nidNumber","email","password","confirmPassword"],"properties":{"nidNumber":{"type":"string","description":"National Identity Card number","key$":"nidNumber"},"email":{"type":"string","format":"email","description":"User's email address","key$":"email"},"password":{"type":"string","format":"password","description":"Account password","key$":"password"},"confirmPassword":{"type":"string","format":"password","description":"Password confirmation","key$":"confirmPassword"},"phone":{"type":"string","description":"User's phone number","key$":"phone"},"dateOfBirth":{"type":"string","format":"date","description":"Date of birth","key$":"dateOfBirth"}},"x-ref":"#/components/schemas/RegistrationRequest","index$":1}}}},"parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('RegistrationEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

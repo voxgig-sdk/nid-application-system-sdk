@@ -13,8 +13,25 @@ class Application
 end
 
 # Request payload for Application#create.
-class ApplicationCreateData
-end
+#
+# @!attribute [rw] additionalInfo
+#   @return [Object, nil]
+#
+# @!attribute [rw] nidNumber
+#   @return [Object, nil]
+#
+# @!attribute [rw] policeReportNumber
+#   @return [Object, nil]
+#
+# @!attribute [rw] reason
+#   @return [Object, nil]
+ApplicationCreateData = Struct.new(
+  :additionalInfo,
+  :nidNumber,
+  :policeReportNumber,
+  :reason,
+  keyword_init: true
+)
 
 # ApplicationStatus entity data model.
 #
@@ -100,30 +117,14 @@ Login = Struct.new(
 # @!attribute [rw] captcha
 #   @return [String]
 #
-# @!attribute [rw] expiresIn
-#   @return [Integer, nil]
-#
 # @!attribute [rw] password
 #   @return [String]
-#
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] token
-#   @return [String, nil]
-#
-# @!attribute [rw] user
-#   @return [Hash, nil]
 #
 # @!attribute [rw] username
 #   @return [String]
 LoginCreateData = Struct.new(
   :captcha,
-  :expiresIn,
   :password,
-  :success,
-  :token,
-  :user,
   :username,
   keyword_init: true
 )
@@ -243,21 +244,13 @@ Success = Struct.new(
 # @!attribute [rw] isOverseas
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] message
-#   @return [String, nil]
-#
 # @!attribute [rw] nidNumber
 #   @return [String, nil]
-#
-# @!attribute [rw] success
-#   @return [Boolean, nil]
 SuccessCreateData = Struct.new(
   :code,
   :email,
   :isOverseas,
-  :message,
   :nidNumber,
-  :success,
   keyword_init: true
 )
 

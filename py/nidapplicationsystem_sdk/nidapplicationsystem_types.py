@@ -20,8 +20,11 @@ class Application(TypedDict):
     pass
 
 
-class ApplicationCreateData(TypedDict):
-    pass
+class ApplicationCreateData(TypedDict, total=False):
+    additionalInfo: Any
+    nidNumber: Any
+    policeReportNumber: Any
+    reason: Any
 
 
 class ApplicationStatus(TypedDict, total=False):
@@ -52,17 +55,10 @@ class Login(LoginRequired, total=False):
     user: dict
 
 
-class LoginCreateDataRequired(TypedDict):
+class LoginCreateData(TypedDict):
     captcha: str
     password: str
     username: str
-
-
-class LoginCreateData(LoginCreateDataRequired, total=False):
-    expiresIn: int
-    success: bool
-    token: str
-    user: dict
 
 
 class NidManagement(TypedDict):
@@ -120,6 +116,4 @@ class SuccessCreateDataRequired(TypedDict):
 
 class SuccessCreateData(SuccessCreateDataRequired, total=False):
     isOverseas: bool
-    message: str
     nidNumber: str
-    success: bool

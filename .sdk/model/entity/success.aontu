@@ -54,6 +54,10 @@ main: kit: entity: success: {
       name: "create"
       points: [
         {
+          bf: [
+            "email"
+            "nidNumber"
+          ]
           co: {
             id: "POST /auth/password-reset"
             source: "openapi3"
@@ -61,6 +65,10 @@ main: kit: entity: success: {
           }
           m: "POST"
           o: "/auth/password-reset"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "auth"
@@ -75,6 +83,10 @@ main: kit: entity: success: {
           }
         }
         {
+          bf: [
+            "email"
+            "isOverseas"
+          ]
           co: {
             id: "POST /verification/send-code"
             source: "openapi3"
@@ -82,6 +94,10 @@ main: kit: entity: success: {
           }
           m: "POST"
           o: "/verification/send-code"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "verification"
@@ -96,6 +112,10 @@ main: kit: entity: success: {
           }
         }
         {
+          bf: [
+            "code"
+            "email"
+          ]
           co: {
             id: "POST /verification/verify-code"
             source: "openapi3"
@@ -103,6 +123,10 @@ main: kit: entity: success: {
           }
           m: "POST"
           o: "/verification/verify-code"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "verification"

@@ -9,6 +9,10 @@ export interface Application {
 }
 
 export interface ApplicationCreateData {
+  additionalInfo?: any
+  nidNumber?: any
+  policeReportNumber?: any
+  reason?: any
 
   // Selects a custom action instead of the plain create:
   //   'correction' | 'duplicate' | 'new_registration'
@@ -44,11 +48,7 @@ export interface Login {
 
 export interface LoginCreateData {
   captcha: string
-  expiresIn?: number
   password: string
-  success?: boolean
-  token?: string
-  user?: Record<string, any>
   username: string
 }
 
@@ -91,8 +91,6 @@ export interface SuccessCreateData {
   code: string
   email: string
   isOverseas?: boolean
-  message?: string
   nidNumber?: string
-  success?: boolean
 }
 

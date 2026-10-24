@@ -98,6 +98,10 @@ main: kit: entity: application_status: {
               applicationId: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "application"

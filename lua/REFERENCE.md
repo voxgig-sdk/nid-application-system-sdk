@@ -111,12 +111,7 @@ local application = client:Application(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
-
-```lua
-local result, err = client:Application():create({
-})
-```
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ### Common Methods
 
@@ -171,7 +166,7 @@ local application_status = client:ApplicationStatus(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ApplicationStatus():load({ id = "application_status_id" })
@@ -229,7 +224,7 @@ local login = client:Login(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Login():create({
@@ -279,7 +274,7 @@ local nid_management = client:NidManagement(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:NidManagement():load({ nid_number = "nid_number" })
@@ -336,7 +331,7 @@ local registration = client:Registration(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Registration():create({
@@ -398,7 +393,7 @@ local success = client:Success(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Success():create({
@@ -594,6 +589,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

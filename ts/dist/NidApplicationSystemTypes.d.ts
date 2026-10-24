@@ -1,6 +1,10 @@
 export interface Application {
 }
 export interface ApplicationCreateData {
+    additionalInfo?: any;
+    nidNumber?: any;
+    policeReportNumber?: any;
+    reason?: any;
     $action?: string;
     [action: string]: any;
 }
@@ -28,11 +32,7 @@ export interface Login {
 }
 export interface LoginCreateData {
     captcha: string;
-    expiresIn?: number;
     password: string;
-    success?: boolean;
-    token?: string;
-    user?: Record<string, any>;
     username: string;
 }
 export interface NidManagement {
@@ -69,7 +69,5 @@ export interface SuccessCreateData {
     code: string;
     email: string;
     isOverseas?: boolean;
-    message?: string;
     nidNumber?: string;
-    success?: boolean;
 }

@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { NidApplicationSystemSDK, BaseFeature, stdutil } from '../../..'
+import { NidApplicationSystemSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('LoginEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = NidApplicationSystemSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Login().create({"captcha":1,"password":"x","username":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.NID_APPLICATION_SYSTEM_TEST_LIVE
@@ -51,7 +63,7 @@ describe('LoginEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"captcha":{"a":true,"h":"Captcha","n":"captcha","r":true,"sh":"Captcha code displayed in the image","t":"`$STRING`","key$":"captcha","index$":0},"expiresIn":{"a":true,"h":"Expires In","n":"expiresIn","r":false,"sh":"Token expiration time in seconds","t":"`$INTEGER`","key$":"expiresIn","index$":1},"password":{"a":true,"fo":"password","h":"Password","n":"password","r":true,"sh":"User's password","t":"`$STRING`","key$":"password","index$":2},"success":{"a":true,"h":"Success","n":"success","r":false,"t":"`$BOOLEAN`","key$":"success","index$":3},"token":{"a":true,"h":"Token","n":"token","r":false,"sh":"Authentication token","t":"`$STRING`","key$":"token","index$":4},"user":{"a":true,"h":"User","n":"user","r":false,"t":"`$OBJECT`","key$":"user","index$":5},"username":{"a":true,"h":"Username","n":"username","r":true,"sh":"User's username or NID number","t":"`$STRING`","key$":"username","index$":6}},"name":"login","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /auth/login","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/auth/login","q":{},"r":{},"s":[{"lit":"auth"},{"lit":"login"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"login","name__orig":"login","Name":"Login","name_":"login","name-":"login","NAME":"LOGIN","index$":2}, {"active":true,"entity":"login","key$":"BasicLoginFlow","kind":"basic","name":"BasicLoginFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"login_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Login', {"POST /auth/login":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["username","password","captcha"],"properties":{"username":{"type":"string","description":"User's username or NID number","key$":"username"},"password":{"type":"string","format":"password","description":"User's password","key$":"password"},"captcha":{"type":"string","description":"Captcha code displayed in the image","key$":"captcha"}},"x-ref":"#/components/schemas/LoginRequest","index$":1}}}},"parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"captcha":{"a":true,"h":"Captcha","n":"captcha","r":true,"sh":"Captcha code displayed in the image","t":"`$STRING`","key$":"captcha","index$":0},"expiresIn":{"a":true,"h":"Expires In","n":"expiresIn","r":false,"sh":"Token expiration time in seconds","t":"`$INTEGER`","key$":"expiresIn","index$":1},"password":{"a":true,"fo":"password","h":"Password","n":"password","r":true,"sh":"User's password","t":"`$STRING`","key$":"password","index$":2},"success":{"a":true,"h":"Success","n":"success","r":false,"t":"`$BOOLEAN`","key$":"success","index$":3},"token":{"a":true,"h":"Token","n":"token","r":false,"sh":"Authentication token","t":"`$STRING`","key$":"token","index$":4},"user":{"a":true,"h":"User","n":"user","r":false,"t":"`$OBJECT`","key$":"user","index$":5},"username":{"a":true,"h":"Username","n":"username","r":true,"sh":"User's username or NID number","t":"`$STRING`","key$":"username","index$":6}},"name":"login","op":{"create":{"input":"data","name":"create","points":[{"a":true,"bf":["captcha","password","username"],"co":{"id":"POST /auth/login","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/auth/login","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"auth"},{"lit":"login"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"login","name__orig":"login","Name":"Login","name_":"login","name-":"login","NAME":"LOGIN","index$":2}, {"active":true,"entity":"login","key$":"BasicLoginFlow","kind":"basic","name":"BasicLoginFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"login_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0}]}, 'Login', {"POST /auth/login":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["username","password","captcha"],"properties":{"username":{"type":"string","description":"User's username or NID number","key$":"username"},"password":{"type":"string","format":"password","description":"User's password","key$":"password"},"captcha":{"type":"string","description":"Captcha code displayed in the image","key$":"captcha"}},"x-ref":"#/components/schemas/LoginRequest","index$":1}}}},"parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('LoginEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options
